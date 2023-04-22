@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+
+<body>
+    <h2 style="color:dodgerblue;">Here is your tracking info!</h2>
+    {% if shipInfo %}
+    <h3> Shipment ID: {{ shipInfo.shipment_id }}</h3>
+    <h3>Shipment Warehouse Location: {{ shipInfo.wh_x }}, {{ shipInfo.wh_y }}</h3>
+    <h3>Shipment Destination: {{ shipInfo.dest_x }}, {{ shipInfo.dest_y }}</h3>
+    <h3>Truck ID: {{ shipInfo.truck_id }}</h3>
+    <h3>Shipment Status: {{ shipInfo.shipment_status }}</h3>
+    {% else %}
+    <h3 style="color:rgb(255, 191, 30);"> No Shipment Found </h3>
+    {% endif %}
+    <h3><a href="{% url 'ups_website:index' %}">Go back home</a></h3>
+</body>
+
+</html>

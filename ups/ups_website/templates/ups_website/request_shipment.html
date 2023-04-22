@@ -1,0 +1,9 @@
+{% block content %}
+<h2>Enter your tracking number</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+<h3><a href="{% url 'ups_website:index' %}">Go back home</a></h3>
+{% endblock %}
