@@ -1,0 +1,114 @@
+Django Setup Guide
+
+sudo pip3 install django psycopg2
+django-admin startproject `firsthomework`
+https://docs.djangoproject.com/en/4.2/intro/tutorial01/ Follow tutorial
+sudo python3 manage.py runserver 0.0.0.0:8000
+browser(http://vcm-33565.vm.duke.edu:8000/)
+python3 manage.py startapp ups_website
+Follow (https://docs.djangoproject.com/en/4.2/intro/tutorial01/) Write Your First View
+
+
+Postgresql Setup
+sudo apt-get install postgresql
+sudo su - postgres
+psql
+CREATE user yl906;   //replace brian with your username. note the ';' at the end
+ALTER USER yl906 CREATEDB;    //again, replace brian with your user name. note the ';' at the end
+ALTER USER yl906 WITH PASSWORD “kevinzuishuai”
+exit postgres (by pressing Ctrl+D)
+exit the su'ed shell
+createdb upsDB   //replace nameOfDB with a meaningful name for your project
+
+// Change config 
+– Change this line: 
+local all postgres peer 
+– To: 
+local all postgres md5
+
+sudo service postgresql restart
+sudo su - postgres
+psql -U yl906 -d upsDB
+
+Connect Postgresql with Django
+settings.py
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "upsDB",
+        "USER": "yl906",
+        "PASSWORD": "kevinzuishuai",
+        "HOST": 'localhost',
+        "PORT": 5432,
+    }
+}
+
+sudo apt-get install libpq-dev
+pip install psycopg2
+python3 manage.py migrate
+
+
+Update the models.py
+* Change your models (in models.py).
+* Run python manage.py makemigrations to create migrations for those changes
+* Run python manage.py migrate to apply those changes to the database.
+Add to INSTALLED_APPS in the settings.py 
+INSTALLED_APPS = [
+    "ups_website.apps.UpsWebsiteConfig",
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+python3 manage.py makemigrations ups_website
+python3 manage.py migrate
+
+Check the database if it created
+\dt;
+
+------------------------------------------------------------------------
+
+568 UPS Database Design
+Schema
+class Truck(models.Model):
+    truck_id = models.IntegerField(primary_key=True)
+    truck_x = models.IntegerField(null=True)
+    truck_y = models.IntegerField(null=True)
+    truck_status = models.CharField(max_length=200, null=True)
+    def __str__(self):
+        return str(self.truck_id)
+
+class Shipments(models.Model):
+    shipment_id = models.IntegerField(primary_key=True)
+    truck_id = models.IntegerField(null=True)
+    wh_x = models.IntegerField(null=True)
+    wh_y = models.IntegerField(null=True)
+    dest_x = models.IntegerField(null=True)
+    dest_y = models.IntegerField(null=True)
+    shipment_status = models.CharField(max_length=200, null=True)
+    def __str__(self):
+        return str(self.shipment_id)
+
+class ProductsInPackage(models.Model):
+    id = models.AutoField(primary_key=True)
+    shipment_id = models.IntegerField(null=True)
+    product_id = models.IntegerField(null=True)
+    product_description = models.CharField(max_length=200, null=True)
+    product_quantity = models.IntegerField(null=True)
+    def __str__(self):
+        return str(self.product_id)
+
+
+
+Query in Postgres
+
+INSERT INTO ups_website_truck (truck_id, truck_x, truck_y, truck_status) VALUES (1, 10, 10, ‘idle’);
+SELECT * FROM ups_website_truck;
+INSERT INTO ups_website_shipments (shipment_id, truck_id, wh_x, wh_y, dest_x, dest_y, shipment_status) VALUES (000001, 1, 1, 2, 11, 11, ‘created’);
+SELECT * FROM ups_website_shipments;
+
+
+
