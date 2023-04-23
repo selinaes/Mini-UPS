@@ -1,0 +1,14 @@
+1. Java Versions & IntelliJ IDEA. Especially if created project on one machine, then move to VCM.
+- Make sure Java and JDK versions are the same everywhere. Mind the following:
+(a) Try "java --version"
+(b) IntelliJ IDEA: File -> Project Structure -> Project -> Project SDK
+(c) IntelliJ IDEA: File -> Project Structure -> Project -> Project Language Level (Use SDK Default)
+(d) IntelliJ IDEA: File -> Project Structure -> Modules -> Language Level (Use Project Default)
+(e) IntelliJ IDEA: File -> Project Structure -> SDKs -> notice the path. /usr/lib/jvm/java-1.17.0-openjdk-amd64
+
+2. Gradle Versions & gradle including libraries
+(a) "gradle --version"
+(b) IntelliJ IDEA: File -> Settings -> Build, Execution, Deployment -> Build Tools -> Gradle -> Gradle JVM
+(c) IntelliJ IDEA: File -> Project Structure -> Libraries -> See there is a list of gradle libraries
+(d) Project Tree: External Libraries: See a list of Gradle: xxxx libraries
+(e) Project Tree: gradle -> wrapper -> gradle-wrapper.properties -> distributionUrl: mind the version!

@@ -15,12 +15,13 @@ sudo su - postgres
 psql
 CREATE user yl906;   //replace brian with your username. note the ';' at the end
 ALTER USER yl906 CREATEDB;    //again, replace brian with your user name. note the ';' at the end
-ALTER USER yl906 WITH PASSWORD “kevinzuishuai”
+ALTER USER yl906 WITH PASSWORD 'kevinzuishuai'
 exit postgres (by pressing Ctrl+D)
 exit the su'ed shell
 createdb upsDB   //replace nameOfDB with a meaningful name for your project
 
-// Change config 
+// Change config  sudo vi /etc/postgresql/xx/main/pg_hba.conf
+xx = 12/10/.. based on postgres version
 – Change this line: 
 local all postgres peer 
 – To: 
