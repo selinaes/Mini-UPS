@@ -25,7 +25,7 @@ public class WorldSimulatorClient {
         socket = new Socket(host, port);
         inputStream = socket.getInputStream();
         outputStream = socket.getOutputStream();
-        WorldUps.UConnect uConnect = WorldUps.UConnect.newBuilder().setWorldid(worldId).addAllTrucks(trucks).setIsAmazon(false).build();
+        WorldUps.UConnect uConnect = WorldUps.UConnect.newBuilder().addAllTrucks(trucks).setIsAmazon(false).build();
         send(uConnect);
 
         // Wait for UConnected response
