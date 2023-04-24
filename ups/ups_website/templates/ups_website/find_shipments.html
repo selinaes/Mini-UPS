@@ -1,0 +1,23 @@
+{% block content %}
+<h2>Shipments</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Shipment ID</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for shipment in shipments_info %}
+        <tr>
+            <td>
+                <a href="{% url 'ups_website:find_packages_detail' shipment.shipment_id %}">
+                    {{ shipment.shipment_id }}
+                </a>
+            </td>
+            <td>{{ shipment.shipment_status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

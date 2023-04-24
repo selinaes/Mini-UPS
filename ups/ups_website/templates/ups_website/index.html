@@ -1,4 +1,259 @@
 <!DOCTYPE html>
+<html lang="en">
+
+<!-- Basic Page Needs––––––––––––––––––––––––––– -->
+
+<head>
+    <meta http-equiv="content-type" content="text/html">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--SEO meta tags-->
+    <!--    Change the index to your website's name-->
+    <title>UPS Webapp</title>
+    <!-- Bootstrap Core CSS ––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
+    <!-- fontawesome ––––––––––––––––––––––––––– -->
+    <script src="https://kit.fontawesome.com/5c9f2dfb26.js"></script>
+    <!-- To add a google font and paste the link -->
+    <style>
+        html {
+            /*    1rem = 16px*/
+            font-size: 1rem;
+        }
+
+        body {
+            background-color: white;
+            font-family: 'Futura', sans-serif;
+            line-height: 1.5;
+        }
+
+        p {
+            margin-bottom: 1.3rem;
+        }
+
+        /*this is a group selection, selecting all the headlines h1-h4*/
+        h1,
+        h2,
+        h3,
+        h4 {
+            /*    headline font*/
+            font-family: 'Merriweather Sans', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 {
+            /*  top:0 right:0  bottom:0.5rem left:0*/
+            margin: 0 0 0.5rem 0;
+            font-size: 3.157rem;
+        }
+
+        h2 {
+            /*  top:1.414rem right:0  bottom:0.5rem left:0*/
+            margin: 1.414rem 0 0.5rem 0;
+            font-size: 2.369rem;
+        }
+
+        h3 {
+            /*  top:1.414rem right:0  bottom:0.5rem left:0*/
+            margin: 1.414em 0 0.5rem 0;
+            font-size: 1.777rem;
+        }
+
+        h4 {
+            /*  top:1.414rem right:0  bottom:0.5rem left:0*/
+            margin: 1.414em 0 0.5rem 0;
+            font-size: 1.333rem;
+        }
+
+
+        /*Interactive elements*/
+        /* link*/
+        a {
+            color: #166088;
+        }
+
+        a:hover {
+            /* color: #C0D6DF; */
+            color: orange;
+            text-decoration: none;
+        }
+
+        /*self-defined class names*/
+        .view {
+            background: rgb(220, 188, 248) center center no-repeat;
+            background-size: cover;
+            padding-top: 11rem;
+            padding-bottom: 3.5rem;
+        }
+
+        .view h1 {
+            padding-left: 50px;
+            color: orange;
+        }
+
+
+        .projectbackground {
+            /* background-color:#F2C299; */
+            background-color: rgb(228, 242, 247);
+            padding-top: 6.5rem;
+            padding-bottom: 5rem;
+        }
+
+        .project img {
+            filter: grayscale(50%);
+        }
+
+        .project img:hover {
+            filter: grayscale(0%);
+        }
+
+        /*navigation*/
+        /*-----navigation background------*/
+        .navbackground {
+            background-color: rgb(255, 255, 255, 0.7);
+        }
+
+        /*-----navigation button in the mobile view------*/
+        /*-----navigation brand name------*/
+        .navbar-light .navbar-brand {
+            padding-left: 1rem;
+            color: #996666;
+            font-weight: 900;
+        }
+
+        /*-----navigation brand name hover color----*/
+        .navbar-light .navbar-brand:hover {
+            color: #166088;
+        }
+
+        /*-------navigation menu links--------*/
+        .navbar-light .navbar-nav .nav-link {
+            color: #4F6D7A;
+            font-size: 1.2rem;
+            padding-right: 1rem;
+        }
+
+        .navbar-light .navbar-nav :hover {
+            color: orange;
+        }
+
+        .contactbackground {
+            padding-top: 1rem;
+            background-color: #C0D6DF;
+            color: #4F6D7A;
+        }
+
+        /*footer*/
+        footer {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .info {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contactbackground p {
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .date {
+            margin-top: 5rem;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="100">
+
+    <nav class="navbar  navbar-light navbar-expand-sm navbackground fixed-top">
+
+        <!--     add d-block d-sm-none class name if you just want the brand name to appear in the mobile view.-->
+        <a class="navbar-brand page-scroll">UPS Webapp</a>
+        <!--        Try justify-content-start, justify-content-end or justify-content-between, justify-content-around to see different layout styles for the navigation.-->
+        <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <span class="nav-link page-scroll">Hi, {{userinfo.user_name}} <a
+                            href="{% url 'ups_website:logout' %}">Logout</a></span>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!--    main content starts from here. Use container or container-fluid-->
+    <div class="container-fluid view" id='view'>
+        <div class='row justify-content-start align-items-center'>
+            <div class='col-sm-5 text-center'>
+                <h1>UPS Webapp</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class='projectbackground' id='portfolio'>
+        <div class="container project">
+            <div class='row justify-content-center align-items-center'>
+                <div class='col-sm-3 text-center'>
+                    <h3><a href="{% url 'ups_website:request_shipment' %}" style="text-decoration: none"> Tracking
+                            Package </a>
+                    </h3>
+                </div>
+                <div class='col-sm-3 text-center'>
+                    <h3><a href="{% url 'ups_website:find_shipments' %}" style="text-decoration: none"> Find All Your
+                            Packages </a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class='contactbackground' id='contact'>
+        <footer class='container text-center'>
+            <h2>I would love to hear from you!</h2>
+            <p>If you have any questions, please let us know.</p>
+
+            <div class='info'>
+                <p><a href='mailto:yikai.liu@duke.edu'>yikai.liu@duke.edu</a></p>
+            </div>
+
+        </footer>
+    </div>
+
+
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js "></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
 <html>
 
 <body>
@@ -7,4 +262,4 @@
 
 </body>
 
-</html>
+</html> -->
