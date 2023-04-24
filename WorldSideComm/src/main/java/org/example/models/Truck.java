@@ -8,5 +8,11 @@ import jakarta.persistence.Id;
 @Table(name = "ups_website_truck")
 public class Truck {
     @Id
-    private int id;
+    private int truck_id;
+
+    private int truck_x;
+    private int truck_y;
+    private String truck_status;
+
+
 }

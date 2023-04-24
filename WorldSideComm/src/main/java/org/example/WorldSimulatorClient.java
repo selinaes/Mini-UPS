@@ -20,7 +20,7 @@ public class WorldSimulatorClient {
         this.port = port;
     }
 
-    public void connectToWorld(long worldId, List<WorldUps.UInitTruck> trucks) throws IOException {
+    public long connectToWorld(List<WorldUps.UInitTruck> trucks) throws IOException {
         // Connect to the world using UConnect
         socket = new Socket(host, port);
         inputStream = socket.getInputStream();
@@ -32,6 +32,7 @@ public class WorldSimulatorClient {
         WorldUps.UConnected uConnected = read(WorldUps.UConnected.parser());
         System.out.println("Result of connection: " + uConnected.getResult());
         System.out.println("Connected to world " + uConnected.getWorldid());
+        return uConnected.getWorldid();
     }
 
     public WorldUps.UResponses sendCommands(WorldUps.UCommands uCommands) throws IOException {
@@ -51,7 +52,7 @@ public class WorldSimulatorClient {
         return parser.parseDelimitedFrom(inputStream);
     }
 
-
+//
 //    public WorldUps.UCommands receiveWorldUpdate() throws IOException {
 //        WorldUps.UCommands commands = WorldUps.UCommands.newBuilder().build();
 //
