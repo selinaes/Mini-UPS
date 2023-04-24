@@ -14,7 +14,11 @@ class SignupForm(forms.Form):
     lastname = forms.CharField(label='Last name', max_length=100, required=False)
     email = forms.EmailField(label='Email Address', required=False)
 
+# class EditUserInfoForm(forms.Form):
+#     firstname = forms.CharField(label='First name', max_length=100, required=False)
+#     lastname = forms.CharField(label='Last name', max_length=100, required=False)
+#     email = forms.EmailField(label='Email Address', required=False)
+
 class EditUserInfoForm(forms.Form):
-    firstname = forms.CharField(label='First name', max_length=100, required=False)
-    lastname = forms.CharField(label='Last name', max_length=100, required=False)
-    email = forms.EmailField(label='Email Address', required=False)
+    address_x = forms.IntegerField(label='Address_x')
+    address_y = forms.IntegerField(label='Address_y')

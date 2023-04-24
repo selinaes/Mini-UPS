@@ -94,3 +94,21 @@ def find_packages_detail(request, shipment_id):
     package = ProductsInPackage.objects.filter(shipment=shipment)
     return render(request, 'ups_website/find_packages_detail.html', {'package_info': packages})
 
+@login_required
+def change_address(request, shipment_id):
+    user = request.user
+    shipment = Shipments.objects.get(ups_username=user.username, shipment_id=shipment_id)
+    if request.method == 'POST':
+        form = EditUserInfoForm(request.POST)
+        if form.is_valid():
+            new_address_x = form.cleaned_data['address_x']
+            new_address_y = form.cleaned_data['address_y']
+            shipment.dest_x = new_address_x
+            shipment.dest_y = new_address_y
+            shipment.save()
+            return HttpResponseRedirect(reverse('ups_website:find_shipments'))
+        else:
+            return HttpResponse("Invalid form")
+    else:
+        form = EditUserInfoForm()
+    return render(request, 'ups_website/change_address.html', {'form': form})

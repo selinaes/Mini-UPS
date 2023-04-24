@@ -1,23 +1,43 @@
-{% block content %}
-<h2>Packages</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Shipment ID</th>
-            <th>Product ID</th>
-            <th>Description</th>
-            <th>Quantity</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for package in package_info %}
-        <tr>
-            <td>{{ package.shipment.shipment_id }}</td>
-            <td>{{ package.product_id }}</td>
-            <td>{{ package.product_description }}</td>
-            <td>{{ package.product_quantity }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% endblock %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Packages</title>
+</head>
+
+<body>
+    <header>
+        My UPS Website
+    </header>
+    <main>
+        <h2>Packages</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Shipment ID</th>
+                    <th>Product ID</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for package in package_info %}
+                <tr>
+                    <td>{{ package.shipment.shipment_id }}</td>
+                    <td>{{ package.product_id }}</td>
+                    <td>{{ package.product_description }}</td>
+                    <td>{{ package.product_quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3><a href="{% url 'ups_website:index' %}">Go back home</a></h3>
+    </main>
+</body>
+
+</html>
