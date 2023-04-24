@@ -1,4 +1,5 @@
 syntax = "proto2";
+package gpb; // add this line
 message AProduct{
   required int64 id = 1;
   required string description = 2;
@@ -18,7 +19,7 @@ message AUconnectedWorld{
 
 
 message AUreqPickup {
-	required int32 whid = 1;
+	required int32 whID = 1;
 	required int32 destinationX = 2;
 	required int32 destinationY = 3;
 	required int64 shipID = 4;  //Amazon generate shipID
@@ -28,14 +29,14 @@ message AUreqPickup {
 }
 
 message UApickupConfirmed {
-	required int32 whid = 1;
+	required int32 whID = 1;
 	required int64 shipID = 2; 
 	required int32 truckID = 3;
-	repeated int64 acks = 4;
+	required int64 seqNum = 4;
 }
 
 message UAtruckArrived {
-	required int32 whid = 1;
+	required int32 whID = 1;
 	required int64 shipID = 2;
 	required int32 truckID = 3;
 	required int64 seqNum = 4;
@@ -43,7 +44,7 @@ message UAtruckArrived {
 
 message AUarriveConfirmed {
 	required int64 shipID = 1;
-	repeated int64 acks = 2;
+	required int64 seqNum = 2;
 }
 
 message AUreqDelivery {
@@ -52,7 +53,7 @@ message AUreqDelivery {
 }
 
 message UAstartDelivery {
-	repeated int64 acks = 1;
+	required int64 seqNum = 1;
 }
 
 message AUquery {
@@ -70,7 +71,7 @@ message UAdelivered {
 	required int64 seqNum = 2;
 }
 
-mesage AUdeliverConfirmed {
+message AUdeliverConfirmed {
 	required int64 shipID = 1;
 	required int64 acks = 2;
 }
@@ -102,6 +103,7 @@ message UAcommands{
 	repeated UAchangeResp changeResp = 6;
 	repeated Err err = 7;
 	optional bool disconnect = 8;
+	repeated int64 acks = 9;
 }
 
 message AUcommands{
@@ -113,4 +115,5 @@ message AUcommands{
 	repeated AUchangeDestn changeDest = 6;
 	repeated Err err = 7;
 	optional bool disconnect = 8;
+	repeated int64 acks = 9;
 }
