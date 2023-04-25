@@ -26,7 +26,7 @@ class Truck(models.Model):
         return str(self.truck_id)
 
 class Shipments(models.Model):
-    shipment_id = models.IntegerField(primary_key=True)
+    shipment_id = models.BigIntegerField(primary_key=True)
     ups_username = models.CharField(max_length=200, null=True)
     truck_id = models.IntegerField(null=True)
     wh_id = models.IntegerField(null=True)
