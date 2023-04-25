@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 @Table(name = "ups_website_shipments")
 public class Shipment {
     @Id
-    private int shipment_id;
+    private long shipment_id;
 
     private int truck_id;
 

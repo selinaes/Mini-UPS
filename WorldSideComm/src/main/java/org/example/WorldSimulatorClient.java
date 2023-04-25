@@ -52,21 +52,13 @@ public class WorldSimulatorClient {
         return parser.parseDelimitedFrom(inputStream);
     }
 
-//
-//    public WorldUps.UCommands receiveWorldUpdate() throws IOException {
-//        WorldUps.UCommands commands = WorldUps.UCommands.newBuilder().build();
-//
-//        byte[] sizeBytes = new byte[4];
-//        socket.getInputStream().read(sizeBytes);
-//        int size = java.nio.ByteBuffer.wrap(sizeBytes).getInt();
-//
-//        byte[] data = new byte[size];
-//        socket.getInputStream().read(data);
-//
-//        commands = WorldUps.UCommands.parseFrom(data);
-//
-//        return commands;
-//    }
+    public WorldUps.UResponses readResponses() throws IOException {
+        WorldUps.UResponses uResponses = read(WorldUps.UResponses.parser());
+        System.out.println("Received responses: " + uResponses);
+        return uResponses;
+    }
+
+
 
 
     public void disconnect() throws IOException {

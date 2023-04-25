@@ -2075,6 +2075,645 @@ public final class UpsAmazon {
 
   }
 
+  public interface AUbindUPSOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:gpb.AUbindUPS)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required int32 upsID = 1;</code>
+     */
+    boolean hasUpsID();
+    /**
+     * <code>required int32 upsID = 1;</code>
+     */
+    int getUpsID();
+
+    /**
+     * <pre>
+     * ack = success (exist), Err = fail (not exist)
+     * </pre>
+     *
+     * <code>required int64 seqNum = 2;</code>
+     */
+    boolean hasSeqNum();
+    /**
+     * <pre>
+     * ack = success (exist), Err = fail (not exist)
+     * </pre>
+     *
+     * <code>required int64 seqNum = 2;</code>
+     */
+    long getSeqNum();
+  }
+  /**
+   * Protobuf type {@code gpb.AUbindUPS}
+   */
+  public  static final class AUbindUPS extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:gpb.AUbindUPS)
+      AUbindUPSOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use AUbindUPS.newBuilder() to construct.
+    private AUbindUPS(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AUbindUPS() {
+      upsID_ = 0;
+      seqNum_ = 0L;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private AUbindUPS(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+              bitField0_ |= 0x00000001;
+              upsID_ = input.readInt32();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              seqNum_ = input.readInt64();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return gpb.UpsAmazon.internal_static_gpb_AUbindUPS_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return gpb.UpsAmazon.internal_static_gpb_AUbindUPS_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              gpb.UpsAmazon.AUbindUPS.class, gpb.UpsAmazon.AUbindUPS.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int UPSID_FIELD_NUMBER = 1;
+    private int upsID_;
+    /**
+     * <code>required int32 upsID = 1;</code>
+     */
+    public boolean hasUpsID() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required int32 upsID = 1;</code>
+     */
+    public int getUpsID() {
+      return upsID_;
+    }
+
+    public static final int SEQNUM_FIELD_NUMBER = 2;
+    private long seqNum_;
+    /**
+     * <pre>
+     * ack = success (exist), Err = fail (not exist)
+     * </pre>
+     *
+     * <code>required int64 seqNum = 2;</code>
+     */
+    public boolean hasSeqNum() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <pre>
+     * ack = success (exist), Err = fail (not exist)
+     * </pre>
+     *
+     * <code>required int64 seqNum = 2;</code>
+     */
+    public long getSeqNum() {
+      return seqNum_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasUpsID()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasSeqNum()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, upsID_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeInt64(2, seqNum_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, upsID_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, seqNum_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof gpb.UpsAmazon.AUbindUPS)) {
+        return super.equals(obj);
+      }
+      gpb.UpsAmazon.AUbindUPS other = (gpb.UpsAmazon.AUbindUPS) obj;
+
+      boolean result = true;
+      result = result && (hasUpsID() == other.hasUpsID());
+      if (hasUpsID()) {
+        result = result && (getUpsID()
+            == other.getUpsID());
+      }
+      result = result && (hasSeqNum() == other.hasSeqNum());
+      if (hasSeqNum()) {
+        result = result && (getSeqNum()
+            == other.getSeqNum());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasUpsID()) {
+        hash = (37 * hash) + UPSID_FIELD_NUMBER;
+        hash = (53 * hash) + getUpsID();
+      }
+      if (hasSeqNum()) {
+        hash = (37 * hash) + SEQNUM_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getSeqNum());
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static gpb.UpsAmazon.AUbindUPS parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static gpb.UpsAmazon.AUbindUPS parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static gpb.UpsAmazon.AUbindUPS parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static gpb.UpsAmazon.AUbindUPS parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static gpb.UpsAmazon.AUbindUPS parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static gpb.UpsAmazon.AUbindUPS parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static gpb.UpsAmazon.AUbindUPS parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static gpb.UpsAmazon.AUbindUPS parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static gpb.UpsAmazon.AUbindUPS parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static gpb.UpsAmazon.AUbindUPS parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static gpb.UpsAmazon.AUbindUPS parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static gpb.UpsAmazon.AUbindUPS parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(gpb.UpsAmazon.AUbindUPS prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code gpb.AUbindUPS}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:gpb.AUbindUPS)
+        gpb.UpsAmazon.AUbindUPSOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return gpb.UpsAmazon.internal_static_gpb_AUbindUPS_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return gpb.UpsAmazon.internal_static_gpb_AUbindUPS_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                gpb.UpsAmazon.AUbindUPS.class, gpb.UpsAmazon.AUbindUPS.Builder.class);
+      }
+
+      // Construct using gpb.UpsAmazon.AUbindUPS.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        upsID_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        seqNum_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return gpb.UpsAmazon.internal_static_gpb_AUbindUPS_descriptor;
+      }
+
+      @java.lang.Override
+      public gpb.UpsAmazon.AUbindUPS getDefaultInstanceForType() {
+        return gpb.UpsAmazon.AUbindUPS.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public gpb.UpsAmazon.AUbindUPS build() {
+        gpb.UpsAmazon.AUbindUPS result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public gpb.UpsAmazon.AUbindUPS buildPartial() {
+        gpb.UpsAmazon.AUbindUPS result = new gpb.UpsAmazon.AUbindUPS(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.upsID_ = upsID_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.seqNum_ = seqNum_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof gpb.UpsAmazon.AUbindUPS) {
+          return mergeFrom((gpb.UpsAmazon.AUbindUPS)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(gpb.UpsAmazon.AUbindUPS other) {
+        if (other == gpb.UpsAmazon.AUbindUPS.getDefaultInstance()) return this;
+        if (other.hasUpsID()) {
+          setUpsID(other.getUpsID());
+        }
+        if (other.hasSeqNum()) {
+          setSeqNum(other.getSeqNum());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        if (!hasUpsID()) {
+          return false;
+        }
+        if (!hasSeqNum()) {
+          return false;
+        }
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        gpb.UpsAmazon.AUbindUPS parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (gpb.UpsAmazon.AUbindUPS) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int upsID_ ;
+      /**
+       * <code>required int32 upsID = 1;</code>
+       */
+      public boolean hasUpsID() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required int32 upsID = 1;</code>
+       */
+      public int getUpsID() {
+        return upsID_;
+      }
+      /**
+       * <code>required int32 upsID = 1;</code>
+       */
+      public Builder setUpsID(int value) {
+        bitField0_ |= 0x00000001;
+        upsID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required int32 upsID = 1;</code>
+       */
+      public Builder clearUpsID() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        upsID_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long seqNum_ ;
+      /**
+       * <pre>
+       * ack = success (exist), Err = fail (not exist)
+       * </pre>
+       *
+       * <code>required int64 seqNum = 2;</code>
+       */
+      public boolean hasSeqNum() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <pre>
+       * ack = success (exist), Err = fail (not exist)
+       * </pre>
+       *
+       * <code>required int64 seqNum = 2;</code>
+       */
+      public long getSeqNum() {
+        return seqNum_;
+      }
+      /**
+       * <pre>
+       * ack = success (exist), Err = fail (not exist)
+       * </pre>
+       *
+       * <code>required int64 seqNum = 2;</code>
+       */
+      public Builder setSeqNum(long value) {
+        bitField0_ |= 0x00000002;
+        seqNum_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * ack = success (exist), Err = fail (not exist)
+       * </pre>
+       *
+       * <code>required int64 seqNum = 2;</code>
+       */
+      public Builder clearSeqNum() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        seqNum_ = 0L;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:gpb.AUbindUPS)
+    }
+
+    // @@protoc_insertion_point(class_scope:gpb.AUbindUPS)
+    private static final gpb.UpsAmazon.AUbindUPS DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new gpb.UpsAmazon.AUbindUPS();
+    }
+
+    public static gpb.UpsAmazon.AUbindUPS getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<AUbindUPS>
+        PARSER = new com.google.protobuf.AbstractParser<AUbindUPS>() {
+      @java.lang.Override
+      public AUbindUPS parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new AUbindUPS(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<AUbindUPS> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AUbindUPS> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public gpb.UpsAmazon.AUbindUPS getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface AUreqPickupOrBuilder extends
       // @@protoc_insertion_point(interface_extends:gpb.AUreqPickup)
       com.google.protobuf.MessageOrBuilder {
@@ -3375,802 +4014,6 @@ public final class UpsAmazon {
 
   }
 
-  public interface UApickupConfirmedOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gpb.UApickupConfirmed)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required int32 whID = 1;</code>
-     */
-    boolean hasWhID();
-    /**
-     * <code>required int32 whID = 1;</code>
-     */
-    int getWhID();
-
-    /**
-     * <code>required int64 shipID = 2;</code>
-     */
-    boolean hasShipID();
-    /**
-     * <code>required int64 shipID = 2;</code>
-     */
-    long getShipID();
-
-    /**
-     * <code>required int32 truckID = 3;</code>
-     */
-    boolean hasTruckID();
-    /**
-     * <code>required int32 truckID = 3;</code>
-     */
-    int getTruckID();
-
-    /**
-     * <code>required int64 seqNum = 4;</code>
-     */
-    boolean hasSeqNum();
-    /**
-     * <code>required int64 seqNum = 4;</code>
-     */
-    long getSeqNum();
-  }
-  /**
-   * Protobuf type {@code gpb.UApickupConfirmed}
-   */
-  public  static final class UApickupConfirmed extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:gpb.UApickupConfirmed)
-      UApickupConfirmedOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use UApickupConfirmed.newBuilder() to construct.
-    private UApickupConfirmed(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private UApickupConfirmed() {
-      whID_ = 0;
-      shipID_ = 0L;
-      truckID_ = 0;
-      seqNum_ = 0L;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private UApickupConfirmed(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              bitField0_ |= 0x00000001;
-              whID_ = input.readInt32();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              shipID_ = input.readInt64();
-              break;
-            }
-            case 24: {
-              bitField0_ |= 0x00000004;
-              truckID_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              bitField0_ |= 0x00000008;
-              seqNum_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return gpb.UpsAmazon.internal_static_gpb_UApickupConfirmed_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return gpb.UpsAmazon.internal_static_gpb_UApickupConfirmed_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              gpb.UpsAmazon.UApickupConfirmed.class, gpb.UpsAmazon.UApickupConfirmed.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int WHID_FIELD_NUMBER = 1;
-    private int whID_;
-    /**
-     * <code>required int32 whID = 1;</code>
-     */
-    public boolean hasWhID() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required int32 whID = 1;</code>
-     */
-    public int getWhID() {
-      return whID_;
-    }
-
-    public static final int SHIPID_FIELD_NUMBER = 2;
-    private long shipID_;
-    /**
-     * <code>required int64 shipID = 2;</code>
-     */
-    public boolean hasShipID() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required int64 shipID = 2;</code>
-     */
-    public long getShipID() {
-      return shipID_;
-    }
-
-    public static final int TRUCKID_FIELD_NUMBER = 3;
-    private int truckID_;
-    /**
-     * <code>required int32 truckID = 3;</code>
-     */
-    public boolean hasTruckID() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required int32 truckID = 3;</code>
-     */
-    public int getTruckID() {
-      return truckID_;
-    }
-
-    public static final int SEQNUM_FIELD_NUMBER = 4;
-    private long seqNum_;
-    /**
-     * <code>required int64 seqNum = 4;</code>
-     */
-    public boolean hasSeqNum() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>required int64 seqNum = 4;</code>
-     */
-    public long getSeqNum() {
-      return seqNum_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasWhID()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasShipID()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasTruckID()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasSeqNum()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(1, whID_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, shipID_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeInt32(3, truckID_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeInt64(4, seqNum_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, whID_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, shipID_);
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, truckID_);
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, seqNum_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof gpb.UpsAmazon.UApickupConfirmed)) {
-        return super.equals(obj);
-      }
-      gpb.UpsAmazon.UApickupConfirmed other = (gpb.UpsAmazon.UApickupConfirmed) obj;
-
-      boolean result = true;
-      result = result && (hasWhID() == other.hasWhID());
-      if (hasWhID()) {
-        result = result && (getWhID()
-            == other.getWhID());
-      }
-      result = result && (hasShipID() == other.hasShipID());
-      if (hasShipID()) {
-        result = result && (getShipID()
-            == other.getShipID());
-      }
-      result = result && (hasTruckID() == other.hasTruckID());
-      if (hasTruckID()) {
-        result = result && (getTruckID()
-            == other.getTruckID());
-      }
-      result = result && (hasSeqNum() == other.hasSeqNum());
-      if (hasSeqNum()) {
-        result = result && (getSeqNum()
-            == other.getSeqNum());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasWhID()) {
-        hash = (37 * hash) + WHID_FIELD_NUMBER;
-        hash = (53 * hash) + getWhID();
-      }
-      if (hasShipID()) {
-        hash = (37 * hash) + SHIPID_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getShipID());
-      }
-      if (hasTruckID()) {
-        hash = (37 * hash) + TRUCKID_FIELD_NUMBER;
-        hash = (53 * hash) + getTruckID();
-      }
-      if (hasSeqNum()) {
-        hash = (37 * hash) + SEQNUM_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getSeqNum());
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static gpb.UpsAmazon.UApickupConfirmed parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.UApickupConfirmed parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.UApickupConfirmed parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.UApickupConfirmed parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.UApickupConfirmed parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.UApickupConfirmed parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.UApickupConfirmed parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.UApickupConfirmed parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.UApickupConfirmed parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.UApickupConfirmed parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.UApickupConfirmed parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.UApickupConfirmed parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(gpb.UpsAmazon.UApickupConfirmed prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code gpb.UApickupConfirmed}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:gpb.UApickupConfirmed)
-        gpb.UpsAmazon.UApickupConfirmedOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return gpb.UpsAmazon.internal_static_gpb_UApickupConfirmed_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return gpb.UpsAmazon.internal_static_gpb_UApickupConfirmed_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                gpb.UpsAmazon.UApickupConfirmed.class, gpb.UpsAmazon.UApickupConfirmed.Builder.class);
-      }
-
-      // Construct using gpb.UpsAmazon.UApickupConfirmed.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        whID_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        shipID_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        truckID_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        seqNum_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000008);
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return gpb.UpsAmazon.internal_static_gpb_UApickupConfirmed_descriptor;
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.UApickupConfirmed getDefaultInstanceForType() {
-        return gpb.UpsAmazon.UApickupConfirmed.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.UApickupConfirmed build() {
-        gpb.UpsAmazon.UApickupConfirmed result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.UApickupConfirmed buildPartial() {
-        gpb.UpsAmazon.UApickupConfirmed result = new gpb.UpsAmazon.UApickupConfirmed(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.whID_ = whID_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.shipID_ = shipID_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.truckID_ = truckID_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.seqNum_ = seqNum_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof gpb.UpsAmazon.UApickupConfirmed) {
-          return mergeFrom((gpb.UpsAmazon.UApickupConfirmed)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(gpb.UpsAmazon.UApickupConfirmed other) {
-        if (other == gpb.UpsAmazon.UApickupConfirmed.getDefaultInstance()) return this;
-        if (other.hasWhID()) {
-          setWhID(other.getWhID());
-        }
-        if (other.hasShipID()) {
-          setShipID(other.getShipID());
-        }
-        if (other.hasTruckID()) {
-          setTruckID(other.getTruckID());
-        }
-        if (other.hasSeqNum()) {
-          setSeqNum(other.getSeqNum());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        if (!hasWhID()) {
-          return false;
-        }
-        if (!hasShipID()) {
-          return false;
-        }
-        if (!hasTruckID()) {
-          return false;
-        }
-        if (!hasSeqNum()) {
-          return false;
-        }
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        gpb.UpsAmazon.UApickupConfirmed parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (gpb.UpsAmazon.UApickupConfirmed) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int whID_ ;
-      /**
-       * <code>required int32 whID = 1;</code>
-       */
-      public boolean hasWhID() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required int32 whID = 1;</code>
-       */
-      public int getWhID() {
-        return whID_;
-      }
-      /**
-       * <code>required int32 whID = 1;</code>
-       */
-      public Builder setWhID(int value) {
-        bitField0_ |= 0x00000001;
-        whID_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int32 whID = 1;</code>
-       */
-      public Builder clearWhID() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        whID_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private long shipID_ ;
-      /**
-       * <code>required int64 shipID = 2;</code>
-       */
-      public boolean hasShipID() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required int64 shipID = 2;</code>
-       */
-      public long getShipID() {
-        return shipID_;
-      }
-      /**
-       * <code>required int64 shipID = 2;</code>
-       */
-      public Builder setShipID(long value) {
-        bitField0_ |= 0x00000002;
-        shipID_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 shipID = 2;</code>
-       */
-      public Builder clearShipID() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        shipID_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private int truckID_ ;
-      /**
-       * <code>required int32 truckID = 3;</code>
-       */
-      public boolean hasTruckID() {
-        return ((bitField0_ & 0x00000004) == 0x00000004);
-      }
-      /**
-       * <code>required int32 truckID = 3;</code>
-       */
-      public int getTruckID() {
-        return truckID_;
-      }
-      /**
-       * <code>required int32 truckID = 3;</code>
-       */
-      public Builder setTruckID(int value) {
-        bitField0_ |= 0x00000004;
-        truckID_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int32 truckID = 3;</code>
-       */
-      public Builder clearTruckID() {
-        bitField0_ = (bitField0_ & ~0x00000004);
-        truckID_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private long seqNum_ ;
-      /**
-       * <code>required int64 seqNum = 4;</code>
-       */
-      public boolean hasSeqNum() {
-        return ((bitField0_ & 0x00000008) == 0x00000008);
-      }
-      /**
-       * <code>required int64 seqNum = 4;</code>
-       */
-      public long getSeqNum() {
-        return seqNum_;
-      }
-      /**
-       * <code>required int64 seqNum = 4;</code>
-       */
-      public Builder setSeqNum(long value) {
-        bitField0_ |= 0x00000008;
-        seqNum_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 seqNum = 4;</code>
-       */
-      public Builder clearSeqNum() {
-        bitField0_ = (bitField0_ & ~0x00000008);
-        seqNum_ = 0L;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:gpb.UApickupConfirmed)
-    }
-
-    // @@protoc_insertion_point(class_scope:gpb.UApickupConfirmed)
-    private static final gpb.UpsAmazon.UApickupConfirmed DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new gpb.UpsAmazon.UApickupConfirmed();
-    }
-
-    public static gpb.UpsAmazon.UApickupConfirmed getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<UApickupConfirmed>
-        PARSER = new com.google.protobuf.AbstractParser<UApickupConfirmed>() {
-      @java.lang.Override
-      public UApickupConfirmed parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UApickupConfirmed(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<UApickupConfirmed> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<UApickupConfirmed> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public gpb.UpsAmazon.UApickupConfirmed getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface UAtruckArrivedOrBuilder extends
       // @@protoc_insertion_point(interface_extends:gpb.UAtruckArrived)
       com.google.protobuf.MessageOrBuilder {
@@ -4967,614 +4810,6 @@ public final class UpsAmazon {
 
   }
 
-  public interface AUarriveConfirmedOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gpb.AUarriveConfirmed)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required int64 shipID = 1;</code>
-     */
-    boolean hasShipID();
-    /**
-     * <code>required int64 shipID = 1;</code>
-     */
-    long getShipID();
-
-    /**
-     * <code>required int64 seqNum = 2;</code>
-     */
-    boolean hasSeqNum();
-    /**
-     * <code>required int64 seqNum = 2;</code>
-     */
-    long getSeqNum();
-  }
-  /**
-   * Protobuf type {@code gpb.AUarriveConfirmed}
-   */
-  public  static final class AUarriveConfirmed extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:gpb.AUarriveConfirmed)
-      AUarriveConfirmedOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use AUarriveConfirmed.newBuilder() to construct.
-    private AUarriveConfirmed(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private AUarriveConfirmed() {
-      shipID_ = 0L;
-      seqNum_ = 0L;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private AUarriveConfirmed(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              bitField0_ |= 0x00000001;
-              shipID_ = input.readInt64();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              seqNum_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return gpb.UpsAmazon.internal_static_gpb_AUarriveConfirmed_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return gpb.UpsAmazon.internal_static_gpb_AUarriveConfirmed_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              gpb.UpsAmazon.AUarriveConfirmed.class, gpb.UpsAmazon.AUarriveConfirmed.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int SHIPID_FIELD_NUMBER = 1;
-    private long shipID_;
-    /**
-     * <code>required int64 shipID = 1;</code>
-     */
-    public boolean hasShipID() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required int64 shipID = 1;</code>
-     */
-    public long getShipID() {
-      return shipID_;
-    }
-
-    public static final int SEQNUM_FIELD_NUMBER = 2;
-    private long seqNum_;
-    /**
-     * <code>required int64 seqNum = 2;</code>
-     */
-    public boolean hasSeqNum() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required int64 seqNum = 2;</code>
-     */
-    public long getSeqNum() {
-      return seqNum_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasShipID()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasSeqNum()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, shipID_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, seqNum_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, shipID_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, seqNum_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof gpb.UpsAmazon.AUarriveConfirmed)) {
-        return super.equals(obj);
-      }
-      gpb.UpsAmazon.AUarriveConfirmed other = (gpb.UpsAmazon.AUarriveConfirmed) obj;
-
-      boolean result = true;
-      result = result && (hasShipID() == other.hasShipID());
-      if (hasShipID()) {
-        result = result && (getShipID()
-            == other.getShipID());
-      }
-      result = result && (hasSeqNum() == other.hasSeqNum());
-      if (hasSeqNum()) {
-        result = result && (getSeqNum()
-            == other.getSeqNum());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasShipID()) {
-        hash = (37 * hash) + SHIPID_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getShipID());
-      }
-      if (hasSeqNum()) {
-        hash = (37 * hash) + SEQNUM_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getSeqNum());
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static gpb.UpsAmazon.AUarriveConfirmed parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.AUarriveConfirmed parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.AUarriveConfirmed parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.AUarriveConfirmed parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.AUarriveConfirmed parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.AUarriveConfirmed parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.AUarriveConfirmed parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.AUarriveConfirmed parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.AUarriveConfirmed parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.AUarriveConfirmed parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.AUarriveConfirmed parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.AUarriveConfirmed parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(gpb.UpsAmazon.AUarriveConfirmed prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code gpb.AUarriveConfirmed}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:gpb.AUarriveConfirmed)
-        gpb.UpsAmazon.AUarriveConfirmedOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return gpb.UpsAmazon.internal_static_gpb_AUarriveConfirmed_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return gpb.UpsAmazon.internal_static_gpb_AUarriveConfirmed_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                gpb.UpsAmazon.AUarriveConfirmed.class, gpb.UpsAmazon.AUarriveConfirmed.Builder.class);
-      }
-
-      // Construct using gpb.UpsAmazon.AUarriveConfirmed.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        shipID_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        seqNum_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return gpb.UpsAmazon.internal_static_gpb_AUarriveConfirmed_descriptor;
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.AUarriveConfirmed getDefaultInstanceForType() {
-        return gpb.UpsAmazon.AUarriveConfirmed.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.AUarriveConfirmed build() {
-        gpb.UpsAmazon.AUarriveConfirmed result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.AUarriveConfirmed buildPartial() {
-        gpb.UpsAmazon.AUarriveConfirmed result = new gpb.UpsAmazon.AUarriveConfirmed(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.shipID_ = shipID_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.seqNum_ = seqNum_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof gpb.UpsAmazon.AUarriveConfirmed) {
-          return mergeFrom((gpb.UpsAmazon.AUarriveConfirmed)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(gpb.UpsAmazon.AUarriveConfirmed other) {
-        if (other == gpb.UpsAmazon.AUarriveConfirmed.getDefaultInstance()) return this;
-        if (other.hasShipID()) {
-          setShipID(other.getShipID());
-        }
-        if (other.hasSeqNum()) {
-          setSeqNum(other.getSeqNum());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        if (!hasShipID()) {
-          return false;
-        }
-        if (!hasSeqNum()) {
-          return false;
-        }
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        gpb.UpsAmazon.AUarriveConfirmed parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (gpb.UpsAmazon.AUarriveConfirmed) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private long shipID_ ;
-      /**
-       * <code>required int64 shipID = 1;</code>
-       */
-      public boolean hasShipID() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required int64 shipID = 1;</code>
-       */
-      public long getShipID() {
-        return shipID_;
-      }
-      /**
-       * <code>required int64 shipID = 1;</code>
-       */
-      public Builder setShipID(long value) {
-        bitField0_ |= 0x00000001;
-        shipID_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 shipID = 1;</code>
-       */
-      public Builder clearShipID() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        shipID_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private long seqNum_ ;
-      /**
-       * <code>required int64 seqNum = 2;</code>
-       */
-      public boolean hasSeqNum() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required int64 seqNum = 2;</code>
-       */
-      public long getSeqNum() {
-        return seqNum_;
-      }
-      /**
-       * <code>required int64 seqNum = 2;</code>
-       */
-      public Builder setSeqNum(long value) {
-        bitField0_ |= 0x00000002;
-        seqNum_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 seqNum = 2;</code>
-       */
-      public Builder clearSeqNum() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        seqNum_ = 0L;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:gpb.AUarriveConfirmed)
-    }
-
-    // @@protoc_insertion_point(class_scope:gpb.AUarriveConfirmed)
-    private static final gpb.UpsAmazon.AUarriveConfirmed DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new gpb.UpsAmazon.AUarriveConfirmed();
-    }
-
-    public static gpb.UpsAmazon.AUarriveConfirmed getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<AUarriveConfirmed>
-        PARSER = new com.google.protobuf.AbstractParser<AUarriveConfirmed>() {
-      @java.lang.Override
-      public AUarriveConfirmed parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AUarriveConfirmed(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<AUarriveConfirmed> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<AUarriveConfirmed> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public gpb.UpsAmazon.AUarriveConfirmed getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface AUreqDeliveryOrBuilder extends
       // @@protoc_insertion_point(interface_extends:gpb.AUreqDelivery)
       com.google.protobuf.MessageOrBuilder {
@@ -6178,519 +5413,6 @@ public final class UpsAmazon {
 
     @java.lang.Override
     public gpb.UpsAmazon.AUreqDelivery getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface UAstartDeliveryOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gpb.UAstartDelivery)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required int64 seqNum = 1;</code>
-     */
-    boolean hasSeqNum();
-    /**
-     * <code>required int64 seqNum = 1;</code>
-     */
-    long getSeqNum();
-  }
-  /**
-   * Protobuf type {@code gpb.UAstartDelivery}
-   */
-  public  static final class UAstartDelivery extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:gpb.UAstartDelivery)
-      UAstartDeliveryOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use UAstartDelivery.newBuilder() to construct.
-    private UAstartDelivery(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private UAstartDelivery() {
-      seqNum_ = 0L;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private UAstartDelivery(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              bitField0_ |= 0x00000001;
-              seqNum_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return gpb.UpsAmazon.internal_static_gpb_UAstartDelivery_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return gpb.UpsAmazon.internal_static_gpb_UAstartDelivery_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              gpb.UpsAmazon.UAstartDelivery.class, gpb.UpsAmazon.UAstartDelivery.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int SEQNUM_FIELD_NUMBER = 1;
-    private long seqNum_;
-    /**
-     * <code>required int64 seqNum = 1;</code>
-     */
-    public boolean hasSeqNum() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required int64 seqNum = 1;</code>
-     */
-    public long getSeqNum() {
-      return seqNum_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasSeqNum()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, seqNum_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, seqNum_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof gpb.UpsAmazon.UAstartDelivery)) {
-        return super.equals(obj);
-      }
-      gpb.UpsAmazon.UAstartDelivery other = (gpb.UpsAmazon.UAstartDelivery) obj;
-
-      boolean result = true;
-      result = result && (hasSeqNum() == other.hasSeqNum());
-      if (hasSeqNum()) {
-        result = result && (getSeqNum()
-            == other.getSeqNum());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasSeqNum()) {
-        hash = (37 * hash) + SEQNUM_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getSeqNum());
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static gpb.UpsAmazon.UAstartDelivery parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.UAstartDelivery parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.UAstartDelivery parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.UAstartDelivery parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.UAstartDelivery parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.UAstartDelivery parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.UAstartDelivery parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.UAstartDelivery parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.UAstartDelivery parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.UAstartDelivery parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.UAstartDelivery parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.UAstartDelivery parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(gpb.UpsAmazon.UAstartDelivery prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code gpb.UAstartDelivery}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:gpb.UAstartDelivery)
-        gpb.UpsAmazon.UAstartDeliveryOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return gpb.UpsAmazon.internal_static_gpb_UAstartDelivery_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return gpb.UpsAmazon.internal_static_gpb_UAstartDelivery_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                gpb.UpsAmazon.UAstartDelivery.class, gpb.UpsAmazon.UAstartDelivery.Builder.class);
-      }
-
-      // Construct using gpb.UpsAmazon.UAstartDelivery.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        seqNum_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return gpb.UpsAmazon.internal_static_gpb_UAstartDelivery_descriptor;
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.UAstartDelivery getDefaultInstanceForType() {
-        return gpb.UpsAmazon.UAstartDelivery.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.UAstartDelivery build() {
-        gpb.UpsAmazon.UAstartDelivery result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.UAstartDelivery buildPartial() {
-        gpb.UpsAmazon.UAstartDelivery result = new gpb.UpsAmazon.UAstartDelivery(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.seqNum_ = seqNum_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof gpb.UpsAmazon.UAstartDelivery) {
-          return mergeFrom((gpb.UpsAmazon.UAstartDelivery)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(gpb.UpsAmazon.UAstartDelivery other) {
-        if (other == gpb.UpsAmazon.UAstartDelivery.getDefaultInstance()) return this;
-        if (other.hasSeqNum()) {
-          setSeqNum(other.getSeqNum());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        if (!hasSeqNum()) {
-          return false;
-        }
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        gpb.UpsAmazon.UAstartDelivery parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (gpb.UpsAmazon.UAstartDelivery) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private long seqNum_ ;
-      /**
-       * <code>required int64 seqNum = 1;</code>
-       */
-      public boolean hasSeqNum() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required int64 seqNum = 1;</code>
-       */
-      public long getSeqNum() {
-        return seqNum_;
-      }
-      /**
-       * <code>required int64 seqNum = 1;</code>
-       */
-      public Builder setSeqNum(long value) {
-        bitField0_ |= 0x00000001;
-        seqNum_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 seqNum = 1;</code>
-       */
-      public Builder clearSeqNum() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        seqNum_ = 0L;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:gpb.UAstartDelivery)
-    }
-
-    // @@protoc_insertion_point(class_scope:gpb.UAstartDelivery)
-    private static final gpb.UpsAmazon.UAstartDelivery DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new gpb.UpsAmazon.UAstartDelivery();
-    }
-
-    public static gpb.UpsAmazon.UAstartDelivery getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<UAstartDelivery>
-        PARSER = new com.google.protobuf.AbstractParser<UAstartDelivery>() {
-      @java.lang.Override
-      public UAstartDelivery parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UAstartDelivery(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<UAstartDelivery> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<UAstartDelivery> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public gpb.UpsAmazon.UAstartDelivery getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -7323,13 +6045,13 @@ public final class UpsAmazon {
         getStatusBytes();
 
     /**
-     * <code>required int64 acks = 2;</code>
+     * <code>required int64 seqNum = 2;</code>
      */
-    boolean hasAcks();
+    boolean hasSeqNum();
     /**
-     * <code>required int64 acks = 2;</code>
+     * <code>required int64 seqNum = 2;</code>
      */
-    long getAcks();
+    long getSeqNum();
   }
   /**
    * Protobuf type {@code gpb.UAstatus}
@@ -7345,7 +6067,7 @@ public final class UpsAmazon {
     }
     private UAstatus() {
       status_ = "";
-      acks_ = 0L;
+      seqNum_ = 0L;
     }
 
     @java.lang.Override
@@ -7380,7 +6102,7 @@ public final class UpsAmazon {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              acks_ = input.readInt64();
+              seqNum_ = input.readInt64();
               break;
             }
             default: {
@@ -7458,19 +6180,19 @@ public final class UpsAmazon {
       }
     }
 
-    public static final int ACKS_FIELD_NUMBER = 2;
-    private long acks_;
+    public static final int SEQNUM_FIELD_NUMBER = 2;
+    private long seqNum_;
     /**
-     * <code>required int64 acks = 2;</code>
+     * <code>required int64 seqNum = 2;</code>
      */
-    public boolean hasAcks() {
+    public boolean hasSeqNum() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required int64 acks = 2;</code>
+     * <code>required int64 seqNum = 2;</code>
      */
-    public long getAcks() {
-      return acks_;
+    public long getSeqNum() {
+      return seqNum_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -7484,7 +6206,7 @@ public final class UpsAmazon {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasAcks()) {
+      if (!hasSeqNum()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -7499,7 +6221,7 @@ public final class UpsAmazon {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, status_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, acks_);
+        output.writeInt64(2, seqNum_);
       }
       unknownFields.writeTo(output);
     }
@@ -7515,7 +6237,7 @@ public final class UpsAmazon {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, acks_);
+          .computeInt64Size(2, seqNum_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -7538,10 +6260,10 @@ public final class UpsAmazon {
         result = result && getStatus()
             .equals(other.getStatus());
       }
-      result = result && (hasAcks() == other.hasAcks());
-      if (hasAcks()) {
-        result = result && (getAcks()
-            == other.getAcks());
+      result = result && (hasSeqNum() == other.hasSeqNum());
+      if (hasSeqNum()) {
+        result = result && (getSeqNum()
+            == other.getSeqNum());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -7558,10 +6280,10 @@ public final class UpsAmazon {
         hash = (37 * hash) + STATUS_FIELD_NUMBER;
         hash = (53 * hash) + getStatus().hashCode();
       }
-      if (hasAcks()) {
-        hash = (37 * hash) + ACKS_FIELD_NUMBER;
+      if (hasSeqNum()) {
+        hash = (37 * hash) + SEQNUM_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getAcks());
+            getSeqNum());
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -7698,7 +6420,7 @@ public final class UpsAmazon {
         super.clear();
         status_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        acks_ = 0L;
+        seqNum_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -7735,7 +6457,7 @@ public final class UpsAmazon {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.acks_ = acks_;
+        result.seqNum_ = seqNum_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -7790,8 +6512,8 @@ public final class UpsAmazon {
           status_ = other.status_;
           onChanged();
         }
-        if (other.hasAcks()) {
-          setAcks(other.getAcks());
+        if (other.hasSeqNum()) {
+          setSeqNum(other.getSeqNum());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -7803,7 +6525,7 @@ public final class UpsAmazon {
         if (!hasStatus()) {
           return false;
         }
-        if (!hasAcks()) {
+        if (!hasSeqNum()) {
           return false;
         }
         return true;
@@ -7905,34 +6627,34 @@ public final class UpsAmazon {
         return this;
       }
 
-      private long acks_ ;
+      private long seqNum_ ;
       /**
-       * <code>required int64 acks = 2;</code>
+       * <code>required int64 seqNum = 2;</code>
        */
-      public boolean hasAcks() {
+      public boolean hasSeqNum() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required int64 acks = 2;</code>
+       * <code>required int64 seqNum = 2;</code>
        */
-      public long getAcks() {
-        return acks_;
+      public long getSeqNum() {
+        return seqNum_;
       }
       /**
-       * <code>required int64 acks = 2;</code>
+       * <code>required int64 seqNum = 2;</code>
        */
-      public Builder setAcks(long value) {
+      public Builder setSeqNum(long value) {
         bitField0_ |= 0x00000002;
-        acks_ = value;
+        seqNum_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int64 acks = 2;</code>
+       * <code>required int64 seqNum = 2;</code>
        */
-      public Builder clearAcks() {
+      public Builder clearSeqNum() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        acks_ = 0L;
+        seqNum_ = 0L;
         onChanged();
         return this;
       }
@@ -8592,614 +7314,6 @@ public final class UpsAmazon {
 
     @java.lang.Override
     public gpb.UpsAmazon.UAdelivered getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface AUdeliverConfirmedOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:gpb.AUdeliverConfirmed)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>required int64 shipID = 1;</code>
-     */
-    boolean hasShipID();
-    /**
-     * <code>required int64 shipID = 1;</code>
-     */
-    long getShipID();
-
-    /**
-     * <code>required int64 acks = 2;</code>
-     */
-    boolean hasAcks();
-    /**
-     * <code>required int64 acks = 2;</code>
-     */
-    long getAcks();
-  }
-  /**
-   * Protobuf type {@code gpb.AUdeliverConfirmed}
-   */
-  public  static final class AUdeliverConfirmed extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:gpb.AUdeliverConfirmed)
-      AUdeliverConfirmedOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use AUdeliverConfirmed.newBuilder() to construct.
-    private AUdeliverConfirmed(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private AUdeliverConfirmed() {
-      shipID_ = 0L;
-      acks_ = 0L;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private AUdeliverConfirmed(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-              bitField0_ |= 0x00000001;
-              shipID_ = input.readInt64();
-              break;
-            }
-            case 16: {
-              bitField0_ |= 0x00000002;
-              acks_ = input.readInt64();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return gpb.UpsAmazon.internal_static_gpb_AUdeliverConfirmed_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return gpb.UpsAmazon.internal_static_gpb_AUdeliverConfirmed_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              gpb.UpsAmazon.AUdeliverConfirmed.class, gpb.UpsAmazon.AUdeliverConfirmed.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int SHIPID_FIELD_NUMBER = 1;
-    private long shipID_;
-    /**
-     * <code>required int64 shipID = 1;</code>
-     */
-    public boolean hasShipID() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required int64 shipID = 1;</code>
-     */
-    public long getShipID() {
-      return shipID_;
-    }
-
-    public static final int ACKS_FIELD_NUMBER = 2;
-    private long acks_;
-    /**
-     * <code>required int64 acks = 2;</code>
-     */
-    public boolean hasAcks() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required int64 acks = 2;</code>
-     */
-    public long getAcks() {
-      return acks_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      if (!hasShipID()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasAcks()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt64(1, shipID_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, acks_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(1, shipID_);
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, acks_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof gpb.UpsAmazon.AUdeliverConfirmed)) {
-        return super.equals(obj);
-      }
-      gpb.UpsAmazon.AUdeliverConfirmed other = (gpb.UpsAmazon.AUdeliverConfirmed) obj;
-
-      boolean result = true;
-      result = result && (hasShipID() == other.hasShipID());
-      if (hasShipID()) {
-        result = result && (getShipID()
-            == other.getShipID());
-      }
-      result = result && (hasAcks() == other.hasAcks());
-      if (hasAcks()) {
-        result = result && (getAcks()
-            == other.getAcks());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasShipID()) {
-        hash = (37 * hash) + SHIPID_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getShipID());
-      }
-      if (hasAcks()) {
-        hash = (37 * hash) + ACKS_FIELD_NUMBER;
-        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getAcks());
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static gpb.UpsAmazon.AUdeliverConfirmed parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(gpb.UpsAmazon.AUdeliverConfirmed prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code gpb.AUdeliverConfirmed}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:gpb.AUdeliverConfirmed)
-        gpb.UpsAmazon.AUdeliverConfirmedOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return gpb.UpsAmazon.internal_static_gpb_AUdeliverConfirmed_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return gpb.UpsAmazon.internal_static_gpb_AUdeliverConfirmed_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                gpb.UpsAmazon.AUdeliverConfirmed.class, gpb.UpsAmazon.AUdeliverConfirmed.Builder.class);
-      }
-
-      // Construct using gpb.UpsAmazon.AUdeliverConfirmed.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        shipID_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        acks_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return gpb.UpsAmazon.internal_static_gpb_AUdeliverConfirmed_descriptor;
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.AUdeliverConfirmed getDefaultInstanceForType() {
-        return gpb.UpsAmazon.AUdeliverConfirmed.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.AUdeliverConfirmed build() {
-        gpb.UpsAmazon.AUdeliverConfirmed result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public gpb.UpsAmazon.AUdeliverConfirmed buildPartial() {
-        gpb.UpsAmazon.AUdeliverConfirmed result = new gpb.UpsAmazon.AUdeliverConfirmed(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.shipID_ = shipID_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.acks_ = acks_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof gpb.UpsAmazon.AUdeliverConfirmed) {
-          return mergeFrom((gpb.UpsAmazon.AUdeliverConfirmed)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(gpb.UpsAmazon.AUdeliverConfirmed other) {
-        if (other == gpb.UpsAmazon.AUdeliverConfirmed.getDefaultInstance()) return this;
-        if (other.hasShipID()) {
-          setShipID(other.getShipID());
-        }
-        if (other.hasAcks()) {
-          setAcks(other.getAcks());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        if (!hasShipID()) {
-          return false;
-        }
-        if (!hasAcks()) {
-          return false;
-        }
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        gpb.UpsAmazon.AUdeliverConfirmed parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (gpb.UpsAmazon.AUdeliverConfirmed) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private long shipID_ ;
-      /**
-       * <code>required int64 shipID = 1;</code>
-       */
-      public boolean hasShipID() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required int64 shipID = 1;</code>
-       */
-      public long getShipID() {
-        return shipID_;
-      }
-      /**
-       * <code>required int64 shipID = 1;</code>
-       */
-      public Builder setShipID(long value) {
-        bitField0_ |= 0x00000001;
-        shipID_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 shipID = 1;</code>
-       */
-      public Builder clearShipID() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        shipID_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private long acks_ ;
-      /**
-       * <code>required int64 acks = 2;</code>
-       */
-      public boolean hasAcks() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>required int64 acks = 2;</code>
-       */
-      public long getAcks() {
-        return acks_;
-      }
-      /**
-       * <code>required int64 acks = 2;</code>
-       */
-      public Builder setAcks(long value) {
-        bitField0_ |= 0x00000002;
-        acks_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>required int64 acks = 2;</code>
-       */
-      public Builder clearAcks() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        acks_ = 0L;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:gpb.AUdeliverConfirmed)
-    }
-
-    // @@protoc_insertion_point(class_scope:gpb.AUdeliverConfirmed)
-    private static final gpb.UpsAmazon.AUdeliverConfirmed DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new gpb.UpsAmazon.AUdeliverConfirmed();
-    }
-
-    public static gpb.UpsAmazon.AUdeliverConfirmed getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<AUdeliverConfirmed>
-        PARSER = new com.google.protobuf.AbstractParser<AUdeliverConfirmed>() {
-      @java.lang.Override
-      public AUdeliverConfirmed parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new AUdeliverConfirmed(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<AUdeliverConfirmed> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<AUdeliverConfirmed> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public gpb.UpsAmazon.AUdeliverConfirmed getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -10015,13 +8129,13 @@ public final class UpsAmazon {
     boolean getSuccess();
 
     /**
-     * <code>required int64 acks = 2;</code>
+     * <code>required int64 seqNum = 2;</code>
      */
-    boolean hasAcks();
+    boolean hasSeqNum();
     /**
-     * <code>required int64 acks = 2;</code>
+     * <code>required int64 seqNum = 2;</code>
      */
-    long getAcks();
+    long getSeqNum();
   }
   /**
    * Protobuf type {@code gpb.UAchangeResp}
@@ -10037,7 +8151,7 @@ public final class UpsAmazon {
     }
     private UAchangeResp() {
       success_ = false;
-      acks_ = 0L;
+      seqNum_ = 0L;
     }
 
     @java.lang.Override
@@ -10071,7 +8185,7 @@ public final class UpsAmazon {
             }
             case 16: {
               bitField0_ |= 0x00000002;
-              acks_ = input.readInt64();
+              seqNum_ = input.readInt64();
               break;
             }
             default: {
@@ -10122,19 +8236,19 @@ public final class UpsAmazon {
       return success_;
     }
 
-    public static final int ACKS_FIELD_NUMBER = 2;
-    private long acks_;
+    public static final int SEQNUM_FIELD_NUMBER = 2;
+    private long seqNum_;
     /**
-     * <code>required int64 acks = 2;</code>
+     * <code>required int64 seqNum = 2;</code>
      */
-    public boolean hasAcks() {
+    public boolean hasSeqNum() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required int64 acks = 2;</code>
+     * <code>required int64 seqNum = 2;</code>
      */
-    public long getAcks() {
-      return acks_;
+    public long getSeqNum() {
+      return seqNum_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -10148,7 +8262,7 @@ public final class UpsAmazon {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasAcks()) {
+      if (!hasSeqNum()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -10163,7 +8277,7 @@ public final class UpsAmazon {
         output.writeBool(1, success_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt64(2, acks_);
+        output.writeInt64(2, seqNum_);
       }
       unknownFields.writeTo(output);
     }
@@ -10180,7 +8294,7 @@ public final class UpsAmazon {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, acks_);
+          .computeInt64Size(2, seqNum_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -10203,10 +8317,10 @@ public final class UpsAmazon {
         result = result && (getSuccess()
             == other.getSuccess());
       }
-      result = result && (hasAcks() == other.hasAcks());
-      if (hasAcks()) {
-        result = result && (getAcks()
-            == other.getAcks());
+      result = result && (hasSeqNum() == other.hasSeqNum());
+      if (hasSeqNum()) {
+        result = result && (getSeqNum()
+            == other.getSeqNum());
       }
       result = result && unknownFields.equals(other.unknownFields);
       return result;
@@ -10224,10 +8338,10 @@ public final class UpsAmazon {
         hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
             getSuccess());
       }
-      if (hasAcks()) {
-        hash = (37 * hash) + ACKS_FIELD_NUMBER;
+      if (hasSeqNum()) {
+        hash = (37 * hash) + SEQNUM_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-            getAcks());
+            getSeqNum());
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -10364,7 +8478,7 @@ public final class UpsAmazon {
         super.clear();
         success_ = false;
         bitField0_ = (bitField0_ & ~0x00000001);
-        acks_ = 0L;
+        seqNum_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -10401,7 +8515,7 @@ public final class UpsAmazon {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.acks_ = acks_;
+        result.seqNum_ = seqNum_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -10454,8 +8568,8 @@ public final class UpsAmazon {
         if (other.hasSuccess()) {
           setSuccess(other.getSuccess());
         }
-        if (other.hasAcks()) {
-          setAcks(other.getAcks());
+        if (other.hasSeqNum()) {
+          setSeqNum(other.getSeqNum());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -10467,7 +8581,7 @@ public final class UpsAmazon {
         if (!hasSuccess()) {
           return false;
         }
-        if (!hasAcks()) {
+        if (!hasSeqNum()) {
           return false;
         }
         return true;
@@ -10525,34 +8639,34 @@ public final class UpsAmazon {
         return this;
       }
 
-      private long acks_ ;
+      private long seqNum_ ;
       /**
-       * <code>required int64 acks = 2;</code>
+       * <code>required int64 seqNum = 2;</code>
        */
-      public boolean hasAcks() {
+      public boolean hasSeqNum() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required int64 acks = 2;</code>
+       * <code>required int64 seqNum = 2;</code>
        */
-      public long getAcks() {
-        return acks_;
+      public long getSeqNum() {
+        return seqNum_;
       }
       /**
-       * <code>required int64 acks = 2;</code>
+       * <code>required int64 seqNum = 2;</code>
        */
-      public Builder setAcks(long value) {
+      public Builder setSeqNum(long value) {
         bitField0_ |= 0x00000002;
-        acks_ = value;
+        seqNum_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int64 acks = 2;</code>
+       * <code>required int64 seqNum = 2;</code>
        */
-      public Builder clearAcks() {
+      public Builder clearSeqNum() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        acks_ = 0L;
+        seqNum_ = 0L;
         onChanged();
         return this;
       }
@@ -11394,192 +9508,144 @@ public final class UpsAmazon {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-     */
-    java.util.List<gpb.UpsAmazon.UApickupConfirmed> 
-        getPickupConfList();
-    /**
-     * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-     */
-    gpb.UpsAmazon.UApickupConfirmed getPickupConf(int index);
-    /**
-     * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-     */
-    int getPickupConfCount();
-    /**
-     * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-     */
-    java.util.List<? extends gpb.UpsAmazon.UApickupConfirmedOrBuilder> 
-        getPickupConfOrBuilderList();
-    /**
-     * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-     */
-    gpb.UpsAmazon.UApickupConfirmedOrBuilder getPickupConfOrBuilder(
-        int index);
-
-    /**
-     * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+     * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
      */
     java.util.List<gpb.UpsAmazon.UAtruckArrived> 
         getTruckArrList();
     /**
-     * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+     * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
      */
     gpb.UpsAmazon.UAtruckArrived getTruckArr(int index);
     /**
-     * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+     * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
      */
     int getTruckArrCount();
     /**
-     * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+     * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
      */
     java.util.List<? extends gpb.UpsAmazon.UAtruckArrivedOrBuilder> 
         getTruckArrOrBuilderList();
     /**
-     * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+     * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
      */
     gpb.UpsAmazon.UAtruckArrivedOrBuilder getTruckArrOrBuilder(
         int index);
 
     /**
-     * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-     */
-    java.util.List<gpb.UpsAmazon.UAstartDelivery> 
-        getStartDeliList();
-    /**
-     * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-     */
-    gpb.UpsAmazon.UAstartDelivery getStartDeli(int index);
-    /**
-     * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-     */
-    int getStartDeliCount();
-    /**
-     * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-     */
-    java.util.List<? extends gpb.UpsAmazon.UAstartDeliveryOrBuilder> 
-        getStartDeliOrBuilderList();
-    /**
-     * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-     */
-    gpb.UpsAmazon.UAstartDeliveryOrBuilder getStartDeliOrBuilder(
-        int index);
-
-    /**
-     * <code>repeated .gpb.UAstatus status = 4;</code>
+     * <code>repeated .gpb.UAstatus status = 2;</code>
      */
     java.util.List<gpb.UpsAmazon.UAstatus> 
         getStatusList();
     /**
-     * <code>repeated .gpb.UAstatus status = 4;</code>
+     * <code>repeated .gpb.UAstatus status = 2;</code>
      */
     gpb.UpsAmazon.UAstatus getStatus(int index);
     /**
-     * <code>repeated .gpb.UAstatus status = 4;</code>
+     * <code>repeated .gpb.UAstatus status = 2;</code>
      */
     int getStatusCount();
     /**
-     * <code>repeated .gpb.UAstatus status = 4;</code>
+     * <code>repeated .gpb.UAstatus status = 2;</code>
      */
     java.util.List<? extends gpb.UpsAmazon.UAstatusOrBuilder> 
         getStatusOrBuilderList();
     /**
-     * <code>repeated .gpb.UAstatus status = 4;</code>
+     * <code>repeated .gpb.UAstatus status = 2;</code>
      */
     gpb.UpsAmazon.UAstatusOrBuilder getStatusOrBuilder(
         int index);
 
     /**
-     * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+     * <code>repeated .gpb.UAdelivered delivered = 3;</code>
      */
     java.util.List<gpb.UpsAmazon.UAdelivered> 
         getDeliveredList();
     /**
-     * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+     * <code>repeated .gpb.UAdelivered delivered = 3;</code>
      */
     gpb.UpsAmazon.UAdelivered getDelivered(int index);
     /**
-     * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+     * <code>repeated .gpb.UAdelivered delivered = 3;</code>
      */
     int getDeliveredCount();
     /**
-     * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+     * <code>repeated .gpb.UAdelivered delivered = 3;</code>
      */
     java.util.List<? extends gpb.UpsAmazon.UAdeliveredOrBuilder> 
         getDeliveredOrBuilderList();
     /**
-     * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+     * <code>repeated .gpb.UAdelivered delivered = 3;</code>
      */
     gpb.UpsAmazon.UAdeliveredOrBuilder getDeliveredOrBuilder(
         int index);
 
     /**
-     * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+     * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
      */
     java.util.List<gpb.UpsAmazon.UAchangeResp> 
         getChangeRespList();
     /**
-     * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+     * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
      */
     gpb.UpsAmazon.UAchangeResp getChangeResp(int index);
     /**
-     * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+     * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
      */
     int getChangeRespCount();
     /**
-     * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+     * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
      */
     java.util.List<? extends gpb.UpsAmazon.UAchangeRespOrBuilder> 
         getChangeRespOrBuilderList();
     /**
-     * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+     * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
      */
     gpb.UpsAmazon.UAchangeRespOrBuilder getChangeRespOrBuilder(
         int index);
 
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 5;</code>
      */
     java.util.List<gpb.UpsAmazon.Err> 
         getErrList();
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 5;</code>
      */
     gpb.UpsAmazon.Err getErr(int index);
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 5;</code>
      */
     int getErrCount();
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 5;</code>
      */
     java.util.List<? extends gpb.UpsAmazon.ErrOrBuilder> 
         getErrOrBuilderList();
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 5;</code>
      */
     gpb.UpsAmazon.ErrOrBuilder getErrOrBuilder(
         int index);
 
     /**
-     * <code>optional bool disconnect = 8;</code>
+     * <code>optional bool disconnect = 6;</code>
      */
     boolean hasDisconnect();
     /**
-     * <code>optional bool disconnect = 8;</code>
+     * <code>optional bool disconnect = 6;</code>
      */
     boolean getDisconnect();
 
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 7;</code>
      */
     java.util.List<java.lang.Long> getAcksList();
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 7;</code>
      */
     int getAcksCount();
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 7;</code>
      */
     long getAcks(int index);
   }
@@ -11596,9 +9662,7 @@ public final class UpsAmazon {
       super(builder);
     }
     private UAcommands() {
-      pickupConf_ = java.util.Collections.emptyList();
       truckArr_ = java.util.Collections.emptyList();
-      startDeli_ = java.util.Collections.emptyList();
       status_ = java.util.Collections.emptyList();
       delivered_ = java.util.Collections.emptyList();
       changeResp_ = java.util.Collections.emptyList();
@@ -11633,86 +9697,68 @@ public final class UpsAmazon {
               break;
             case 10: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                pickupConf_ = new java.util.ArrayList<gpb.UpsAmazon.UApickupConfirmed>();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              pickupConf_.add(
-                  input.readMessage(gpb.UpsAmazon.UApickupConfirmed.PARSER, extensionRegistry));
-              break;
-            }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 truckArr_ = new java.util.ArrayList<gpb.UpsAmazon.UAtruckArrived>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               truckArr_.add(
                   input.readMessage(gpb.UpsAmazon.UAtruckArrived.PARSER, extensionRegistry));
               break;
             }
-            case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-                startDeli_ = new java.util.ArrayList<gpb.UpsAmazon.UAstartDelivery>();
-                mutable_bitField0_ |= 0x00000004;
-              }
-              startDeli_.add(
-                  input.readMessage(gpb.UpsAmazon.UAstartDelivery.PARSER, extensionRegistry));
-              break;
-            }
-            case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 status_ = new java.util.ArrayList<gpb.UpsAmazon.UAstatus>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000002;
               }
               status_.add(
                   input.readMessage(gpb.UpsAmazon.UAstatus.PARSER, extensionRegistry));
               break;
             }
-            case 42: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 delivered_ = new java.util.ArrayList<gpb.UpsAmazon.UAdelivered>();
-                mutable_bitField0_ |= 0x00000010;
+                mutable_bitField0_ |= 0x00000004;
               }
               delivered_.add(
                   input.readMessage(gpb.UpsAmazon.UAdelivered.PARSER, extensionRegistry));
               break;
             }
-            case 50: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                 changeResp_ = new java.util.ArrayList<gpb.UpsAmazon.UAchangeResp>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000008;
               }
               changeResp_.add(
                   input.readMessage(gpb.UpsAmazon.UAchangeResp.PARSER, extensionRegistry));
               break;
             }
-            case 58: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
                 err_ = new java.util.ArrayList<gpb.UpsAmazon.Err>();
-                mutable_bitField0_ |= 0x00000040;
+                mutable_bitField0_ |= 0x00000010;
               }
               err_.add(
                   input.readMessage(gpb.UpsAmazon.Err.PARSER, extensionRegistry));
               break;
             }
-            case 64: {
+            case 48: {
               bitField0_ |= 0x00000001;
               disconnect_ = input.readBool();
               break;
             }
-            case 72: {
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+            case 56: {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
                 acks_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000100;
+                mutable_bitField0_ |= 0x00000040;
               }
               acks_.add(input.readInt64());
               break;
             }
-            case 74: {
+            case 58: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040) && input.getBytesUntilLimit() > 0) {
                 acks_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000100;
+                mutable_bitField0_ |= 0x00000040;
               }
               while (input.getBytesUntilLimit() > 0) {
                 acks_.add(input.readInt64());
@@ -11736,27 +9782,21 @@ public final class UpsAmazon {
             e).setUnfinishedMessage(this);
       } finally {
         if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-          pickupConf_ = java.util.Collections.unmodifiableList(pickupConf_);
-        }
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           truckArr_ = java.util.Collections.unmodifiableList(truckArr_);
         }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
-          startDeli_ = java.util.Collections.unmodifiableList(startDeli_);
-        }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           status_ = java.util.Collections.unmodifiableList(status_);
         }
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           delivered_ = java.util.Collections.unmodifiableList(delivered_);
         }
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           changeResp_ = java.util.Collections.unmodifiableList(changeResp_);
         }
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
           err_ = java.util.Collections.unmodifiableList(err_);
         }
-        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
           acks_ = java.util.Collections.unmodifiableList(acks_);
         }
         this.unknownFields = unknownFields.build();
@@ -11777,283 +9817,213 @@ public final class UpsAmazon {
     }
 
     private int bitField0_;
-    public static final int PICKUPCONF_FIELD_NUMBER = 1;
-    private java.util.List<gpb.UpsAmazon.UApickupConfirmed> pickupConf_;
-    /**
-     * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-     */
-    public java.util.List<gpb.UpsAmazon.UApickupConfirmed> getPickupConfList() {
-      return pickupConf_;
-    }
-    /**
-     * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-     */
-    public java.util.List<? extends gpb.UpsAmazon.UApickupConfirmedOrBuilder> 
-        getPickupConfOrBuilderList() {
-      return pickupConf_;
-    }
-    /**
-     * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-     */
-    public int getPickupConfCount() {
-      return pickupConf_.size();
-    }
-    /**
-     * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-     */
-    public gpb.UpsAmazon.UApickupConfirmed getPickupConf(int index) {
-      return pickupConf_.get(index);
-    }
-    /**
-     * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-     */
-    public gpb.UpsAmazon.UApickupConfirmedOrBuilder getPickupConfOrBuilder(
-        int index) {
-      return pickupConf_.get(index);
-    }
-
-    public static final int TRUCKARR_FIELD_NUMBER = 2;
+    public static final int TRUCKARR_FIELD_NUMBER = 1;
     private java.util.List<gpb.UpsAmazon.UAtruckArrived> truckArr_;
     /**
-     * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+     * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
      */
     public java.util.List<gpb.UpsAmazon.UAtruckArrived> getTruckArrList() {
       return truckArr_;
     }
     /**
-     * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+     * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
      */
     public java.util.List<? extends gpb.UpsAmazon.UAtruckArrivedOrBuilder> 
         getTruckArrOrBuilderList() {
       return truckArr_;
     }
     /**
-     * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+     * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
      */
     public int getTruckArrCount() {
       return truckArr_.size();
     }
     /**
-     * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+     * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
      */
     public gpb.UpsAmazon.UAtruckArrived getTruckArr(int index) {
       return truckArr_.get(index);
     }
     /**
-     * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+     * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
      */
     public gpb.UpsAmazon.UAtruckArrivedOrBuilder getTruckArrOrBuilder(
         int index) {
       return truckArr_.get(index);
     }
 
-    public static final int STARTDELI_FIELD_NUMBER = 3;
-    private java.util.List<gpb.UpsAmazon.UAstartDelivery> startDeli_;
-    /**
-     * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-     */
-    public java.util.List<gpb.UpsAmazon.UAstartDelivery> getStartDeliList() {
-      return startDeli_;
-    }
-    /**
-     * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-     */
-    public java.util.List<? extends gpb.UpsAmazon.UAstartDeliveryOrBuilder> 
-        getStartDeliOrBuilderList() {
-      return startDeli_;
-    }
-    /**
-     * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-     */
-    public int getStartDeliCount() {
-      return startDeli_.size();
-    }
-    /**
-     * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-     */
-    public gpb.UpsAmazon.UAstartDelivery getStartDeli(int index) {
-      return startDeli_.get(index);
-    }
-    /**
-     * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-     */
-    public gpb.UpsAmazon.UAstartDeliveryOrBuilder getStartDeliOrBuilder(
-        int index) {
-      return startDeli_.get(index);
-    }
-
-    public static final int STATUS_FIELD_NUMBER = 4;
+    public static final int STATUS_FIELD_NUMBER = 2;
     private java.util.List<gpb.UpsAmazon.UAstatus> status_;
     /**
-     * <code>repeated .gpb.UAstatus status = 4;</code>
+     * <code>repeated .gpb.UAstatus status = 2;</code>
      */
     public java.util.List<gpb.UpsAmazon.UAstatus> getStatusList() {
       return status_;
     }
     /**
-     * <code>repeated .gpb.UAstatus status = 4;</code>
+     * <code>repeated .gpb.UAstatus status = 2;</code>
      */
     public java.util.List<? extends gpb.UpsAmazon.UAstatusOrBuilder> 
         getStatusOrBuilderList() {
       return status_;
     }
     /**
-     * <code>repeated .gpb.UAstatus status = 4;</code>
+     * <code>repeated .gpb.UAstatus status = 2;</code>
      */
     public int getStatusCount() {
       return status_.size();
     }
     /**
-     * <code>repeated .gpb.UAstatus status = 4;</code>
+     * <code>repeated .gpb.UAstatus status = 2;</code>
      */
     public gpb.UpsAmazon.UAstatus getStatus(int index) {
       return status_.get(index);
     }
     /**
-     * <code>repeated .gpb.UAstatus status = 4;</code>
+     * <code>repeated .gpb.UAstatus status = 2;</code>
      */
     public gpb.UpsAmazon.UAstatusOrBuilder getStatusOrBuilder(
         int index) {
       return status_.get(index);
     }
 
-    public static final int DELIVERED_FIELD_NUMBER = 5;
+    public static final int DELIVERED_FIELD_NUMBER = 3;
     private java.util.List<gpb.UpsAmazon.UAdelivered> delivered_;
     /**
-     * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+     * <code>repeated .gpb.UAdelivered delivered = 3;</code>
      */
     public java.util.List<gpb.UpsAmazon.UAdelivered> getDeliveredList() {
       return delivered_;
     }
     /**
-     * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+     * <code>repeated .gpb.UAdelivered delivered = 3;</code>
      */
     public java.util.List<? extends gpb.UpsAmazon.UAdeliveredOrBuilder> 
         getDeliveredOrBuilderList() {
       return delivered_;
     }
     /**
-     * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+     * <code>repeated .gpb.UAdelivered delivered = 3;</code>
      */
     public int getDeliveredCount() {
       return delivered_.size();
     }
     /**
-     * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+     * <code>repeated .gpb.UAdelivered delivered = 3;</code>
      */
     public gpb.UpsAmazon.UAdelivered getDelivered(int index) {
       return delivered_.get(index);
     }
     /**
-     * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+     * <code>repeated .gpb.UAdelivered delivered = 3;</code>
      */
     public gpb.UpsAmazon.UAdeliveredOrBuilder getDeliveredOrBuilder(
         int index) {
       return delivered_.get(index);
     }
 
-    public static final int CHANGERESP_FIELD_NUMBER = 6;
+    public static final int CHANGERESP_FIELD_NUMBER = 4;
     private java.util.List<gpb.UpsAmazon.UAchangeResp> changeResp_;
     /**
-     * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+     * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
      */
     public java.util.List<gpb.UpsAmazon.UAchangeResp> getChangeRespList() {
       return changeResp_;
     }
     /**
-     * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+     * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
      */
     public java.util.List<? extends gpb.UpsAmazon.UAchangeRespOrBuilder> 
         getChangeRespOrBuilderList() {
       return changeResp_;
     }
     /**
-     * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+     * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
      */
     public int getChangeRespCount() {
       return changeResp_.size();
     }
     /**
-     * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+     * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
      */
     public gpb.UpsAmazon.UAchangeResp getChangeResp(int index) {
       return changeResp_.get(index);
     }
     /**
-     * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+     * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
      */
     public gpb.UpsAmazon.UAchangeRespOrBuilder getChangeRespOrBuilder(
         int index) {
       return changeResp_.get(index);
     }
 
-    public static final int ERR_FIELD_NUMBER = 7;
+    public static final int ERR_FIELD_NUMBER = 5;
     private java.util.List<gpb.UpsAmazon.Err> err_;
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 5;</code>
      */
     public java.util.List<gpb.UpsAmazon.Err> getErrList() {
       return err_;
     }
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 5;</code>
      */
     public java.util.List<? extends gpb.UpsAmazon.ErrOrBuilder> 
         getErrOrBuilderList() {
       return err_;
     }
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 5;</code>
      */
     public int getErrCount() {
       return err_.size();
     }
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 5;</code>
      */
     public gpb.UpsAmazon.Err getErr(int index) {
       return err_.get(index);
     }
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 5;</code>
      */
     public gpb.UpsAmazon.ErrOrBuilder getErrOrBuilder(
         int index) {
       return err_.get(index);
     }
 
-    public static final int DISCONNECT_FIELD_NUMBER = 8;
+    public static final int DISCONNECT_FIELD_NUMBER = 6;
     private boolean disconnect_;
     /**
-     * <code>optional bool disconnect = 8;</code>
+     * <code>optional bool disconnect = 6;</code>
      */
     public boolean hasDisconnect() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional bool disconnect = 8;</code>
+     * <code>optional bool disconnect = 6;</code>
      */
     public boolean getDisconnect() {
       return disconnect_;
     }
 
-    public static final int ACKS_FIELD_NUMBER = 9;
+    public static final int ACKS_FIELD_NUMBER = 7;
     private java.util.List<java.lang.Long> acks_;
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 7;</code>
      */
     public java.util.List<java.lang.Long>
         getAcksList() {
       return acks_;
     }
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 7;</code>
      */
     public int getAcksCount() {
       return acks_.size();
     }
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 7;</code>
      */
     public long getAcks(int index) {
       return acks_.get(index);
@@ -12066,20 +10036,8 @@ public final class UpsAmazon {
       if (isInitialized == 1) return true;
       if (isInitialized == 0) return false;
 
-      for (int i = 0; i < getPickupConfCount(); i++) {
-        if (!getPickupConf(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       for (int i = 0; i < getTruckArrCount(); i++) {
         if (!getTruckArr(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      for (int i = 0; i < getStartDeliCount(); i++) {
-        if (!getStartDeli(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -12115,32 +10073,26 @@ public final class UpsAmazon {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      for (int i = 0; i < pickupConf_.size(); i++) {
-        output.writeMessage(1, pickupConf_.get(i));
-      }
       for (int i = 0; i < truckArr_.size(); i++) {
-        output.writeMessage(2, truckArr_.get(i));
-      }
-      for (int i = 0; i < startDeli_.size(); i++) {
-        output.writeMessage(3, startDeli_.get(i));
+        output.writeMessage(1, truckArr_.get(i));
       }
       for (int i = 0; i < status_.size(); i++) {
-        output.writeMessage(4, status_.get(i));
+        output.writeMessage(2, status_.get(i));
       }
       for (int i = 0; i < delivered_.size(); i++) {
-        output.writeMessage(5, delivered_.get(i));
+        output.writeMessage(3, delivered_.get(i));
       }
       for (int i = 0; i < changeResp_.size(); i++) {
-        output.writeMessage(6, changeResp_.get(i));
+        output.writeMessage(4, changeResp_.get(i));
       }
       for (int i = 0; i < err_.size(); i++) {
-        output.writeMessage(7, err_.get(i));
+        output.writeMessage(5, err_.get(i));
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBool(8, disconnect_);
+        output.writeBool(6, disconnect_);
       }
       for (int i = 0; i < acks_.size(); i++) {
-        output.writeInt64(9, acks_.get(i));
+        output.writeInt64(7, acks_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -12151,37 +10103,29 @@ public final class UpsAmazon {
       if (size != -1) return size;
 
       size = 0;
-      for (int i = 0; i < pickupConf_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, pickupConf_.get(i));
-      }
       for (int i = 0; i < truckArr_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, truckArr_.get(i));
-      }
-      for (int i = 0; i < startDeli_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, startDeli_.get(i));
+          .computeMessageSize(1, truckArr_.get(i));
       }
       for (int i = 0; i < status_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, status_.get(i));
+          .computeMessageSize(2, status_.get(i));
       }
       for (int i = 0; i < delivered_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, delivered_.get(i));
+          .computeMessageSize(3, delivered_.get(i));
       }
       for (int i = 0; i < changeResp_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, changeResp_.get(i));
+          .computeMessageSize(4, changeResp_.get(i));
       }
       for (int i = 0; i < err_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, err_.get(i));
+          .computeMessageSize(5, err_.get(i));
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(8, disconnect_);
+          .computeBoolSize(6, disconnect_);
       }
       {
         int dataSize = 0;
@@ -12208,12 +10152,8 @@ public final class UpsAmazon {
       gpb.UpsAmazon.UAcommands other = (gpb.UpsAmazon.UAcommands) obj;
 
       boolean result = true;
-      result = result && getPickupConfList()
-          .equals(other.getPickupConfList());
       result = result && getTruckArrList()
           .equals(other.getTruckArrList());
-      result = result && getStartDeliList()
-          .equals(other.getStartDeliList());
       result = result && getStatusList()
           .equals(other.getStatusList());
       result = result && getDeliveredList()
@@ -12240,17 +10180,9 @@ public final class UpsAmazon {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (getPickupConfCount() > 0) {
-        hash = (37 * hash) + PICKUPCONF_FIELD_NUMBER;
-        hash = (53 * hash) + getPickupConfList().hashCode();
-      }
       if (getTruckArrCount() > 0) {
         hash = (37 * hash) + TRUCKARR_FIELD_NUMBER;
         hash = (53 * hash) + getTruckArrList().hashCode();
-      }
-      if (getStartDeliCount() > 0) {
-        hash = (37 * hash) + STARTDELI_FIELD_NUMBER;
-        hash = (53 * hash) + getStartDeliList().hashCode();
       }
       if (getStatusCount() > 0) {
         hash = (37 * hash) + STATUS_FIELD_NUMBER;
@@ -12405,9 +10337,7 @@ public final class UpsAmazon {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getPickupConfFieldBuilder();
           getTruckArrFieldBuilder();
-          getStartDeliFieldBuilder();
           getStatusFieldBuilder();
           getDeliveredFieldBuilder();
           getChangeRespFieldBuilder();
@@ -12417,52 +10347,40 @@ public final class UpsAmazon {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (pickupConfBuilder_ == null) {
-          pickupConf_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-        } else {
-          pickupConfBuilder_.clear();
-        }
         if (truckArrBuilder_ == null) {
           truckArr_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           truckArrBuilder_.clear();
         }
-        if (startDeliBuilder_ == null) {
-          startDeli_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
-        } else {
-          startDeliBuilder_.clear();
-        }
         if (statusBuilder_ == null) {
           status_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           statusBuilder_.clear();
         }
         if (deliveredBuilder_ == null) {
           delivered_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           deliveredBuilder_.clear();
         }
         if (changeRespBuilder_ == null) {
           changeResp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000008);
         } else {
           changeRespBuilder_.clear();
         }
         if (errBuilder_ == null) {
           err_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000010);
         } else {
           errBuilder_.clear();
         }
         disconnect_ = false;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000020);
         acks_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -12491,76 +10409,58 @@ public final class UpsAmazon {
         gpb.UpsAmazon.UAcommands result = new gpb.UpsAmazon.UAcommands(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        if (pickupConfBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
-            pickupConf_ = java.util.Collections.unmodifiableList(pickupConf_);
-            bitField0_ = (bitField0_ & ~0x00000001);
-          }
-          result.pickupConf_ = pickupConf_;
-        } else {
-          result.pickupConf_ = pickupConfBuilder_.build();
-        }
         if (truckArrBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
             truckArr_ = java.util.Collections.unmodifiableList(truckArr_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
           result.truckArr_ = truckArr_;
         } else {
           result.truckArr_ = truckArrBuilder_.build();
         }
-        if (startDeliBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
-            startDeli_ = java.util.Collections.unmodifiableList(startDeli_);
-            bitField0_ = (bitField0_ & ~0x00000004);
-          }
-          result.startDeli_ = startDeli_;
-        } else {
-          result.startDeli_ = startDeliBuilder_.build();
-        }
         if (statusBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             status_ = java.util.Collections.unmodifiableList(status_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.status_ = status_;
         } else {
           result.status_ = statusBuilder_.build();
         }
         if (deliveredBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
             delivered_ = java.util.Collections.unmodifiableList(delivered_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.delivered_ = delivered_;
         } else {
           result.delivered_ = deliveredBuilder_.build();
         }
         if (changeRespBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
             changeResp_ = java.util.Collections.unmodifiableList(changeResp_);
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.changeResp_ = changeResp_;
         } else {
           result.changeResp_ = changeRespBuilder_.build();
         }
         if (errBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
             err_ = java.util.Collections.unmodifiableList(err_);
-            bitField0_ = (bitField0_ & ~0x00000040);
+            bitField0_ = (bitField0_ & ~0x00000010);
           }
           result.err_ = err_;
         } else {
           result.err_ = errBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
           to_bitField0_ |= 0x00000001;
         }
         result.disconnect_ = disconnect_;
-        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((bitField0_ & 0x00000040) == 0x00000040)) {
           acks_ = java.util.Collections.unmodifiableList(acks_);
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000040);
         }
         result.acks_ = acks_;
         result.bitField0_ = to_bitField0_;
@@ -12612,37 +10512,11 @@ public final class UpsAmazon {
 
       public Builder mergeFrom(gpb.UpsAmazon.UAcommands other) {
         if (other == gpb.UpsAmazon.UAcommands.getDefaultInstance()) return this;
-        if (pickupConfBuilder_ == null) {
-          if (!other.pickupConf_.isEmpty()) {
-            if (pickupConf_.isEmpty()) {
-              pickupConf_ = other.pickupConf_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-            } else {
-              ensurePickupConfIsMutable();
-              pickupConf_.addAll(other.pickupConf_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.pickupConf_.isEmpty()) {
-            if (pickupConfBuilder_.isEmpty()) {
-              pickupConfBuilder_.dispose();
-              pickupConfBuilder_ = null;
-              pickupConf_ = other.pickupConf_;
-              bitField0_ = (bitField0_ & ~0x00000001);
-              pickupConfBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getPickupConfFieldBuilder() : null;
-            } else {
-              pickupConfBuilder_.addAllMessages(other.pickupConf_);
-            }
-          }
-        }
         if (truckArrBuilder_ == null) {
           if (!other.truckArr_.isEmpty()) {
             if (truckArr_.isEmpty()) {
               truckArr_ = other.truckArr_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
               ensureTruckArrIsMutable();
               truckArr_.addAll(other.truckArr_);
@@ -12655,7 +10529,7 @@ public final class UpsAmazon {
               truckArrBuilder_.dispose();
               truckArrBuilder_ = null;
               truckArr_ = other.truckArr_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
               truckArrBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getTruckArrFieldBuilder() : null;
@@ -12664,37 +10538,11 @@ public final class UpsAmazon {
             }
           }
         }
-        if (startDeliBuilder_ == null) {
-          if (!other.startDeli_.isEmpty()) {
-            if (startDeli_.isEmpty()) {
-              startDeli_ = other.startDeli_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-            } else {
-              ensureStartDeliIsMutable();
-              startDeli_.addAll(other.startDeli_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.startDeli_.isEmpty()) {
-            if (startDeliBuilder_.isEmpty()) {
-              startDeliBuilder_.dispose();
-              startDeliBuilder_ = null;
-              startDeli_ = other.startDeli_;
-              bitField0_ = (bitField0_ & ~0x00000004);
-              startDeliBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getStartDeliFieldBuilder() : null;
-            } else {
-              startDeliBuilder_.addAllMessages(other.startDeli_);
-            }
-          }
-        }
         if (statusBuilder_ == null) {
           if (!other.status_.isEmpty()) {
             if (status_.isEmpty()) {
               status_ = other.status_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureStatusIsMutable();
               status_.addAll(other.status_);
@@ -12707,7 +10555,7 @@ public final class UpsAmazon {
               statusBuilder_.dispose();
               statusBuilder_ = null;
               status_ = other.status_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000002);
               statusBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getStatusFieldBuilder() : null;
@@ -12720,7 +10568,7 @@ public final class UpsAmazon {
           if (!other.delivered_.isEmpty()) {
             if (delivered_.isEmpty()) {
               delivered_ = other.delivered_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensureDeliveredIsMutable();
               delivered_.addAll(other.delivered_);
@@ -12733,7 +10581,7 @@ public final class UpsAmazon {
               deliveredBuilder_.dispose();
               deliveredBuilder_ = null;
               delivered_ = other.delivered_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000004);
               deliveredBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getDeliveredFieldBuilder() : null;
@@ -12746,7 +10594,7 @@ public final class UpsAmazon {
           if (!other.changeResp_.isEmpty()) {
             if (changeResp_.isEmpty()) {
               changeResp_ = other.changeResp_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000008);
             } else {
               ensureChangeRespIsMutable();
               changeResp_.addAll(other.changeResp_);
@@ -12759,7 +10607,7 @@ public final class UpsAmazon {
               changeRespBuilder_.dispose();
               changeRespBuilder_ = null;
               changeResp_ = other.changeResp_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000008);
               changeRespBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getChangeRespFieldBuilder() : null;
@@ -12772,7 +10620,7 @@ public final class UpsAmazon {
           if (!other.err_.isEmpty()) {
             if (err_.isEmpty()) {
               err_ = other.err_;
-              bitField0_ = (bitField0_ & ~0x00000040);
+              bitField0_ = (bitField0_ & ~0x00000010);
             } else {
               ensureErrIsMutable();
               err_.addAll(other.err_);
@@ -12785,7 +10633,7 @@ public final class UpsAmazon {
               errBuilder_.dispose();
               errBuilder_ = null;
               err_ = other.err_;
-              bitField0_ = (bitField0_ & ~0x00000040);
+              bitField0_ = (bitField0_ & ~0x00000010);
               errBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getErrFieldBuilder() : null;
@@ -12800,7 +10648,7 @@ public final class UpsAmazon {
         if (!other.acks_.isEmpty()) {
           if (acks_.isEmpty()) {
             acks_ = other.acks_;
-            bitField0_ = (bitField0_ & ~0x00000100);
+            bitField0_ = (bitField0_ & ~0x00000040);
           } else {
             ensureAcksIsMutable();
             acks_.addAll(other.acks_);
@@ -12814,18 +10662,8 @@ public final class UpsAmazon {
 
       @java.lang.Override
       public final boolean isInitialized() {
-        for (int i = 0; i < getPickupConfCount(); i++) {
-          if (!getPickupConf(i).isInitialized()) {
-            return false;
-          }
-        }
         for (int i = 0; i < getTruckArrCount(); i++) {
           if (!getTruckArr(i).isInitialized()) {
-            return false;
-          }
-        }
-        for (int i = 0; i < getStartDeliCount(); i++) {
-          if (!getStartDeli(i).isInitialized()) {
             return false;
           }
         }
@@ -12872,252 +10710,12 @@ public final class UpsAmazon {
       }
       private int bitField0_;
 
-      private java.util.List<gpb.UpsAmazon.UApickupConfirmed> pickupConf_ =
-        java.util.Collections.emptyList();
-      private void ensurePickupConfIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          pickupConf_ = new java.util.ArrayList<gpb.UpsAmazon.UApickupConfirmed>(pickupConf_);
-          bitField0_ |= 0x00000001;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          gpb.UpsAmazon.UApickupConfirmed, gpb.UpsAmazon.UApickupConfirmed.Builder, gpb.UpsAmazon.UApickupConfirmedOrBuilder> pickupConfBuilder_;
-
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public java.util.List<gpb.UpsAmazon.UApickupConfirmed> getPickupConfList() {
-        if (pickupConfBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(pickupConf_);
-        } else {
-          return pickupConfBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public int getPickupConfCount() {
-        if (pickupConfBuilder_ == null) {
-          return pickupConf_.size();
-        } else {
-          return pickupConfBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public gpb.UpsAmazon.UApickupConfirmed getPickupConf(int index) {
-        if (pickupConfBuilder_ == null) {
-          return pickupConf_.get(index);
-        } else {
-          return pickupConfBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public Builder setPickupConf(
-          int index, gpb.UpsAmazon.UApickupConfirmed value) {
-        if (pickupConfBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePickupConfIsMutable();
-          pickupConf_.set(index, value);
-          onChanged();
-        } else {
-          pickupConfBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public Builder setPickupConf(
-          int index, gpb.UpsAmazon.UApickupConfirmed.Builder builderForValue) {
-        if (pickupConfBuilder_ == null) {
-          ensurePickupConfIsMutable();
-          pickupConf_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          pickupConfBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public Builder addPickupConf(gpb.UpsAmazon.UApickupConfirmed value) {
-        if (pickupConfBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePickupConfIsMutable();
-          pickupConf_.add(value);
-          onChanged();
-        } else {
-          pickupConfBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public Builder addPickupConf(
-          int index, gpb.UpsAmazon.UApickupConfirmed value) {
-        if (pickupConfBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensurePickupConfIsMutable();
-          pickupConf_.add(index, value);
-          onChanged();
-        } else {
-          pickupConfBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public Builder addPickupConf(
-          gpb.UpsAmazon.UApickupConfirmed.Builder builderForValue) {
-        if (pickupConfBuilder_ == null) {
-          ensurePickupConfIsMutable();
-          pickupConf_.add(builderForValue.build());
-          onChanged();
-        } else {
-          pickupConfBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public Builder addPickupConf(
-          int index, gpb.UpsAmazon.UApickupConfirmed.Builder builderForValue) {
-        if (pickupConfBuilder_ == null) {
-          ensurePickupConfIsMutable();
-          pickupConf_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          pickupConfBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public Builder addAllPickupConf(
-          java.lang.Iterable<? extends gpb.UpsAmazon.UApickupConfirmed> values) {
-        if (pickupConfBuilder_ == null) {
-          ensurePickupConfIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, pickupConf_);
-          onChanged();
-        } else {
-          pickupConfBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public Builder clearPickupConf() {
-        if (pickupConfBuilder_ == null) {
-          pickupConf_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
-          onChanged();
-        } else {
-          pickupConfBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public Builder removePickupConf(int index) {
-        if (pickupConfBuilder_ == null) {
-          ensurePickupConfIsMutable();
-          pickupConf_.remove(index);
-          onChanged();
-        } else {
-          pickupConfBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public gpb.UpsAmazon.UApickupConfirmed.Builder getPickupConfBuilder(
-          int index) {
-        return getPickupConfFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public gpb.UpsAmazon.UApickupConfirmedOrBuilder getPickupConfOrBuilder(
-          int index) {
-        if (pickupConfBuilder_ == null) {
-          return pickupConf_.get(index);  } else {
-          return pickupConfBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public java.util.List<? extends gpb.UpsAmazon.UApickupConfirmedOrBuilder> 
-           getPickupConfOrBuilderList() {
-        if (pickupConfBuilder_ != null) {
-          return pickupConfBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(pickupConf_);
-        }
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public gpb.UpsAmazon.UApickupConfirmed.Builder addPickupConfBuilder() {
-        return getPickupConfFieldBuilder().addBuilder(
-            gpb.UpsAmazon.UApickupConfirmed.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public gpb.UpsAmazon.UApickupConfirmed.Builder addPickupConfBuilder(
-          int index) {
-        return getPickupConfFieldBuilder().addBuilder(
-            index, gpb.UpsAmazon.UApickupConfirmed.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .gpb.UApickupConfirmed pickupConf = 1;</code>
-       */
-      public java.util.List<gpb.UpsAmazon.UApickupConfirmed.Builder> 
-           getPickupConfBuilderList() {
-        return getPickupConfFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          gpb.UpsAmazon.UApickupConfirmed, gpb.UpsAmazon.UApickupConfirmed.Builder, gpb.UpsAmazon.UApickupConfirmedOrBuilder> 
-          getPickupConfFieldBuilder() {
-        if (pickupConfBuilder_ == null) {
-          pickupConfBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              gpb.UpsAmazon.UApickupConfirmed, gpb.UpsAmazon.UApickupConfirmed.Builder, gpb.UpsAmazon.UApickupConfirmedOrBuilder>(
-                  pickupConf_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
-                  getParentForChildren(),
-                  isClean());
-          pickupConf_ = null;
-        }
-        return pickupConfBuilder_;
-      }
-
       private java.util.List<gpb.UpsAmazon.UAtruckArrived> truckArr_ =
         java.util.Collections.emptyList();
       private void ensureTruckArrIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
           truckArr_ = new java.util.ArrayList<gpb.UpsAmazon.UAtruckArrived>(truckArr_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -13125,7 +10723,7 @@ public final class UpsAmazon {
           gpb.UpsAmazon.UAtruckArrived, gpb.UpsAmazon.UAtruckArrived.Builder, gpb.UpsAmazon.UAtruckArrivedOrBuilder> truckArrBuilder_;
 
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public java.util.List<gpb.UpsAmazon.UAtruckArrived> getTruckArrList() {
         if (truckArrBuilder_ == null) {
@@ -13135,7 +10733,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public int getTruckArrCount() {
         if (truckArrBuilder_ == null) {
@@ -13145,7 +10743,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public gpb.UpsAmazon.UAtruckArrived getTruckArr(int index) {
         if (truckArrBuilder_ == null) {
@@ -13155,7 +10753,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public Builder setTruckArr(
           int index, gpb.UpsAmazon.UAtruckArrived value) {
@@ -13172,7 +10770,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public Builder setTruckArr(
           int index, gpb.UpsAmazon.UAtruckArrived.Builder builderForValue) {
@@ -13186,7 +10784,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public Builder addTruckArr(gpb.UpsAmazon.UAtruckArrived value) {
         if (truckArrBuilder_ == null) {
@@ -13202,7 +10800,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public Builder addTruckArr(
           int index, gpb.UpsAmazon.UAtruckArrived value) {
@@ -13219,7 +10817,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public Builder addTruckArr(
           gpb.UpsAmazon.UAtruckArrived.Builder builderForValue) {
@@ -13233,7 +10831,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public Builder addTruckArr(
           int index, gpb.UpsAmazon.UAtruckArrived.Builder builderForValue) {
@@ -13247,7 +10845,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public Builder addAllTruckArr(
           java.lang.Iterable<? extends gpb.UpsAmazon.UAtruckArrived> values) {
@@ -13262,12 +10860,12 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public Builder clearTruckArr() {
         if (truckArrBuilder_ == null) {
           truckArr_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           truckArrBuilder_.clear();
@@ -13275,7 +10873,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public Builder removeTruckArr(int index) {
         if (truckArrBuilder_ == null) {
@@ -13288,14 +10886,14 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public gpb.UpsAmazon.UAtruckArrived.Builder getTruckArrBuilder(
           int index) {
         return getTruckArrFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public gpb.UpsAmazon.UAtruckArrivedOrBuilder getTruckArrOrBuilder(
           int index) {
@@ -13305,7 +10903,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public java.util.List<? extends gpb.UpsAmazon.UAtruckArrivedOrBuilder> 
            getTruckArrOrBuilderList() {
@@ -13316,14 +10914,14 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public gpb.UpsAmazon.UAtruckArrived.Builder addTruckArrBuilder() {
         return getTruckArrFieldBuilder().addBuilder(
             gpb.UpsAmazon.UAtruckArrived.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public gpb.UpsAmazon.UAtruckArrived.Builder addTruckArrBuilder(
           int index) {
@@ -13331,7 +10929,7 @@ public final class UpsAmazon {
             index, gpb.UpsAmazon.UAtruckArrived.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.UAtruckArrived truckArr = 2;</code>
+       * <code>repeated .gpb.UAtruckArrived truckArr = 1;</code>
        */
       public java.util.List<gpb.UpsAmazon.UAtruckArrived.Builder> 
            getTruckArrBuilderList() {
@@ -13344,7 +10942,7 @@ public final class UpsAmazon {
           truckArrBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               gpb.UpsAmazon.UAtruckArrived, gpb.UpsAmazon.UAtruckArrived.Builder, gpb.UpsAmazon.UAtruckArrivedOrBuilder>(
                   truckArr_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000001) == 0x00000001),
                   getParentForChildren(),
                   isClean());
           truckArr_ = null;
@@ -13352,252 +10950,12 @@ public final class UpsAmazon {
         return truckArrBuilder_;
       }
 
-      private java.util.List<gpb.UpsAmazon.UAstartDelivery> startDeli_ =
-        java.util.Collections.emptyList();
-      private void ensureStartDeliIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
-          startDeli_ = new java.util.ArrayList<gpb.UpsAmazon.UAstartDelivery>(startDeli_);
-          bitField0_ |= 0x00000004;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          gpb.UpsAmazon.UAstartDelivery, gpb.UpsAmazon.UAstartDelivery.Builder, gpb.UpsAmazon.UAstartDeliveryOrBuilder> startDeliBuilder_;
-
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public java.util.List<gpb.UpsAmazon.UAstartDelivery> getStartDeliList() {
-        if (startDeliBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(startDeli_);
-        } else {
-          return startDeliBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public int getStartDeliCount() {
-        if (startDeliBuilder_ == null) {
-          return startDeli_.size();
-        } else {
-          return startDeliBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public gpb.UpsAmazon.UAstartDelivery getStartDeli(int index) {
-        if (startDeliBuilder_ == null) {
-          return startDeli_.get(index);
-        } else {
-          return startDeliBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public Builder setStartDeli(
-          int index, gpb.UpsAmazon.UAstartDelivery value) {
-        if (startDeliBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureStartDeliIsMutable();
-          startDeli_.set(index, value);
-          onChanged();
-        } else {
-          startDeliBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public Builder setStartDeli(
-          int index, gpb.UpsAmazon.UAstartDelivery.Builder builderForValue) {
-        if (startDeliBuilder_ == null) {
-          ensureStartDeliIsMutable();
-          startDeli_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          startDeliBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public Builder addStartDeli(gpb.UpsAmazon.UAstartDelivery value) {
-        if (startDeliBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureStartDeliIsMutable();
-          startDeli_.add(value);
-          onChanged();
-        } else {
-          startDeliBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public Builder addStartDeli(
-          int index, gpb.UpsAmazon.UAstartDelivery value) {
-        if (startDeliBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureStartDeliIsMutable();
-          startDeli_.add(index, value);
-          onChanged();
-        } else {
-          startDeliBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public Builder addStartDeli(
-          gpb.UpsAmazon.UAstartDelivery.Builder builderForValue) {
-        if (startDeliBuilder_ == null) {
-          ensureStartDeliIsMutable();
-          startDeli_.add(builderForValue.build());
-          onChanged();
-        } else {
-          startDeliBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public Builder addStartDeli(
-          int index, gpb.UpsAmazon.UAstartDelivery.Builder builderForValue) {
-        if (startDeliBuilder_ == null) {
-          ensureStartDeliIsMutable();
-          startDeli_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          startDeliBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public Builder addAllStartDeli(
-          java.lang.Iterable<? extends gpb.UpsAmazon.UAstartDelivery> values) {
-        if (startDeliBuilder_ == null) {
-          ensureStartDeliIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, startDeli_);
-          onChanged();
-        } else {
-          startDeliBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public Builder clearStartDeli() {
-        if (startDeliBuilder_ == null) {
-          startDeli_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
-          onChanged();
-        } else {
-          startDeliBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public Builder removeStartDeli(int index) {
-        if (startDeliBuilder_ == null) {
-          ensureStartDeliIsMutable();
-          startDeli_.remove(index);
-          onChanged();
-        } else {
-          startDeliBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public gpb.UpsAmazon.UAstartDelivery.Builder getStartDeliBuilder(
-          int index) {
-        return getStartDeliFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public gpb.UpsAmazon.UAstartDeliveryOrBuilder getStartDeliOrBuilder(
-          int index) {
-        if (startDeliBuilder_ == null) {
-          return startDeli_.get(index);  } else {
-          return startDeliBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public java.util.List<? extends gpb.UpsAmazon.UAstartDeliveryOrBuilder> 
-           getStartDeliOrBuilderList() {
-        if (startDeliBuilder_ != null) {
-          return startDeliBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(startDeli_);
-        }
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public gpb.UpsAmazon.UAstartDelivery.Builder addStartDeliBuilder() {
-        return getStartDeliFieldBuilder().addBuilder(
-            gpb.UpsAmazon.UAstartDelivery.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public gpb.UpsAmazon.UAstartDelivery.Builder addStartDeliBuilder(
-          int index) {
-        return getStartDeliFieldBuilder().addBuilder(
-            index, gpb.UpsAmazon.UAstartDelivery.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .gpb.UAstartDelivery startDeli = 3;</code>
-       */
-      public java.util.List<gpb.UpsAmazon.UAstartDelivery.Builder> 
-           getStartDeliBuilderList() {
-        return getStartDeliFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          gpb.UpsAmazon.UAstartDelivery, gpb.UpsAmazon.UAstartDelivery.Builder, gpb.UpsAmazon.UAstartDeliveryOrBuilder> 
-          getStartDeliFieldBuilder() {
-        if (startDeliBuilder_ == null) {
-          startDeliBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              gpb.UpsAmazon.UAstartDelivery, gpb.UpsAmazon.UAstartDelivery.Builder, gpb.UpsAmazon.UAstartDeliveryOrBuilder>(
-                  startDeli_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
-                  getParentForChildren(),
-                  isClean());
-          startDeli_ = null;
-        }
-        return startDeliBuilder_;
-      }
-
       private java.util.List<gpb.UpsAmazon.UAstatus> status_ =
         java.util.Collections.emptyList();
       private void ensureStatusIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           status_ = new java.util.ArrayList<gpb.UpsAmazon.UAstatus>(status_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -13605,7 +10963,7 @@ public final class UpsAmazon {
           gpb.UpsAmazon.UAstatus, gpb.UpsAmazon.UAstatus.Builder, gpb.UpsAmazon.UAstatusOrBuilder> statusBuilder_;
 
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public java.util.List<gpb.UpsAmazon.UAstatus> getStatusList() {
         if (statusBuilder_ == null) {
@@ -13615,7 +10973,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public int getStatusCount() {
         if (statusBuilder_ == null) {
@@ -13625,7 +10983,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public gpb.UpsAmazon.UAstatus getStatus(int index) {
         if (statusBuilder_ == null) {
@@ -13635,7 +10993,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public Builder setStatus(
           int index, gpb.UpsAmazon.UAstatus value) {
@@ -13652,7 +11010,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public Builder setStatus(
           int index, gpb.UpsAmazon.UAstatus.Builder builderForValue) {
@@ -13666,7 +11024,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public Builder addStatus(gpb.UpsAmazon.UAstatus value) {
         if (statusBuilder_ == null) {
@@ -13682,7 +11040,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public Builder addStatus(
           int index, gpb.UpsAmazon.UAstatus value) {
@@ -13699,7 +11057,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public Builder addStatus(
           gpb.UpsAmazon.UAstatus.Builder builderForValue) {
@@ -13713,7 +11071,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public Builder addStatus(
           int index, gpb.UpsAmazon.UAstatus.Builder builderForValue) {
@@ -13727,7 +11085,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public Builder addAllStatus(
           java.lang.Iterable<? extends gpb.UpsAmazon.UAstatus> values) {
@@ -13742,12 +11100,12 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public Builder clearStatus() {
         if (statusBuilder_ == null) {
           status_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           statusBuilder_.clear();
@@ -13755,7 +11113,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public Builder removeStatus(int index) {
         if (statusBuilder_ == null) {
@@ -13768,14 +11126,14 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public gpb.UpsAmazon.UAstatus.Builder getStatusBuilder(
           int index) {
         return getStatusFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public gpb.UpsAmazon.UAstatusOrBuilder getStatusOrBuilder(
           int index) {
@@ -13785,7 +11143,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public java.util.List<? extends gpb.UpsAmazon.UAstatusOrBuilder> 
            getStatusOrBuilderList() {
@@ -13796,14 +11154,14 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public gpb.UpsAmazon.UAstatus.Builder addStatusBuilder() {
         return getStatusFieldBuilder().addBuilder(
             gpb.UpsAmazon.UAstatus.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public gpb.UpsAmazon.UAstatus.Builder addStatusBuilder(
           int index) {
@@ -13811,7 +11169,7 @@ public final class UpsAmazon {
             index, gpb.UpsAmazon.UAstatus.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.UAstatus status = 4;</code>
+       * <code>repeated .gpb.UAstatus status = 2;</code>
        */
       public java.util.List<gpb.UpsAmazon.UAstatus.Builder> 
            getStatusBuilderList() {
@@ -13824,7 +11182,7 @@ public final class UpsAmazon {
           statusBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               gpb.UpsAmazon.UAstatus, gpb.UpsAmazon.UAstatus.Builder, gpb.UpsAmazon.UAstatusOrBuilder>(
                   status_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           status_ = null;
@@ -13835,9 +11193,9 @@ public final class UpsAmazon {
       private java.util.List<gpb.UpsAmazon.UAdelivered> delivered_ =
         java.util.Collections.emptyList();
       private void ensureDeliveredIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           delivered_ = new java.util.ArrayList<gpb.UpsAmazon.UAdelivered>(delivered_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000004;
          }
       }
 
@@ -13845,7 +11203,7 @@ public final class UpsAmazon {
           gpb.UpsAmazon.UAdelivered, gpb.UpsAmazon.UAdelivered.Builder, gpb.UpsAmazon.UAdeliveredOrBuilder> deliveredBuilder_;
 
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public java.util.List<gpb.UpsAmazon.UAdelivered> getDeliveredList() {
         if (deliveredBuilder_ == null) {
@@ -13855,7 +11213,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public int getDeliveredCount() {
         if (deliveredBuilder_ == null) {
@@ -13865,7 +11223,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public gpb.UpsAmazon.UAdelivered getDelivered(int index) {
         if (deliveredBuilder_ == null) {
@@ -13875,7 +11233,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public Builder setDelivered(
           int index, gpb.UpsAmazon.UAdelivered value) {
@@ -13892,7 +11250,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public Builder setDelivered(
           int index, gpb.UpsAmazon.UAdelivered.Builder builderForValue) {
@@ -13906,7 +11264,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public Builder addDelivered(gpb.UpsAmazon.UAdelivered value) {
         if (deliveredBuilder_ == null) {
@@ -13922,7 +11280,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public Builder addDelivered(
           int index, gpb.UpsAmazon.UAdelivered value) {
@@ -13939,7 +11297,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public Builder addDelivered(
           gpb.UpsAmazon.UAdelivered.Builder builderForValue) {
@@ -13953,7 +11311,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public Builder addDelivered(
           int index, gpb.UpsAmazon.UAdelivered.Builder builderForValue) {
@@ -13967,7 +11325,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public Builder addAllDelivered(
           java.lang.Iterable<? extends gpb.UpsAmazon.UAdelivered> values) {
@@ -13982,12 +11340,12 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public Builder clearDelivered() {
         if (deliveredBuilder_ == null) {
           delivered_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           deliveredBuilder_.clear();
@@ -13995,7 +11353,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public Builder removeDelivered(int index) {
         if (deliveredBuilder_ == null) {
@@ -14008,14 +11366,14 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public gpb.UpsAmazon.UAdelivered.Builder getDeliveredBuilder(
           int index) {
         return getDeliveredFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public gpb.UpsAmazon.UAdeliveredOrBuilder getDeliveredOrBuilder(
           int index) {
@@ -14025,7 +11383,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public java.util.List<? extends gpb.UpsAmazon.UAdeliveredOrBuilder> 
            getDeliveredOrBuilderList() {
@@ -14036,14 +11394,14 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public gpb.UpsAmazon.UAdelivered.Builder addDeliveredBuilder() {
         return getDeliveredFieldBuilder().addBuilder(
             gpb.UpsAmazon.UAdelivered.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public gpb.UpsAmazon.UAdelivered.Builder addDeliveredBuilder(
           int index) {
@@ -14051,7 +11409,7 @@ public final class UpsAmazon {
             index, gpb.UpsAmazon.UAdelivered.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.UAdelivered delivered = 5;</code>
+       * <code>repeated .gpb.UAdelivered delivered = 3;</code>
        */
       public java.util.List<gpb.UpsAmazon.UAdelivered.Builder> 
            getDeliveredBuilderList() {
@@ -14064,7 +11422,7 @@ public final class UpsAmazon {
           deliveredBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               gpb.UpsAmazon.UAdelivered, gpb.UpsAmazon.UAdelivered.Builder, gpb.UpsAmazon.UAdeliveredOrBuilder>(
                   delivered_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           delivered_ = null;
@@ -14075,9 +11433,9 @@ public final class UpsAmazon {
       private java.util.List<gpb.UpsAmazon.UAchangeResp> changeResp_ =
         java.util.Collections.emptyList();
       private void ensureChangeRespIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
           changeResp_ = new java.util.ArrayList<gpb.UpsAmazon.UAchangeResp>(changeResp_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000008;
          }
       }
 
@@ -14085,7 +11443,7 @@ public final class UpsAmazon {
           gpb.UpsAmazon.UAchangeResp, gpb.UpsAmazon.UAchangeResp.Builder, gpb.UpsAmazon.UAchangeRespOrBuilder> changeRespBuilder_;
 
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public java.util.List<gpb.UpsAmazon.UAchangeResp> getChangeRespList() {
         if (changeRespBuilder_ == null) {
@@ -14095,7 +11453,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public int getChangeRespCount() {
         if (changeRespBuilder_ == null) {
@@ -14105,7 +11463,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public gpb.UpsAmazon.UAchangeResp getChangeResp(int index) {
         if (changeRespBuilder_ == null) {
@@ -14115,7 +11473,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public Builder setChangeResp(
           int index, gpb.UpsAmazon.UAchangeResp value) {
@@ -14132,7 +11490,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public Builder setChangeResp(
           int index, gpb.UpsAmazon.UAchangeResp.Builder builderForValue) {
@@ -14146,7 +11504,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public Builder addChangeResp(gpb.UpsAmazon.UAchangeResp value) {
         if (changeRespBuilder_ == null) {
@@ -14162,7 +11520,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public Builder addChangeResp(
           int index, gpb.UpsAmazon.UAchangeResp value) {
@@ -14179,7 +11537,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public Builder addChangeResp(
           gpb.UpsAmazon.UAchangeResp.Builder builderForValue) {
@@ -14193,7 +11551,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public Builder addChangeResp(
           int index, gpb.UpsAmazon.UAchangeResp.Builder builderForValue) {
@@ -14207,7 +11565,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public Builder addAllChangeResp(
           java.lang.Iterable<? extends gpb.UpsAmazon.UAchangeResp> values) {
@@ -14222,12 +11580,12 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public Builder clearChangeResp() {
         if (changeRespBuilder_ == null) {
           changeResp_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
           changeRespBuilder_.clear();
@@ -14235,7 +11593,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public Builder removeChangeResp(int index) {
         if (changeRespBuilder_ == null) {
@@ -14248,14 +11606,14 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public gpb.UpsAmazon.UAchangeResp.Builder getChangeRespBuilder(
           int index) {
         return getChangeRespFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public gpb.UpsAmazon.UAchangeRespOrBuilder getChangeRespOrBuilder(
           int index) {
@@ -14265,7 +11623,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public java.util.List<? extends gpb.UpsAmazon.UAchangeRespOrBuilder> 
            getChangeRespOrBuilderList() {
@@ -14276,14 +11634,14 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public gpb.UpsAmazon.UAchangeResp.Builder addChangeRespBuilder() {
         return getChangeRespFieldBuilder().addBuilder(
             gpb.UpsAmazon.UAchangeResp.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public gpb.UpsAmazon.UAchangeResp.Builder addChangeRespBuilder(
           int index) {
@@ -14291,7 +11649,7 @@ public final class UpsAmazon {
             index, gpb.UpsAmazon.UAchangeResp.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.UAchangeResp changeResp = 6;</code>
+       * <code>repeated .gpb.UAchangeResp changeResp = 4;</code>
        */
       public java.util.List<gpb.UpsAmazon.UAchangeResp.Builder> 
            getChangeRespBuilderList() {
@@ -14304,7 +11662,7 @@ public final class UpsAmazon {
           changeRespBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               gpb.UpsAmazon.UAchangeResp, gpb.UpsAmazon.UAchangeResp.Builder, gpb.UpsAmazon.UAchangeRespOrBuilder>(
                   changeResp_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           changeResp_ = null;
@@ -14315,9 +11673,9 @@ public final class UpsAmazon {
       private java.util.List<gpb.UpsAmazon.Err> err_ =
         java.util.Collections.emptyList();
       private void ensureErrIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           err_ = new java.util.ArrayList<gpb.UpsAmazon.Err>(err_);
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000010;
          }
       }
 
@@ -14325,7 +11683,7 @@ public final class UpsAmazon {
           gpb.UpsAmazon.Err, gpb.UpsAmazon.Err.Builder, gpb.UpsAmazon.ErrOrBuilder> errBuilder_;
 
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public java.util.List<gpb.UpsAmazon.Err> getErrList() {
         if (errBuilder_ == null) {
@@ -14335,7 +11693,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public int getErrCount() {
         if (errBuilder_ == null) {
@@ -14345,7 +11703,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public gpb.UpsAmazon.Err getErr(int index) {
         if (errBuilder_ == null) {
@@ -14355,7 +11713,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public Builder setErr(
           int index, gpb.UpsAmazon.Err value) {
@@ -14372,7 +11730,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public Builder setErr(
           int index, gpb.UpsAmazon.Err.Builder builderForValue) {
@@ -14386,7 +11744,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public Builder addErr(gpb.UpsAmazon.Err value) {
         if (errBuilder_ == null) {
@@ -14402,7 +11760,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public Builder addErr(
           int index, gpb.UpsAmazon.Err value) {
@@ -14419,7 +11777,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public Builder addErr(
           gpb.UpsAmazon.Err.Builder builderForValue) {
@@ -14433,7 +11791,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public Builder addErr(
           int index, gpb.UpsAmazon.Err.Builder builderForValue) {
@@ -14447,7 +11805,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public Builder addAllErr(
           java.lang.Iterable<? extends gpb.UpsAmazon.Err> values) {
@@ -14462,12 +11820,12 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public Builder clearErr() {
         if (errBuilder_ == null) {
           err_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000010);
           onChanged();
         } else {
           errBuilder_.clear();
@@ -14475,7 +11833,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public Builder removeErr(int index) {
         if (errBuilder_ == null) {
@@ -14488,14 +11846,14 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public gpb.UpsAmazon.Err.Builder getErrBuilder(
           int index) {
         return getErrFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public gpb.UpsAmazon.ErrOrBuilder getErrOrBuilder(
           int index) {
@@ -14505,7 +11863,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public java.util.List<? extends gpb.UpsAmazon.ErrOrBuilder> 
            getErrOrBuilderList() {
@@ -14516,14 +11874,14 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public gpb.UpsAmazon.Err.Builder addErrBuilder() {
         return getErrFieldBuilder().addBuilder(
             gpb.UpsAmazon.Err.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public gpb.UpsAmazon.Err.Builder addErrBuilder(
           int index) {
@@ -14531,7 +11889,7 @@ public final class UpsAmazon {
             index, gpb.UpsAmazon.Err.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 5;</code>
        */
       public java.util.List<gpb.UpsAmazon.Err.Builder> 
            getErrBuilderList() {
@@ -14544,7 +11902,7 @@ public final class UpsAmazon {
           errBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               gpb.UpsAmazon.Err, gpb.UpsAmazon.Err.Builder, gpb.UpsAmazon.ErrOrBuilder>(
                   err_,
-                  ((bitField0_ & 0x00000040) == 0x00000040),
+                  ((bitField0_ & 0x00000010) == 0x00000010),
                   getParentForChildren(),
                   isClean());
           err_ = null;
@@ -14554,31 +11912,31 @@ public final class UpsAmazon {
 
       private boolean disconnect_ ;
       /**
-       * <code>optional bool disconnect = 8;</code>
+       * <code>optional bool disconnect = 6;</code>
        */
       public boolean hasDisconnect() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>optional bool disconnect = 8;</code>
+       * <code>optional bool disconnect = 6;</code>
        */
       public boolean getDisconnect() {
         return disconnect_;
       }
       /**
-       * <code>optional bool disconnect = 8;</code>
+       * <code>optional bool disconnect = 6;</code>
        */
       public Builder setDisconnect(boolean value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000020;
         disconnect_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool disconnect = 8;</code>
+       * <code>optional bool disconnect = 6;</code>
        */
       public Builder clearDisconnect() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000020);
         disconnect_ = false;
         onChanged();
         return this;
@@ -14586,32 +11944,32 @@ public final class UpsAmazon {
 
       private java.util.List<java.lang.Long> acks_ = java.util.Collections.emptyList();
       private void ensureAcksIsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           acks_ = new java.util.ArrayList<java.lang.Long>(acks_);
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000040;
          }
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 7;</code>
        */
       public java.util.List<java.lang.Long>
           getAcksList() {
         return java.util.Collections.unmodifiableList(acks_);
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 7;</code>
        */
       public int getAcksCount() {
         return acks_.size();
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 7;</code>
        */
       public long getAcks(int index) {
         return acks_.get(index);
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 7;</code>
        */
       public Builder setAcks(
           int index, long value) {
@@ -14621,7 +11979,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 7;</code>
        */
       public Builder addAcks(long value) {
         ensureAcksIsMutable();
@@ -14630,7 +11988,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 7;</code>
        */
       public Builder addAllAcks(
           java.lang.Iterable<? extends java.lang.Long> values) {
@@ -14641,11 +11999,11 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 7;</code>
        */
       public Builder clearAcks() {
         acks_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000040);
         onChanged();
         return this;
       }
@@ -14731,168 +12089,144 @@ public final class UpsAmazon {
         int index);
 
     /**
-     * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-     */
-    java.util.List<gpb.UpsAmazon.AUarriveConfirmed> 
-        getArriveConfList();
-    /**
-     * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-     */
-    gpb.UpsAmazon.AUarriveConfirmed getArriveConf(int index);
-    /**
-     * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-     */
-    int getArriveConfCount();
-    /**
-     * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-     */
-    java.util.List<? extends gpb.UpsAmazon.AUarriveConfirmedOrBuilder> 
-        getArriveConfOrBuilderList();
-    /**
-     * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-     */
-    gpb.UpsAmazon.AUarriveConfirmedOrBuilder getArriveConfOrBuilder(
-        int index);
-
-    /**
-     * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+     * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
      */
     java.util.List<gpb.UpsAmazon.AUreqDelivery> 
         getDeliveryList();
     /**
-     * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+     * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
      */
     gpb.UpsAmazon.AUreqDelivery getDelivery(int index);
     /**
-     * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+     * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
      */
     int getDeliveryCount();
     /**
-     * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+     * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
      */
     java.util.List<? extends gpb.UpsAmazon.AUreqDeliveryOrBuilder> 
         getDeliveryOrBuilderList();
     /**
-     * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+     * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
      */
     gpb.UpsAmazon.AUreqDeliveryOrBuilder getDeliveryOrBuilder(
         int index);
 
     /**
-     * <code>repeated .gpb.AUquery query = 4;</code>
+     * <code>repeated .gpb.AUquery query = 3;</code>
      */
     java.util.List<gpb.UpsAmazon.AUquery> 
         getQueryList();
     /**
-     * <code>repeated .gpb.AUquery query = 4;</code>
+     * <code>repeated .gpb.AUquery query = 3;</code>
      */
     gpb.UpsAmazon.AUquery getQuery(int index);
     /**
-     * <code>repeated .gpb.AUquery query = 4;</code>
+     * <code>repeated .gpb.AUquery query = 3;</code>
      */
     int getQueryCount();
     /**
-     * <code>repeated .gpb.AUquery query = 4;</code>
+     * <code>repeated .gpb.AUquery query = 3;</code>
      */
     java.util.List<? extends gpb.UpsAmazon.AUqueryOrBuilder> 
         getQueryOrBuilderList();
     /**
-     * <code>repeated .gpb.AUquery query = 4;</code>
+     * <code>repeated .gpb.AUquery query = 3;</code>
      */
     gpb.UpsAmazon.AUqueryOrBuilder getQueryOrBuilder(
         int index);
 
     /**
-     * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-     */
-    java.util.List<gpb.UpsAmazon.AUdeliverConfirmed> 
-        getDeliveredConfList();
-    /**
-     * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-     */
-    gpb.UpsAmazon.AUdeliverConfirmed getDeliveredConf(int index);
-    /**
-     * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-     */
-    int getDeliveredConfCount();
-    /**
-     * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-     */
-    java.util.List<? extends gpb.UpsAmazon.AUdeliverConfirmedOrBuilder> 
-        getDeliveredConfOrBuilderList();
-    /**
-     * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-     */
-    gpb.UpsAmazon.AUdeliverConfirmedOrBuilder getDeliveredConfOrBuilder(
-        int index);
-
-    /**
-     * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+     * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
      */
     java.util.List<gpb.UpsAmazon.AUchangeDestn> 
         getChangeDestList();
     /**
-     * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+     * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
      */
     gpb.UpsAmazon.AUchangeDestn getChangeDest(int index);
     /**
-     * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+     * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
      */
     int getChangeDestCount();
     /**
-     * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+     * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
      */
     java.util.List<? extends gpb.UpsAmazon.AUchangeDestnOrBuilder> 
         getChangeDestOrBuilderList();
     /**
-     * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+     * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
      */
     gpb.UpsAmazon.AUchangeDestnOrBuilder getChangeDestOrBuilder(
         int index);
 
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+     */
+    java.util.List<gpb.UpsAmazon.AUbindUPS> 
+        getBindList();
+    /**
+     * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+     */
+    gpb.UpsAmazon.AUbindUPS getBind(int index);
+    /**
+     * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+     */
+    int getBindCount();
+    /**
+     * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+     */
+    java.util.List<? extends gpb.UpsAmazon.AUbindUPSOrBuilder> 
+        getBindOrBuilderList();
+    /**
+     * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+     */
+    gpb.UpsAmazon.AUbindUPSOrBuilder getBindOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated .gpb.Err err = 6;</code>
      */
     java.util.List<gpb.UpsAmazon.Err> 
         getErrList();
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 6;</code>
      */
     gpb.UpsAmazon.Err getErr(int index);
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 6;</code>
      */
     int getErrCount();
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 6;</code>
      */
     java.util.List<? extends gpb.UpsAmazon.ErrOrBuilder> 
         getErrOrBuilderList();
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 6;</code>
      */
     gpb.UpsAmazon.ErrOrBuilder getErrOrBuilder(
         int index);
 
     /**
-     * <code>optional bool disconnect = 8;</code>
+     * <code>optional bool disconnect = 7;</code>
      */
     boolean hasDisconnect();
     /**
-     * <code>optional bool disconnect = 8;</code>
+     * <code>optional bool disconnect = 7;</code>
      */
     boolean getDisconnect();
 
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 8;</code>
      */
     java.util.List<java.lang.Long> getAcksList();
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 8;</code>
      */
     int getAcksCount();
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 8;</code>
      */
     long getAcks(int index);
   }
@@ -14910,11 +12244,10 @@ public final class UpsAmazon {
     }
     private AUcommands() {
       pickup_ = java.util.Collections.emptyList();
-      arriveConf_ = java.util.Collections.emptyList();
       delivery_ = java.util.Collections.emptyList();
       query_ = java.util.Collections.emptyList();
-      deliveredConf_ = java.util.Collections.emptyList();
       changeDest_ = java.util.Collections.emptyList();
+      bind_ = java.util.Collections.emptyList();
       err_ = java.util.Collections.emptyList();
       disconnect_ = false;
       acks_ = java.util.Collections.emptyList();
@@ -14955,77 +12288,68 @@ public final class UpsAmazon {
             }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-                arriveConf_ = new java.util.ArrayList<gpb.UpsAmazon.AUarriveConfirmed>();
-                mutable_bitField0_ |= 0x00000002;
-              }
-              arriveConf_.add(
-                  input.readMessage(gpb.UpsAmazon.AUarriveConfirmed.PARSER, extensionRegistry));
-              break;
-            }
-            case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 delivery_ = new java.util.ArrayList<gpb.UpsAmazon.AUreqDelivery>();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000002;
               }
               delivery_.add(
                   input.readMessage(gpb.UpsAmazon.AUreqDelivery.PARSER, extensionRegistry));
               break;
             }
-            case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 query_ = new java.util.ArrayList<gpb.UpsAmazon.AUquery>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000004;
               }
               query_.add(
                   input.readMessage(gpb.UpsAmazon.AUquery.PARSER, extensionRegistry));
               break;
             }
-            case 42: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-                deliveredConf_ = new java.util.ArrayList<gpb.UpsAmazon.AUdeliverConfirmed>();
-                mutable_bitField0_ |= 0x00000010;
-              }
-              deliveredConf_.add(
-                  input.readMessage(gpb.UpsAmazon.AUdeliverConfirmed.PARSER, extensionRegistry));
-              break;
-            }
-            case 50: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
                 changeDest_ = new java.util.ArrayList<gpb.UpsAmazon.AUchangeDestn>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000008;
               }
               changeDest_.add(
                   input.readMessage(gpb.UpsAmazon.AUchangeDestn.PARSER, extensionRegistry));
               break;
             }
-            case 58: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                bind_ = new java.util.ArrayList<gpb.UpsAmazon.AUbindUPS>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              bind_.add(
+                  input.readMessage(gpb.UpsAmazon.AUbindUPS.PARSER, extensionRegistry));
+              break;
+            }
+            case 50: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
                 err_ = new java.util.ArrayList<gpb.UpsAmazon.Err>();
-                mutable_bitField0_ |= 0x00000040;
+                mutable_bitField0_ |= 0x00000020;
               }
               err_.add(
                   input.readMessage(gpb.UpsAmazon.Err.PARSER, extensionRegistry));
               break;
             }
-            case 64: {
+            case 56: {
               bitField0_ |= 0x00000001;
               disconnect_ = input.readBool();
               break;
             }
-            case 72: {
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+            case 64: {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
                 acks_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000100;
+                mutable_bitField0_ |= 0x00000080;
               }
               acks_.add(input.readInt64());
               break;
             }
-            case 74: {
+            case 66: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080) && input.getBytesUntilLimit() > 0) {
                 acks_ = new java.util.ArrayList<java.lang.Long>();
-                mutable_bitField0_ |= 0x00000100;
+                mutable_bitField0_ |= 0x00000080;
               }
               while (input.getBytesUntilLimit() > 0) {
                 acks_.add(input.readInt64());
@@ -15052,24 +12376,21 @@ public final class UpsAmazon {
           pickup_ = java.util.Collections.unmodifiableList(pickup_);
         }
         if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
-          arriveConf_ = java.util.Collections.unmodifiableList(arriveConf_);
-        }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           delivery_ = java.util.Collections.unmodifiableList(delivery_);
         }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           query_ = java.util.Collections.unmodifiableList(query_);
         }
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
-          deliveredConf_ = java.util.Collections.unmodifiableList(deliveredConf_);
-        }
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
           changeDest_ = java.util.Collections.unmodifiableList(changeDest_);
         }
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          bind_ = java.util.Collections.unmodifiableList(bind_);
+        }
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           err_ = java.util.Collections.unmodifiableList(err_);
         }
-        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           acks_ = java.util.Collections.unmodifiableList(acks_);
         }
         this.unknownFields = unknownFields.build();
@@ -15125,248 +12446,213 @@ public final class UpsAmazon {
       return pickup_.get(index);
     }
 
-    public static final int ARRIVECONF_FIELD_NUMBER = 2;
-    private java.util.List<gpb.UpsAmazon.AUarriveConfirmed> arriveConf_;
-    /**
-     * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-     */
-    public java.util.List<gpb.UpsAmazon.AUarriveConfirmed> getArriveConfList() {
-      return arriveConf_;
-    }
-    /**
-     * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-     */
-    public java.util.List<? extends gpb.UpsAmazon.AUarriveConfirmedOrBuilder> 
-        getArriveConfOrBuilderList() {
-      return arriveConf_;
-    }
-    /**
-     * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-     */
-    public int getArriveConfCount() {
-      return arriveConf_.size();
-    }
-    /**
-     * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-     */
-    public gpb.UpsAmazon.AUarriveConfirmed getArriveConf(int index) {
-      return arriveConf_.get(index);
-    }
-    /**
-     * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-     */
-    public gpb.UpsAmazon.AUarriveConfirmedOrBuilder getArriveConfOrBuilder(
-        int index) {
-      return arriveConf_.get(index);
-    }
-
-    public static final int DELIVERY_FIELD_NUMBER = 3;
+    public static final int DELIVERY_FIELD_NUMBER = 2;
     private java.util.List<gpb.UpsAmazon.AUreqDelivery> delivery_;
     /**
-     * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+     * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
      */
     public java.util.List<gpb.UpsAmazon.AUreqDelivery> getDeliveryList() {
       return delivery_;
     }
     /**
-     * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+     * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
      */
     public java.util.List<? extends gpb.UpsAmazon.AUreqDeliveryOrBuilder> 
         getDeliveryOrBuilderList() {
       return delivery_;
     }
     /**
-     * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+     * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
      */
     public int getDeliveryCount() {
       return delivery_.size();
     }
     /**
-     * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+     * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
      */
     public gpb.UpsAmazon.AUreqDelivery getDelivery(int index) {
       return delivery_.get(index);
     }
     /**
-     * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+     * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
      */
     public gpb.UpsAmazon.AUreqDeliveryOrBuilder getDeliveryOrBuilder(
         int index) {
       return delivery_.get(index);
     }
 
-    public static final int QUERY_FIELD_NUMBER = 4;
+    public static final int QUERY_FIELD_NUMBER = 3;
     private java.util.List<gpb.UpsAmazon.AUquery> query_;
     /**
-     * <code>repeated .gpb.AUquery query = 4;</code>
+     * <code>repeated .gpb.AUquery query = 3;</code>
      */
     public java.util.List<gpb.UpsAmazon.AUquery> getQueryList() {
       return query_;
     }
     /**
-     * <code>repeated .gpb.AUquery query = 4;</code>
+     * <code>repeated .gpb.AUquery query = 3;</code>
      */
     public java.util.List<? extends gpb.UpsAmazon.AUqueryOrBuilder> 
         getQueryOrBuilderList() {
       return query_;
     }
     /**
-     * <code>repeated .gpb.AUquery query = 4;</code>
+     * <code>repeated .gpb.AUquery query = 3;</code>
      */
     public int getQueryCount() {
       return query_.size();
     }
     /**
-     * <code>repeated .gpb.AUquery query = 4;</code>
+     * <code>repeated .gpb.AUquery query = 3;</code>
      */
     public gpb.UpsAmazon.AUquery getQuery(int index) {
       return query_.get(index);
     }
     /**
-     * <code>repeated .gpb.AUquery query = 4;</code>
+     * <code>repeated .gpb.AUquery query = 3;</code>
      */
     public gpb.UpsAmazon.AUqueryOrBuilder getQueryOrBuilder(
         int index) {
       return query_.get(index);
     }
 
-    public static final int DELIVEREDCONF_FIELD_NUMBER = 5;
-    private java.util.List<gpb.UpsAmazon.AUdeliverConfirmed> deliveredConf_;
-    /**
-     * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-     */
-    public java.util.List<gpb.UpsAmazon.AUdeliverConfirmed> getDeliveredConfList() {
-      return deliveredConf_;
-    }
-    /**
-     * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-     */
-    public java.util.List<? extends gpb.UpsAmazon.AUdeliverConfirmedOrBuilder> 
-        getDeliveredConfOrBuilderList() {
-      return deliveredConf_;
-    }
-    /**
-     * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-     */
-    public int getDeliveredConfCount() {
-      return deliveredConf_.size();
-    }
-    /**
-     * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-     */
-    public gpb.UpsAmazon.AUdeliverConfirmed getDeliveredConf(int index) {
-      return deliveredConf_.get(index);
-    }
-    /**
-     * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-     */
-    public gpb.UpsAmazon.AUdeliverConfirmedOrBuilder getDeliveredConfOrBuilder(
-        int index) {
-      return deliveredConf_.get(index);
-    }
-
-    public static final int CHANGEDEST_FIELD_NUMBER = 6;
+    public static final int CHANGEDEST_FIELD_NUMBER = 4;
     private java.util.List<gpb.UpsAmazon.AUchangeDestn> changeDest_;
     /**
-     * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+     * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
      */
     public java.util.List<gpb.UpsAmazon.AUchangeDestn> getChangeDestList() {
       return changeDest_;
     }
     /**
-     * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+     * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
      */
     public java.util.List<? extends gpb.UpsAmazon.AUchangeDestnOrBuilder> 
         getChangeDestOrBuilderList() {
       return changeDest_;
     }
     /**
-     * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+     * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
      */
     public int getChangeDestCount() {
       return changeDest_.size();
     }
     /**
-     * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+     * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
      */
     public gpb.UpsAmazon.AUchangeDestn getChangeDest(int index) {
       return changeDest_.get(index);
     }
     /**
-     * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+     * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
      */
     public gpb.UpsAmazon.AUchangeDestnOrBuilder getChangeDestOrBuilder(
         int index) {
       return changeDest_.get(index);
     }
 
-    public static final int ERR_FIELD_NUMBER = 7;
+    public static final int BIND_FIELD_NUMBER = 5;
+    private java.util.List<gpb.UpsAmazon.AUbindUPS> bind_;
+    /**
+     * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+     */
+    public java.util.List<gpb.UpsAmazon.AUbindUPS> getBindList() {
+      return bind_;
+    }
+    /**
+     * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+     */
+    public java.util.List<? extends gpb.UpsAmazon.AUbindUPSOrBuilder> 
+        getBindOrBuilderList() {
+      return bind_;
+    }
+    /**
+     * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+     */
+    public int getBindCount() {
+      return bind_.size();
+    }
+    /**
+     * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+     */
+    public gpb.UpsAmazon.AUbindUPS getBind(int index) {
+      return bind_.get(index);
+    }
+    /**
+     * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+     */
+    public gpb.UpsAmazon.AUbindUPSOrBuilder getBindOrBuilder(
+        int index) {
+      return bind_.get(index);
+    }
+
+    public static final int ERR_FIELD_NUMBER = 6;
     private java.util.List<gpb.UpsAmazon.Err> err_;
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 6;</code>
      */
     public java.util.List<gpb.UpsAmazon.Err> getErrList() {
       return err_;
     }
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 6;</code>
      */
     public java.util.List<? extends gpb.UpsAmazon.ErrOrBuilder> 
         getErrOrBuilderList() {
       return err_;
     }
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 6;</code>
      */
     public int getErrCount() {
       return err_.size();
     }
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 6;</code>
      */
     public gpb.UpsAmazon.Err getErr(int index) {
       return err_.get(index);
     }
     /**
-     * <code>repeated .gpb.Err err = 7;</code>
+     * <code>repeated .gpb.Err err = 6;</code>
      */
     public gpb.UpsAmazon.ErrOrBuilder getErrOrBuilder(
         int index) {
       return err_.get(index);
     }
 
-    public static final int DISCONNECT_FIELD_NUMBER = 8;
+    public static final int DISCONNECT_FIELD_NUMBER = 7;
     private boolean disconnect_;
     /**
-     * <code>optional bool disconnect = 8;</code>
+     * <code>optional bool disconnect = 7;</code>
      */
     public boolean hasDisconnect() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional bool disconnect = 8;</code>
+     * <code>optional bool disconnect = 7;</code>
      */
     public boolean getDisconnect() {
       return disconnect_;
     }
 
-    public static final int ACKS_FIELD_NUMBER = 9;
+    public static final int ACKS_FIELD_NUMBER = 8;
     private java.util.List<java.lang.Long> acks_;
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 8;</code>
      */
     public java.util.List<java.lang.Long>
         getAcksList() {
       return acks_;
     }
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 8;</code>
      */
     public int getAcksCount() {
       return acks_.size();
     }
     /**
-     * <code>repeated int64 acks = 9;</code>
+     * <code>repeated int64 acks = 8;</code>
      */
     public long getAcks(int index) {
       return acks_.get(index);
@@ -15385,12 +12671,6 @@ public final class UpsAmazon {
           return false;
         }
       }
-      for (int i = 0; i < getArriveConfCount(); i++) {
-        if (!getArriveConf(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       for (int i = 0; i < getDeliveryCount(); i++) {
         if (!getDelivery(i).isInitialized()) {
           memoizedIsInitialized = 0;
@@ -15403,14 +12683,14 @@ public final class UpsAmazon {
           return false;
         }
       }
-      for (int i = 0; i < getDeliveredConfCount(); i++) {
-        if (!getDeliveredConf(i).isInitialized()) {
+      for (int i = 0; i < getChangeDestCount(); i++) {
+        if (!getChangeDest(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
       }
-      for (int i = 0; i < getChangeDestCount(); i++) {
-        if (!getChangeDest(i).isInitialized()) {
+      for (int i = 0; i < getBindCount(); i++) {
+        if (!getBind(i).isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -15431,29 +12711,26 @@ public final class UpsAmazon {
       for (int i = 0; i < pickup_.size(); i++) {
         output.writeMessage(1, pickup_.get(i));
       }
-      for (int i = 0; i < arriveConf_.size(); i++) {
-        output.writeMessage(2, arriveConf_.get(i));
-      }
       for (int i = 0; i < delivery_.size(); i++) {
-        output.writeMessage(3, delivery_.get(i));
+        output.writeMessage(2, delivery_.get(i));
       }
       for (int i = 0; i < query_.size(); i++) {
-        output.writeMessage(4, query_.get(i));
-      }
-      for (int i = 0; i < deliveredConf_.size(); i++) {
-        output.writeMessage(5, deliveredConf_.get(i));
+        output.writeMessage(3, query_.get(i));
       }
       for (int i = 0; i < changeDest_.size(); i++) {
-        output.writeMessage(6, changeDest_.get(i));
+        output.writeMessage(4, changeDest_.get(i));
+      }
+      for (int i = 0; i < bind_.size(); i++) {
+        output.writeMessage(5, bind_.get(i));
       }
       for (int i = 0; i < err_.size(); i++) {
-        output.writeMessage(7, err_.get(i));
+        output.writeMessage(6, err_.get(i));
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBool(8, disconnect_);
+        output.writeBool(7, disconnect_);
       }
       for (int i = 0; i < acks_.size(); i++) {
-        output.writeInt64(9, acks_.get(i));
+        output.writeInt64(8, acks_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -15468,33 +12745,29 @@ public final class UpsAmazon {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, pickup_.get(i));
       }
-      for (int i = 0; i < arriveConf_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, arriveConf_.get(i));
-      }
       for (int i = 0; i < delivery_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, delivery_.get(i));
+          .computeMessageSize(2, delivery_.get(i));
       }
       for (int i = 0; i < query_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, query_.get(i));
-      }
-      for (int i = 0; i < deliveredConf_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, deliveredConf_.get(i));
+          .computeMessageSize(3, query_.get(i));
       }
       for (int i = 0; i < changeDest_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, changeDest_.get(i));
+          .computeMessageSize(4, changeDest_.get(i));
+      }
+      for (int i = 0; i < bind_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, bind_.get(i));
       }
       for (int i = 0; i < err_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, err_.get(i));
+          .computeMessageSize(6, err_.get(i));
       }
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(8, disconnect_);
+          .computeBoolSize(7, disconnect_);
       }
       {
         int dataSize = 0;
@@ -15523,16 +12796,14 @@ public final class UpsAmazon {
       boolean result = true;
       result = result && getPickupList()
           .equals(other.getPickupList());
-      result = result && getArriveConfList()
-          .equals(other.getArriveConfList());
       result = result && getDeliveryList()
           .equals(other.getDeliveryList());
       result = result && getQueryList()
           .equals(other.getQueryList());
-      result = result && getDeliveredConfList()
-          .equals(other.getDeliveredConfList());
       result = result && getChangeDestList()
           .equals(other.getChangeDestList());
+      result = result && getBindList()
+          .equals(other.getBindList());
       result = result && getErrList()
           .equals(other.getErrList());
       result = result && (hasDisconnect() == other.hasDisconnect());
@@ -15557,10 +12828,6 @@ public final class UpsAmazon {
         hash = (37 * hash) + PICKUP_FIELD_NUMBER;
         hash = (53 * hash) + getPickupList().hashCode();
       }
-      if (getArriveConfCount() > 0) {
-        hash = (37 * hash) + ARRIVECONF_FIELD_NUMBER;
-        hash = (53 * hash) + getArriveConfList().hashCode();
-      }
       if (getDeliveryCount() > 0) {
         hash = (37 * hash) + DELIVERY_FIELD_NUMBER;
         hash = (53 * hash) + getDeliveryList().hashCode();
@@ -15569,13 +12836,13 @@ public final class UpsAmazon {
         hash = (37 * hash) + QUERY_FIELD_NUMBER;
         hash = (53 * hash) + getQueryList().hashCode();
       }
-      if (getDeliveredConfCount() > 0) {
-        hash = (37 * hash) + DELIVEREDCONF_FIELD_NUMBER;
-        hash = (53 * hash) + getDeliveredConfList().hashCode();
-      }
       if (getChangeDestCount() > 0) {
         hash = (37 * hash) + CHANGEDEST_FIELD_NUMBER;
         hash = (53 * hash) + getChangeDestList().hashCode();
+      }
+      if (getBindCount() > 0) {
+        hash = (37 * hash) + BIND_FIELD_NUMBER;
+        hash = (53 * hash) + getBindList().hashCode();
       }
       if (getErrCount() > 0) {
         hash = (37 * hash) + ERR_FIELD_NUMBER;
@@ -15719,11 +12986,10 @@ public final class UpsAmazon {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
           getPickupFieldBuilder();
-          getArriveConfFieldBuilder();
           getDeliveryFieldBuilder();
           getQueryFieldBuilder();
-          getDeliveredConfFieldBuilder();
           getChangeDestFieldBuilder();
+          getBindFieldBuilder();
           getErrFieldBuilder();
         }
       }
@@ -15736,46 +13002,40 @@ public final class UpsAmazon {
         } else {
           pickupBuilder_.clear();
         }
-        if (arriveConfBuilder_ == null) {
-          arriveConf_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-        } else {
-          arriveConfBuilder_.clear();
-        }
         if (deliveryBuilder_ == null) {
           delivery_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           deliveryBuilder_.clear();
         }
         if (queryBuilder_ == null) {
           query_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           queryBuilder_.clear();
         }
-        if (deliveredConfBuilder_ == null) {
-          deliveredConf_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
-        } else {
-          deliveredConfBuilder_.clear();
-        }
         if (changeDestBuilder_ == null) {
           changeDest_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000008);
         } else {
           changeDestBuilder_.clear();
         }
+        if (bindBuilder_ == null) {
+          bind_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          bindBuilder_.clear();
+        }
         if (errBuilder_ == null) {
           err_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000020);
         } else {
           errBuilder_.clear();
         }
         disconnect_ = false;
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         acks_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         return this;
       }
 
@@ -15813,67 +13073,58 @@ public final class UpsAmazon {
         } else {
           result.pickup_ = pickupBuilder_.build();
         }
-        if (arriveConfBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
-            arriveConf_ = java.util.Collections.unmodifiableList(arriveConf_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.arriveConf_ = arriveConf_;
-        } else {
-          result.arriveConf_ = arriveConfBuilder_.build();
-        }
         if (deliveryBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
             delivery_ = java.util.Collections.unmodifiableList(delivery_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.delivery_ = delivery_;
         } else {
           result.delivery_ = deliveryBuilder_.build();
         }
         if (queryBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
             query_ = java.util.Collections.unmodifiableList(query_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.query_ = query_;
         } else {
           result.query_ = queryBuilder_.build();
         }
-        if (deliveredConfBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
-            deliveredConf_ = java.util.Collections.unmodifiableList(deliveredConf_);
-            bitField0_ = (bitField0_ & ~0x00000010);
-          }
-          result.deliveredConf_ = deliveredConf_;
-        } else {
-          result.deliveredConf_ = deliveredConfBuilder_.build();
-        }
         if (changeDestBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
             changeDest_ = java.util.Collections.unmodifiableList(changeDest_);
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.changeDest_ = changeDest_;
         } else {
           result.changeDest_ = changeDestBuilder_.build();
         }
+        if (bindBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            bind_ = java.util.Collections.unmodifiableList(bind_);
+            bitField0_ = (bitField0_ & ~0x00000010);
+          }
+          result.bind_ = bind_;
+        } else {
+          result.bind_ = bindBuilder_.build();
+        }
         if (errBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
             err_ = java.util.Collections.unmodifiableList(err_);
-            bitField0_ = (bitField0_ & ~0x00000040);
+            bitField0_ = (bitField0_ & ~0x00000020);
           }
           result.err_ = err_;
         } else {
           result.err_ = errBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
           to_bitField0_ |= 0x00000001;
         }
         result.disconnect_ = disconnect_;
-        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (((bitField0_ & 0x00000080) == 0x00000080)) {
           acks_ = java.util.Collections.unmodifiableList(acks_);
-          bitField0_ = (bitField0_ & ~0x00000100);
+          bitField0_ = (bitField0_ & ~0x00000080);
         }
         result.acks_ = acks_;
         result.bitField0_ = to_bitField0_;
@@ -15951,37 +13202,11 @@ public final class UpsAmazon {
             }
           }
         }
-        if (arriveConfBuilder_ == null) {
-          if (!other.arriveConf_.isEmpty()) {
-            if (arriveConf_.isEmpty()) {
-              arriveConf_ = other.arriveConf_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureArriveConfIsMutable();
-              arriveConf_.addAll(other.arriveConf_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.arriveConf_.isEmpty()) {
-            if (arriveConfBuilder_.isEmpty()) {
-              arriveConfBuilder_.dispose();
-              arriveConfBuilder_ = null;
-              arriveConf_ = other.arriveConf_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              arriveConfBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getArriveConfFieldBuilder() : null;
-            } else {
-              arriveConfBuilder_.addAllMessages(other.arriveConf_);
-            }
-          }
-        }
         if (deliveryBuilder_ == null) {
           if (!other.delivery_.isEmpty()) {
             if (delivery_.isEmpty()) {
               delivery_ = other.delivery_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureDeliveryIsMutable();
               delivery_.addAll(other.delivery_);
@@ -15994,7 +13219,7 @@ public final class UpsAmazon {
               deliveryBuilder_.dispose();
               deliveryBuilder_ = null;
               delivery_ = other.delivery_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
               deliveryBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getDeliveryFieldBuilder() : null;
@@ -16007,7 +13232,7 @@ public final class UpsAmazon {
           if (!other.query_.isEmpty()) {
             if (query_.isEmpty()) {
               query_ = other.query_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensureQueryIsMutable();
               query_.addAll(other.query_);
@@ -16020,7 +13245,7 @@ public final class UpsAmazon {
               queryBuilder_.dispose();
               queryBuilder_ = null;
               query_ = other.query_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000004);
               queryBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getQueryFieldBuilder() : null;
@@ -16029,37 +13254,11 @@ public final class UpsAmazon {
             }
           }
         }
-        if (deliveredConfBuilder_ == null) {
-          if (!other.deliveredConf_.isEmpty()) {
-            if (deliveredConf_.isEmpty()) {
-              deliveredConf_ = other.deliveredConf_;
-              bitField0_ = (bitField0_ & ~0x00000010);
-            } else {
-              ensureDeliveredConfIsMutable();
-              deliveredConf_.addAll(other.deliveredConf_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.deliveredConf_.isEmpty()) {
-            if (deliveredConfBuilder_.isEmpty()) {
-              deliveredConfBuilder_.dispose();
-              deliveredConfBuilder_ = null;
-              deliveredConf_ = other.deliveredConf_;
-              bitField0_ = (bitField0_ & ~0x00000010);
-              deliveredConfBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getDeliveredConfFieldBuilder() : null;
-            } else {
-              deliveredConfBuilder_.addAllMessages(other.deliveredConf_);
-            }
-          }
-        }
         if (changeDestBuilder_ == null) {
           if (!other.changeDest_.isEmpty()) {
             if (changeDest_.isEmpty()) {
               changeDest_ = other.changeDest_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000008);
             } else {
               ensureChangeDestIsMutable();
               changeDest_.addAll(other.changeDest_);
@@ -16072,7 +13271,7 @@ public final class UpsAmazon {
               changeDestBuilder_.dispose();
               changeDestBuilder_ = null;
               changeDest_ = other.changeDest_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000008);
               changeDestBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getChangeDestFieldBuilder() : null;
@@ -16081,11 +13280,37 @@ public final class UpsAmazon {
             }
           }
         }
+        if (bindBuilder_ == null) {
+          if (!other.bind_.isEmpty()) {
+            if (bind_.isEmpty()) {
+              bind_ = other.bind_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+            } else {
+              ensureBindIsMutable();
+              bind_.addAll(other.bind_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.bind_.isEmpty()) {
+            if (bindBuilder_.isEmpty()) {
+              bindBuilder_.dispose();
+              bindBuilder_ = null;
+              bind_ = other.bind_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+              bindBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getBindFieldBuilder() : null;
+            } else {
+              bindBuilder_.addAllMessages(other.bind_);
+            }
+          }
+        }
         if (errBuilder_ == null) {
           if (!other.err_.isEmpty()) {
             if (err_.isEmpty()) {
               err_ = other.err_;
-              bitField0_ = (bitField0_ & ~0x00000040);
+              bitField0_ = (bitField0_ & ~0x00000020);
             } else {
               ensureErrIsMutable();
               err_.addAll(other.err_);
@@ -16098,7 +13323,7 @@ public final class UpsAmazon {
               errBuilder_.dispose();
               errBuilder_ = null;
               err_ = other.err_;
-              bitField0_ = (bitField0_ & ~0x00000040);
+              bitField0_ = (bitField0_ & ~0x00000020);
               errBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getErrFieldBuilder() : null;
@@ -16113,7 +13338,7 @@ public final class UpsAmazon {
         if (!other.acks_.isEmpty()) {
           if (acks_.isEmpty()) {
             acks_ = other.acks_;
-            bitField0_ = (bitField0_ & ~0x00000100);
+            bitField0_ = (bitField0_ & ~0x00000080);
           } else {
             ensureAcksIsMutable();
             acks_.addAll(other.acks_);
@@ -16132,11 +13357,6 @@ public final class UpsAmazon {
             return false;
           }
         }
-        for (int i = 0; i < getArriveConfCount(); i++) {
-          if (!getArriveConf(i).isInitialized()) {
-            return false;
-          }
-        }
         for (int i = 0; i < getDeliveryCount(); i++) {
           if (!getDelivery(i).isInitialized()) {
             return false;
@@ -16147,13 +13367,13 @@ public final class UpsAmazon {
             return false;
           }
         }
-        for (int i = 0; i < getDeliveredConfCount(); i++) {
-          if (!getDeliveredConf(i).isInitialized()) {
+        for (int i = 0; i < getChangeDestCount(); i++) {
+          if (!getChangeDest(i).isInitialized()) {
             return false;
           }
         }
-        for (int i = 0; i < getChangeDestCount(); i++) {
-          if (!getChangeDest(i).isInitialized()) {
+        for (int i = 0; i < getBindCount(); i++) {
+          if (!getBind(i).isInitialized()) {
             return false;
           }
         }
@@ -16425,252 +13645,12 @@ public final class UpsAmazon {
         return pickupBuilder_;
       }
 
-      private java.util.List<gpb.UpsAmazon.AUarriveConfirmed> arriveConf_ =
-        java.util.Collections.emptyList();
-      private void ensureArriveConfIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
-          arriveConf_ = new java.util.ArrayList<gpb.UpsAmazon.AUarriveConfirmed>(arriveConf_);
-          bitField0_ |= 0x00000002;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          gpb.UpsAmazon.AUarriveConfirmed, gpb.UpsAmazon.AUarriveConfirmed.Builder, gpb.UpsAmazon.AUarriveConfirmedOrBuilder> arriveConfBuilder_;
-
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public java.util.List<gpb.UpsAmazon.AUarriveConfirmed> getArriveConfList() {
-        if (arriveConfBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(arriveConf_);
-        } else {
-          return arriveConfBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public int getArriveConfCount() {
-        if (arriveConfBuilder_ == null) {
-          return arriveConf_.size();
-        } else {
-          return arriveConfBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public gpb.UpsAmazon.AUarriveConfirmed getArriveConf(int index) {
-        if (arriveConfBuilder_ == null) {
-          return arriveConf_.get(index);
-        } else {
-          return arriveConfBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public Builder setArriveConf(
-          int index, gpb.UpsAmazon.AUarriveConfirmed value) {
-        if (arriveConfBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureArriveConfIsMutable();
-          arriveConf_.set(index, value);
-          onChanged();
-        } else {
-          arriveConfBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public Builder setArriveConf(
-          int index, gpb.UpsAmazon.AUarriveConfirmed.Builder builderForValue) {
-        if (arriveConfBuilder_ == null) {
-          ensureArriveConfIsMutable();
-          arriveConf_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          arriveConfBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public Builder addArriveConf(gpb.UpsAmazon.AUarriveConfirmed value) {
-        if (arriveConfBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureArriveConfIsMutable();
-          arriveConf_.add(value);
-          onChanged();
-        } else {
-          arriveConfBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public Builder addArriveConf(
-          int index, gpb.UpsAmazon.AUarriveConfirmed value) {
-        if (arriveConfBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureArriveConfIsMutable();
-          arriveConf_.add(index, value);
-          onChanged();
-        } else {
-          arriveConfBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public Builder addArriveConf(
-          gpb.UpsAmazon.AUarriveConfirmed.Builder builderForValue) {
-        if (arriveConfBuilder_ == null) {
-          ensureArriveConfIsMutable();
-          arriveConf_.add(builderForValue.build());
-          onChanged();
-        } else {
-          arriveConfBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public Builder addArriveConf(
-          int index, gpb.UpsAmazon.AUarriveConfirmed.Builder builderForValue) {
-        if (arriveConfBuilder_ == null) {
-          ensureArriveConfIsMutable();
-          arriveConf_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          arriveConfBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public Builder addAllArriveConf(
-          java.lang.Iterable<? extends gpb.UpsAmazon.AUarriveConfirmed> values) {
-        if (arriveConfBuilder_ == null) {
-          ensureArriveConfIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, arriveConf_);
-          onChanged();
-        } else {
-          arriveConfBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public Builder clearArriveConf() {
-        if (arriveConfBuilder_ == null) {
-          arriveConf_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          arriveConfBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public Builder removeArriveConf(int index) {
-        if (arriveConfBuilder_ == null) {
-          ensureArriveConfIsMutable();
-          arriveConf_.remove(index);
-          onChanged();
-        } else {
-          arriveConfBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public gpb.UpsAmazon.AUarriveConfirmed.Builder getArriveConfBuilder(
-          int index) {
-        return getArriveConfFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public gpb.UpsAmazon.AUarriveConfirmedOrBuilder getArriveConfOrBuilder(
-          int index) {
-        if (arriveConfBuilder_ == null) {
-          return arriveConf_.get(index);  } else {
-          return arriveConfBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public java.util.List<? extends gpb.UpsAmazon.AUarriveConfirmedOrBuilder> 
-           getArriveConfOrBuilderList() {
-        if (arriveConfBuilder_ != null) {
-          return arriveConfBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(arriveConf_);
-        }
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public gpb.UpsAmazon.AUarriveConfirmed.Builder addArriveConfBuilder() {
-        return getArriveConfFieldBuilder().addBuilder(
-            gpb.UpsAmazon.AUarriveConfirmed.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public gpb.UpsAmazon.AUarriveConfirmed.Builder addArriveConfBuilder(
-          int index) {
-        return getArriveConfFieldBuilder().addBuilder(
-            index, gpb.UpsAmazon.AUarriveConfirmed.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .gpb.AUarriveConfirmed arriveConf = 2;</code>
-       */
-      public java.util.List<gpb.UpsAmazon.AUarriveConfirmed.Builder> 
-           getArriveConfBuilderList() {
-        return getArriveConfFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          gpb.UpsAmazon.AUarriveConfirmed, gpb.UpsAmazon.AUarriveConfirmed.Builder, gpb.UpsAmazon.AUarriveConfirmedOrBuilder> 
-          getArriveConfFieldBuilder() {
-        if (arriveConfBuilder_ == null) {
-          arriveConfBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              gpb.UpsAmazon.AUarriveConfirmed, gpb.UpsAmazon.AUarriveConfirmed.Builder, gpb.UpsAmazon.AUarriveConfirmedOrBuilder>(
-                  arriveConf_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
-                  getParentForChildren(),
-                  isClean());
-          arriveConf_ = null;
-        }
-        return arriveConfBuilder_;
-      }
-
       private java.util.List<gpb.UpsAmazon.AUreqDelivery> delivery_ =
         java.util.Collections.emptyList();
       private void ensureDeliveryIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           delivery_ = new java.util.ArrayList<gpb.UpsAmazon.AUreqDelivery>(delivery_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -16678,7 +13658,7 @@ public final class UpsAmazon {
           gpb.UpsAmazon.AUreqDelivery, gpb.UpsAmazon.AUreqDelivery.Builder, gpb.UpsAmazon.AUreqDeliveryOrBuilder> deliveryBuilder_;
 
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public java.util.List<gpb.UpsAmazon.AUreqDelivery> getDeliveryList() {
         if (deliveryBuilder_ == null) {
@@ -16688,7 +13668,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public int getDeliveryCount() {
         if (deliveryBuilder_ == null) {
@@ -16698,7 +13678,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public gpb.UpsAmazon.AUreqDelivery getDelivery(int index) {
         if (deliveryBuilder_ == null) {
@@ -16708,7 +13688,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public Builder setDelivery(
           int index, gpb.UpsAmazon.AUreqDelivery value) {
@@ -16725,7 +13705,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public Builder setDelivery(
           int index, gpb.UpsAmazon.AUreqDelivery.Builder builderForValue) {
@@ -16739,7 +13719,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public Builder addDelivery(gpb.UpsAmazon.AUreqDelivery value) {
         if (deliveryBuilder_ == null) {
@@ -16755,7 +13735,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public Builder addDelivery(
           int index, gpb.UpsAmazon.AUreqDelivery value) {
@@ -16772,7 +13752,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public Builder addDelivery(
           gpb.UpsAmazon.AUreqDelivery.Builder builderForValue) {
@@ -16786,7 +13766,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public Builder addDelivery(
           int index, gpb.UpsAmazon.AUreqDelivery.Builder builderForValue) {
@@ -16800,7 +13780,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public Builder addAllDelivery(
           java.lang.Iterable<? extends gpb.UpsAmazon.AUreqDelivery> values) {
@@ -16815,12 +13795,12 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public Builder clearDelivery() {
         if (deliveryBuilder_ == null) {
           delivery_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           deliveryBuilder_.clear();
@@ -16828,7 +13808,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public Builder removeDelivery(int index) {
         if (deliveryBuilder_ == null) {
@@ -16841,14 +13821,14 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public gpb.UpsAmazon.AUreqDelivery.Builder getDeliveryBuilder(
           int index) {
         return getDeliveryFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public gpb.UpsAmazon.AUreqDeliveryOrBuilder getDeliveryOrBuilder(
           int index) {
@@ -16858,7 +13838,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public java.util.List<? extends gpb.UpsAmazon.AUreqDeliveryOrBuilder> 
            getDeliveryOrBuilderList() {
@@ -16869,14 +13849,14 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public gpb.UpsAmazon.AUreqDelivery.Builder addDeliveryBuilder() {
         return getDeliveryFieldBuilder().addBuilder(
             gpb.UpsAmazon.AUreqDelivery.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public gpb.UpsAmazon.AUreqDelivery.Builder addDeliveryBuilder(
           int index) {
@@ -16884,7 +13864,7 @@ public final class UpsAmazon {
             index, gpb.UpsAmazon.AUreqDelivery.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.AUreqDelivery delivery = 3;</code>
+       * <code>repeated .gpb.AUreqDelivery delivery = 2;</code>
        */
       public java.util.List<gpb.UpsAmazon.AUreqDelivery.Builder> 
            getDeliveryBuilderList() {
@@ -16897,7 +13877,7 @@ public final class UpsAmazon {
           deliveryBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               gpb.UpsAmazon.AUreqDelivery, gpb.UpsAmazon.AUreqDelivery.Builder, gpb.UpsAmazon.AUreqDeliveryOrBuilder>(
                   delivery_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000002) == 0x00000002),
                   getParentForChildren(),
                   isClean());
           delivery_ = null;
@@ -16908,9 +13888,9 @@ public final class UpsAmazon {
       private java.util.List<gpb.UpsAmazon.AUquery> query_ =
         java.util.Collections.emptyList();
       private void ensureQueryIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           query_ = new java.util.ArrayList<gpb.UpsAmazon.AUquery>(query_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
          }
       }
 
@@ -16918,7 +13898,7 @@ public final class UpsAmazon {
           gpb.UpsAmazon.AUquery, gpb.UpsAmazon.AUquery.Builder, gpb.UpsAmazon.AUqueryOrBuilder> queryBuilder_;
 
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public java.util.List<gpb.UpsAmazon.AUquery> getQueryList() {
         if (queryBuilder_ == null) {
@@ -16928,7 +13908,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public int getQueryCount() {
         if (queryBuilder_ == null) {
@@ -16938,7 +13918,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public gpb.UpsAmazon.AUquery getQuery(int index) {
         if (queryBuilder_ == null) {
@@ -16948,7 +13928,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public Builder setQuery(
           int index, gpb.UpsAmazon.AUquery value) {
@@ -16965,7 +13945,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public Builder setQuery(
           int index, gpb.UpsAmazon.AUquery.Builder builderForValue) {
@@ -16979,7 +13959,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public Builder addQuery(gpb.UpsAmazon.AUquery value) {
         if (queryBuilder_ == null) {
@@ -16995,7 +13975,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public Builder addQuery(
           int index, gpb.UpsAmazon.AUquery value) {
@@ -17012,7 +13992,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public Builder addQuery(
           gpb.UpsAmazon.AUquery.Builder builderForValue) {
@@ -17026,7 +14006,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public Builder addQuery(
           int index, gpb.UpsAmazon.AUquery.Builder builderForValue) {
@@ -17040,7 +14020,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public Builder addAllQuery(
           java.lang.Iterable<? extends gpb.UpsAmazon.AUquery> values) {
@@ -17055,12 +14035,12 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public Builder clearQuery() {
         if (queryBuilder_ == null) {
           query_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           queryBuilder_.clear();
@@ -17068,7 +14048,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public Builder removeQuery(int index) {
         if (queryBuilder_ == null) {
@@ -17081,14 +14061,14 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public gpb.UpsAmazon.AUquery.Builder getQueryBuilder(
           int index) {
         return getQueryFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public gpb.UpsAmazon.AUqueryOrBuilder getQueryOrBuilder(
           int index) {
@@ -17098,7 +14078,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public java.util.List<? extends gpb.UpsAmazon.AUqueryOrBuilder> 
            getQueryOrBuilderList() {
@@ -17109,14 +14089,14 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public gpb.UpsAmazon.AUquery.Builder addQueryBuilder() {
         return getQueryFieldBuilder().addBuilder(
             gpb.UpsAmazon.AUquery.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public gpb.UpsAmazon.AUquery.Builder addQueryBuilder(
           int index) {
@@ -17124,7 +14104,7 @@ public final class UpsAmazon {
             index, gpb.UpsAmazon.AUquery.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.AUquery query = 4;</code>
+       * <code>repeated .gpb.AUquery query = 3;</code>
        */
       public java.util.List<gpb.UpsAmazon.AUquery.Builder> 
            getQueryBuilderList() {
@@ -17137,7 +14117,7 @@ public final class UpsAmazon {
           queryBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               gpb.UpsAmazon.AUquery, gpb.UpsAmazon.AUquery.Builder, gpb.UpsAmazon.AUqueryOrBuilder>(
                   query_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           query_ = null;
@@ -17145,252 +14125,12 @@ public final class UpsAmazon {
         return queryBuilder_;
       }
 
-      private java.util.List<gpb.UpsAmazon.AUdeliverConfirmed> deliveredConf_ =
-        java.util.Collections.emptyList();
-      private void ensureDeliveredConfIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
-          deliveredConf_ = new java.util.ArrayList<gpb.UpsAmazon.AUdeliverConfirmed>(deliveredConf_);
-          bitField0_ |= 0x00000010;
-         }
-      }
-
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          gpb.UpsAmazon.AUdeliverConfirmed, gpb.UpsAmazon.AUdeliverConfirmed.Builder, gpb.UpsAmazon.AUdeliverConfirmedOrBuilder> deliveredConfBuilder_;
-
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public java.util.List<gpb.UpsAmazon.AUdeliverConfirmed> getDeliveredConfList() {
-        if (deliveredConfBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(deliveredConf_);
-        } else {
-          return deliveredConfBuilder_.getMessageList();
-        }
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public int getDeliveredConfCount() {
-        if (deliveredConfBuilder_ == null) {
-          return deliveredConf_.size();
-        } else {
-          return deliveredConfBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public gpb.UpsAmazon.AUdeliverConfirmed getDeliveredConf(int index) {
-        if (deliveredConfBuilder_ == null) {
-          return deliveredConf_.get(index);
-        } else {
-          return deliveredConfBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public Builder setDeliveredConf(
-          int index, gpb.UpsAmazon.AUdeliverConfirmed value) {
-        if (deliveredConfBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDeliveredConfIsMutable();
-          deliveredConf_.set(index, value);
-          onChanged();
-        } else {
-          deliveredConfBuilder_.setMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public Builder setDeliveredConf(
-          int index, gpb.UpsAmazon.AUdeliverConfirmed.Builder builderForValue) {
-        if (deliveredConfBuilder_ == null) {
-          ensureDeliveredConfIsMutable();
-          deliveredConf_.set(index, builderForValue.build());
-          onChanged();
-        } else {
-          deliveredConfBuilder_.setMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public Builder addDeliveredConf(gpb.UpsAmazon.AUdeliverConfirmed value) {
-        if (deliveredConfBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDeliveredConfIsMutable();
-          deliveredConf_.add(value);
-          onChanged();
-        } else {
-          deliveredConfBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public Builder addDeliveredConf(
-          int index, gpb.UpsAmazon.AUdeliverConfirmed value) {
-        if (deliveredConfBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureDeliveredConfIsMutable();
-          deliveredConf_.add(index, value);
-          onChanged();
-        } else {
-          deliveredConfBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public Builder addDeliveredConf(
-          gpb.UpsAmazon.AUdeliverConfirmed.Builder builderForValue) {
-        if (deliveredConfBuilder_ == null) {
-          ensureDeliveredConfIsMutable();
-          deliveredConf_.add(builderForValue.build());
-          onChanged();
-        } else {
-          deliveredConfBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public Builder addDeliveredConf(
-          int index, gpb.UpsAmazon.AUdeliverConfirmed.Builder builderForValue) {
-        if (deliveredConfBuilder_ == null) {
-          ensureDeliveredConfIsMutable();
-          deliveredConf_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          deliveredConfBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public Builder addAllDeliveredConf(
-          java.lang.Iterable<? extends gpb.UpsAmazon.AUdeliverConfirmed> values) {
-        if (deliveredConfBuilder_ == null) {
-          ensureDeliveredConfIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, deliveredConf_);
-          onChanged();
-        } else {
-          deliveredConfBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public Builder clearDeliveredConf() {
-        if (deliveredConfBuilder_ == null) {
-          deliveredConf_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
-          onChanged();
-        } else {
-          deliveredConfBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public Builder removeDeliveredConf(int index) {
-        if (deliveredConfBuilder_ == null) {
-          ensureDeliveredConfIsMutable();
-          deliveredConf_.remove(index);
-          onChanged();
-        } else {
-          deliveredConfBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public gpb.UpsAmazon.AUdeliverConfirmed.Builder getDeliveredConfBuilder(
-          int index) {
-        return getDeliveredConfFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public gpb.UpsAmazon.AUdeliverConfirmedOrBuilder getDeliveredConfOrBuilder(
-          int index) {
-        if (deliveredConfBuilder_ == null) {
-          return deliveredConf_.get(index);  } else {
-          return deliveredConfBuilder_.getMessageOrBuilder(index);
-        }
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public java.util.List<? extends gpb.UpsAmazon.AUdeliverConfirmedOrBuilder> 
-           getDeliveredConfOrBuilderList() {
-        if (deliveredConfBuilder_ != null) {
-          return deliveredConfBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(deliveredConf_);
-        }
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public gpb.UpsAmazon.AUdeliverConfirmed.Builder addDeliveredConfBuilder() {
-        return getDeliveredConfFieldBuilder().addBuilder(
-            gpb.UpsAmazon.AUdeliverConfirmed.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public gpb.UpsAmazon.AUdeliverConfirmed.Builder addDeliveredConfBuilder(
-          int index) {
-        return getDeliveredConfFieldBuilder().addBuilder(
-            index, gpb.UpsAmazon.AUdeliverConfirmed.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .gpb.AUdeliverConfirmed deliveredConf = 5;</code>
-       */
-      public java.util.List<gpb.UpsAmazon.AUdeliverConfirmed.Builder> 
-           getDeliveredConfBuilderList() {
-        return getDeliveredConfFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          gpb.UpsAmazon.AUdeliverConfirmed, gpb.UpsAmazon.AUdeliverConfirmed.Builder, gpb.UpsAmazon.AUdeliverConfirmedOrBuilder> 
-          getDeliveredConfFieldBuilder() {
-        if (deliveredConfBuilder_ == null) {
-          deliveredConfBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              gpb.UpsAmazon.AUdeliverConfirmed, gpb.UpsAmazon.AUdeliverConfirmed.Builder, gpb.UpsAmazon.AUdeliverConfirmedOrBuilder>(
-                  deliveredConf_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
-                  getParentForChildren(),
-                  isClean());
-          deliveredConf_ = null;
-        }
-        return deliveredConfBuilder_;
-      }
-
       private java.util.List<gpb.UpsAmazon.AUchangeDestn> changeDest_ =
         java.util.Collections.emptyList();
       private void ensureChangeDestIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
           changeDest_ = new java.util.ArrayList<gpb.UpsAmazon.AUchangeDestn>(changeDest_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000008;
          }
       }
 
@@ -17398,7 +14138,7 @@ public final class UpsAmazon {
           gpb.UpsAmazon.AUchangeDestn, gpb.UpsAmazon.AUchangeDestn.Builder, gpb.UpsAmazon.AUchangeDestnOrBuilder> changeDestBuilder_;
 
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public java.util.List<gpb.UpsAmazon.AUchangeDestn> getChangeDestList() {
         if (changeDestBuilder_ == null) {
@@ -17408,7 +14148,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public int getChangeDestCount() {
         if (changeDestBuilder_ == null) {
@@ -17418,7 +14158,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public gpb.UpsAmazon.AUchangeDestn getChangeDest(int index) {
         if (changeDestBuilder_ == null) {
@@ -17428,7 +14168,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public Builder setChangeDest(
           int index, gpb.UpsAmazon.AUchangeDestn value) {
@@ -17445,7 +14185,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public Builder setChangeDest(
           int index, gpb.UpsAmazon.AUchangeDestn.Builder builderForValue) {
@@ -17459,7 +14199,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public Builder addChangeDest(gpb.UpsAmazon.AUchangeDestn value) {
         if (changeDestBuilder_ == null) {
@@ -17475,7 +14215,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public Builder addChangeDest(
           int index, gpb.UpsAmazon.AUchangeDestn value) {
@@ -17492,7 +14232,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public Builder addChangeDest(
           gpb.UpsAmazon.AUchangeDestn.Builder builderForValue) {
@@ -17506,7 +14246,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public Builder addChangeDest(
           int index, gpb.UpsAmazon.AUchangeDestn.Builder builderForValue) {
@@ -17520,7 +14260,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public Builder addAllChangeDest(
           java.lang.Iterable<? extends gpb.UpsAmazon.AUchangeDestn> values) {
@@ -17535,12 +14275,12 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public Builder clearChangeDest() {
         if (changeDestBuilder_ == null) {
           changeDest_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
           changeDestBuilder_.clear();
@@ -17548,7 +14288,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public Builder removeChangeDest(int index) {
         if (changeDestBuilder_ == null) {
@@ -17561,14 +14301,14 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public gpb.UpsAmazon.AUchangeDestn.Builder getChangeDestBuilder(
           int index) {
         return getChangeDestFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public gpb.UpsAmazon.AUchangeDestnOrBuilder getChangeDestOrBuilder(
           int index) {
@@ -17578,7 +14318,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public java.util.List<? extends gpb.UpsAmazon.AUchangeDestnOrBuilder> 
            getChangeDestOrBuilderList() {
@@ -17589,14 +14329,14 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public gpb.UpsAmazon.AUchangeDestn.Builder addChangeDestBuilder() {
         return getChangeDestFieldBuilder().addBuilder(
             gpb.UpsAmazon.AUchangeDestn.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public gpb.UpsAmazon.AUchangeDestn.Builder addChangeDestBuilder(
           int index) {
@@ -17604,7 +14344,7 @@ public final class UpsAmazon {
             index, gpb.UpsAmazon.AUchangeDestn.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.AUchangeDestn changeDest = 6;</code>
+       * <code>repeated .gpb.AUchangeDestn changeDest = 4;</code>
        */
       public java.util.List<gpb.UpsAmazon.AUchangeDestn.Builder> 
            getChangeDestBuilderList() {
@@ -17617,7 +14357,7 @@ public final class UpsAmazon {
           changeDestBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               gpb.UpsAmazon.AUchangeDestn, gpb.UpsAmazon.AUchangeDestn.Builder, gpb.UpsAmazon.AUchangeDestnOrBuilder>(
                   changeDest_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  ((bitField0_ & 0x00000008) == 0x00000008),
                   getParentForChildren(),
                   isClean());
           changeDest_ = null;
@@ -17625,12 +14365,252 @@ public final class UpsAmazon {
         return changeDestBuilder_;
       }
 
+      private java.util.List<gpb.UpsAmazon.AUbindUPS> bind_ =
+        java.util.Collections.emptyList();
+      private void ensureBindIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          bind_ = new java.util.ArrayList<gpb.UpsAmazon.AUbindUPS>(bind_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          gpb.UpsAmazon.AUbindUPS, gpb.UpsAmazon.AUbindUPS.Builder, gpb.UpsAmazon.AUbindUPSOrBuilder> bindBuilder_;
+
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public java.util.List<gpb.UpsAmazon.AUbindUPS> getBindList() {
+        if (bindBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(bind_);
+        } else {
+          return bindBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public int getBindCount() {
+        if (bindBuilder_ == null) {
+          return bind_.size();
+        } else {
+          return bindBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public gpb.UpsAmazon.AUbindUPS getBind(int index) {
+        if (bindBuilder_ == null) {
+          return bind_.get(index);
+        } else {
+          return bindBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public Builder setBind(
+          int index, gpb.UpsAmazon.AUbindUPS value) {
+        if (bindBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBindIsMutable();
+          bind_.set(index, value);
+          onChanged();
+        } else {
+          bindBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public Builder setBind(
+          int index, gpb.UpsAmazon.AUbindUPS.Builder builderForValue) {
+        if (bindBuilder_ == null) {
+          ensureBindIsMutable();
+          bind_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          bindBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public Builder addBind(gpb.UpsAmazon.AUbindUPS value) {
+        if (bindBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBindIsMutable();
+          bind_.add(value);
+          onChanged();
+        } else {
+          bindBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public Builder addBind(
+          int index, gpb.UpsAmazon.AUbindUPS value) {
+        if (bindBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBindIsMutable();
+          bind_.add(index, value);
+          onChanged();
+        } else {
+          bindBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public Builder addBind(
+          gpb.UpsAmazon.AUbindUPS.Builder builderForValue) {
+        if (bindBuilder_ == null) {
+          ensureBindIsMutable();
+          bind_.add(builderForValue.build());
+          onChanged();
+        } else {
+          bindBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public Builder addBind(
+          int index, gpb.UpsAmazon.AUbindUPS.Builder builderForValue) {
+        if (bindBuilder_ == null) {
+          ensureBindIsMutable();
+          bind_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          bindBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public Builder addAllBind(
+          java.lang.Iterable<? extends gpb.UpsAmazon.AUbindUPS> values) {
+        if (bindBuilder_ == null) {
+          ensureBindIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, bind_);
+          onChanged();
+        } else {
+          bindBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public Builder clearBind() {
+        if (bindBuilder_ == null) {
+          bind_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+          onChanged();
+        } else {
+          bindBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public Builder removeBind(int index) {
+        if (bindBuilder_ == null) {
+          ensureBindIsMutable();
+          bind_.remove(index);
+          onChanged();
+        } else {
+          bindBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public gpb.UpsAmazon.AUbindUPS.Builder getBindBuilder(
+          int index) {
+        return getBindFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public gpb.UpsAmazon.AUbindUPSOrBuilder getBindOrBuilder(
+          int index) {
+        if (bindBuilder_ == null) {
+          return bind_.get(index);  } else {
+          return bindBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public java.util.List<? extends gpb.UpsAmazon.AUbindUPSOrBuilder> 
+           getBindOrBuilderList() {
+        if (bindBuilder_ != null) {
+          return bindBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(bind_);
+        }
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public gpb.UpsAmazon.AUbindUPS.Builder addBindBuilder() {
+        return getBindFieldBuilder().addBuilder(
+            gpb.UpsAmazon.AUbindUPS.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public gpb.UpsAmazon.AUbindUPS.Builder addBindBuilder(
+          int index) {
+        return getBindFieldBuilder().addBuilder(
+            index, gpb.UpsAmazon.AUbindUPS.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .gpb.AUbindUPS bind = 5;</code>
+       */
+      public java.util.List<gpb.UpsAmazon.AUbindUPS.Builder> 
+           getBindBuilderList() {
+        return getBindFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          gpb.UpsAmazon.AUbindUPS, gpb.UpsAmazon.AUbindUPS.Builder, gpb.UpsAmazon.AUbindUPSOrBuilder> 
+          getBindFieldBuilder() {
+        if (bindBuilder_ == null) {
+          bindBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              gpb.UpsAmazon.AUbindUPS, gpb.UpsAmazon.AUbindUPS.Builder, gpb.UpsAmazon.AUbindUPSOrBuilder>(
+                  bind_,
+                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  getParentForChildren(),
+                  isClean());
+          bind_ = null;
+        }
+        return bindBuilder_;
+      }
+
       private java.util.List<gpb.UpsAmazon.Err> err_ =
         java.util.Collections.emptyList();
       private void ensureErrIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
           err_ = new java.util.ArrayList<gpb.UpsAmazon.Err>(err_);
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000020;
          }
       }
 
@@ -17638,7 +14618,7 @@ public final class UpsAmazon {
           gpb.UpsAmazon.Err, gpb.UpsAmazon.Err.Builder, gpb.UpsAmazon.ErrOrBuilder> errBuilder_;
 
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public java.util.List<gpb.UpsAmazon.Err> getErrList() {
         if (errBuilder_ == null) {
@@ -17648,7 +14628,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public int getErrCount() {
         if (errBuilder_ == null) {
@@ -17658,7 +14638,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public gpb.UpsAmazon.Err getErr(int index) {
         if (errBuilder_ == null) {
@@ -17668,7 +14648,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public Builder setErr(
           int index, gpb.UpsAmazon.Err value) {
@@ -17685,7 +14665,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public Builder setErr(
           int index, gpb.UpsAmazon.Err.Builder builderForValue) {
@@ -17699,7 +14679,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public Builder addErr(gpb.UpsAmazon.Err value) {
         if (errBuilder_ == null) {
@@ -17715,7 +14695,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public Builder addErr(
           int index, gpb.UpsAmazon.Err value) {
@@ -17732,7 +14712,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public Builder addErr(
           gpb.UpsAmazon.Err.Builder builderForValue) {
@@ -17746,7 +14726,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public Builder addErr(
           int index, gpb.UpsAmazon.Err.Builder builderForValue) {
@@ -17760,7 +14740,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public Builder addAllErr(
           java.lang.Iterable<? extends gpb.UpsAmazon.Err> values) {
@@ -17775,12 +14755,12 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public Builder clearErr() {
         if (errBuilder_ == null) {
           err_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
           errBuilder_.clear();
@@ -17788,7 +14768,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public Builder removeErr(int index) {
         if (errBuilder_ == null) {
@@ -17801,14 +14781,14 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public gpb.UpsAmazon.Err.Builder getErrBuilder(
           int index) {
         return getErrFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public gpb.UpsAmazon.ErrOrBuilder getErrOrBuilder(
           int index) {
@@ -17818,7 +14798,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public java.util.List<? extends gpb.UpsAmazon.ErrOrBuilder> 
            getErrOrBuilderList() {
@@ -17829,14 +14809,14 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public gpb.UpsAmazon.Err.Builder addErrBuilder() {
         return getErrFieldBuilder().addBuilder(
             gpb.UpsAmazon.Err.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public gpb.UpsAmazon.Err.Builder addErrBuilder(
           int index) {
@@ -17844,7 +14824,7 @@ public final class UpsAmazon {
             index, gpb.UpsAmazon.Err.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.Err err = 7;</code>
+       * <code>repeated .gpb.Err err = 6;</code>
        */
       public java.util.List<gpb.UpsAmazon.Err.Builder> 
            getErrBuilderList() {
@@ -17857,7 +14837,7 @@ public final class UpsAmazon {
           errBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               gpb.UpsAmazon.Err, gpb.UpsAmazon.Err.Builder, gpb.UpsAmazon.ErrOrBuilder>(
                   err_,
-                  ((bitField0_ & 0x00000040) == 0x00000040),
+                  ((bitField0_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
                   isClean());
           err_ = null;
@@ -17867,31 +14847,31 @@ public final class UpsAmazon {
 
       private boolean disconnect_ ;
       /**
-       * <code>optional bool disconnect = 8;</code>
+       * <code>optional bool disconnect = 7;</code>
        */
       public boolean hasDisconnect() {
-        return ((bitField0_ & 0x00000080) == 0x00000080);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>optional bool disconnect = 8;</code>
+       * <code>optional bool disconnect = 7;</code>
        */
       public boolean getDisconnect() {
         return disconnect_;
       }
       /**
-       * <code>optional bool disconnect = 8;</code>
+       * <code>optional bool disconnect = 7;</code>
        */
       public Builder setDisconnect(boolean value) {
-        bitField0_ |= 0x00000080;
+        bitField0_ |= 0x00000040;
         disconnect_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool disconnect = 8;</code>
+       * <code>optional bool disconnect = 7;</code>
        */
       public Builder clearDisconnect() {
-        bitField0_ = (bitField0_ & ~0x00000080);
+        bitField0_ = (bitField0_ & ~0x00000040);
         disconnect_ = false;
         onChanged();
         return this;
@@ -17899,32 +14879,32 @@ public final class UpsAmazon {
 
       private java.util.List<java.lang.Long> acks_ = java.util.Collections.emptyList();
       private void ensureAcksIsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
           acks_ = new java.util.ArrayList<java.lang.Long>(acks_);
-          bitField0_ |= 0x00000100;
+          bitField0_ |= 0x00000080;
          }
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 8;</code>
        */
       public java.util.List<java.lang.Long>
           getAcksList() {
         return java.util.Collections.unmodifiableList(acks_);
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 8;</code>
        */
       public int getAcksCount() {
         return acks_.size();
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 8;</code>
        */
       public long getAcks(int index) {
         return acks_.get(index);
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 8;</code>
        */
       public Builder setAcks(
           int index, long value) {
@@ -17934,7 +14914,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 8;</code>
        */
       public Builder addAcks(long value) {
         ensureAcksIsMutable();
@@ -17943,7 +14923,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 8;</code>
        */
       public Builder addAllAcks(
           java.lang.Iterable<? extends java.lang.Long> values) {
@@ -17954,11 +14934,11 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated int64 acks = 9;</code>
+       * <code>repeated int64 acks = 8;</code>
        */
       public Builder clearAcks() {
         acks_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000100);
+        bitField0_ = (bitField0_ & ~0x00000080);
         onChanged();
         return this;
       }
@@ -18031,35 +15011,25 @@ public final class UpsAmazon {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_gpb_AUconnectedWorld_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_gpb_AUbindUPS_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_gpb_AUbindUPS_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_gpb_AUreqPickup_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_gpb_AUreqPickup_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_gpb_UApickupConfirmed_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_gpb_UApickupConfirmed_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_gpb_UAtruckArrived_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_gpb_UAtruckArrived_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_gpb_AUarriveConfirmed_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_gpb_AUarriveConfirmed_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_gpb_AUreqDelivery_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_gpb_AUreqDelivery_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_gpb_UAstartDelivery_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_gpb_UAstartDelivery_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_gpb_AUquery_descriptor;
   private static final 
@@ -18075,11 +15045,6 @@ public final class UpsAmazon {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_gpb_UAdelivered_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_gpb_AUdeliverConfirmed_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_gpb_AUdeliverConfirmed_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_gpb_AUchangeDestn_descriptor;
   private static final 
@@ -18118,43 +15083,35 @@ public final class UpsAmazon {
       "d\030\001 \002(\003\022\023\n\013description\030\002 \002(\t\022\r\n\005count\030\003 " +
       "\002(\005\".\n\013UAinitWorld\022\017\n\007worldID\030\001 \002(\003\022\016\n\006s" +
       "eqNum\030\002 \002(\003\"1\n\020AUconnectedWorld\022\017\n\007succe" +
-      "ss\030\001 \002(\010\022\014\n\004acks\030\002 \003(\003\"\210\001\n\013AUreqPickup\022\014" +
-      "\n\004whID\030\001 \002(\005\022\024\n\014destinationX\030\002 \002(\005\022\024\n\014de" +
-      "stinationY\030\003 \002(\005\022\016\n\006shipID\030\004 \002(\003\022\037\n\010prod" +
-      "ucts\030\005 \003(\0132\r.gpb.AProduct\022\016\n\006seqNum\030\006 \002(" +
-      "\003\"R\n\021UApickupConfirmed\022\014\n\004whID\030\001 \002(\005\022\016\n\006" +
-      "shipID\030\002 \002(\003\022\017\n\007truckID\030\003 \002(\005\022\016\n\006seqNum\030" +
-      "\004 \002(\003\"O\n\016UAtruckArrived\022\014\n\004whID\030\001 \002(\005\022\016\n" +
+      "ss\030\001 \002(\010\022\014\n\004acks\030\002 \003(\003\"*\n\tAUbindUPS\022\r\n\005u" +
+      "psID\030\001 \002(\005\022\016\n\006seqNum\030\002 \002(\003\"\210\001\n\013AUreqPick" +
+      "up\022\014\n\004whID\030\001 \002(\005\022\024\n\014destinationX\030\002 \002(\005\022\024" +
+      "\n\014destinationY\030\003 \002(\005\022\016\n\006shipID\030\004 \002(\003\022\037\n\010" +
+      "products\030\005 \003(\0132\r.gpb.AProduct\022\016\n\006seqNum\030" +
+      "\006 \002(\003\"O\n\016UAtruckArrived\022\014\n\004whID\030\001 \002(\005\022\016\n" +
       "\006shipID\030\002 \002(\003\022\017\n\007truckID\030\003 \002(\005\022\016\n\006seqNum" +
-      "\030\004 \002(\003\"3\n\021AUarriveConfirmed\022\016\n\006shipID\030\001 " +
-      "\002(\003\022\016\n\006seqNum\030\002 \002(\003\"/\n\rAUreqDelivery\022\016\n\006" +
-      "shipID\030\001 \002(\003\022\016\n\006seqNum\030\002 \002(\003\"!\n\017UAstartD" +
-      "elivery\022\016\n\006seqNum\030\001 \002(\003\")\n\007AUquery\022\016\n\006sh" +
-      "ipID\030\001 \002(\003\022\016\n\006seqNum\030\002 \002(\003\"(\n\010UAstatus\022\016" +
-      "\n\006status\030\001 \002(\t\022\014\n\004acks\030\002 \002(\003\"-\n\013UAdelive" +
-      "red\022\016\n\006shipID\030\001 \002(\003\022\016\n\006seqNum\030\002 \002(\003\"2\n\022A" +
-      "UdeliverConfirmed\022\016\n\006shipID\030\001 \002(\003\022\014\n\004ack" +
-      "s\030\002 \002(\003\"[\n\rAUchangeDestn\022\016\n\006shipID\030\001 \002(\003" +
-      "\022\024\n\014destinationX\030\002 \002(\005\022\024\n\014destinationY\030\003" +
-      " \002(\005\022\016\n\006seqNum\030\004 \002(\003\"-\n\014UAchangeResp\022\017\n\007" +
-      "success\030\001 \002(\010\022\014\n\004acks\030\002 \002(\003\"8\n\003Err\022\013\n\003er" +
-      "r\030\001 \002(\t\022\024\n\014originseqnum\030\002 \002(\003\022\016\n\006seqnum\030" +
-      "\003 \002(\003\"\254\002\n\nUAcommands\022*\n\npickupConf\030\001 \003(\013" +
-      "2\026.gpb.UApickupConfirmed\022%\n\010truckArr\030\002 \003" +
-      "(\0132\023.gpb.UAtruckArrived\022\'\n\tstartDeli\030\003 \003" +
-      "(\0132\024.gpb.UAstartDelivery\022\035\n\006status\030\004 \003(\013" +
-      "2\r.gpb.UAstatus\022#\n\tdelivered\030\005 \003(\0132\020.gpb" +
-      ".UAdelivered\022%\n\nchangeResp\030\006 \003(\0132\021.gpb.U" +
-      "AchangeResp\022\025\n\003err\030\007 \003(\0132\010.gpb.Err\022\022\n\ndi" +
-      "sconnect\030\010 \001(\010\022\014\n\004acks\030\t \003(\003\"\256\002\n\nAUcomma" +
-      "nds\022 \n\006pickup\030\001 \003(\0132\020.gpb.AUreqPickup\022*\n" +
-      "\narriveConf\030\002 \003(\0132\026.gpb.AUarriveConfirme" +
-      "d\022$\n\010delivery\030\003 \003(\0132\022.gpb.AUreqDelivery\022" +
-      "\033\n\005query\030\004 \003(\0132\014.gpb.AUquery\022.\n\rdelivere" +
-      "dConf\030\005 \003(\0132\027.gpb.AUdeliverConfirmed\022&\n\n" +
-      "changeDest\030\006 \003(\0132\022.gpb.AUchangeDestn\022\025\n\003" +
-      "err\030\007 \003(\0132\010.gpb.Err\022\022\n\ndisconnect\030\010 \001(\010\022" +
-      "\014\n\004acks\030\t \003(\003"
+      "\030\004 \002(\003\"/\n\rAUreqDelivery\022\016\n\006shipID\030\001 \002(\003\022" +
+      "\016\n\006seqNum\030\002 \002(\003\")\n\007AUquery\022\016\n\006shipID\030\001 \002" +
+      "(\003\022\016\n\006seqNum\030\002 \002(\003\"*\n\010UAstatus\022\016\n\006status" +
+      "\030\001 \002(\t\022\016\n\006seqNum\030\002 \002(\003\"-\n\013UAdelivered\022\016\n" +
+      "\006shipID\030\001 \002(\003\022\016\n\006seqNum\030\002 \002(\003\"[\n\rAUchang" +
+      "eDestn\022\016\n\006shipID\030\001 \002(\003\022\024\n\014destinationX\030\002" +
+      " \002(\005\022\024\n\014destinationY\030\003 \002(\005\022\016\n\006seqNum\030\004 \002" +
+      "(\003\"/\n\014UAchangeResp\022\017\n\007success\030\001 \002(\010\022\016\n\006s" +
+      "eqNum\030\002 \002(\003\"8\n\003Err\022\013\n\003err\030\001 \002(\t\022\024\n\014origi" +
+      "nseqnum\030\002 \002(\003\022\016\n\006seqnum\030\003 \002(\003\"\327\001\n\nUAcomm" +
+      "ands\022%\n\010truckArr\030\001 \003(\0132\023.gpb.UAtruckArri" +
+      "ved\022\035\n\006status\030\002 \003(\0132\r.gpb.UAstatus\022#\n\tde" +
+      "livered\030\003 \003(\0132\020.gpb.UAdelivered\022%\n\nchang" +
+      "eResp\030\004 \003(\0132\021.gpb.UAchangeResp\022\025\n\003err\030\005 " +
+      "\003(\0132\010.gpb.Err\022\022\n\ndisconnect\030\006 \001(\010\022\014\n\004ack" +
+      "s\030\007 \003(\003\"\360\001\n\nAUcommands\022 \n\006pickup\030\001 \003(\0132\020" +
+      ".gpb.AUreqPickup\022$\n\010delivery\030\002 \003(\0132\022.gpb" +
+      ".AUreqDelivery\022\033\n\005query\030\003 \003(\0132\014.gpb.AUqu" +
+      "ery\022&\n\nchangeDest\030\004 \003(\0132\022.gpb.AUchangeDe" +
+      "stn\022\034\n\004bind\030\005 \003(\0132\016.gpb.AUbindUPS\022\025\n\003err" +
+      "\030\006 \003(\0132\010.gpb.Err\022\022\n\ndisconnect\030\007 \001(\010\022\014\n\004" +
+      "acks\030\010 \003(\003"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -18186,96 +15143,78 @@ public final class UpsAmazon {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_AUconnectedWorld_descriptor,
         new java.lang.String[] { "Success", "Acks", });
-    internal_static_gpb_AUreqPickup_descriptor =
+    internal_static_gpb_AUbindUPS_descriptor =
       getDescriptor().getMessageTypes().get(3);
+    internal_static_gpb_AUbindUPS_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_gpb_AUbindUPS_descriptor,
+        new java.lang.String[] { "UpsID", "SeqNum", });
+    internal_static_gpb_AUreqPickup_descriptor =
+      getDescriptor().getMessageTypes().get(4);
     internal_static_gpb_AUreqPickup_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_AUreqPickup_descriptor,
         new java.lang.String[] { "WhID", "DestinationX", "DestinationY", "ShipID", "Products", "SeqNum", });
-    internal_static_gpb_UApickupConfirmed_descriptor =
-      getDescriptor().getMessageTypes().get(4);
-    internal_static_gpb_UApickupConfirmed_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_gpb_UApickupConfirmed_descriptor,
-        new java.lang.String[] { "WhID", "ShipID", "TruckID", "SeqNum", });
     internal_static_gpb_UAtruckArrived_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_gpb_UAtruckArrived_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_UAtruckArrived_descriptor,
         new java.lang.String[] { "WhID", "ShipID", "TruckID", "SeqNum", });
-    internal_static_gpb_AUarriveConfirmed_descriptor =
-      getDescriptor().getMessageTypes().get(6);
-    internal_static_gpb_AUarriveConfirmed_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_gpb_AUarriveConfirmed_descriptor,
-        new java.lang.String[] { "ShipID", "SeqNum", });
     internal_static_gpb_AUreqDelivery_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_gpb_AUreqDelivery_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_AUreqDelivery_descriptor,
         new java.lang.String[] { "ShipID", "SeqNum", });
-    internal_static_gpb_UAstartDelivery_descriptor =
-      getDescriptor().getMessageTypes().get(8);
-    internal_static_gpb_UAstartDelivery_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_gpb_UAstartDelivery_descriptor,
-        new java.lang.String[] { "SeqNum", });
     internal_static_gpb_AUquery_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_gpb_AUquery_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_AUquery_descriptor,
         new java.lang.String[] { "ShipID", "SeqNum", });
     internal_static_gpb_UAstatus_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_gpb_UAstatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_UAstatus_descriptor,
-        new java.lang.String[] { "Status", "Acks", });
+        new java.lang.String[] { "Status", "SeqNum", });
     internal_static_gpb_UAdelivered_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_gpb_UAdelivered_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_UAdelivered_descriptor,
         new java.lang.String[] { "ShipID", "SeqNum", });
-    internal_static_gpb_AUdeliverConfirmed_descriptor =
-      getDescriptor().getMessageTypes().get(12);
-    internal_static_gpb_AUdeliverConfirmed_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_gpb_AUdeliverConfirmed_descriptor,
-        new java.lang.String[] { "ShipID", "Acks", });
     internal_static_gpb_AUchangeDestn_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_gpb_AUchangeDestn_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_AUchangeDestn_descriptor,
         new java.lang.String[] { "ShipID", "DestinationX", "DestinationY", "SeqNum", });
     internal_static_gpb_UAchangeResp_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_gpb_UAchangeResp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_UAchangeResp_descriptor,
-        new java.lang.String[] { "Success", "Acks", });
+        new java.lang.String[] { "Success", "SeqNum", });
     internal_static_gpb_Err_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_gpb_Err_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_Err_descriptor,
         new java.lang.String[] { "Err", "Originseqnum", "Seqnum", });
     internal_static_gpb_UAcommands_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_gpb_UAcommands_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_UAcommands_descriptor,
-        new java.lang.String[] { "PickupConf", "TruckArr", "StartDeli", "Status", "Delivered", "ChangeResp", "Err", "Disconnect", "Acks", });
+        new java.lang.String[] { "TruckArr", "Status", "Delivered", "ChangeResp", "Err", "Disconnect", "Acks", });
     internal_static_gpb_AUcommands_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_gpb_AUcommands_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_AUcommands_descriptor,
-        new java.lang.String[] { "Pickup", "ArriveConf", "Delivery", "Query", "DeliveredConf", "ChangeDest", "Err", "Disconnect", "Acks", });
+        new java.lang.String[] { "Pickup", "Delivery", "Query", "ChangeDest", "Bind", "Err", "Disconnect", "Acks", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

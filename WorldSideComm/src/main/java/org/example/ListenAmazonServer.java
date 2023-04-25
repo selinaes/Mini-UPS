@@ -9,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -17,29 +18,30 @@ import java.util.concurrent.TimeUnit;
 import javax.xml.parsers.ParserConfigurationException;
 
 import gpb.UpsAmazon;
+import gpb.WorldUps;
 
 public class ListenAmazonServer {
     private final ServerSocket serverSocket;
     BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>(100);
-    ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 100, 5, TimeUnit.MILLISECONDS, workQueue);
-    //  ArrayList<Client> clients = new ArrayList<>();
-    int numClients;
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(4, 4, 5, TimeUnit.MILLISECONDS, workQueue);
+    WorldSimulatorClient worldClient;
+    long worldId;
+    long seqNumWorld;
+    long seqNumAmazon;
 
 
-    public ListenAmazonServer(int port) throws IOException {
+    public ListenAmazonServer(int port, WorldSimulatorClient client) throws IOException {
         this.serverSocket = new ServerSocket(port);
-        this.numClients = 0;
-
+        this.worldClient = client;
+        this.seqNumAmazon = 0;
+        this.seqNumWorld = 0;
     }
 
     public void run() {
-        System.out.println("Server started");
+        System.out.println("ListenAmazonServer started");
         while (!Thread.currentThread().isInterrupted()) {
             final Socket client_socket = acceptOrNull();
 
-            synchronized (this){
-                numClients++;
-            }
             if (client_socket == null) {
                 continue;
             }
@@ -49,7 +51,7 @@ public class ListenAmazonServer {
                     try {
                         // do something with client_socket
                         synchronized (this) {
-                            System.out.println("Client accepted" + numClients);
+                            System.out.println("Client amazon accepted");
                         }
                         handleClient(client_socket);
                     } catch (Exception e) {
@@ -67,26 +69,94 @@ public class ListenAmazonServer {
         }
     }
 
-    public void handleClient(Socket client_socket) throws IOException {
-        // receive AUcommands
-        UpsAmazon.AUcommands aUcommands = read(UpsAmazon.AUcommands.parser(), client_socket);
+    public boolean connectSameWorld(long worldId, long seqNum, Socket clientSock) throws IOException {
+        UpsAmazon.UAinitWorld initWorld = UpsAmazon.UAinitWorld.newBuilder()
+                .setWorldID(worldId).setSeqNum(seqNum)
+                .build();
+        send(initWorld, clientSock);
 
-        // handle each situation  with world
-        for (UpsAmazon.AUreqPickup pickup : aUcommands.getPickupList()) {
-            System.out.println("pickup");
-            handlePickup(pickup);
+        // Wait for AUconnectedWorld response
+        UpsAmazon.AUconnectedWorld connectedWorld = read(UpsAmazon.AUconnectedWorld.parser(), clientSock);
+        System.out.println("Amazon's result: " + connectedWorld.getSuccess());
+        if (connectedWorld.getSuccess() && connectedWorld.getAcksList().contains(seqNum)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void handleClient(Socket client_socket) throws IOException {
+        // Step 0: UInitTruck
+        WorldUps.UInitTruck truck = WorldUps.UInitTruck.newBuilder().setId(1).setX(50).setY(30).build();
+        // Step 1: UConnect
+        long worldId = worldClient.connectToWorld(List.of(truck));
+
+       // UAinitWorld, make sure connect to same world
+        while (true) {
+            boolean result = connectSameWorld(worldId, seqNumWorld++, client_socket);
+            if (result) {
+                this.worldId = worldId; // not sure need or not
+                break;
+            }
+            worldId = worldClient.connectToWorld(List.of(truck));
         }
 
-        // send back UAcommands
+        // continuously read from input stream
+        while (!Thread.currentThread().isInterrupted()) {
+            UpsAmazon.AUcommands aUcommands = read(UpsAmazon.AUcommands.parser(), client_socket);
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    // handle each situation with world
+                    for (UpsAmazon.AUreqPickup pickup : aUcommands.getPickupList()) {
+                        System.out.println("pickup");
+                        handlePickup(pickup);
+                    }
+
+                    // send back UAcommands
+                }
+            });
+        }
+
 
     }
 
-    public void handlePickup(UpsAmazon.AUreqPickup pickup){
-        // retrieve all information
+    public void handlePickup(UpsAmazon.AUreqPickup pickup) {
+        // retrieve whid
+        int whid = pickup.getWhID();
 
-        // create a new shipment, save to DB
+        // in DB, find a truckID that is available. Now just use 1 注意用hibernate session处理DB
+        int truckID = 1;
+
+        // create a new shipment, save to DB 注意用hibernate session处理DB
+        long shipmentID = pickup.getShipID();
+        int destX = pickup.getDestinationX();
+        int destY = pickup.getDestinationY();
+        String status = "created";
+
 
         // UGoPickup to world
+        long pickupSeqNum = seqNumWorld++;
+        WorldUps.UGoPickup uGoPickup = WorldUps.UGoPickup.newBuilder()
+                .setTruckid(truckID).setWhid(whid).setSeqnum(pickupSeqNum).build(); // 注意seqnum需要synchronize
+        // 注意应该存这个seqnum和对应的信息，uGoPickup全文。这样后面可以继续发直到对方收到
+        // 注意改成集成队列，放入某个uCommands的list一起发。现在暂时用单个的
+        WorldUps.UCommands uCommands = WorldUps.UCommands.newBuilder().addPickups(uGoPickup).build();
+        try {
+            worldClient.sendCommands(uCommands);
+            // block wait for UResponses with UFinished. 注意放进集成之后就可以写成async的
+            WorldUps.UResponses uResponses = worldClient.readResponses();
+            if (uResponses.getAcksList().contains(pickupSeqNum)){
+                System.out.println("world received UGoPickup");
+                // 仍然需要一直接收UResponses，直到收到对应的UFinished，然后再给amazon回复UAtruckArrived
+            }
+            else {
+                System.out.println("world did not receive UGoPickup");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 

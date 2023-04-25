@@ -17,6 +17,12 @@ message AUconnectedWorld{
 	repeated int64 acks = 2;
 }
 
+message AUbindUPS {
+	required int32 upsID = 1;
+	required int64 seqNum = 2; // ack = success (exist), Err = fail (not exist)
+}
+
+
 
 message AUreqPickup {
 	required int32 whID = 1;
@@ -28,13 +34,6 @@ message AUreqPickup {
 
 }
 
-message UApickupConfirmed {
-	required int32 whID = 1;
-	required int64 shipID = 2; 
-	required int32 truckID = 3;
-	required int64 seqNum = 4;
-}
-
 message UAtruckArrived {
 	required int32 whID = 1;
 	required int64 shipID = 2;
@@ -42,19 +41,12 @@ message UAtruckArrived {
 	required int64 seqNum = 4;
 }
 
-message AUarriveConfirmed {
-	required int64 shipID = 1;
-	required int64 seqNum = 2;
-}
 
 message AUreqDelivery {
 	required int64 shipID = 1;
 	required int64 seqNum = 2;
 }
 
-message UAstartDelivery {
-	required int64 seqNum = 1;
-}
 
 message AUquery {
 	required int64 shipID = 1;
@@ -63,7 +55,7 @@ message AUquery {
 
 message UAstatus {
 	required string status = 1;
-	required int64 acks = 2;
+	required int64 seqNum = 2;
 }
 
 message UAdelivered {
@@ -71,10 +63,6 @@ message UAdelivered {
 	required int64 seqNum = 2;
 }
 
-message AUdeliverConfirmed {
-	required int64 shipID = 1;
-	required int64 acks = 2;
-}
 
 message AUchangeDestn {
 	required int64 shipID = 1;
@@ -85,7 +73,7 @@ message AUchangeDestn {
 
 message UAchangeResp {
 	required bool success = 1;
-	required int64 acks = 2;
+	required int64 seqNum = 2;
 }
 
 message Err{
@@ -95,25 +83,22 @@ message Err{
 }
 
 message UAcommands{
-	repeated UApickupConfirmed pickupConf = 1;
-	repeated UAtruckArrived truckArr = 2;
-	repeated UAstartDelivery startDeli = 3;
-	repeated UAstatus status = 4;
-	repeated UAdelivered delivered = 5;
-	repeated UAchangeResp changeResp = 6;
-	repeated Err err = 7;
-	optional bool disconnect = 8;
-	repeated int64 acks = 9;
+	repeated UAtruckArrived truckArr = 1;
+	repeated UAstatus status = 2;
+	repeated UAdelivered delivered = 3;
+	repeated UAchangeResp changeResp = 4;
+	repeated Err err = 5;
+	optional bool disconnect = 6;
+	repeated int64 acks = 7;
 }
 
 message AUcommands{
 	repeated AUreqPickup pickup = 1;
-	repeated AUarriveConfirmed arriveConf = 2;
-	repeated AUreqDelivery delivery =  3;
-	repeated AUquery query = 4;
-	repeated AUdeliverConfirmed deliveredConf = 5;
-	repeated AUchangeDestn changeDest = 6;
-	repeated Err err = 7;
-	optional bool disconnect = 8;
-	repeated int64 acks = 9;
+	repeated AUreqDelivery delivery =  2;
+	repeated AUquery query = 3;
+	repeated AUchangeDestn changeDest = 4;
+	repeated AUbindUPS bind = 5;
+	repeated Err err = 6;
+	optional bool disconnect = 7;
+	repeated int64 acks = 8;
 }
