@@ -1,0 +1,33 @@
+{% block content %}
+
+<h2>Shipments</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Shipment ID</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for shipment in shipments_info %}
+        <tr>
+            <td>
+                <a href="{% url 'ups_website:find_packages_detail' shipment.shipment_id %}">
+                    {{ shipment.shipment_id }}
+                </a>
+            </td>
+            <td>{{ shipment.shipment_status }}</td>
+            <td>
+                {% if shipment.shipment_status != "delivered" %}
+                <a href="{% url 'ups_website:change_address' shipment.shipment_id %}">
+                    Change Address
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h3><a href="{% url 'ups_website:index' %}">Go back home</a></h3>
+{% endblock %}

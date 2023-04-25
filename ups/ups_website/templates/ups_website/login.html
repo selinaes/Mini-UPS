@@ -1,0 +1,116 @@
+3.92 KiB
+<!DOCTYPE html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!--SEO meta tags-->
+    <!--    Change the index to your website's name-->
+    <title>UPS Webapp</title>
+    <!-- Bootstrap Core CSS ––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
+    <!-- fontawesome ––––––––––––––––––––––––––– -->
+    <script src="https://kit.fontawesome.com/5c9f2dfb26.js"></script>
+    <!-- To add a google font and paste the link -->
+    <style>
+        body {
+            background-color: rgb(228, 242, 247);
+            font-family: 'Futura', sans-serif;
+            line-height: 1.5;
+            color: rgb(0, 0, 0);
+            align-items: center;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        .view {
+            background: rgb(228, 242, 247) center center no-repeat;
+            background-size: cover;
+            padding-top: 4rem;
+            padding-bottom: 2rem;
+        }
+
+        /*navigation*/
+        .navbackground {
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+
+        .navbar-light .navbar-brand {
+            padding-left: 1rem;
+            color: #996666;
+            font-weight: 900;
+        }
+
+        .navbar-light .navbar-brand:hover {
+            color: #166088;
+        }
+
+        .login {
+            padding-top: 1.5rem;
+            padding-bottom: 3rem;
+        }
+
+        .form-signin .form-floating h3 {
+            font-size: 1rem;
+            text-align: center;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-signin .form-floating:focus-within {
+            z-index: 2;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="100" class="text-center">
+    <nav class="navbar  navbar-light navbar-expand-sm navbackground fixed-top">
+        <a class="navbar-brand page-scroll">UPS Webapp</a>
+    </nav>
+    <div class="container-fluid view" id='view'>
+        <div class='row justify-content-start align-items-center'>
+        </div>
+    </div>
+    <div class="main">
+        <div class="form-signin">
+            <form method="post">
+                <h1 class="h3 mb-3 fw-normal">Please log in</h1>
+                <div class="form-floating">
+                    {% csrf_token %}
+                    {{error_msg}}
+                    {{ form.as_p }}
+                </div>
+                <div class="login">
+                    <button class="w-40 btn btn-lg btn-primary" type="submit">Log in</button>
+                </div>
+            </form>
+            <p style="text-align:center;">Don't have an account? <a href="{% url 'ups_website:signup' %}">Sign up</a>
+            </p>
+        </div>
+    </div>
+</body>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+    integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js "></script>

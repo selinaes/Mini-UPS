@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 # from django.contrib.auth.models import User
 # from django.contrib.postgres.fields import ArrayField
 
@@ -26,18 +27,21 @@ class Truck(models.Model):
 
 class Shipments(models.Model):
     shipment_id = models.IntegerField(primary_key=True)
+    ups_username = models.CharField(max_length=200, null=True)
     truck_id = models.IntegerField(null=True)
-    wh_x = models.IntegerField(null=True)
-    wh_y = models.IntegerField(null=True)
+    wh_id = models.IntegerField(null=True)
     dest_x = models.IntegerField(null=True)
     dest_y = models.IntegerField(null=True)
     shipment_status = models.CharField(max_length=200, null=True)
     def __str__(self):
         return str(self.shipment_id)
 
+
+
+
 class ProductsInPackage(models.Model):
     id = models.AutoField(primary_key=True)
-    shipment_id = models.IntegerField(null=True)
+    shipment = models.ForeignKey(Shipments, on_delete=models.CASCADE, null=True)
     product_id = models.IntegerField(null=True)
     product_description = models.CharField(max_length=200, null=True)
     product_quantity = models.IntegerField(null=True)
