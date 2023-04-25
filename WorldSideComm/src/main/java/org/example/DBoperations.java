@@ -41,7 +41,7 @@ public class DBoperations {
             newTruck.setTruck_y(truck.getY());
             newTruck.setTruck_status("idle");
 
-            session.save(newTruck);
+            session.merge(newTruck);
             tx.commit();
         } finally {
             lock.unlock();
@@ -82,13 +82,25 @@ public class DBoperations {
         }
     }
 
-    public static void createNewShipment(Shipment shipment) {
+    public static void createNewShipment(long shipID, int truckID, int whID, int destX, int destY, Integer upsUserID) {
         Session session = SessionFactoryWrapper.openSession();
         Lock lock = SessionFactoryWrapper.getLock("shipment");
         lock.lock();
         try (session) {
             Transaction tx = session.beginTransaction();
-            session.save(shipment);
+
+            Shipment newShipment = new Shipment();
+            newShipment.setShipment_id(shipID);
+            newShipment.setTruck_id(truckID);
+            newShipment.setWh_id(whID);
+            newShipment.setDest_x(destX);
+            newShipment.setDest_y(destY);
+            newShipment.setShipment_status("created");
+            if (upsUserID != null){
+                newShipment.setUps_userid(upsUserID);
+            }
+
+            session.merge(newShipment);
             tx.commit();
         } finally {
             lock.unlock();

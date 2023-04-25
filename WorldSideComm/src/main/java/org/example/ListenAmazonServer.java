@@ -24,7 +24,7 @@ import gpb.WorldUps;
 public class ListenAmazonServer {
     private final ServerSocket serverSocket;
     BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>(100);
-    ThreadPoolExecutor executor = new ThreadPoolExecutor(4, 4, 5, TimeUnit.MILLISECONDS, workQueue);
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 5, 5, TimeUnit.MILLISECONDS, workQueue);
     WorldSimulatorClient worldClient;
     long worldId;
     long seqNumWorld;
@@ -40,30 +40,27 @@ public class ListenAmazonServer {
 
     public void run() {
         System.out.println("ListenAmazonServer started");
+
         while (!Thread.currentThread().isInterrupted()) {
+
             final Socket client_socket = acceptOrNull();
 
             if (client_socket == null) {
                 continue;
             }
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
+
+            // Thread, for each client Amazon handle it
+            executor.execute(() -> {
+                try {
+                    handleClient(client_socket);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                finally {
                     try {
-                        // do something with client_socket
-                        synchronized (this) {
-                            System.out.println("Client amazon accepted");
-                        }
-                        handleClient(client_socket);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    finally {
-                        try {
-                            client_socket.close();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
+                        client_socket.close();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
                     }
                 }
             });
@@ -71,7 +68,7 @@ public class ListenAmazonServer {
     }
 
     /**
-    * Send the wordId to the amazon and check for for the AUconnectedWorld response
+    * Send the wordId to the amazon and check for the AUconnectedWorld response
     */
     public boolean connectSameWorld(long worldId, Socket clientSock) throws IOException {
         UpsAmazon.UAinitWorld initWorld = UpsAmazon.UAinitWorld.newBuilder()
@@ -90,7 +87,7 @@ public class ListenAmazonServer {
     }
 
     /**
-    * Send the wordId to the amazon and check for for the AUconnectedWorld response
+    * Send the wordId to the amazon and check for the AUconnectedWorld response
     */
     public static List<WorldUps.UInitTruck> initTrucks(int number) {
         List<WorldUps.UInitTruck> trucks = new ArrayList<>();
@@ -104,6 +101,9 @@ public class ListenAmazonServer {
         return trucks;
     }
 
+    /**
+    * Handle Client: UConnect from the
+    */
     public void handleClient(Socket client_socket) throws IOException {
         List<WorldUps.UInitTruck> trucks = initTrucks(1);
 
@@ -120,24 +120,57 @@ public class ListenAmazonServer {
             worldId = worldClient.connectToWorld(trucks);
         }
 
-        // continuously read from input stream
+        // Thread, always listen to World and handle updates
+        executor.execute(() -> {
+                    worldClient.listenHandleUpdates();
+                }
+        );
+
+        // continuously read from Amazon, handle one by one, collect next-to-send messages into global variable
         while (!Thread.currentThread().isInterrupted()) {
             UpsAmazon.AUcommands aUcommands = read(UpsAmazon.AUcommands.parser(), client_socket); // 需要验证，如果下一条没有会不会出问题
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    // handle each situation with world
-                    for (UpsAmazon.AUreqPickup pickup : aUcommands.getPickupList()) {
-                        System.out.println("pickup");
-                        handlePickup(pickup);
-                    }
+            // handle each situation with world
+            for (UpsAmazon.AUreqPickup pickup : aUcommands.getPickupList()) {
+                System.out.println("pickup");
+                handlePickup(pickup);
+            }
 
-                    // send back UAcommands
-                }
-            });
+            for (UpsAmazon.AUbindUPS bind : aUcommands.getBindList()) {
+                System.out.println("bind");
+                handleBind(bind);
+            }
+
+            for (UpsAmazon.AUreqDelivery delivery : aUcommands.getDeliveryList()) {
+                System.out.println("delivery");
+                handleDelivery(delivery);
+            }
+
+            for (UpsAmazon.AUchangeDestn changeDestn : aUcommands.getChangeDestList()) {
+                System.out.println("change");
+                handleChangeDest(changeDestn);
+            }
+
+            for (UpsAmazon.AUquery query : aUcommands.getQueryList()) {
+                System.out.println("query");
+                handleQuery(query);
+            }
+
+            for (UpsAmazon.Err err: aUcommands.getErrList()) {
+                System.out.println("err");
+                handleErr(err);
+            }
+
+            for (long acks : aUcommands.getAcksList()) {
+                System.out.println("disconnect");
+                handleAcks(acks);
+            }
+
+            if (aUcommands.getDisconnect()) {
+                System.out.println("disconnect");
+                break;
+            }
+
         }
-
-
     }
 
     public void handlePickup(UpsAmazon.AUreqPickup pickup) {
@@ -147,16 +180,19 @@ public class ListenAmazonServer {
         // in DB, find a truckID that is available. Now just use 1 注意用hibernate session处理DB
         Truck usedTruck = DBoperations.useAvailableTruck();
         int truckID = usedTruck.getTruck_id();
-//        int truckID = 1;
 
         // create a new shipment, save to DB 注意用hibernate session处理DB
         long shipmentID = pickup.getShipID();
         int destX = pickup.getDestinationX();
         int destY = pickup.getDestinationY();
-        String status = "created";
+        Integer upsID = null;
+        if (pickup.hasUpsID()){
+            upsID = pickup.getUpsID();
+        }
+        DBoperations.createNewShipment(shipmentID, truckID, whid, destX, destY, upsID);
 
 
-        // UGoPickup to world
+        // form UGoPickup, save to global variable
         long pickupSeqNum = seqNumWorld++;
         WorldUps.UGoPickup uGoPickup = WorldUps.UGoPickup.newBuilder()
                 .setTruckid(truckID).setWhid(whid).setSeqnum(pickupSeqNum).build(); // 注意seqnum需要synchronize
@@ -179,6 +215,30 @@ public class ListenAmazonServer {
         }
 
 
+    }
+
+    public void handleBind(UpsAmazon.AUbindUPS bind) {
+        System.out.println("bind");
+    }
+
+    public void handleDelivery(UpsAmazon.AUreqDelivery delivery) {
+        System.out.println("delivery");
+    }
+
+    public void handleChangeDest(UpsAmazon.AUchangeDestn changeDestn) {
+        System.out.println("change");
+    }
+
+    public void handleQuery(UpsAmazon.AUquery query) {
+        System.out.println("query");
+    }
+
+    public void handleErr(UpsAmazon.Err err) {
+        System.out.println("err");
+    }
+
+    public void handleAcks(long acks) {
+        System.out.println("acked " + acks);
     }
 
     private <T> void send(com.google.protobuf.MessageLite message, Socket client_socket) throws IOException {

@@ -3429,35 +3429,44 @@ public final class UpsAmazon {
     long getShipID();
 
     /**
-     * <code>repeated .gpb.AProduct products = 5;</code>
+     * <code>optional int32 upsID = 5;</code>
+     */
+    boolean hasUpsID();
+    /**
+     * <code>optional int32 upsID = 5;</code>
+     */
+    int getUpsID();
+
+    /**
+     * <code>repeated .gpb.AProduct products = 6;</code>
      */
     java.util.List<gpb.UpsAmazon.AProduct> 
         getProductsList();
     /**
-     * <code>repeated .gpb.AProduct products = 5;</code>
+     * <code>repeated .gpb.AProduct products = 6;</code>
      */
     gpb.UpsAmazon.AProduct getProducts(int index);
     /**
-     * <code>repeated .gpb.AProduct products = 5;</code>
+     * <code>repeated .gpb.AProduct products = 6;</code>
      */
     int getProductsCount();
     /**
-     * <code>repeated .gpb.AProduct products = 5;</code>
+     * <code>repeated .gpb.AProduct products = 6;</code>
      */
     java.util.List<? extends gpb.UpsAmazon.AProductOrBuilder> 
         getProductsOrBuilderList();
     /**
-     * <code>repeated .gpb.AProduct products = 5;</code>
+     * <code>repeated .gpb.AProduct products = 6;</code>
      */
     gpb.UpsAmazon.AProductOrBuilder getProductsOrBuilder(
         int index);
 
     /**
-     * <code>required int64 seqNum = 6;</code>
+     * <code>required int64 seqNum = 7;</code>
      */
     boolean hasSeqNum();
     /**
-     * <code>required int64 seqNum = 6;</code>
+     * <code>required int64 seqNum = 7;</code>
      */
     long getSeqNum();
   }
@@ -3478,6 +3487,7 @@ public final class UpsAmazon {
       destinationX_ = 0;
       destinationY_ = 0;
       shipID_ = 0L;
+      upsID_ = 0;
       products_ = java.util.Collections.emptyList();
       seqNum_ = 0L;
     }
@@ -3526,17 +3536,22 @@ public final class UpsAmazon {
               shipID_ = input.readInt64();
               break;
             }
-            case 42: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+            case 40: {
+              bitField0_ |= 0x00000010;
+              upsID_ = input.readInt32();
+              break;
+            }
+            case 50: {
+              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
                 products_ = new java.util.ArrayList<gpb.UpsAmazon.AProduct>();
-                mutable_bitField0_ |= 0x00000010;
+                mutable_bitField0_ |= 0x00000020;
               }
               products_.add(
                   input.readMessage(gpb.UpsAmazon.AProduct.PARSER, extensionRegistry));
               break;
             }
-            case 48: {
-              bitField0_ |= 0x00000010;
+            case 56: {
+              bitField0_ |= 0x00000020;
               seqNum_ = input.readInt64();
               break;
             }
@@ -3555,7 +3570,7 @@ public final class UpsAmazon {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
           products_ = java.util.Collections.unmodifiableList(products_);
         }
         this.unknownFields = unknownFields.build();
@@ -3644,51 +3659,66 @@ public final class UpsAmazon {
       return shipID_;
     }
 
-    public static final int PRODUCTS_FIELD_NUMBER = 5;
+    public static final int UPSID_FIELD_NUMBER = 5;
+    private int upsID_;
+    /**
+     * <code>optional int32 upsID = 5;</code>
+     */
+    public boolean hasUpsID() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional int32 upsID = 5;</code>
+     */
+    public int getUpsID() {
+      return upsID_;
+    }
+
+    public static final int PRODUCTS_FIELD_NUMBER = 6;
     private java.util.List<gpb.UpsAmazon.AProduct> products_;
     /**
-     * <code>repeated .gpb.AProduct products = 5;</code>
+     * <code>repeated .gpb.AProduct products = 6;</code>
      */
     public java.util.List<gpb.UpsAmazon.AProduct> getProductsList() {
       return products_;
     }
     /**
-     * <code>repeated .gpb.AProduct products = 5;</code>
+     * <code>repeated .gpb.AProduct products = 6;</code>
      */
     public java.util.List<? extends gpb.UpsAmazon.AProductOrBuilder> 
         getProductsOrBuilderList() {
       return products_;
     }
     /**
-     * <code>repeated .gpb.AProduct products = 5;</code>
+     * <code>repeated .gpb.AProduct products = 6;</code>
      */
     public int getProductsCount() {
       return products_.size();
     }
     /**
-     * <code>repeated .gpb.AProduct products = 5;</code>
+     * <code>repeated .gpb.AProduct products = 6;</code>
      */
     public gpb.UpsAmazon.AProduct getProducts(int index) {
       return products_.get(index);
     }
     /**
-     * <code>repeated .gpb.AProduct products = 5;</code>
+     * <code>repeated .gpb.AProduct products = 6;</code>
      */
     public gpb.UpsAmazon.AProductOrBuilder getProductsOrBuilder(
         int index) {
       return products_.get(index);
     }
 
-    public static final int SEQNUM_FIELD_NUMBER = 6;
+    public static final int SEQNUM_FIELD_NUMBER = 7;
     private long seqNum_;
     /**
-     * <code>required int64 seqNum = 6;</code>
+     * <code>required int64 seqNum = 7;</code>
      */
     public boolean hasSeqNum() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
+      return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required int64 seqNum = 6;</code>
+     * <code>required int64 seqNum = 7;</code>
      */
     public long getSeqNum() {
       return seqNum_;
@@ -3746,11 +3776,14 @@ public final class UpsAmazon {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeInt64(4, shipID_);
       }
-      for (int i = 0; i < products_.size(); i++) {
-        output.writeMessage(5, products_.get(i));
-      }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(6, seqNum_);
+        output.writeInt32(5, upsID_);
+      }
+      for (int i = 0; i < products_.size(); i++) {
+        output.writeMessage(6, products_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(7, seqNum_);
       }
       unknownFields.writeTo(output);
     }
@@ -3777,13 +3810,17 @@ public final class UpsAmazon {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(4, shipID_);
       }
-      for (int i = 0; i < products_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, products_.get(i));
-      }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(6, seqNum_);
+          .computeInt32Size(5, upsID_);
+      }
+      for (int i = 0; i < products_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, products_.get(i));
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(7, seqNum_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3821,6 +3858,11 @@ public final class UpsAmazon {
         result = result && (getShipID()
             == other.getShipID());
       }
+      result = result && (hasUpsID() == other.hasUpsID());
+      if (hasUpsID()) {
+        result = result && (getUpsID()
+            == other.getUpsID());
+      }
       result = result && getProductsList()
           .equals(other.getProductsList());
       result = result && (hasSeqNum() == other.hasSeqNum());
@@ -3855,6 +3897,10 @@ public final class UpsAmazon {
         hash = (37 * hash) + SHIPID_FIELD_NUMBER;
         hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
             getShipID());
+      }
+      if (hasUpsID()) {
+        hash = (37 * hash) + UPSID_FIELD_NUMBER;
+        hash = (53 * hash) + getUpsID();
       }
       if (getProductsCount() > 0) {
         hash = (37 * hash) + PRODUCTS_FIELD_NUMBER;
@@ -4007,14 +4053,16 @@ public final class UpsAmazon {
         bitField0_ = (bitField0_ & ~0x00000004);
         shipID_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000008);
+        upsID_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000010);
         if (productsBuilder_ == null) {
           products_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000020);
         } else {
           productsBuilder_.clear();
         }
         seqNum_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -4059,17 +4107,21 @@ public final class UpsAmazon {
           to_bitField0_ |= 0x00000008;
         }
         result.shipID_ = shipID_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.upsID_ = upsID_;
         if (productsBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000020) == 0x00000020)) {
             products_ = java.util.Collections.unmodifiableList(products_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000020);
           }
           result.products_ = products_;
         } else {
           result.products_ = productsBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000010;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000020;
         }
         result.seqNum_ = seqNum_;
         result.bitField0_ = to_bitField0_;
@@ -4133,11 +4185,14 @@ public final class UpsAmazon {
         if (other.hasShipID()) {
           setShipID(other.getShipID());
         }
+        if (other.hasUpsID()) {
+          setUpsID(other.getUpsID());
+        }
         if (productsBuilder_ == null) {
           if (!other.products_.isEmpty()) {
             if (products_.isEmpty()) {
               products_ = other.products_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000020);
             } else {
               ensureProductsIsMutable();
               products_.addAll(other.products_);
@@ -4150,7 +4205,7 @@ public final class UpsAmazon {
               productsBuilder_.dispose();
               productsBuilder_ = null;
               products_ = other.products_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000020);
               productsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getProductsFieldBuilder() : null;
@@ -4356,12 +4411,44 @@ public final class UpsAmazon {
         return this;
       }
 
+      private int upsID_ ;
+      /**
+       * <code>optional int32 upsID = 5;</code>
+       */
+      public boolean hasUpsID() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional int32 upsID = 5;</code>
+       */
+      public int getUpsID() {
+        return upsID_;
+      }
+      /**
+       * <code>optional int32 upsID = 5;</code>
+       */
+      public Builder setUpsID(int value) {
+        bitField0_ |= 0x00000010;
+        upsID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 upsID = 5;</code>
+       */
+      public Builder clearUpsID() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        upsID_ = 0;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<gpb.UpsAmazon.AProduct> products_ =
         java.util.Collections.emptyList();
       private void ensureProductsIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
           products_ = new java.util.ArrayList<gpb.UpsAmazon.AProduct>(products_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000020;
          }
       }
 
@@ -4369,7 +4456,7 @@ public final class UpsAmazon {
           gpb.UpsAmazon.AProduct, gpb.UpsAmazon.AProduct.Builder, gpb.UpsAmazon.AProductOrBuilder> productsBuilder_;
 
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public java.util.List<gpb.UpsAmazon.AProduct> getProductsList() {
         if (productsBuilder_ == null) {
@@ -4379,7 +4466,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public int getProductsCount() {
         if (productsBuilder_ == null) {
@@ -4389,7 +4476,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public gpb.UpsAmazon.AProduct getProducts(int index) {
         if (productsBuilder_ == null) {
@@ -4399,7 +4486,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public Builder setProducts(
           int index, gpb.UpsAmazon.AProduct value) {
@@ -4416,7 +4503,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public Builder setProducts(
           int index, gpb.UpsAmazon.AProduct.Builder builderForValue) {
@@ -4430,7 +4517,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public Builder addProducts(gpb.UpsAmazon.AProduct value) {
         if (productsBuilder_ == null) {
@@ -4446,7 +4533,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public Builder addProducts(
           int index, gpb.UpsAmazon.AProduct value) {
@@ -4463,7 +4550,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public Builder addProducts(
           gpb.UpsAmazon.AProduct.Builder builderForValue) {
@@ -4477,7 +4564,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public Builder addProducts(
           int index, gpb.UpsAmazon.AProduct.Builder builderForValue) {
@@ -4491,7 +4578,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public Builder addAllProducts(
           java.lang.Iterable<? extends gpb.UpsAmazon.AProduct> values) {
@@ -4506,12 +4593,12 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public Builder clearProducts() {
         if (productsBuilder_ == null) {
           products_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
           productsBuilder_.clear();
@@ -4519,7 +4606,7 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public Builder removeProducts(int index) {
         if (productsBuilder_ == null) {
@@ -4532,14 +4619,14 @@ public final class UpsAmazon {
         return this;
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public gpb.UpsAmazon.AProduct.Builder getProductsBuilder(
           int index) {
         return getProductsFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public gpb.UpsAmazon.AProductOrBuilder getProductsOrBuilder(
           int index) {
@@ -4549,7 +4636,7 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public java.util.List<? extends gpb.UpsAmazon.AProductOrBuilder> 
            getProductsOrBuilderList() {
@@ -4560,14 +4647,14 @@ public final class UpsAmazon {
         }
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public gpb.UpsAmazon.AProduct.Builder addProductsBuilder() {
         return getProductsFieldBuilder().addBuilder(
             gpb.UpsAmazon.AProduct.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public gpb.UpsAmazon.AProduct.Builder addProductsBuilder(
           int index) {
@@ -4575,7 +4662,7 @@ public final class UpsAmazon {
             index, gpb.UpsAmazon.AProduct.getDefaultInstance());
       }
       /**
-       * <code>repeated .gpb.AProduct products = 5;</code>
+       * <code>repeated .gpb.AProduct products = 6;</code>
        */
       public java.util.List<gpb.UpsAmazon.AProduct.Builder> 
            getProductsBuilderList() {
@@ -4588,7 +4675,7 @@ public final class UpsAmazon {
           productsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               gpb.UpsAmazon.AProduct, gpb.UpsAmazon.AProduct.Builder, gpb.UpsAmazon.AProductOrBuilder>(
                   products_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000020) == 0x00000020),
                   getParentForChildren(),
                   isClean());
           products_ = null;
@@ -4598,31 +4685,31 @@ public final class UpsAmazon {
 
       private long seqNum_ ;
       /**
-       * <code>required int64 seqNum = 6;</code>
+       * <code>required int64 seqNum = 7;</code>
        */
       public boolean hasSeqNum() {
-        return ((bitField0_ & 0x00000020) == 0x00000020);
+        return ((bitField0_ & 0x00000040) == 0x00000040);
       }
       /**
-       * <code>required int64 seqNum = 6;</code>
+       * <code>required int64 seqNum = 7;</code>
        */
       public long getSeqNum() {
         return seqNum_;
       }
       /**
-       * <code>required int64 seqNum = 6;</code>
+       * <code>required int64 seqNum = 7;</code>
        */
       public Builder setSeqNum(long value) {
-        bitField0_ |= 0x00000020;
+        bitField0_ |= 0x00000040;
         seqNum_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required int64 seqNum = 6;</code>
+       * <code>required int64 seqNum = 7;</code>
        */
       public Builder clearSeqNum() {
-        bitField0_ = (bitField0_ & ~0x00000020);
+        bitField0_ = (bitField0_ & ~0x00000040);
         seqNum_ = 0L;
         onChanged();
         return this;
@@ -16135,35 +16222,35 @@ public final class UpsAmazon {
       "ndUPS\022\017\n\007ownerID\030\001 \002(\005\022\r\n\005upsID\030\002 \002(\005\022\016\n" +
       "\006seqNum\030\003 \002(\003\"S\n\021UAbindUPSResponse\022\016\n\006st" +
       "atus\030\001 \002(\010\022\017\n\007ownerID\030\002 \002(\005\022\r\n\005upsID\030\003 \002" +
-      "(\005\022\016\n\006seqNum\030\004 \002(\003\"\210\001\n\013AUreqPickup\022\014\n\004wh" +
+      "(\005\022\016\n\006seqNum\030\004 \002(\003\"\227\001\n\013AUreqPickup\022\014\n\004wh" +
       "ID\030\001 \002(\005\022\024\n\014destinationX\030\002 \002(\005\022\024\n\014destin" +
-      "ationY\030\003 \002(\005\022\016\n\006shipID\030\004 \002(\003\022\037\n\010products" +
-      "\030\005 \003(\0132\r.gpb.AProduct\022\016\n\006seqNum\030\006 \002(\003\"O\n" +
-      "\016UAtruckArrived\022\014\n\004whID\030\001 \002(\005\022\016\n\006shipID\030" +
-      "\002 \002(\003\022\017\n\007truckID\030\003 \002(\005\022\016\n\006seqNum\030\004 \002(\003\"/" +
-      "\n\rAUreqDelivery\022\016\n\006shipID\030\001 \002(\003\022\016\n\006seqNu" +
-      "m\030\002 \002(\003\")\n\007AUquery\022\016\n\006shipID\030\001 \002(\003\022\016\n\006se" +
-      "qNum\030\002 \002(\003\"*\n\010UAstatus\022\016\n\006status\030\001 \002(\t\022\016" +
-      "\n\006seqNum\030\002 \002(\003\"-\n\013UAdelivered\022\016\n\006shipID\030" +
-      "\001 \002(\003\022\016\n\006seqNum\030\002 \002(\003\"[\n\rAUchangeDestn\022\016" +
-      "\n\006shipID\030\001 \002(\003\022\024\n\014destinationX\030\002 \002(\005\022\024\n\014" +
-      "destinationY\030\003 \002(\005\022\016\n\006seqNum\030\004 \002(\003\"/\n\014UA" +
-      "changeResp\022\017\n\007success\030\001 \002(\010\022\016\n\006seqNum\030\002 " +
-      "\002(\003\"8\n\003Err\022\013\n\003err\030\001 \002(\t\022\024\n\014originseqnum\030" +
-      "\002 \002(\003\022\016\n\006seqnum\030\003 \002(\003\"\210\002\n\nUAcommands\022%\n\010" +
-      "truckArr\030\001 \003(\0132\023.gpb.UAtruckArrived\022\035\n\006s" +
-      "tatus\030\002 \003(\0132\r.gpb.UAstatus\022#\n\tdelivered\030" +
-      "\003 \003(\0132\020.gpb.UAdelivered\022%\n\nchangeResp\030\004 " +
-      "\003(\0132\021.gpb.UAchangeResp\022/\n\017bindUPSRespons" +
-      "e\030\005 \003(\0132\026.gpb.UAbindUPSResponse\022\025\n\003err\030\006" +
-      " \003(\0132\010.gpb.Err\022\022\n\ndisconnect\030\007 \001(\010\022\014\n\004ac" +
-      "ks\030\010 \003(\003\"\360\001\n\nAUcommands\022 \n\006pickup\030\001 \003(\0132" +
-      "\020.gpb.AUreqPickup\022$\n\010delivery\030\002 \003(\0132\022.gp" +
-      "b.AUreqDelivery\022\033\n\005query\030\003 \003(\0132\014.gpb.AUq" +
-      "uery\022&\n\nchangeDest\030\004 \003(\0132\022.gpb.AUchangeD" +
-      "estn\022\034\n\004bind\030\005 \003(\0132\016.gpb.AUbindUPS\022\025\n\003er" +
-      "r\030\006 \003(\0132\010.gpb.Err\022\022\n\ndisconnect\030\007 \001(\010\022\014\n" +
-      "\004acks\030\010 \003(\003"
+      "ationY\030\003 \002(\005\022\016\n\006shipID\030\004 \002(\003\022\r\n\005upsID\030\005 " +
+      "\001(\005\022\037\n\010products\030\006 \003(\0132\r.gpb.AProduct\022\016\n\006" +
+      "seqNum\030\007 \002(\003\"O\n\016UAtruckArrived\022\014\n\004whID\030\001" +
+      " \002(\005\022\016\n\006shipID\030\002 \002(\003\022\017\n\007truckID\030\003 \002(\005\022\016\n" +
+      "\006seqNum\030\004 \002(\003\"/\n\rAUreqDelivery\022\016\n\006shipID" +
+      "\030\001 \002(\003\022\016\n\006seqNum\030\002 \002(\003\")\n\007AUquery\022\016\n\006shi" +
+      "pID\030\001 \002(\003\022\016\n\006seqNum\030\002 \002(\003\"*\n\010UAstatus\022\016\n" +
+      "\006status\030\001 \002(\t\022\016\n\006seqNum\030\002 \002(\003\"-\n\013UAdeliv" +
+      "ered\022\016\n\006shipID\030\001 \002(\003\022\016\n\006seqNum\030\002 \002(\003\"[\n\r" +
+      "AUchangeDestn\022\016\n\006shipID\030\001 \002(\003\022\024\n\014destina" +
+      "tionX\030\002 \002(\005\022\024\n\014destinationY\030\003 \002(\005\022\016\n\006seq" +
+      "Num\030\004 \002(\003\"/\n\014UAchangeResp\022\017\n\007success\030\001 \002" +
+      "(\010\022\016\n\006seqNum\030\002 \002(\003\"8\n\003Err\022\013\n\003err\030\001 \002(\t\022\024" +
+      "\n\014originseqnum\030\002 \002(\003\022\016\n\006seqnum\030\003 \002(\003\"\210\002\n" +
+      "\nUAcommands\022%\n\010truckArr\030\001 \003(\0132\023.gpb.UAtr" +
+      "uckArrived\022\035\n\006status\030\002 \003(\0132\r.gpb.UAstatu" +
+      "s\022#\n\tdelivered\030\003 \003(\0132\020.gpb.UAdelivered\022%" +
+      "\n\nchangeResp\030\004 \003(\0132\021.gpb.UAchangeResp\022/\n" +
+      "\017bindUPSResponse\030\005 \003(\0132\026.gpb.UAbindUPSRe" +
+      "sponse\022\025\n\003err\030\006 \003(\0132\010.gpb.Err\022\022\n\ndisconn" +
+      "ect\030\007 \001(\010\022\014\n\004acks\030\010 \003(\003\"\360\001\n\nAUcommands\022 " +
+      "\n\006pickup\030\001 \003(\0132\020.gpb.AUreqPickup\022$\n\010deli" +
+      "very\030\002 \003(\0132\022.gpb.AUreqDelivery\022\033\n\005query\030" +
+      "\003 \003(\0132\014.gpb.AUquery\022&\n\nchangeDest\030\004 \003(\0132" +
+      "\022.gpb.AUchangeDestn\022\034\n\004bind\030\005 \003(\0132\016.gpb." +
+      "AUbindUPS\022\025\n\003err\030\006 \003(\0132\010.gpb.Err\022\022\n\ndisc" +
+      "onnect\030\007 \001(\010\022\014\n\004acks\030\010 \003(\003"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -16212,7 +16299,7 @@ public final class UpsAmazon {
     internal_static_gpb_AUreqPickup_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_gpb_AUreqPickup_descriptor,
-        new java.lang.String[] { "WhID", "DestinationX", "DestinationY", "ShipID", "Products", "SeqNum", });
+        new java.lang.String[] { "WhID", "DestinationX", "DestinationY", "ShipID", "UpsID", "Products", "SeqNum", });
     internal_static_gpb_UAtruckArrived_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_gpb_UAtruckArrived_fieldAccessorTable = new

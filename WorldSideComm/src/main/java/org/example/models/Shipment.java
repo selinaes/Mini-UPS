@@ -1,5 +1,6 @@
 package org.example.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
@@ -20,6 +21,8 @@ public class Shipment {
 
     private String shipment_status;
 
+    @Column(name = "ups_userid", nullable = true)
+    private int ups_userid;
 
     public long getShipment_id() {
         return shipment_id;
@@ -67,5 +70,13 @@ public class Shipment {
 
     public void setDest_y(int dest_y) {
         this.dest_y = dest_y;
+    }
+
+    public int getUps_userid() {
+        return ups_userid;
+    }
+
+    public void setUps_userid(int ups_userid) {
+        this.ups_userid = ups_userid;
     }
 }

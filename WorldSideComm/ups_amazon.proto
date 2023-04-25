@@ -33,8 +33,9 @@ message AUreqPickup {
 	required int32 destinationX = 2;
 	required int32 destinationY = 3;
 	required int64 shipID = 4;  //Amazon generate shipID
-	repeated AProduct products = 5;
-	required int64 seqNum = 6;
+	optional int32 upsID = 5;
+	repeated AProduct products = 6;
+	required int64 seqNum = 7;
 
 }
 
