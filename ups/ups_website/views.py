@@ -82,14 +82,14 @@ def request_tracking(request):
 @login_required
 def find_all_shipments(request):
     user = request.user
-    shipments = Shipments.objects.filter(ups_username=user.username)
+    shipments = Shipments.objects.filter(ups_userid=user.id)
     return render(request, 'ups_website/find_shipments.html', {'shipments_info': shipments})
 
 
 @login_required
 def find_packages_detail(request, shipment_id):
     user = request.user
-    shipment = Shipments.objects.get(ups_username=user.username, shipment_id=shipment_id)
+    shipment = Shipments.objects.get(ups_userid=user.id, shipment_id=shipment_id)
     packages = ProductsInPackage.objects.filter(shipment=shipment)
     package = ProductsInPackage.objects.filter(shipment=shipment)
     return render(request, 'ups_website/find_packages_detail.html', {'package_info': packages})
@@ -97,7 +97,7 @@ def find_packages_detail(request, shipment_id):
 @login_required
 def change_address(request, shipment_id):
     user = request.user
-    shipment = Shipments.objects.get(ups_username=user.username, shipment_id=shipment_id)
+    shipment = Shipments.objects.get(ups_userid=user.id, shipment_id=shipment_id)
     if request.method == 'POST':
         form = EditUserInfoForm(request.POST)
         if form.is_valid():

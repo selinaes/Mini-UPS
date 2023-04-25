@@ -18,25 +18,24 @@ from django.contrib.auth.models import User
 #         return self.user_name
 
 class Truck(models.Model):
-    truck_id = models.IntegerField(primary_key=True)
-    truck_x = models.IntegerField(null=True)
-    truck_y = models.IntegerField(null=True)
-    truck_status = models.CharField(max_length=200, null=True)
+    truck_id = models.IntegerField(primary_key=True)  # Required: primary key, unique identifier for each Truck
+    truck_x = models.IntegerField()  # Required: truck's x coordinate
+    truck_y = models.IntegerField()  # Required: truck's y coordinate
+    truck_status = models.CharField(max_length=200)  # Required: truck's status as a character field with a max length of 200 characters
     def __str__(self):
-        return str(self.truck_id)
+        return str(self.truck_id)  # String representation of the Truck model, using the truck_id
+
 
 class Shipments(models.Model):
-    shipment_id = models.IntegerField(primary_key=True)
-    ups_username = models.CharField(max_length=200, null=True)
-    truck_id = models.IntegerField(null=True)
-    wh_id = models.IntegerField(null=True)
-    dest_x = models.IntegerField(null=True)
-    dest_y = models.IntegerField(null=True)
-    shipment_status = models.CharField(max_length=200, null=True)
+    shipment_id = models.BigIntegerField(primary_key=True)
+    ups_userid = models.IntegerField(null=True)
+    truck_id = models.IntegerField()
+    wh_id = models.IntegerField()
+    dest_x = models.IntegerField()
+    dest_y = models.IntegerField()
+    shipment_status = models.CharField(max_length=200)
     def __str__(self):
         return str(self.shipment_id)
-
-
 
 
 class ProductsInPackage(models.Model):
