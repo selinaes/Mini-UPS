@@ -4,16 +4,28 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class SessionFactoryWrapper {
 
-
+  public static ConcurrentHashMap<String, Lock> lock;
   private static SessionFactoryWrapper instance;
   private SessionFactory sessionFactory;
+
+  public static synchronized Lock getLock(String type) {
+    return lock.get(type);
+  }
 
   private SessionFactoryWrapper() {
     try {
 
       this.initSessionFactory();
+      lock = new ConcurrentHashMap<>();
+      lock.put("truck", new ReentrantLock());
+      lock.put("shipment", new ReentrantLock());
+      lock.put("productsInPackage", new ReentrantLock());
 
     } catch (Exception e) {
       e.printStackTrace();

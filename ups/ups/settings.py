@@ -75,12 +75,23 @@ WSGI_APPLICATION = 'ups.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "upsDB",
+#         "USER": "yl906",
+#         "PASSWORD": "kevinzuishuai",
+#         "HOST": 'localhost',
+#         "PORT": 5432,
+#     }
+# }
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "upsDB",
-        "USER": "yl906",
-        "PASSWORD": "kevinzuishuai",
+        "USER": "jl1188",
+        "PASSWORD": "selina1111",
         "HOST": 'localhost',
         "PORT": 5432,
     }

@@ -12,17 +12,12 @@ public class Main {
         int worldPort = 12345;
         int amazonPort = 34567;
 
-
-
         WorldSimulatorClient client = new WorldSimulatorClient(host, worldPort);
 
-
         try {
-            // Step 2: Listen for connection from amazon. Everything else in server
+            // Step 1: Listen for connection from amazon. Everything else in server
             ListenAmazonServer listenAmazonServer = new ListenAmazonServer(amazonPort, client);
             listenAmazonServer.run();
-
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

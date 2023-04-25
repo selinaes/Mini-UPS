@@ -8,20 +8,24 @@ message AProduct{
 
 message UAinitWorld{
 	required int64 worldID = 1;
-	required int64 seqNum = 2;
-	
 }
 
 message AUconnectedWorld{
 	required bool success = 1;
-	repeated int64 acks = 2;
 }
 
 message AUbindUPS {
-	required int32 upsID = 1;
-	required int64 seqNum = 2; // ack = success (exist), Err = fail (not exist)
+	required int32 ownerID = 1;
+	required int32 upsID = 2;
+	required int64 seqNum = 3; // ack = success (exist), Err = fail (not exist)
 }
 
+message UAbindUPSResponse {
+	required bool status = 1;
+	required int32 ownerID = 2;
+	required int32 upsID = 3;
+	required int64 seqNum = 4; // ack = success (exist),
+}
 
 
 message AUreqPickup {
@@ -87,9 +91,10 @@ message UAcommands{
 	repeated UAstatus status = 2;
 	repeated UAdelivered delivered = 3;
 	repeated UAchangeResp changeResp = 4;
-	repeated Err err = 5;
-	optional bool disconnect = 6;
-	repeated int64 acks = 7;
+	repeated UAbindUPSResponse bindUPSResponse = 5;
+	repeated Err err = 6;
+	optional bool disconnect = 7;
+	repeated int64 acks = 8;
 }
 
 message AUcommands{

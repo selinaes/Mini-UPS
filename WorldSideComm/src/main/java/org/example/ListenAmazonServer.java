@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.models.Truck;
 import org.hibernate.Session;
 import org.xml.sax.SAXException;
 
@@ -69,41 +70,59 @@ public class ListenAmazonServer {
         }
     }
 
-    public boolean connectSameWorld(long worldId, long seqNum, Socket clientSock) throws IOException {
+    /**
+    * Send the wordId to the amazon and check for for the AUconnectedWorld response
+    */
+    public boolean connectSameWorld(long worldId, Socket clientSock) throws IOException {
         UpsAmazon.UAinitWorld initWorld = UpsAmazon.UAinitWorld.newBuilder()
-                .setWorldID(worldId).setSeqNum(seqNum)
+                .setWorldID(worldId)
                 .build();
         send(initWorld, clientSock);
 
         // Wait for AUconnectedWorld response
         UpsAmazon.AUconnectedWorld connectedWorld = read(UpsAmazon.AUconnectedWorld.parser(), clientSock);
         System.out.println("Amazon's result: " + connectedWorld.getSuccess());
-        if (connectedWorld.getSuccess() && connectedWorld.getAcksList().contains(seqNum)) {
+        if (connectedWorld.getSuccess()) {
             return true;
         } else {
             return false;
         }
     }
 
+    /**
+    * Send the wordId to the amazon and check for for the AUconnectedWorld response
+    */
+    public static List<WorldUps.UInitTruck> initTrucks(int number) {
+        List<WorldUps.UInitTruck> trucks = new ArrayList<>();
+        for (int i = 1; i <= number; i++){
+            // Step 0: UInitTruck
+            WorldUps.UInitTruck truck = WorldUps.UInitTruck.newBuilder().setId(1).setX(50).setY(30).build();
+            // add DB operation, add to DB
+            DBoperations.createNewTruck(truck);
+            trucks.add(truck);
+        }
+        return trucks;
+    }
+
     public void handleClient(Socket client_socket) throws IOException {
-        // Step 0: UInitTruck
-        WorldUps.UInitTruck truck = WorldUps.UInitTruck.newBuilder().setId(1).setX(50).setY(30).build();
+        List<WorldUps.UInitTruck> trucks = initTrucks(1);
+
         // Step 1: UConnect
-        long worldId = worldClient.connectToWorld(List.of(truck));
+        long worldId = worldClient.connectToWorld(trucks);
 
        // UAinitWorld, make sure connect to same world
         while (true) {
-            boolean result = connectSameWorld(worldId, seqNumWorld++, client_socket);
+            boolean result = connectSameWorld(worldId,client_socket);
             if (result) {
                 this.worldId = worldId; // not sure need or not
                 break;
             }
-            worldId = worldClient.connectToWorld(List.of(truck));
+            worldId = worldClient.connectToWorld(trucks);
         }
 
         // continuously read from input stream
         while (!Thread.currentThread().isInterrupted()) {
-            UpsAmazon.AUcommands aUcommands = read(UpsAmazon.AUcommands.parser(), client_socket);
+            UpsAmazon.AUcommands aUcommands = read(UpsAmazon.AUcommands.parser(), client_socket); // 需要验证，如果下一条没有会不会出问题
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -126,7 +145,9 @@ public class ListenAmazonServer {
         int whid = pickup.getWhID();
 
         // in DB, find a truckID that is available. Now just use 1 注意用hibernate session处理DB
-        int truckID = 1;
+        Truck usedTruck = DBoperations.useAvailableTruck();
+        int truckID = usedTruck.getTruck_id();
+//        int truckID = 1;
 
         // create a new shipment, save to DB 注意用hibernate session处理DB
         long shipmentID = pickup.getShipID();
@@ -183,6 +204,11 @@ public class ListenAmazonServer {
         } catch (IOException ioe) {
             return null;
         }
+    }
+
+    // main function
+    public static void main(String[] args) throws IOException {
+        initTrucks(1);
     }
 }
 

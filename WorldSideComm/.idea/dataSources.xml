@@ -19,5 +19,16 @@
       <jdbc-url>jdbc:postgresql://localhost:5432/ups</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="bin:main:hibernate.cfg.xml/Hibernate" uuid="1122041c-deb0-4631-8f60-637f72f14cd4">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+/home/jl1188/erss-project-yl906-jl1188/WorldSideComm/bin/main/hibernate.cfg.xml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/upsDB</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

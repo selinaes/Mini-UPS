@@ -15,4 +15,35 @@ public class Truck {
     private String truck_status;
 
 
+    public String getTruck_status() {
+        return truck_status;
+    }
+
+    public void setTruck_status(String truck_status) {
+        this.truck_status = truck_status;
+    }
+
+    public int getTruck_y() {
+        return truck_y;
+    }
+
+    public void setTruck_y(int truck_y) {
+        this.truck_y = truck_y;
+    }
+
+    public int getTruck_x() {
+        return truck_x;
+    }
+
+    public void setTruck_x(int truck_x) {
+        this.truck_x = truck_x;
+    }
+
+    public int getTruck_id() {
+        return truck_id;
+    }
+
+    public void setTruck_id(int truck_id) {
+        this.truck_id = truck_id;
+    }
 }
