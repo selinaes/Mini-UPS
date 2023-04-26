@@ -7,6 +7,9 @@ import java.net.Socket;
 import java.util.List;
 
 import gpb.WorldUps;
+import gpb.UpsAmazon;
+import org.example.models.Shipment;
+
 public class WorldSimulatorClient {
     private final String host;
     private final int port;
@@ -122,18 +125,41 @@ public class WorldSimulatorClient {
     }
 
     public void handleCompletions(WorldUps.UFinished completions){
+        GlobalVariables.worldAckLock.lock();
         GlobalVariables.worldAcks.add(completions.getSeqnum());
+        GlobalVariables.worldAckLock.unlock();
+        if (completions.getStatus().equals("idle")) {
+            System.out.println("truck all deliveres finished"); // !!!注意这里没有implement！！！
+        }
+        // Arrive warehouse
+        else {
+            // using truck id to find all ship_id
+            int truck_id = completions.getTruckid();
+            List<Shipment> shipments = DBoperations.findShipmentsUpdateStatus(truck_id);
+            // using ship_id to find WhID
+            int whID = shipments.get(0).getWh_id();
+            // for loop to add for amazonMessages to add UATruckArrived
+            for (Shipment sh: shipments) {
+                long seqNum = GlobalVariables.seqNumAmazon.incrementAndGet();
+                UpsAmazon.UAtruckArrived arrived = UpsAmazon.UAtruckArrived.newBuilder().setWhID(whID)
+                        .setTruckID(truck_id).setShipID(sh.getShipment_id()).setSeqNum(seqNum).build();
+                GlobalVariables.amazonMessages.put(seqNum, arrived);
+            }
+        }
         System.out.println("handle completions");
     }
 
     public void handleDeliveries(WorldUps.UDeliveryMade delivered){
-
+        GlobalVariables.worldAckLock.lock();
         GlobalVariables.worldAcks.add(delivered.getSeqnum());
+        GlobalVariables.worldAckLock.unlock();
         System.out.println("handle deliveries");
     }
 
     public void handleTruckStatus(WorldUps.UTruck truckstatus){
+        GlobalVariables.worldAckLock.lock();
         GlobalVariables.worldAcks.add(truckstatus.getSeqnum());
+        GlobalVariables.worldAckLock.unlock();
         System.out.println("handle truck status");
     }
 
@@ -142,7 +168,9 @@ public class WorldSimulatorClient {
     }
 
     public void handleError(WorldUps.UErr err){
+        GlobalVariables.worldAckLock.lock();
         GlobalVariables.worldAcks.add(err.getSeqnum());
+        GlobalVariables.worldAckLock.unlock();
         System.out.println("handle error");
     }
 

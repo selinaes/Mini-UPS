@@ -45,7 +45,6 @@ def login(request):
         form = LoginForm()
     return render(request, 'ups_website/login.html', {'form': form})
 
-@login_required
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)

@@ -38,6 +38,9 @@ public class ListenAmazonServer {
     * Formed Ucommands message to send to the UPS client to solve
     */
     public WorldUps.UCommands formWorldMessage() {
+        if (GlobalVariables.worldMessages.isEmpty()) {
+            return null;
+        }
         WorldUps.UCommands.Builder uCommandsBuilder = WorldUps.UCommands.newBuilder();
         // Loop through the ConcurrentHashMap
         for (com.google.protobuf.GeneratedMessageV3 message : GlobalVariables.worldMessages.values()) {
@@ -57,10 +60,11 @@ public class ListenAmazonServer {
                 System.out.println("Unknown message type: " + message.getClass().getName());
             }
         }
-        synchronized (GlobalVariables.worldAcks) {
-            uCommandsBuilder.addAllAcks(GlobalVariables.worldAcks);
-            GlobalVariables.worldAcks.clear();
-        }
+
+        GlobalVariables.worldAckLock.lock();
+        uCommandsBuilder.addAllAcks(GlobalVariables.worldAcks);
+        GlobalVariables.worldAcks.clear();
+        GlobalVariables.worldAckLock.unlock();
 
         return uCommandsBuilder.build();
     }
@@ -69,6 +73,9 @@ public class ListenAmazonServer {
     * Formed UAcommands message to send to the Amazon client for handling
     */
     public UpsAmazon.UAcommands formAmazonMessage() {
+        if (GlobalVariables.amazonMessages.isEmpty()) {
+            return null;
+        }
         UpsAmazon.UAcommands.Builder UACommandsBuilder = UpsAmazon.UAcommands.newBuilder();
         // Loop through the ConcurrentHashMap
         for (com.google.protobuf.GeneratedMessageV3 message : GlobalVariables.amazonMessages.values()) {
@@ -94,6 +101,11 @@ public class ListenAmazonServer {
                 System.out.println("Unknown message type: " + message.getClass().getName());
             }
         }
+
+        GlobalVariables.amazonAckLock.lock();
+        UACommandsBuilder.addAllAcks(GlobalVariables.amazonAcks);
+        GlobalVariables.amazonAcks.clear();
+        GlobalVariables.amazonAckLock.unlock();
         return UACommandsBuilder.build();
     }
 
@@ -167,13 +179,14 @@ public class ListenAmazonServer {
                 }
         );
 
-
-
         // Schedule a task to be executed after a certain delay
         int delayInSeconds = 5; // Adjust the delay as needed
         scheduler.schedule(() -> {
             // Call formWorldMessage() and send the message
             WorldUps.UCommands worldMessage = formWorldMessage();
+            if (worldMessage == null) {
+                return;
+            }
             try {
                 worldClient.sendCommands(worldMessage);
             } catch (IOException e) {
@@ -186,6 +199,9 @@ public class ListenAmazonServer {
         scheduler.schedule(() -> {
             // Call formWorldMessage() and send the message
             UpsAmazon.UAcommands amazonMessage = formAmazonMessage();
+            if (amazonMessage == null) {
+                return;
+            }
             try {
                 send(amazonMessage, client_socket);
             } catch (IOException e) {
@@ -243,13 +259,21 @@ public class ListenAmazonServer {
 
     public void handlePickup(UpsAmazon.AUreqPickup pickup) {
         // in DB, find a truckID that is available. Now just use 1 注意用hibernate session处理DB
+        GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(pickup.getSeqNum());
+        GlobalVariables.amazonAckLock.unlock();
         Truck usedTruck = DBoperations.useAvailableTruck();
-        int truckID = 0;
-        if (usedTruck != null) {
-            truckID = usedTruck.getTruck_id();
+        if (usedTruck == null) {
+            long errSeqNum = GlobalVariables.seqNumAmazon.incrementAndGet();
+            UpsAmazon.Err error = UpsAmazon.Err.newBuilder()
+                    .setOriginseqnum(pickup.getSeqNum())
+                    .setErr("No Truck Available")
+                    .setSeqnum(errSeqNum)
+                    .build();
+            GlobalVariables.amazonMessages.put(errSeqNum, error);
+            return;
         }
-
+        int truckID = usedTruck.getTruck_id();
         // create a new shipment, save to DB 注意用hibernate session处理DB
         int whid = pickup.getWhID();
         long shipmentID = pickup.getShipID();
@@ -272,28 +296,38 @@ public class ListenAmazonServer {
     }
 
     public void handleBind(UpsAmazon.AUbindUPS bind) {
+        GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(bind.getSeqNum());
+        GlobalVariables.amazonAckLock.unlock();
         System.out.println("bind");
     }
 
     public void handleDelivery(UpsAmazon.AUreqDelivery delivery) {
+        GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(delivery.getSeqNum());
+        GlobalVariables.amazonAckLock.unlock();
 
         System.out.println("delivery");
     }
 
     public void handleChangeDest(UpsAmazon.AUchangeDestn changeDestn) {
+        GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(changeDestn.getSeqNum());
+        GlobalVariables.amazonAckLock.unlock();
         System.out.println("change");
     }
 
     public void handleQuery(UpsAmazon.AUquery query) {
+        GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(query.getSeqNum());
+        GlobalVariables.amazonAckLock.unlock();
         System.out.println("query");
     }
 
     public void handleErr(UpsAmazon.Err err) {
+        GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(err.getSeqnum());
+        GlobalVariables.amazonAckLock.unlock();
         System.out.println("err");
     }
 

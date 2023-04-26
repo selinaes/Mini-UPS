@@ -71,7 +71,7 @@ public class DBoperations {
                 return null;
             }
             Truck usedTruck = trucks.get(0);
-            usedTruck.setTruck_status("traveling");
+            usedTruck.setTruck_status("traveling"); // 应该在收到ack再改travelling。这里需要改，有可能收到err
 
             session.merge(usedTruck);
             tx.commit();
@@ -101,9 +101,43 @@ public class DBoperations {
             }
 
             session.merge(newShipment);
+            // 这里需要create productsinpackage instance
             tx.commit();
         } finally {
             lock.unlock();
         }
     }
+
+    public static List<Shipment> findShipmentsUpdateStatus(int truckID) {
+        Session session = SessionFactoryWrapper.openSession();
+        Lock lock = SessionFactoryWrapper.getLock("shipment");
+        lock.lock();
+        try (session) {
+            Transaction tx = session.beginTransaction();
+            // get corresponding truck and update truck status
+            Truck tk = session.get(Truck.class, truckID, LockMode.PESSIMISTIC_WRITE);
+            tk.setTruck_status("arrive warehouse");
+            session.merge(tk);
+            // get all shipments associated with this truck_id
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Shipment> cq = cb.createQuery(Shipment.class);
+            Root<Shipment> root = cq.from(Shipment.class);
+            cq.where(
+                    cb.equal(root.get("truck_id"), truckID ) // 可能不止idle 看一下要求
+            );
+            List<Shipment> shipments = session.createQuery(cq).setLockMode(LockModeType.PESSIMISTIC_WRITE).getResultList();
+            // Update shipment_status for each shipment
+            for (Shipment sh: shipments) {
+                sh.setShipment_status("truck waiting for package");
+                session.merge(sh);
+            }
+
+            tx.commit();
+            return shipments;
+        }
+        finally {
+            lock.unlock();
+        }
+    }
+
 }
