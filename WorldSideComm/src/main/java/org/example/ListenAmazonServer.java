@@ -11,10 +11,8 @@ import java.net.Socket;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicLong;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -25,17 +23,78 @@ public class ListenAmazonServer {
     private final ServerSocket serverSocket;
     BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>(100);
     ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 5, 5, TimeUnit.MILLISECONDS, workQueue);
+    // Create a ScheduledExecutorService with 1 thread
+    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
     WorldSimulatorClient worldClient;
     long worldId;
-    long seqNumWorld;
-    long seqNumAmazon;
 
 
     public ListenAmazonServer(int port, WorldSimulatorClient client) throws IOException {
         this.serverSocket = new ServerSocket(port);
         this.worldClient = client;
-        this.seqNumAmazon = 0;
-        this.seqNumWorld = 0;
+    }
+
+    /**
+    * Formed Ucommands message to send to the UPS client to solve
+    */
+    public WorldUps.UCommands formWorldMessage() {
+        WorldUps.UCommands.Builder uCommandsBuilder = WorldUps.UCommands.newBuilder();
+        // Loop through the ConcurrentHashMap
+        for (com.google.protobuf.GeneratedMessageV3 message : GlobalVariables.worldMessages.values()) {
+            // Add UGoPickup messages
+            if (message instanceof WorldUps.UGoPickup pickup) {
+                uCommandsBuilder.addPickups(pickup);
+            }
+            // Add UGoDeliver messages
+            else if (message instanceof WorldUps.UGoDeliver delivery) {
+                uCommandsBuilder.addDeliveries(delivery);
+            }
+            // Add UQuery messages
+            else if (message instanceof WorldUps.UQuery query) {
+                uCommandsBuilder.addQueries(query);
+            }
+            else {
+                System.out.println("Unknown message type: " + message.getClass().getName());
+            }
+        }
+        synchronized (GlobalVariables.worldAcks) {
+            uCommandsBuilder.addAllAcks(GlobalVariables.worldAcks);
+            GlobalVariables.worldAcks.clear();
+        }
+
+        return uCommandsBuilder.build();
+    }
+
+    /**
+    * Formed UAcommands message to send to the Amazon client for handling
+    */
+    public UpsAmazon.UAcommands formAmazonMessage() {
+        UpsAmazon.UAcommands.Builder UACommandsBuilder = UpsAmazon.UAcommands.newBuilder();
+        // Loop through the ConcurrentHashMap
+        for (com.google.protobuf.GeneratedMessageV3 message : GlobalVariables.amazonMessages.values()) {
+            // Add UGoPickup messages
+            if (message instanceof UpsAmazon.UAtruckArrived truckArr) {
+                UACommandsBuilder.addTruckArr(truckArr);
+            }
+            // Add UGoDeliver messages
+            else if (message instanceof UpsAmazon.UAstatus status) {
+                UACommandsBuilder.addStatus(status);
+            }
+            // Add UQuery messages
+            else if (message instanceof UpsAmazon.UAdelivered delivered) {
+                UACommandsBuilder.addDelivered(delivered);
+            }
+            else if (message instanceof UpsAmazon.UAbindUPSResponse bindRes){
+                UACommandsBuilder.addBindUPSResponse(bindRes);
+            }
+            else if (message instanceof  UpsAmazon.UAchangeResp changeResp) {
+                UACommandsBuilder.addChangeResp(changeResp);
+            }
+            else {
+                System.out.println("Unknown message type: " + message.getClass().getName());
+            }
+        }
+        return UACommandsBuilder.build();
     }
 
     public void run() {
@@ -79,27 +138,9 @@ public class ListenAmazonServer {
         // Wait for AUconnectedWorld response
         UpsAmazon.AUconnectedWorld connectedWorld = read(UpsAmazon.AUconnectedWorld.parser(), clientSock);
         System.out.println("Amazon's result: " + connectedWorld.getSuccess());
-        if (connectedWorld.getSuccess()) {
-            return true;
-        } else {
-            return false;
-        }
+        return connectedWorld.getSuccess();
     }
 
-    /**
-    * Send the wordId to the amazon and check for the AUconnectedWorld response
-    */
-    public static List<WorldUps.UInitTruck> initTrucks(int number) {
-        List<WorldUps.UInitTruck> trucks = new ArrayList<>();
-        for (int i = 1; i <= number; i++){
-            // Step 0: UInitTruck
-            WorldUps.UInitTruck truck = WorldUps.UInitTruck.newBuilder().setId(1).setX(50).setY(30).build();
-            // add DB operation, add to DB
-            DBoperations.createNewTruck(truck);
-            trucks.add(truck);
-        }
-        return trucks;
-    }
 
     /**
     * Handle Client: UConnect from the
@@ -125,6 +166,32 @@ public class ListenAmazonServer {
                     worldClient.listenHandleUpdates();
                 }
         );
+
+
+
+        // Schedule a task to be executed after a certain delay
+        int delayInSeconds = 5; // Adjust the delay as needed
+        scheduler.schedule(() -> {
+            // Call formWorldMessage() and send the message
+            WorldUps.UCommands worldMessage = formWorldMessage();
+            try {
+                worldClient.sendCommands(worldMessage);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }, delayInSeconds, TimeUnit.SECONDS);
+
+        // Schedule a task to be executed after a certain delay
+        int delayForAmazon = 5; // Adjust the delay as needed
+        scheduler.schedule(() -> {
+            // Call formWorldMessage() and send the message
+            UpsAmazon.UAcommands amazonMessage = formAmazonMessage();
+            try {
+                send(amazonMessage, client_socket);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }, delayForAmazon, TimeUnit.SECONDS);
 
         // continuously read from Amazon, handle one by one, collect next-to-send messages into global variable
         while (!Thread.currentThread().isInterrupted()) {
@@ -173,15 +240,18 @@ public class ListenAmazonServer {
         }
     }
 
-    public void handlePickup(UpsAmazon.AUreqPickup pickup) {
-        // retrieve whid
-        int whid = pickup.getWhID();
 
+    public void handlePickup(UpsAmazon.AUreqPickup pickup) {
         // in DB, find a truckID that is available. Now just use 1 注意用hibernate session处理DB
+        GlobalVariables.amazonAcks.add(pickup.getSeqNum());
         Truck usedTruck = DBoperations.useAvailableTruck();
-        int truckID = usedTruck.getTruck_id();
+        int truckID = 0;
+        if (usedTruck != null) {
+            truckID = usedTruck.getTruck_id();
+        }
 
         // create a new shipment, save to DB 注意用hibernate session处理DB
+        int whid = pickup.getWhID();
         long shipmentID = pickup.getShipID();
         int destX = pickup.getDestinationX();
         int destY = pickup.getDestinationY();
@@ -193,52 +263,42 @@ public class ListenAmazonServer {
 
 
         // form UGoPickup, save to global variable
-        long pickupSeqNum = seqNumWorld++;
+        long pickupSeqNum = GlobalVariables.seqNumWorld.incrementAndGet();
         WorldUps.UGoPickup uGoPickup = WorldUps.UGoPickup.newBuilder()
-                .setTruckid(truckID).setWhid(whid).setSeqnum(pickupSeqNum).build(); // 注意seqnum需要synchronize
-        // 注意应该存这个seqnum和对应的信息，uGoPickup全文。这样后面可以继续发直到对方收到
-        // 注意改成集成队列，放入某个uCommands的list一起发。现在暂时用单个的
-        WorldUps.UCommands uCommands = WorldUps.UCommands.newBuilder().addPickups(uGoPickup).build();
-        try {
-            worldClient.sendCommands(uCommands);
-            // block wait for UResponses with UFinished. 注意放进集成之后就可以写成async的
-            WorldUps.UResponses uResponses = worldClient.readResponses();
-            if (uResponses.getAcksList().contains(pickupSeqNum)){
-                System.out.println("world received UGoPickup");
-                // 仍然需要一直接收UResponses，直到收到对应的UFinished，然后再给amazon回复UAtruckArrived
-            }
-            else {
-                System.out.println("world did not receive UGoPickup");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+                .setTruckid(truckID).setWhid(whid).setSeqnum(pickupSeqNum).build();
+        // put into concurrentHashMap
+        GlobalVariables.worldMessages.put(pickupSeqNum, uGoPickup);
 
     }
 
     public void handleBind(UpsAmazon.AUbindUPS bind) {
+        GlobalVariables.amazonAcks.add(bind.getSeqNum());
         System.out.println("bind");
     }
 
     public void handleDelivery(UpsAmazon.AUreqDelivery delivery) {
+        GlobalVariables.amazonAcks.add(delivery.getSeqNum());
+
         System.out.println("delivery");
     }
 
     public void handleChangeDest(UpsAmazon.AUchangeDestn changeDestn) {
+        GlobalVariables.amazonAcks.add(changeDestn.getSeqNum());
         System.out.println("change");
     }
 
     public void handleQuery(UpsAmazon.AUquery query) {
+        GlobalVariables.amazonAcks.add(query.getSeqNum());
         System.out.println("query");
     }
 
     public void handleErr(UpsAmazon.Err err) {
+        GlobalVariables.amazonAcks.add(err.getSeqnum());
         System.out.println("err");
     }
 
     public void handleAcks(long acks) {
-        System.out.println("acked " + acks);
+        GlobalVariables.amazonMessages.remove(acks);
     }
 
     private <T> void send(com.google.protobuf.MessageLite message, Socket client_socket) throws IOException {
@@ -266,14 +326,37 @@ public class ListenAmazonServer {
         }
     }
 
+
+    /**
+     * Send the wordId to the amazon and check for the AUconnectedWorld response
+     */
+    public static List<WorldUps.UInitTruck> initTrucks(int number) {
+        List<WorldUps.UInitTruck> trucks = new ArrayList<>();
+        for (int i = 1; i <= number; i++){
+            // Step 0: UInitTruck
+            WorldUps.UInitTruck truck = WorldUps.UInitTruck.newBuilder().setId(1).setX(50).setY(30).build();
+            // add DB operation, add to DB
+            DBoperations.createNewTruck(truck);
+            trucks.add(truck);
+        }
+        return trucks;
+    }
+
+    public static void createShipment(){
+        long shipmentID = 1;
+        int truckID = 1;
+        int whid = 1;
+        int destX = 50;
+        int destY = 50;
+        Integer upsID = null;
+        DBoperations.createNewShipment(shipmentID, truckID, whid, destX, destY, upsID);
+    }
+
     // main function
     public static void main(String[] args) throws IOException {
-        initTrucks(1);
+//        initTrucks(1);
+        createShipment();
     }
 }
-
-
-
-
 
 

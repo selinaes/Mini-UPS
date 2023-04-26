@@ -75,9 +75,9 @@ public class WorldSimulatorClient {
         return uResponses;
     }
 
-     /**
-    * handle each world UResponse, to send things to amazon
-    */
+    /**
+     * handle each world UResponse, to send things to amazon
+     */
     public void listenHandleUpdates() {
         while (!Thread.currentThread().isInterrupted()) {
             WorldUps.UResponses uResponses;
@@ -122,14 +122,18 @@ public class WorldSimulatorClient {
     }
 
     public void handleCompletions(WorldUps.UFinished completions){
+        GlobalVariables.worldAcks.add(completions.getSeqnum());
         System.out.println("handle completions");
     }
 
     public void handleDeliveries(WorldUps.UDeliveryMade delivered){
+
+        GlobalVariables.worldAcks.add(delivered.getSeqnum());
         System.out.println("handle deliveries");
     }
 
     public void handleTruckStatus(WorldUps.UTruck truckstatus){
+        GlobalVariables.worldAcks.add(truckstatus.getSeqnum());
         System.out.println("handle truck status");
     }
 
@@ -138,6 +142,7 @@ public class WorldSimulatorClient {
     }
 
     public void handleError(WorldUps.UErr err){
+        GlobalVariables.worldAcks.add(err.getSeqnum());
         System.out.println("handle error");
     }
 

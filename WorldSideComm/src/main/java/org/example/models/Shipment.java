@@ -1,9 +1,9 @@
 package org.example.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ups_website_shipments")
@@ -23,6 +23,9 @@ public class Shipment {
 
     @Column(name = "ups_userid", nullable = true)
     private int ups_userid;
+
+    @OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductsInPackage> productsInPackage = new ArrayList<>();
 
     public long getShipment_id() {
         return shipment_id;
@@ -78,5 +81,13 @@ public class Shipment {
 
     public void setUps_userid(int ups_userid) {
         this.ups_userid = ups_userid;
+    }
+
+    public List<ProductsInPackage> getProductsInPackage() {
+        return productsInPackage;
+    }
+
+    public void setProductsInPackage(List<ProductsInPackage> productsInPackage) {
+        this.productsInPackage = productsInPackage;
     }
 }

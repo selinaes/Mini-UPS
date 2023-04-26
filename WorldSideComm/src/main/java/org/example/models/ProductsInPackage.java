@@ -1,16 +1,16 @@
 package org.example.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ups_website_products_in_package")
+@Table(name = "ups_website_productsinpackage")
 public class ProductsInPackage {
     @Id
     private int id;
 
-    private int shipment_id;
+    @ManyToOne
+    @JoinColumn(name = "shipment_id")
+    private Shipment shipment;
 
     private int product_id;
 
@@ -27,12 +27,12 @@ public class ProductsInPackage {
         this.id = id;
     }
 
-    public int getShipment_id() {
-        return shipment_id;
+    public Shipment getShipment() {
+        return shipment;
     }
 
-    public void setShipment_id(int shipment_id) {
-        this.shipment_id = shipment_id;
+    public void setShipment(Shipment shipment) {
+        this.shipment = shipment;
     }
 
     public int getProduct_id() {
