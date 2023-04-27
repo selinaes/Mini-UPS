@@ -111,7 +111,7 @@ public class WorldSimulatorClient {
 
                 for (long acks: uResponses.getAcksList()){
                     loggerListenWorld.debug("line 113 received world acks: " + acks);
-                    handleAcks(acks);
+                    handleWorldAcks(acks);
                 }
 
                 for (WorldUps.UErr err: uResponses.getErrorList()){
@@ -192,12 +192,31 @@ public class WorldSimulatorClient {
         System.out.println("handle truck status");
     }
 
-    public void handleAcks(long acks){
+    public void handleWorldAcks(long acks){
         // world acked, we can delete it from worldMessages
-        if (GlobalVariables.worldMessages.containsKey(acks)){
-            loggerListenWorld.debug("Message with ack " + acks + " removed from worldMessages");
-            GlobalVariables.worldMessages.remove(acks);
+        if (!GlobalVariables.worldMessages.containsKey(acks)){
+            System.out.println("World ack already not in worldMessages, not handling");
+            return;
         }
+
+        String type = GlobalVariables.worldMessages.get(acks).getDescriptorForType().getName();
+        System.out.println("World Ack type: " + type);
+
+        if (type.equals("UGoPickup")){
+            // change truck status to traveling
+            System.out.println("successful identified type");
+        }
+        else if (type.equals("UGoDeliver")){
+            // change truck status to delivering
+            
+        }
+        else if (type.equals("UQuery")){
+            //似乎不需要做啥？
+
+        }
+        loggerListenWorld.debug("Message with ack " + acks + " removed from worldMessages");
+        GlobalVariables.worldMessages.remove(acks);
+
     }
 
     public void handleError(WorldUps.UErr err){

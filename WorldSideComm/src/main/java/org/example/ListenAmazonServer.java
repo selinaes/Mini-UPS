@@ -1,9 +1,6 @@
 package org.example;
 
 import org.example.models.Truck;
-import org.hibernate.Session;
-import org.xml.sax.SAXException;
-import javax.xml.bind.DatatypeConverter;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,9 +11,6 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicLong;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -235,7 +229,7 @@ public class ListenAmazonServer {
             UpsAmazon.UAcommands amazonMessage = formAmazonMessage();
             if (amazonMessage == null) {
                 loggerSendAmazon.debug("no message to send to amazon!");
-                System.out.println("no message to send to amazon!");
+//                System.out.println("no message to send to amazon!");
                 return;
             }
             try {
@@ -288,7 +282,7 @@ public class ListenAmazonServer {
 
             for (long acks : aUcommands.getAcksList()) {
                 System.out.println("disconnect");
-                handleAcks(acks);
+                handleAmazonAcks(acks);
             }
 
             if (aUcommands.getDisconnect()) {
@@ -352,8 +346,12 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcks.add(delivery.getSeqNum());
         GlobalVariables.amazonAcked.add(delivery.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
+        // get ShipID
 
-        System.out.println("delivery");
+        // create new UGoDeliver, make UDeliveryLocation first
+
+        // add to worldMessage
+
     }
 
     public void handleChangeDest(UpsAmazon.AUchangeDestn changeDestn) {
@@ -361,7 +359,13 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcks.add(changeDestn.getSeqNum());
         GlobalVariables.amazonAcked.add(changeDestn.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
-        System.out.println("change");
+
+
+        // Case 1: if status before delivering, change destination
+        // get ShipID, destinationX, destionation Y, and change it in DB
+        // create UAchangeResp success, save to message list
+
+        // Case 2: if status delivering, create UAchangeResp fail, save to message list
     }
 
     public void handleQuery(UpsAmazon.AUquery query) {
@@ -369,7 +373,8 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcks.add(query.getSeqNum());
         GlobalVariables.amazonAcked.add(query.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
-        System.out.println("query");
+
+
     }
 
     public void handleErr(UpsAmazon.Err err) {
@@ -380,7 +385,18 @@ public class ListenAmazonServer {
         System.out.println("err");
     }
 
-    public void handleAcks(long acks) {
+    public void handleAmazonAcks(long acks) {
+        if (!GlobalVariables.amazonMessages.containsKey(acks)){
+            System.out.println("World ack already not in amazonMessage, not handling");
+            return;
+        }
+        // Step1. check ack Type, call corresponding method to change necessary status
+        String type = GlobalVariables.amazonMessages.get(acks).getDescriptorForType().getName();
+        if (type.equals("UAtruckArrived")){
+            // change package status to loading
+        }
+
+        // Step2. remove ack from amazonAcks
         GlobalVariables.amazonMessages.remove(acks);
     }
 
@@ -391,6 +407,7 @@ public class ListenAmazonServer {
     }
 
     private <T> T read(com.google.protobuf.Parser<T> parser, Socket client_socket) throws IOException {
+        // use codedInputStream to read message 注意改
         InputStream inputStream = client_socket.getInputStream();
 //        byte[] bytes = inputStream.readAllBytes();
 //        String hexContent = DatatypeConverter.printHexBinary(bytes);
