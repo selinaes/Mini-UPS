@@ -8,6 +8,8 @@ import java.util.List;
 
 import gpb.WorldUps;
 import gpb.UpsAmazon;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.example.models.Shipment;
 
 public class WorldSimulatorClient {
@@ -17,6 +19,8 @@ public class WorldSimulatorClient {
 
     private InputStream inputStream;
     private OutputStream outputStream;
+
+    private static final Logger loggerListenWorld = LogManager.getLogger("LISTEN_WORLD");
 
     public WorldSimulatorClient(String host, int port) {
         this.host = host;
@@ -74,7 +78,7 @@ public class WorldSimulatorClient {
     */
     public WorldUps.UResponses readResponses() throws IOException {
         WorldUps.UResponses uResponses = read(WorldUps.UResponses.parser());
-        System.out.println("Received responses: " + uResponses);
+        loggerListenWorld.info("Received responses: " + uResponses);
         return uResponses;
     }
 
@@ -88,25 +92,31 @@ public class WorldSimulatorClient {
                 uResponses = readResponses();
                 // handle each situation with world
                 for (WorldUps.UFinished completions : uResponses.getCompletionsList()) {
-                    System.out.println("completions");
+                    loggerListenWorld.debug("line 91 received completions");
+                    loggerListenWorld.info(completions.toString());
                     handleCompletions(completions);
                 }
 
                 for (WorldUps.UDeliveryMade delivered: uResponses.getDeliveredList()) {
-                    System.out.println("deliveries");
+                    loggerListenWorld.debug("line 101 received UDeliveryMade");
+                    loggerListenWorld.info(delivered.toString());
                     handleDeliveries(delivered);
                 }
 
                 for (WorldUps.UTruck truckstatus: uResponses.getTruckstatusList()) {
-                    System.out.println("truckstatus");
+                    loggerListenWorld.debug("line 107 received completions");
+                    loggerListenWorld.info(truckstatus.toString());
                     handleTruckStatus(truckstatus);
                 }
 
                 for (long acks: uResponses.getAcksList()){
+                    loggerListenWorld.debug("line 113 received world acks: " + acks);
                     handleAcks(acks);
                 }
 
                 for (WorldUps.UErr err: uResponses.getErrorList()){
+                    loggerListenWorld.debug("line 118 received completions");
+                    loggerListenWorld.info(err.toString());
                     handleError(err);
                 }
 
@@ -125,11 +135,18 @@ public class WorldSimulatorClient {
     }
 
     public void handleCompletions(WorldUps.UFinished completions){
+        long seqNum = completions.getSeqnum();
+        if (GlobalVariables.worldAcked.contains(seqNum)){
+            loggerListenWorld.debug("UFinished " + seqNum + " already handled");
+            return;
+        }
+
         GlobalVariables.worldAckLock.lock();
-        GlobalVariables.worldAcks.add(completions.getSeqnum());
+        GlobalVariables.worldAcks.add(seqNum);
+        GlobalVariables.worldAcked.add(seqNum);
         GlobalVariables.worldAckLock.unlock();
         if (completions.getStatus().equals("idle")) {
-            System.out.println("truck all deliveres finished"); // !!!注意这里没有implement！！！
+            loggerListenWorld.debug("UFinished " + seqNum + " already handled");// !!!注意这里没有implement！！！
         }
         // Arrive warehouse
         else {
@@ -140,38 +157,59 @@ public class WorldSimulatorClient {
             int whID = shipments.get(0).getWh_id();
             // for loop to add for amazonMessages to add UATruckArrived
             for (Shipment sh: shipments) {
-                long seqNum = GlobalVariables.seqNumAmazon.incrementAndGet();
+                long seqnum = GlobalVariables.seqNumAmazon.incrementAndGet();
                 UpsAmazon.UAtruckArrived arrived = UpsAmazon.UAtruckArrived.newBuilder().setWhID(whID)
-                        .setTruckID(truck_id).setShipID(sh.getShipment_id()).setSeqNum(seqNum).build();
-                GlobalVariables.amazonMessages.put(seqNum, arrived);
+                        .setTruckID(truck_id).setShipID(sh.getShipment_id()).setSeqNum(seqnum).build();
+                GlobalVariables.amazonMessages.put(seqnum, arrived);
             }
         }
-        System.out.println("handle completions");
+
     }
 
     public void handleDeliveries(WorldUps.UDeliveryMade delivered){
+        long seqNum = delivered.getSeqnum();
+        if (GlobalVariables.worldAcked.contains(seqNum)){
+            loggerListenWorld.debug("UDeliveryMade " + seqNum + " already handled");
+            return;
+        }
         GlobalVariables.worldAckLock.lock();
-        GlobalVariables.worldAcks.add(delivered.getSeqnum());
+        GlobalVariables.worldAcks.add(seqNum);
+        GlobalVariables.worldAcked.add(seqNum);
         GlobalVariables.worldAckLock.unlock();
-        System.out.println("handle deliveries");
+
     }
 
     public void handleTruckStatus(WorldUps.UTruck truckstatus){
+        long seqNum = truckstatus.getSeqnum();
+        if (GlobalVariables.worldAcked.contains(seqNum)){
+            loggerListenWorld.debug("UTruck " + seqNum + " already handled");
+            return;
+        }
         GlobalVariables.worldAckLock.lock();
         GlobalVariables.worldAcks.add(truckstatus.getSeqnum());
+        GlobalVariables.worldAcked.add(truckstatus.getSeqnum());
         GlobalVariables.worldAckLock.unlock();
         System.out.println("handle truck status");
     }
 
     public void handleAcks(long acks){
-        System.out.println("handle acks");
+        // world acked, we can delete it from worldMessages
+        if (GlobalVariables.worldMessages.containsKey(acks)){
+            loggerListenWorld.debug("Message with ack " + acks + " removed from worldMessages");
+            GlobalVariables.worldMessages.remove(acks);
+        }
     }
 
     public void handleError(WorldUps.UErr err){
+        long seqNum = err.getSeqnum();
+        if (GlobalVariables.worldAcked.contains(seqNum)){
+            loggerListenWorld.debug("UErr " + seqNum + " already handled");
+            return;
+        }
         GlobalVariables.worldAckLock.lock();
         GlobalVariables.worldAcks.add(err.getSeqnum());
+        GlobalVariables.worldAcked.add(err.getSeqnum());
         GlobalVariables.worldAckLock.unlock();
-        System.out.println("handle error");
     }
 
 

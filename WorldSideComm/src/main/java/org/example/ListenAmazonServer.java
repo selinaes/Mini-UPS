@@ -3,18 +3,23 @@ package org.example;
 import org.example.models.Truck;
 import org.hibernate.Session;
 import org.xml.sax.SAXException;
+import javax.xml.bind.DatatypeConverter;
 
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import gpb.UpsAmazon;
 import gpb.WorldUps;
@@ -29,6 +34,10 @@ public class ListenAmazonServer {
     long worldId;
 
 
+    private static final Logger loggerListenAmazon = LogManager.getLogger("LISTEN_AMAZON");
+    private static final Logger loggerSendWorld = LogManager.getLogger("SEND_WORLD");
+    private static final Logger loggerSendAmazon = LogManager.getLogger("SEND_AMAZON");
+
     public ListenAmazonServer(int port, WorldSimulatorClient client) throws IOException {
         this.serverSocket = new ServerSocket(port);
         this.worldClient = client;
@@ -39,21 +48,26 @@ public class ListenAmazonServer {
     */
     public WorldUps.UCommands formWorldMessage() {
         if (GlobalVariables.worldMessages.isEmpty()) {
+            System.out.println("worldMessage list empty");
             return null;
         }
         WorldUps.UCommands.Builder uCommandsBuilder = WorldUps.UCommands.newBuilder();
         // Loop through the ConcurrentHashMap
         for (com.google.protobuf.GeneratedMessageV3 message : GlobalVariables.worldMessages.values()) {
+            System.out.println("message type" + message.getClass().getName());
             // Add UGoPickup messages
             if (message instanceof WorldUps.UGoPickup pickup) {
+                System.out.println("added pickup to ucommands line 49");
                 uCommandsBuilder.addPickups(pickup);
             }
             // Add UGoDeliver messages
             else if (message instanceof WorldUps.UGoDeliver delivery) {
+                System.out.println("added delivery to ucommands line 54");
                 uCommandsBuilder.addDeliveries(delivery);
             }
             // Add UQuery messages
             else if (message instanceof WorldUps.UQuery query) {
+                System.out.println("added query to ucommands line 59");
                 uCommandsBuilder.addQueries(query);
             }
             else {
@@ -62,6 +76,7 @@ public class ListenAmazonServer {
         }
 
         GlobalVariables.worldAckLock.lock();
+        System.out.println("formed world acks" + GlobalVariables.worldAcks);
         uCommandsBuilder.addAllAcks(GlobalVariables.worldAcks);
         GlobalVariables.worldAcks.clear();
         GlobalVariables.worldAckLock.unlock();
@@ -79,22 +94,28 @@ public class ListenAmazonServer {
         UpsAmazon.UAcommands.Builder UACommandsBuilder = UpsAmazon.UAcommands.newBuilder();
         // Loop through the ConcurrentHashMap
         for (com.google.protobuf.GeneratedMessageV3 message : GlobalVariables.amazonMessages.values()) {
+            System.out.println("message type" + message.getClass().getName());
             // Add UGoPickup messages
             if (message instanceof UpsAmazon.UAtruckArrived truckArr) {
+                System.out.println("line 91 added truckArr to UAcommands");
                 UACommandsBuilder.addTruckArr(truckArr);
             }
             // Add UGoDeliver messages
             else if (message instanceof UpsAmazon.UAstatus status) {
+                System.out.println("line 96 added status to UAcommands");
                 UACommandsBuilder.addStatus(status);
             }
             // Add UQuery messages
             else if (message instanceof UpsAmazon.UAdelivered delivered) {
+                System.out.println("line 101 added delivered to UAcommands");
                 UACommandsBuilder.addDelivered(delivered);
             }
             else if (message instanceof UpsAmazon.UAbindUPSResponse bindRes){
+                System.out.println("line 105 added bindRes to UAcommands");
                 UACommandsBuilder.addBindUPSResponse(bindRes);
             }
             else if (message instanceof  UpsAmazon.UAchangeResp changeResp) {
+                System.out.println("line 109 added changeResp to UAcommands");
                 UACommandsBuilder.addChangeResp(changeResp);
             }
             else {
@@ -103,6 +124,7 @@ public class ListenAmazonServer {
         }
 
         GlobalVariables.amazonAckLock.lock();
+        System.out.println("formed amazon acks" + GlobalVariables.amazonAcks);
         UACommandsBuilder.addAllAcks(GlobalVariables.amazonAcks);
         GlobalVariables.amazonAcks.clear();
         GlobalVariables.amazonAckLock.unlock();
@@ -158,7 +180,7 @@ public class ListenAmazonServer {
     * Handle Client: UConnect from the
     */
     public void handleClient(Socket client_socket) throws IOException {
-        List<WorldUps.UInitTruck> trucks = initTrucks(1);
+        List<WorldUps.UInitTruck> trucks = initTrucks(10);
 
         // Step 1: UConnect
         long worldId = worldClient.connectToWorld(trucks);
@@ -179,42 +201,56 @@ public class ListenAmazonServer {
                 }
         );
 
-        // Schedule a task to be executed after a certain delay
-        int delayInSeconds = 5; // Adjust the delay as needed
-        scheduler.schedule(() -> {
+        // Schedule a task to be executed periodically with a fixed delay
+        int delayInSeconds = 1; // Adjust the delay as needed
+        scheduler.scheduleAtFixedRate(() -> {
             // Call formWorldMessage() and send the message
             WorldUps.UCommands worldMessage = formWorldMessage();
             if (worldMessage == null) {
+                loggerSendWorld.debug("no message to send to world!");
+                System.out.println("no message to send to world!");
                 return;
             }
             try {
+                loggerSendWorld.debug("sent message to world!");
+                System.out.println("sent message to world!");
                 worldClient.sendCommands(worldMessage);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }, delayInSeconds, TimeUnit.SECONDS);
+        }, delayInSeconds, delayInSeconds, TimeUnit.SECONDS);
+
 
         // Schedule a task to be executed after a certain delay
-        int delayForAmazon = 5; // Adjust the delay as needed
-        scheduler.schedule(() -> {
+        int delayForAmazon = 1; // Adjust the delay as needed
+        scheduler.scheduleAtFixedRate(() -> {
             // Call formWorldMessage() and send the message
             UpsAmazon.UAcommands amazonMessage = formAmazonMessage();
             if (amazonMessage == null) {
+                loggerSendAmazon.debug("no message to send to amazon!");
+                System.out.println("no message to send to amazon!");
                 return;
             }
             try {
+                loggerSendAmazon.debug("sent message to amazon!");
+                System.out.println("sent message to amazon!");
                 send(amazonMessage, client_socket);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-        }, delayForAmazon, TimeUnit.SECONDS);
+        }, delayForAmazon, delayInSeconds, TimeUnit.SECONDS);
 
         // continuously read from Amazon, handle one by one, collect next-to-send messages into global variable
         while (!Thread.currentThread().isInterrupted()) {
             UpsAmazon.AUcommands aUcommands = read(UpsAmazon.AUcommands.parser(), client_socket); // 需要验证，如果下一条没有会不会出问题
+            if (aUcommands == null){
+                System.out.println("AUcommands is null");
+                break;
+            }
+
             // handle each situation with world
             for (UpsAmazon.AUreqPickup pickup : aUcommands.getPickupList()) {
-                System.out.println("pickup");
+                System.out.println("pickup line 217");
                 handlePickup(pickup);
             }
 
@@ -258,9 +294,10 @@ public class ListenAmazonServer {
 
 
     public void handlePickup(UpsAmazon.AUreqPickup pickup) {
-        // in DB, find a truckID that is available. Now just use 1 注意用hibernate session处理DB
+
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(pickup.getSeqNum());
+        GlobalVariables.amazonAcked.add(pickup.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
         Truck usedTruck = DBoperations.useAvailableTruck();
         if (usedTruck == null) {
@@ -298,6 +335,7 @@ public class ListenAmazonServer {
     public void handleBind(UpsAmazon.AUbindUPS bind) {
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(bind.getSeqNum());
+        GlobalVariables.amazonAcked.add(bind.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
         System.out.println("bind");
     }
@@ -305,6 +343,7 @@ public class ListenAmazonServer {
     public void handleDelivery(UpsAmazon.AUreqDelivery delivery) {
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(delivery.getSeqNum());
+        GlobalVariables.amazonAcked.add(delivery.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
 
         System.out.println("delivery");
@@ -313,6 +352,7 @@ public class ListenAmazonServer {
     public void handleChangeDest(UpsAmazon.AUchangeDestn changeDestn) {
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(changeDestn.getSeqNum());
+        GlobalVariables.amazonAcked.add(changeDestn.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
         System.out.println("change");
     }
@@ -320,6 +360,7 @@ public class ListenAmazonServer {
     public void handleQuery(UpsAmazon.AUquery query) {
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(query.getSeqNum());
+        GlobalVariables.amazonAcked.add(query.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
         System.out.println("query");
     }
@@ -327,6 +368,7 @@ public class ListenAmazonServer {
     public void handleErr(UpsAmazon.Err err) {
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(err.getSeqnum());
+        GlobalVariables.amazonAcked.add(err.getSeqnum());
         GlobalVariables.amazonAckLock.unlock();
         System.out.println("err");
     }
@@ -343,8 +385,35 @@ public class ListenAmazonServer {
 
     private <T> T read(com.google.protobuf.Parser<T> parser, Socket client_socket) throws IOException {
         InputStream inputStream = client_socket.getInputStream();
+//        byte[] bytes = inputStream.readAllBytes();
+//        String hexContent = DatatypeConverter.printHexBinary(bytes);
+//        System.out.println("Read content from amazon: \n" + hexContent);
         return parser.parseDelimitedFrom(inputStream);
     }
+
+    private <T extends com.google.protobuf.GeneratedMessageV3> T readNew(com.google.protobuf.Parser<T> parser, Socket socket) throws IOException {
+        InputStream inputStream = socket.getInputStream();
+
+        // Read the message length prefix (an integer)
+        byte[] lengthPrefix = new byte[4];
+        inputStream.read(lengthPrefix);
+        int messageLength = ByteBuffer.wrap(lengthPrefix).getInt();
+
+        // Read the entire message into a byte array
+        byte[] messageBytes = new byte[messageLength];
+        int totalBytesRead = 0;
+        while (totalBytesRead < messageLength) {
+            int bytesRead = inputStream.read(messageBytes, totalBytesRead, messageLength - totalBytesRead);
+            if (bytesRead == -1) {
+                throw new IOException("Connection closed before full message received");
+            }
+            totalBytesRead += bytesRead;
+        }
+
+        // Parse the message from the byte array
+        return parser.parseFrom(messageBytes);
+    }
+
 
     /**
      * This is a helper method to accept a socket from the ServerSocket or return null if it
@@ -368,7 +437,7 @@ public class ListenAmazonServer {
         List<WorldUps.UInitTruck> trucks = new ArrayList<>();
         for (int i = 1; i <= number; i++){
             // Step 0: UInitTruck
-            WorldUps.UInitTruck truck = WorldUps.UInitTruck.newBuilder().setId(1).setX(50).setY(30).build();
+            WorldUps.UInitTruck truck = WorldUps.UInitTruck.newBuilder().setId(i).setX(50).setY(30).build();
             // add DB operation, add to DB
             DBoperations.createNewTruck(truck);
             trucks.add(truck);

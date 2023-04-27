@@ -18,6 +18,9 @@ public class GlobalVariables {
     public static CopyOnWriteArrayList<Long> worldAcks = new CopyOnWriteArrayList<>();
     public static CopyOnWriteArrayList<Long> amazonAcks = new CopyOnWriteArrayList<>();
 
+    public static CopyOnWriteArrayList<Long> worldAcked = new CopyOnWriteArrayList<>();
+    public static CopyOnWriteArrayList<Long> amazonAcked = new CopyOnWriteArrayList<>();
+
     public static Lock worldAckLock = new ReentrantLock();
     public static Lock amazonAckLock = new ReentrantLock();
 }
