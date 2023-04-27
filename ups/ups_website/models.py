@@ -22,6 +22,7 @@ class Truck(models.Model):
     truck_x = models.IntegerField()  # Required: truck's x coordinate
     truck_y = models.IntegerField()  # Required: truck's y coordinate
     truck_status = models.CharField(max_length=200)  # Required: truck's status as a character field with a max length of 200 characters
+    wh_id = models.IntegerField(null=True)  # Required: warehouse's id
     def __str__(self):
         return str(self.truck_id)  # String representation of the Truck model, using the truck_id
 
