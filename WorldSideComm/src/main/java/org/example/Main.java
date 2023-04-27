@@ -8,11 +8,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        String host = "localhost";
+        String worldHost = "localhost";
         int worldPort = 12345;
         int amazonPort = 34567;
-
-        WorldSimulatorClient client = new WorldSimulatorClient(host, worldPort);
+        System.out.println(System.getProperty("user.dir"));
+        WorldSimulatorClient client = new WorldSimulatorClient(worldHost, worldPort);
 
         try {
             // Step 1: Listen for connection from amazon. Everything else in server

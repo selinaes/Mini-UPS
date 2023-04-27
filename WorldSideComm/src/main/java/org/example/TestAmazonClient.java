@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 import gpb.UpsAmazon;
+import com.google.protobuf.GeneratedMessageV3;
 
 public class TestAmazonClient {
 
@@ -37,6 +38,12 @@ public class TestAmazonClient {
     //generate AUbindUPS
 
     //generate AUreqPickup
+    public UpsAmazon.AUreqPickup generateAUreqPickup(int whID, int destX, int destY, long shipID, int upsID, long seqNum){
+        UpsAmazon.AProduct product = UpsAmazon.AProduct.newBuilder().setId(1).setCount(2).setDescription("item").build();
+        return UpsAmazon.AUreqPickup.newBuilder().setWhID(whID).setDestinationX(destX)
+                .setDestinationY(destY).setShipID(shipID).setUpsID(upsID).setSeqNum(seqNum)
+                .addProducts(product).build();
+    }
 
     //generate AUreqDelivery
 
@@ -44,13 +51,35 @@ public class TestAmazonClient {
 
     //generate AUchangeDestn
 
-    //form AUcommands
+    //add to AUcommand
+    public UpsAmazon.AUcommands.Builder addToAUcommands(UpsAmazon.AUcommands.Builder builder, GeneratedMessageV3 message){
+        if (message instanceof UpsAmazon.AUreqPickup pickup) {
+            builder.addPickup(pickup);
+        }
+        else if (message instanceof UpsAmazon.AUbindUPS bind) {
+            builder.addBind(bind);
+        }
+        else if (message instanceof UpsAmazon.AUquery query) {
+            builder.addQuery(query);
+        }
+        else if (message instanceof UpsAmazon.AUreqDelivery delivery) {
+            builder.addDelivery(delivery);
+        }
+        else if (message instanceof UpsAmazon.AUchangeDestn changeDest) {
+            builder.addChangeDest(changeDest);
+        }
+        return builder;
+    }
     
 
     //recv UAcommands
     public void recvUACommands() throws IOException {
         UpsAmazon.UAcommands commands = read(UpsAmazon.UAcommands.parser());
         System.out.println("Acked result: " + commands.getAcksList());
+    }
+
+    public void sendAUcommands(UpsAmazon.AUcommands commands) throws IOException {
+        send(commands);
     }
 
 
@@ -66,9 +95,15 @@ public class TestAmazonClient {
 
     //main class
     public static void main(String[] args) throws IOException {
-        TestAmazonClient client = new TestAmazonClient("localhost", 34567);
-        client.connectToUPS();
-        client.sendConnectedWorld();
+        TestAmazonClient testAmazonClient = new TestAmazonClient("localhost", 34567);
+        testAmazonClient.connectToUPS();
+
+        testAmazonClient.sendConnectedWorld();
+
+        UpsAmazon.AUreqPickup pickup = testAmazonClient.generateAUreqPickup(1, 50, 50, 1, 1, 1);
+        UpsAmazon.AUcommands.Builder builder = UpsAmazon.AUcommands.newBuilder();
+        testAmazonClient.addToAUcommands(builder, pickup);
+        testAmazonClient.sendAUcommands(builder.build());
     }
 
 

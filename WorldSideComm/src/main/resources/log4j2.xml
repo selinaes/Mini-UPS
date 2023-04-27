@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <File name="LISTEN_WORLD" fileName="logs/listenWorld.log">
+            <PatternLayout>
+                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+        </File>
+        <File name="LISTEN_AMAZON" fileName="logs/listenAmazon.log">
+            <PatternLayout>
+                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+        </File>
+        <File name="SEND_WORLD" fileName="logs/sendWorld.log">
+            <PatternLayout>
+                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+        </File>
+        <File name="SEND_AMAZON" fileName= "logs/sendAmazon.log">
+            <PatternLayout>
+                <pattern>%d %p %c{1.} [%t] %m%n</pattern>
+            </PatternLayout>
+        </File>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="LISTEN_WORLD_LOGGER" level="debug" additivity="false">
+            <AppenderRef ref="LISTEN_WORLD" />
+        </Logger>
+        <Logger name="LISTEN_AMAZON_LOGGER" level="debug" additivity="false">
+            <AppenderRef ref="LISTEN_AMAZON" />
+        </Logger>
+        <Logger name="SEND_WORLD_LOGGER" level="debug" additivity="false">
+            <AppenderRef ref="SEND_WORLD" />
+        </Logger>
+        <Logger name="SEND_AMAZON_LOGGER" level="debug" additivity="false">
+            <AppenderRef ref="SEND_AMAZON" />
+        </Logger>
+        <Root level="error">
+            <AppenderRef ref="CONSOLE" />
+        </Root>
+    </Loggers>
+</Configuration>

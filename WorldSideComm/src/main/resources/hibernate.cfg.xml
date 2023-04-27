@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url">jdbc:postgresql://localhost:5432/ups</property>
+    <property name="connection.url">jdbc:postgresql://localhost:5432/upsDB</property>
     <property name="connection.driver_class">org.postgresql.Driver</property>
 
 
@@ -17,8 +17,8 @@
     <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
     <!-- Print executed SQL to stdout -->
-    <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.format_sql">true</property>
+    <property name="hibernate.show_sql">false</property>
+    <property name="hibernate.format_sql">false</property>
 
     <!-- Update database on startup -->
     <property name="hibernate.hbm2ddl.auto">create</property>
@@ -26,5 +26,11 @@
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.connection.autocommit">false</property>
     <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+
+    <!-- Mapping files -->
+    <mapping class="org.example.models.Truck"/>
+    <mapping class="org.example.models.Shipment"/>
+    <mapping class="org.example.models.ProductsInPackage"/>
+    
   </session-factory>
 </hibernate-configuration>
