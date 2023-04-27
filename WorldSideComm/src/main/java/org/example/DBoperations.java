@@ -52,7 +52,7 @@ public class DBoperations {
     * Get an available truck ("idle") and set it to "travelling"
     * Return the truck which is selected
     */
-    public static Truck useAvailableTruck() {
+    public static Truck useAvailableTruck(int targetWH) {
         Session session = SessionFactoryWrapper.openSession();
         Lock lock = SessionFactoryWrapper.getLock("truck");
         lock.lock();
@@ -62,17 +62,26 @@ public class DBoperations {
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<Truck> cq = cb.createQuery(Truck.class);
             Root<Truck> root = cq.from(Truck.class);
-
+            // first find traveling + same whid, just use that truck when it arrives
             cq.where(
-                    cb.equal(root.get("truck_status"), "idle" ) // 可能不止idle 看一下要求
+                    cb.equal(root.get("truck_status"), "traveling" ),
+                    cb.equal(root.get("wh_id"), targetWH )
             );
-            List<Truck> trucks = session.createQuery(cq).setLockMode(LockModeType.PESSIMISTIC_WRITE).getResultList();
-            if (trucks.size() == 0) {
+            List<Truck> trucksToSameWH = session.createQuery(cq).setLockMode(LockModeType.PESSIMISTIC_WRITE).getResultList();
+            if(trucksToSameWH.size() != 0){
+                return trucksToSameWH.get(0);
+            }
+
+            CriteriaQuery<Truck> cq2 = cb.createQuery(Truck.class);
+            cq2.where(
+                    cb.equal(root.get("truck_status"), "idle" )
+            );
+            List<Truck> trucksIdle = session.createQuery(cq).setLockMode(LockModeType.PESSIMISTIC_WRITE).getResultList();
+            if (trucksIdle.size() == 0) {
                 return null;
             }
-            Truck usedTruck = trucks.get(0);
-            usedTruck.setTruck_status("traveling"); // 应该在收到ack再改travelling。这里需要改，有可能收到err
-
+            Truck usedTruck = trucksIdle.get(0);
+            usedTruck.setWh_id(targetWH);
             session.merge(usedTruck);
             tx.commit();
             return usedTruck;
@@ -139,5 +148,73 @@ public class DBoperations {
             lock.unlock();
         }
     }
+
+    public static WorldUps.UGoDeliver makeDeliverMessage(long shipID, long seqnum){
+        Session session = SessionFactoryWrapper.openSession();
+        Lock lock = SessionFactoryWrapper.getLock("shipment");
+        lock.lock();
+        try (session) {
+            Transaction tx = session.beginTransaction();
+            // get corresponding shipment
+            Shipment ship = session.get(Shipment.class, shipID, LockMode.PESSIMISTIC_WRITE);
+
+            WorldUps.UDeliveryLocation uDeliveryLocation = WorldUps.UDeliveryLocation.newBuilder()
+                    .setPackageid(shipID).setX(ship.getDest_x()).setY(ship.getDest_y()).build();
+
+            WorldUps.UGoDeliver uGoDeliver = WorldUps.UGoDeliver.newBuilder()
+                    .addPackages(uDeliveryLocation).setTruckid(ship.getTruck_id()).setSeqnum(seqnum).build();
+
+            tx.commit();
+            return uGoDeliver;
+        }
+        finally {
+            lock.unlock();
+        }
+
+    }
+
+    public static void updateShipAndTruckStatus(long shipID, String shipStatus, String truckStatus) {
+        Session session = SessionFactoryWrapper.openSession();
+        Lock lock = SessionFactoryWrapper.getLock("shipment");
+        lock.lock();
+        Lock lockT = SessionFactoryWrapper.getLock("truck");
+        lockT.lock();
+        try (session) {
+            Transaction tx = session.beginTransaction();
+            // get corresponding shipment
+            Shipment ship = session.get(Shipment.class, shipID, LockMode.PESSIMISTIC_WRITE);
+            ship.setShipment_status(shipStatus);
+
+            Truck truck = session.get(Truck.class, ship.getTruck_id(), LockMode.PESSIMISTIC_WRITE);
+            truck.setTruck_status(truckStatus);
+            session.merge(truck);
+            session.merge(ship);
+
+            tx.commit();
+        }
+        finally {
+            lockT.unlock();
+            lock.unlock();
+        }
+    }
+
+    public static void updateTruckStatus(int truckID, String truckStatus) {
+        Session session = SessionFactoryWrapper.openSession();
+        Lock lockT = SessionFactoryWrapper.getLock("truck");
+        lockT.lock();
+        try (session) {
+            Transaction tx = session.beginTransaction();
+            // get corresponding truck
+            Truck truck = session.get(Truck.class, truckID, LockMode.PESSIMISTIC_WRITE);
+            truck.setTruck_status(truckStatus);
+            session.merge(truck);
+
+            tx.commit();
+        }
+        finally {
+            lockT.unlock();
+        }
+    }
+
 
 }

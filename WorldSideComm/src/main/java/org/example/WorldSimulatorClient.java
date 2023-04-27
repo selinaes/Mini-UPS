@@ -94,6 +94,7 @@ public class WorldSimulatorClient {
                 for (WorldUps.UFinished completions : uResponses.getCompletionsList()) {
                     loggerListenWorld.debug("line 91 received completions");
                     loggerListenWorld.info(completions.toString());
+                    System.out.println("UFinished received. status: " + completions.getStatus());
                     handleCompletions(completions);
                 }
 
@@ -204,11 +205,18 @@ public class WorldSimulatorClient {
 
         if (type.equals("UGoPickup")){
             // change truck status to traveling
-            System.out.println("successful identified type");
+            WorldUps.UGoPickup message = (WorldUps.UGoPickup) GlobalVariables.worldMessages.get(acks);
+            DBoperations.updateTruckStatus(message.getTruckid(), "traveling");
         }
         else if (type.equals("UGoDeliver")){
-            // change truck status to delivering
-            
+            WorldUps.UGoDeliver message = (WorldUps.UGoDeliver) GlobalVariables.worldMessages.get(acks);
+            // change truck status to delivering, change shipment status to out for delivery
+            List<WorldUps.UDeliveryLocation> locations = message.getPackagesList();
+            for (WorldUps.UDeliveryLocation location : locations){
+                long ship_id = location.getPackageid();
+                DBoperations.updateShipAndTruckStatus(ship_id, "out for delivery", "delivering");
+            }
+
         }
         else if (type.equals("UQuery")){
             //似乎不需要做啥？

@@ -300,7 +300,7 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcks.add(pickup.getSeqNum());
         GlobalVariables.amazonAcked.add(pickup.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
-        Truck usedTruck = DBoperations.useAvailableTruck();
+        Truck usedTruck = DBoperations.useAvailableTruck(pickup.getWhID());
         if (usedTruck == null) {
             long errSeqNum = GlobalVariables.seqNumAmazon.incrementAndGet();
             UpsAmazon.Err error = UpsAmazon.Err.newBuilder()
@@ -347,10 +347,13 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcked.add(delivery.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
         // get ShipID
-
+        long shipmentID = delivery.getShipID();
+        long seqnum = GlobalVariables.seqNumWorld.incrementAndGet();
         // create new UGoDeliver, make UDeliveryLocation first
+        WorldUps.UGoDeliver message = DBoperations.makeDeliverMessage(shipmentID, seqnum);
 
         // add to worldMessage
+        GlobalVariables.worldMessages.put(seqnum, message);
 
     }
 
@@ -394,6 +397,8 @@ public class ListenAmazonServer {
         String type = GlobalVariables.amazonMessages.get(acks).getDescriptorForType().getName();
         if (type.equals("UAtruckArrived")){
             // change package status to loading
+            UpsAmazon.UAtruckArrived truckArrived = (UpsAmazon.UAtruckArrived) GlobalVariables.amazonMessages.get(acks);
+            DBoperations.updateTruckStatus(truckArrived.getTruckID(), "loading");
         }
 
         // Step2. remove ack from amazonAcks

@@ -1,5 +1,6 @@
 package org.example.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
@@ -10,7 +11,11 @@ public class Truck {
     @Id
     private int truck_id;
 
+    @Column(nullable = true)
+    private int wh_id;
+
     private int truck_x;
+
     private int truck_y;
     private String truck_status;
 
@@ -46,4 +51,13 @@ public class Truck {
     public void setTruck_id(int truck_id) {
         this.truck_id = truck_id;
     }
+
+    public int getWh_id() {
+        return wh_id;
+    }
+
+    public void setWh_id(int wh_id) {
+        this.wh_id = wh_id;
+    }
+
 }
