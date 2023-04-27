@@ -41,7 +41,7 @@ public class DBoperations {
             newTruck.setTruck_y(truck.getY());
             newTruck.setTruck_status("idle");
 
-            session.merge(newTuck);
+            session.merge(newTruck);
             tx.commit();
         } finally {
             lock.unlock();
