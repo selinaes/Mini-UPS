@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.List;
 
+import com.google.protobuf.CodedInputStream;
 import gpb.WorldUps;
 import gpb.UpsAmazon;
 import org.apache.logging.log4j.LogManager;
@@ -73,6 +74,11 @@ public class WorldSimulatorClient {
         return parser.parseDelimitedFrom(inputStream);
     }
 
+    private <T> T readNew(com.google.protobuf.Parser<T> parser) throws IOException {
+        CodedInputStream codedInputStream = CodedInputStream.newInstance(inputStream);
+        return parser.parseFrom(codedInputStream);
+    }
+
     /**
     * Read message from the world Docker and return it to UResponse
     */
@@ -90,6 +96,10 @@ public class WorldSimulatorClient {
             WorldUps.UResponses uResponses;
             try {
                 uResponses = readResponses();
+                if (uResponses == null){
+                    System.out.println("null uResponses");
+                    continue;
+                }
                 // handle each situation with world
                 for (long acks: uResponses.getAcksList()){
                     loggerListenWorld.debug("line 113 received world acks: " + acks);

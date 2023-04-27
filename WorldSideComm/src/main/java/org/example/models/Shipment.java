@@ -17,6 +17,20 @@ public class Shipment {
 
     private int dest_x;
 
+    @Override
+    public String toString() {
+        return "Shipment{" +
+                "shipment_id=" + shipment_id +
+                ", truck_id=" + truck_id +
+                ", wh_id=" + wh_id +
+                ", dest_x=" + dest_x +
+                ", dest_y=" + dest_y +
+                ", shipment_status='" + shipment_status + '\'' +
+                ", ups_userid=" + ups_userid +
+                ", productsInPackage=" + productsInPackage +
+                '}';
+    }
+
     private int dest_y;
 
     private String shipment_status;

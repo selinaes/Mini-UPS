@@ -58,4 +58,15 @@ public class ProductsInPackage {
     public void setProduct_quantity(int product_quantity) {
         this.product_quantity = product_quantity;
     }
+
+    @Override
+    public String toString() {
+        return "ProductsInPackage{" +
+                "id=" + id +
+                ", shipment=" + shipment +
+                ", product_id=" + product_id +
+                ", product_description='" + product_description + '\'' +
+                ", product_quantity=" + product_quantity +
+                '}';
+    }
 }

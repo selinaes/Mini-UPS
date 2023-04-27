@@ -1,5 +1,7 @@
 package org.example;
 
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.InvalidProtocolBufferException;
 import org.example.models.Truck;
 
 import java.io.InputStream;
@@ -77,6 +79,7 @@ public class ListenAmazonServer {
         loggerSendWorld.debug("added world acks to worldmessage" + GlobalVariables.worldAcks);
         System.out.println("added world acks to worldmessage" + GlobalVariables.worldAcks);
         uCommandsBuilder.addAllAcks(GlobalVariables.worldAcks);
+        uCommandsBuilder.setSimspeed(50);
         GlobalVariables.worldAcks.clear();
         GlobalVariables.worldAckLock.unlock();
 
@@ -439,36 +442,29 @@ public class ListenAmazonServer {
     }
 
     private <T> T read(com.google.protobuf.Parser<T> parser, Socket client_socket) throws IOException {
-        // use codedInputStream to read message 注意改
         InputStream inputStream = client_socket.getInputStream();
-//        byte[] bytes = inputStream.readAllBytes();
-//        String hexContent = DatatypeConverter.printHexBinary(bytes);
-//        System.out.println("Read content from amazon: \n" + hexContent);
         return parser.parseDelimitedFrom(inputStream);
     }
 
-    private <T extends com.google.protobuf.GeneratedMessageV3> T readNew(com.google.protobuf.Parser<T> parser, Socket socket) throws IOException {
-        InputStream inputStream = socket.getInputStream();
-
-        // Read the message length prefix (an integer)
-        byte[] lengthPrefix = new byte[4];
-        inputStream.read(lengthPrefix);
-        int messageLength = ByteBuffer.wrap(lengthPrefix).getInt();
-
-        // Read the entire message into a byte array
-        byte[] messageBytes = new byte[messageLength];
-        int totalBytesRead = 0;
-        while (totalBytesRead < messageLength) {
-            int bytesRead = inputStream.read(messageBytes, totalBytesRead, messageLength - totalBytesRead);
-            if (bytesRead == -1) {
-                throw new IOException("Connection closed before full message received");
-            }
-            totalBytesRead += bytesRead;
-        }
-
-        // Parse the message from the byte array
-        return parser.parseFrom(messageBytes);
+    private <T> T readNew(com.google.protobuf.Parser<T> parser, Socket client_socket) throws IOException {
+        InputStream inputStream = client_socket.getInputStream();
+        CodedInputStream codedInputStream = CodedInputStream.newInstance(inputStream);
+        return parser.parseFrom(codedInputStream);
     }
+
+    private <T> T readCoded(com.google.protobuf.Parser<T> parser, Socket client_socket) throws IOException {
+        try (InputStream inputStream = client_socket.getInputStream()) {
+            CodedInputStream codedInputStream = CodedInputStream.newInstance(inputStream);
+            T result = parser.parseFrom(codedInputStream);
+            codedInputStream.checkLastTagWas(0); // Ensure the stream has been fully consumed
+            return result;
+        } catch (InvalidProtocolBufferException e) {
+            System.err.println("Error parsing message from input stream: " + e.getMessage());
+            throw e;
+        }
+    }
+
+
 
 
     /**
