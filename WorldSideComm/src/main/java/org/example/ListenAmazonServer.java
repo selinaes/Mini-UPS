@@ -48,35 +48,42 @@ public class ListenAmazonServer {
     */
     public WorldUps.UCommands formWorldMessage() {
         if (GlobalVariables.worldMessages.isEmpty()) {
-            System.out.println("worldMessage list empty");
+            loggerSendWorld.debug("worldMessage list empty");
+//            System.out.println("worldMessage list empty");
             return null;
         }
         WorldUps.UCommands.Builder uCommandsBuilder = WorldUps.UCommands.newBuilder();
         // Loop through the ConcurrentHashMap
         for (com.google.protobuf.GeneratedMessageV3 message : GlobalVariables.worldMessages.values()) {
-            System.out.println("message type" + message.getClass().getName());
+            loggerSendWorld.debug("message type" + message.getClass().getName());
+//            System.out.println("message type" + message.getClass().getName());
             // Add UGoPickup messages
             if (message instanceof WorldUps.UGoPickup pickup) {
-                System.out.println("added pickup to ucommands line 49");
+                loggerSendWorld.debug("added pickup to ucommands line 62");
+//                System.out.println("added pickup to ucommands line 49");
                 uCommandsBuilder.addPickups(pickup);
             }
             // Add UGoDeliver messages
             else if (message instanceof WorldUps.UGoDeliver delivery) {
-                System.out.println("added delivery to ucommands line 54");
+                loggerSendWorld.debug("added delivery to ucommands line 68");
+//                System.out.println("added delivery to ucommands line 54");
                 uCommandsBuilder.addDeliveries(delivery);
             }
             // Add UQuery messages
             else if (message instanceof WorldUps.UQuery query) {
-                System.out.println("added query to ucommands line 59");
+                loggerSendWorld.debug("added query to ucommands line 74");
+//                System.out.println("added query to ucommands line 59");
                 uCommandsBuilder.addQueries(query);
             }
             else {
-                System.out.println("Unknown message type: " + message.getClass().getName());
+                loggerSendWorld.debug("Unknown message type: " + message.getClass().getName());
+//                System.out.println();
             }
         }
 
         GlobalVariables.worldAckLock.lock();
-        System.out.println("formed world acks" + GlobalVariables.worldAcks);
+        loggerSendWorld.debug("formed world acks" + GlobalVariables.worldAcks);
+//        System.out.println("formed world acks" + GlobalVariables.worldAcks);
         uCommandsBuilder.addAllAcks(GlobalVariables.worldAcks);
         GlobalVariables.worldAcks.clear();
         GlobalVariables.worldAckLock.unlock();
@@ -208,12 +215,12 @@ public class ListenAmazonServer {
             WorldUps.UCommands worldMessage = formWorldMessage();
             if (worldMessage == null) {
                 loggerSendWorld.debug("no message to send to world!");
-                System.out.println("no message to send to world!");
+//                System.out.println("no message to send to world!");
                 return;
             }
             try {
                 loggerSendWorld.debug("sent message to world!");
-                System.out.println("sent message to world!");
+//                System.out.println("sent message to world!");
                 worldClient.sendCommands(worldMessage);
             } catch (IOException e) {
                 throw new RuntimeException(e);

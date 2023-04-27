@@ -11,7 +11,7 @@ public class Main {
         String worldHost = "localhost";
         int worldPort = 12345;
         int amazonPort = 34567;
-
+        System.out.println(System.getProperty("user.dir"));
         WorldSimulatorClient client = new WorldSimulatorClient(worldHost, worldPort);
 
         try {
