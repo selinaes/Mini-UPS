@@ -41,43 +41,41 @@ public class ListenAmazonServer {
     * Formed Ucommands message to send to the UPS client to solve
     */
     public WorldUps.UCommands formWorldMessage() {
-        if (GlobalVariables.worldMessages.isEmpty()) {
+        if (GlobalVariables.worldMessages.isEmpty() && GlobalVariables.worldAcks.isEmpty()) {
             loggerSendWorld.debug("worldMessage list empty");
-//            System.out.println("worldMessage list empty");
             return null;
         }
         WorldUps.UCommands.Builder uCommandsBuilder = WorldUps.UCommands.newBuilder();
         // Loop through the ConcurrentHashMap
         for (com.google.protobuf.GeneratedMessageV3 message : GlobalVariables.worldMessages.values()) {
             loggerSendWorld.debug("message type" + message.getClass().getName());
-//            System.out.println("message type" + message.getClass().getName());
+            System.out.println("adding to worldMessage - type" + message.getClass().getName());
             // Add UGoPickup messages
             if (message instanceof WorldUps.UGoPickup pickup) {
                 loggerSendWorld.debug("added pickup to ucommands line 62");
-//                System.out.println("added pickup to ucommands line 49");
+                System.out.println("added pickup to ucommands line 49");
                 uCommandsBuilder.addPickups(pickup);
             }
             // Add UGoDeliver messages
             else if (message instanceof WorldUps.UGoDeliver delivery) {
                 loggerSendWorld.debug("added delivery to ucommands line 68");
-//                System.out.println("added delivery to ucommands line 54");
+                System.out.println("added delivery to ucommands line 54");
                 uCommandsBuilder.addDeliveries(delivery);
             }
             // Add UQuery messages
             else if (message instanceof WorldUps.UQuery query) {
                 loggerSendWorld.debug("added query to ucommands line 74");
-//                System.out.println("added query to ucommands line 59");
+                System.out.println("added query to ucommands line 59");
                 uCommandsBuilder.addQueries(query);
             }
             else {
                 loggerSendWorld.debug("Unknown message type: " + message.getClass().getName());
-//                System.out.println();
             }
         }
 
         GlobalVariables.worldAckLock.lock();
-        loggerSendWorld.debug("formed world acks" + GlobalVariables.worldAcks);
-//        System.out.println("formed world acks" + GlobalVariables.worldAcks);
+        loggerSendWorld.debug("added world acks to worldmessage" + GlobalVariables.worldAcks);
+        System.out.println("added world acks to worldmessage" + GlobalVariables.worldAcks);
         uCommandsBuilder.addAllAcks(GlobalVariables.worldAcks);
         GlobalVariables.worldAcks.clear();
         GlobalVariables.worldAckLock.unlock();
@@ -89,7 +87,7 @@ public class ListenAmazonServer {
     * Formed UAcommands message to send to the Amazon client for handling
     */
     public UpsAmazon.UAcommands formAmazonMessage() {
-        if (GlobalVariables.amazonMessages.isEmpty()) {
+        if (GlobalVariables.amazonMessages.isEmpty() && GlobalVariables.amazonAcks.isEmpty()) {
             return null;
         }
         UpsAmazon.UAcommands.Builder UACommandsBuilder = UpsAmazon.UAcommands.newBuilder();
@@ -119,13 +117,17 @@ public class ListenAmazonServer {
                 System.out.println("line 109 added changeResp to UAcommands");
                 UACommandsBuilder.addChangeResp(changeResp);
             }
+            else if (message instanceof  UpsAmazon.Err err) {
+                System.out.println("line 123 added err to UAcommands");
+                UACommandsBuilder.addErr(err);
+            }
             else {
                 System.out.println("Unknown message type: " + message.getClass().getName());
             }
         }
 
         GlobalVariables.amazonAckLock.lock();
-        System.out.println("formed amazon acks" + GlobalVariables.amazonAcks);
+        System.out.println("added amazon acks to amazonMessage" + GlobalVariables.amazonAcks);
         UACommandsBuilder.addAllAcks(GlobalVariables.amazonAcks);
         GlobalVariables.amazonAcks.clear();
         GlobalVariables.amazonAckLock.unlock();
@@ -214,7 +216,7 @@ public class ListenAmazonServer {
             }
             try {
                 loggerSendWorld.debug("sent message to world!");
-//                System.out.println("sent message to world!");
+                System.out.println("Sent to world: \n" + worldMessage.toString());
                 worldClient.sendCommands(worldMessage);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -234,7 +236,7 @@ public class ListenAmazonServer {
             }
             try {
                 loggerSendAmazon.debug("sent message to amazon!");
-                System.out.println("sent message to amazon!");
+                System.out.println("Sent to amazon: \n" + amazonMessage.toString());
                 send(amazonMessage, client_socket);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -250,40 +252,42 @@ public class ListenAmazonServer {
             }
 
             // handle each situation with world
-            for (UpsAmazon.AUreqPickup pickup : aUcommands.getPickupList()) {
-                System.out.println("pickup line 217");
-                handlePickup(pickup);
-            }
-
-            for (UpsAmazon.AUbindUPS bind : aUcommands.getBindList()) {
-                System.out.println("bind");
-                handleBind(bind);
-            }
-
-            for (UpsAmazon.AUreqDelivery delivery : aUcommands.getDeliveryList()) {
-                System.out.println("delivery");
-                handleDelivery(delivery);
-            }
-
-            for (UpsAmazon.AUchangeDestn changeDestn : aUcommands.getChangeDestList()) {
-                System.out.println("change");
-                handleChangeDest(changeDestn);
-            }
-
-            for (UpsAmazon.AUquery query : aUcommands.getQueryList()) {
-                System.out.println("query");
-                handleQuery(query);
-            }
-
             for (UpsAmazon.Err err: aUcommands.getErrList()) {
                 System.out.println("err");
                 handleErr(err);
             }
 
             for (long acks : aUcommands.getAcksList()) {
-                System.out.println("disconnect");
+                System.out.println("ack received");
                 handleAmazonAcks(acks);
             }
+
+            for (UpsAmazon.AUreqPickup pickup : aUcommands.getPickupList()) {
+                System.out.println("AUreqPickup");
+                handlePickup(pickup);
+            }
+
+            for (UpsAmazon.AUbindUPS bind : aUcommands.getBindList()) {
+                System.out.println("AUbindUPS");
+                handleBind(bind);
+            }
+
+            for (UpsAmazon.AUreqDelivery delivery : aUcommands.getDeliveryList()) {
+                System.out.println("AUreqDelivery");
+                handleDelivery(delivery);
+            }
+
+            for (UpsAmazon.AUchangeDestn changeDestn : aUcommands.getChangeDestList()) {
+                System.out.println("AUchangeDestn");
+                handleChangeDest(changeDestn);
+            }
+
+            for (UpsAmazon.AUquery query : aUcommands.getQueryList()) {
+                System.out.println("AUquery");
+                handleQuery(query);
+            }
+
+
 
             if (aUcommands.getDisconnect()) {
                 System.out.println("disconnect");
@@ -295,7 +299,10 @@ public class ListenAmazonServer {
 
 
     public void handlePickup(UpsAmazon.AUreqPickup pickup) {
-
+        if (GlobalVariables.amazonAcked.contains(pickup.getSeqNum())){
+            return;
+        }
+        System.out.println("Handling pickup: \n" + pickup.toString());
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(pickup.getSeqNum());
         GlobalVariables.amazonAcked.add(pickup.getSeqNum());
@@ -334,6 +341,10 @@ public class ListenAmazonServer {
     }
 
     public void handleBind(UpsAmazon.AUbindUPS bind) {
+        if (GlobalVariables.amazonAcked.contains(bind.getSeqNum())){
+            return;
+        }
+        System.out.println("Handling bind" + bind.toString());
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(bind.getSeqNum());
         GlobalVariables.amazonAcked.add(bind.getSeqNum());
@@ -342,6 +353,10 @@ public class ListenAmazonServer {
     }
 
     public void handleDelivery(UpsAmazon.AUreqDelivery delivery) {
+        if (GlobalVariables.amazonAcked.contains(delivery.getSeqNum())){
+            return;
+        }
+        System.out.println("Handling delivery" + delivery.toString());
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(delivery.getSeqNum());
         GlobalVariables.amazonAcked.add(delivery.getSeqNum());
@@ -358,6 +373,10 @@ public class ListenAmazonServer {
     }
 
     public void handleChangeDest(UpsAmazon.AUchangeDestn changeDestn) {
+        if (GlobalVariables.amazonAcked.contains(changeDestn.getSeqNum())){
+            return;
+        }
+        System.out.println("Handling changeDest" + changeDestn.toString());
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(changeDestn.getSeqNum());
         GlobalVariables.amazonAcked.add(changeDestn.getSeqNum());
@@ -372,15 +391,21 @@ public class ListenAmazonServer {
     }
 
     public void handleQuery(UpsAmazon.AUquery query) {
+        if (GlobalVariables.amazonAcked.contains(query.getSeqNum())){
+            return;
+        }
+        System.out.println("Handling query" + query.toString());
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(query.getSeqNum());
         GlobalVariables.amazonAcked.add(query.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
-
-
     }
 
     public void handleErr(UpsAmazon.Err err) {
+        if (GlobalVariables.amazonAcked.contains(err.getSeqnum())){
+            return;
+        }
+        System.out.println("Handling error" + err.toString());
         GlobalVariables.amazonAckLock.lock();
         GlobalVariables.amazonAcks.add(err.getSeqnum());
         GlobalVariables.amazonAcked.add(err.getSeqnum());
@@ -393,6 +418,7 @@ public class ListenAmazonServer {
             System.out.println("World ack already not in amazonMessage, not handling");
             return;
         }
+        System.out.println("Handling Amazon acks: " + acks);
         // Step1. check ack Type, call corresponding method to change necessary status
         String type = GlobalVariables.amazonMessages.get(acks).getDescriptorForType().getName();
         if (type.equals("UAtruckArrived")){
@@ -404,6 +430,7 @@ public class ListenAmazonServer {
         // Step2. remove ack from amazonAcks
         GlobalVariables.amazonMessages.remove(acks);
     }
+
 
     private <T> void send(com.google.protobuf.MessageLite message, Socket client_socket) throws IOException {
         OutputStream outputStream = client_socket.getOutputStream();

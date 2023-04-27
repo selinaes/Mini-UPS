@@ -60,4 +60,14 @@ public class Truck {
         this.wh_id = wh_id;
     }
 
+    @Override
+    public String toString() {
+        return "Truck{" +
+                "truck_id=" + truck_id +
+                ", wh_id=" + wh_id +
+                ", truck_x=" + truck_x +
+                ", truck_y=" + truck_y +
+                ", truck_status='" + truck_status + '\'' +
+                '}';
+    }
 }

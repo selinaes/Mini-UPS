@@ -64,7 +64,10 @@ public class DBoperations {
             Root<Truck> root = cq.from(Truck.class);
             // first find traveling + same whid, just use that truck when it arrives
             cq.where(
-                    cb.equal(root.get("truck_status"), "traveling" ),
+                    cb.or(
+                            cb.equal(root.get("truck_status"), "traveling"),
+                            cb.equal(root.get("truck_status"), "arrive warehouse")
+                    ),
                     cb.equal(root.get("wh_id"), targetWH )
             );
             List<Truck> trucksToSameWH = session.createQuery(cq).setLockMode(LockModeType.PESSIMISTIC_WRITE).getResultList();
@@ -72,11 +75,12 @@ public class DBoperations {
                 return trucksToSameWH.get(0);
             }
 
-            CriteriaQuery<Truck> cq2 = cb.createQuery(Truck.class);
-            cq2.where(
+
+            cq.where(
                     cb.equal(root.get("truck_status"), "idle" )
             );
             List<Truck> trucksIdle = session.createQuery(cq).setLockMode(LockModeType.PESSIMISTIC_WRITE).getResultList();
+            System.out.println(trucksIdle);
             if (trucksIdle.size() == 0) {
                 return null;
             }
@@ -194,6 +198,24 @@ public class DBoperations {
         }
         finally {
             lockT.unlock();
+            lock.unlock();
+        }
+    }
+
+    public static void updateShipStatus(long shipID, String shipStatus) {
+        Session session = SessionFactoryWrapper.openSession();
+        Lock lock = SessionFactoryWrapper.getLock("shipment");
+        lock.lock();
+        try (session) {
+            Transaction tx = session.beginTransaction();
+            // get corresponding shipment
+            Shipment ship = session.get(Shipment.class, shipID, LockMode.PESSIMISTIC_WRITE);
+            ship.setShipment_status(shipStatus);
+            session.merge(ship);
+
+            tx.commit();
+        }
+        finally {
             lock.unlock();
         }
     }
