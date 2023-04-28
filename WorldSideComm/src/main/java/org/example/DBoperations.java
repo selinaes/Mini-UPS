@@ -74,6 +74,7 @@ public class DBoperations {
             );
             List<Truck> trucksToSameWH = session.createQuery(cq).setLockMode(LockModeType.PESSIMISTIC_WRITE).getResultList();
             if(trucksToSameWH.size() != 0){
+                tx.commit();
                 return trucksToSameWH.get(0);
             }
 
@@ -89,6 +90,7 @@ public class DBoperations {
             Truck usedTruck = trucksIdle.get(0);
             usedTruck.setWh_id(targetWH);
             session.merge(usedTruck);
+
             tx.commit();
             return usedTruck;
         }
@@ -270,6 +272,7 @@ public class DBoperations {
             Transaction trans = session.beginTransaction();
             User user = session.get(User.class, upsID, LockMode.PESSIMISTIC_WRITE);
             if (user == null){ // can't find in database
+                trans.commit();
                 return false;
             }
             user.setAmazon_id(amazonID);
@@ -290,6 +293,7 @@ public class DBoperations {
             Transaction trans = session.beginTransaction();
             Shipment ship = session.get(Shipment.class, changeDestn.getShipID(), LockMode.PESSIMISTIC_WRITE); // 所有此类都必须查是否存在！然后用到Err
             if (ship == null || ship.getShipment_status().equals("out for delivery") || ship.getShipment_status().equals("delivered")){ // can't find in database, or already delivering
+                trans.commit();
                 return false;
             }
             ship.setDest_x(changeDestn.getDestinationX());

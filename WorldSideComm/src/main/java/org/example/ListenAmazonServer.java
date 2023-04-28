@@ -246,6 +246,7 @@ public class ListenAmazonServer {
         while (!Thread.currentThread().isInterrupted()) {
             UpsAmazon.AUcommands aUcommands = read(UpsAmazon.AUcommands.parser(), client_socket); // 需要验证，如果下一条没有会不会出问题
 //            UpsAmazon.AUcommands aUcommands = (UpsAmazon.AUcommands) readNew(UpsAmazon.AUcommands.newBuilder(), client_socket);
+            System.out.println("Received AUcommands: \n" + aUcommands.toString());
             if (aUcommands == null){
                 System.out.println("AUcommands is null");
                 break;

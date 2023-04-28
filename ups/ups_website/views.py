@@ -8,6 +8,7 @@ from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.urls import reverse
+import socket
 
 @login_required
 def index(request):    
@@ -112,3 +113,19 @@ def change_address(request, shipment_id):
     else:
         form = EditUserInfoForm()
     return render(request, 'ups_website/change_address.html', {'form': form})
+
+
+def query_truck(truck_id):
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect(('daemon', 8888))
+    # NOTE: append a \n at the end to become a line
+    msg = str(truck_id) + '\n'
+    client.send(msg.encode('utf-8'))
+    # expected response: ': 
+    data = client.recv(1024)
+    data = data.decode()
+    res = data.split(":")
+    if res[0] == "ack" and res[1] == str(truck_id):
+        return True
+    print('recv:', data)
+    return False
