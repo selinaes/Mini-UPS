@@ -6,13 +6,14 @@ import jakarta.persistence.*;
 @Table(name = "ups_website_productsinpackage")
 public class ProductsInPackage {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne
     @JoinColumn(name = "shipment_id")
     private Shipment shipment;
 
-    private int product_id;
+    private long product_id;
 
     private String product_description;
 
@@ -35,11 +36,11 @@ public class ProductsInPackage {
         this.shipment = shipment;
     }
 
-    public int getProduct_id() {
+    public long getProduct_id() {
         return product_id;
     }
 
-    public void setProduct_id(int product_id) {
+    public void setProduct_id(long product_id) {
         this.product_id = product_id;
     }
 

@@ -59,9 +59,6 @@ public class TestAmazonClient {
         else if (message instanceof UpsAmazon.AUbindUPS bind) {
             builder.addBind(bind);
         }
-        else if (message instanceof UpsAmazon.AUquery query) {
-            builder.addQuery(query);
-        }
         else if (message instanceof UpsAmazon.AUreqDelivery delivery) {
             builder.addDelivery(delivery);
         }

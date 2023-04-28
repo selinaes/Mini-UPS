@@ -1,7 +1,9 @@
 package org.example;
 
 import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.GeneratedMessageV3;
 import com.google.protobuf.InvalidProtocolBufferException;
+import com.google.protobuf.Message;
 import org.example.models.Truck;
 
 import java.io.InputStream;
@@ -97,17 +99,10 @@ public class ListenAmazonServer {
         // Loop through the ConcurrentHashMap
         for (com.google.protobuf.GeneratedMessageV3 message : GlobalVariables.amazonMessages.values()) {
             System.out.println("message type" + message.getClass().getName());
-            // Add UGoPickup messages
             if (message instanceof UpsAmazon.UAtruckArrived truckArr) {
                 System.out.println("line 91 added truckArr to UAcommands");
                 UACommandsBuilder.addTruckArr(truckArr);
             }
-            // Add UGoDeliver messages
-            else if (message instanceof UpsAmazon.UAstatus status) {
-                System.out.println("line 96 added status to UAcommands");
-                UACommandsBuilder.addStatus(status);
-            }
-            // Add UQuery messages
             else if (message instanceof UpsAmazon.UAdelivered delivered) {
                 System.out.println("line 101 added delivered to UAcommands");
                 UACommandsBuilder.addDelivered(delivered);
@@ -177,6 +172,7 @@ public class ListenAmazonServer {
 
         // Wait for AUconnectedWorld response
         UpsAmazon.AUconnectedWorld connectedWorld = read(UpsAmazon.AUconnectedWorld.parser(), clientSock);
+//        UpsAmazon.AUconnectedWorld connectedWorld = (UpsAmazon.AUconnectedWorld) readNew(UpsAmazon.AUconnectedWorld.newBuilder(), clientSock);
         System.out.println("Amazon's result: " + connectedWorld.getSuccess());
         return connectedWorld.getSuccess();
     }
@@ -249,6 +245,7 @@ public class ListenAmazonServer {
         // continuously read from Amazon, handle one by one, collect next-to-send messages into global variable
         while (!Thread.currentThread().isInterrupted()) {
             UpsAmazon.AUcommands aUcommands = read(UpsAmazon.AUcommands.parser(), client_socket); // 需要验证，如果下一条没有会不会出问题
+//            UpsAmazon.AUcommands aUcommands = (UpsAmazon.AUcommands) readNew(UpsAmazon.AUcommands.newBuilder(), client_socket);
             if (aUcommands == null){
                 System.out.println("AUcommands is null");
                 break;
@@ -284,12 +281,6 @@ public class ListenAmazonServer {
                 System.out.println("AUchangeDestn");
                 handleChangeDest(changeDestn);
             }
-
-            for (UpsAmazon.AUquery query : aUcommands.getQueryList()) {
-                System.out.println("AUquery");
-                handleQuery(query);
-            }
-
 
 
             if (aUcommands.getDisconnect()) {
@@ -327,11 +318,16 @@ public class ListenAmazonServer {
         long shipmentID = pickup.getShipID();
         int destX = pickup.getDestinationX();
         int destY = pickup.getDestinationY();
+
+        List<UpsAmazon.AProduct> products = pickup.getProductsList();
+
         Integer upsID = null;
         if (pickup.hasUpsID()){
             upsID = pickup.getUpsID();
         }
         DBoperations.createNewShipment(shipmentID, truckID, whid, destX, destY, upsID);
+
+        DBoperations.addProductsInPackage(shipmentID, products);
 
 
         // form UGoPickup, save to global variable
@@ -352,7 +348,16 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcks.add(bind.getSeqNum());
         GlobalVariables.amazonAcked.add(bind.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
-        System.out.println("bind");
+        // search in DB to see if upsID exist, if so return success
+        int upsID = bind.getUpsID();
+        int amazonID = bind.getOwnerID();
+        boolean success = DBoperations.searchUpsIDaddAmazonID(upsID, amazonID);
+        // form AUbindUPSResponse
+        long seqnum = GlobalVariables.seqNumAmazon.incrementAndGet();
+        UpsAmazon.UAbindUPSResponse response = UpsAmazon.UAbindUPSResponse.newBuilder()
+                .setStatus(success).setOwnerID(amazonID).setUpsID(upsID).setSeqNum(seqnum).build();
+        // put response into message list
+        GlobalVariables.amazonMessages.put(seqnum, response);
     }
 
     public void handleDelivery(UpsAmazon.AUreqDelivery delivery) {
@@ -385,24 +390,19 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcked.add(changeDestn.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
 
-
-        // Case 1: if status before delivering, change destination
-        // get ShipID, destinationX, destionation Y, and change it in DB
-        // create UAchangeResp success, save to message list
-
+        // Case 1: if status before delivering, change destination.
         // Case 2: if status delivering, create UAchangeResp fail, save to message list
+        boolean success = DBoperations.checkStatusChangeDestination(changeDestn);
+
+        // create UAchangeResp success, save to message list
+        long seqnum = GlobalVariables.seqNumAmazon.incrementAndGet();
+        UpsAmazon.UAchangeResp response = UpsAmazon.UAchangeResp.newBuilder()
+                .setSuccess(success).setSeqNum(seqnum).build();
+        // put into message list
+        GlobalVariables.amazonMessages.put(seqnum, response);
     }
 
-    public void handleQuery(UpsAmazon.AUquery query) {
-        if (GlobalVariables.amazonAcked.contains(query.getSeqNum())){
-            return;
-        }
-        System.out.println("Handling query" + query.toString());
-        GlobalVariables.amazonAckLock.lock();
-        GlobalVariables.amazonAcks.add(query.getSeqNum());
-        GlobalVariables.amazonAcked.add(query.getSeqNum());
-        GlobalVariables.amazonAckLock.unlock();
-    }
+
 
     public void handleErr(UpsAmazon.Err err) {
         if (GlobalVariables.amazonAcked.contains(err.getSeqnum())){
@@ -446,10 +446,15 @@ public class ListenAmazonServer {
         return parser.parseDelimitedFrom(inputStream);
     }
 
-    private <T> T readNew(com.google.protobuf.Parser<T> parser, Socket client_socket) throws IOException {
+    private <T extends GeneratedMessageV3.Builder<?>> Message readNew(T builder, Socket client_socket) throws IOException {
         InputStream inputStream = client_socket.getInputStream();
         CodedInputStream codedInputStream = CodedInputStream.newInstance(inputStream);
-        return parser.parseFrom(codedInputStream);
+        int length = codedInputStream.readRawVarint32();
+        int parseLimit = codedInputStream.pushLimit(length);
+        builder.mergeFrom(codedInputStream);
+        codedInputStream.popLimit(parseLimit);
+
+        return builder.build();
     }
 
     private <T> T readCoded(com.google.protobuf.Parser<T> parser, Socket client_socket) throws IOException {

@@ -26,6 +26,7 @@ public class SessionFactoryWrapper {
       lock.put("truck", new ReentrantLock());
       lock.put("shipment", new ReentrantLock());
       lock.put("productsInPackage", new ReentrantLock());
+      lock.put("user", new ReentrantLock());
 
     } catch (Exception e) {
       e.printStackTrace();

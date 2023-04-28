@@ -7,6 +7,8 @@ import java.net.Socket;
 import java.util.List;
 
 import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.GeneratedMessageV3;
+import com.google.protobuf.Message;
 import gpb.WorldUps;
 import gpb.UpsAmazon;
 import org.apache.logging.log4j.LogManager;
@@ -44,6 +46,7 @@ public class WorldSimulatorClient {
 
         // Wait for UConnected response
         WorldUps.UConnected uConnected = read(WorldUps.UConnected.parser());
+//        WorldUps.UConnected uConnected = (WorldUps.UConnected)readNew(WorldUps.UCommands.newBuilder());
         System.out.println("Result of connection: " + uConnected.getResult());
         System.out.println("Connected to world " + uConnected.getWorldid());
         return uConnected.getWorldid();
@@ -79,11 +82,23 @@ public class WorldSimulatorClient {
         return parser.parseFrom(codedInputStream);
     }
 
+    private <T extends GeneratedMessageV3.Builder<?>> Message readNew(T builder) throws IOException {
+        CodedInputStream codedInputStream = CodedInputStream.newInstance(inputStream);
+        int length = codedInputStream.readRawVarint32();
+        int parseLimit = codedInputStream.pushLimit(length);
+        builder.mergeFrom(codedInputStream);
+        codedInputStream.popLimit(parseLimit);
+
+        return builder.build();
+    }
+
+
     /**
     * Read message from the world Docker and return it to UResponse
     */
     public WorldUps.UResponses readResponses() throws IOException {
         WorldUps.UResponses uResponses = read(WorldUps.UResponses.parser());
+//        WorldUps.UResponses uResponses = (WorldUps.UResponses)readNew(WorldUps.UResponses.newBuilder());
         loggerListenWorld.info("Received responses: " + uResponses);
         return uResponses;
     }
@@ -98,7 +113,7 @@ public class WorldSimulatorClient {
                 uResponses = readResponses();
                 if (uResponses == null){
                     System.out.println("null uResponses");
-                    continue;
+                    break;
                 }
                 // handle each situation with world
                 for (long acks: uResponses.getAcksList()){

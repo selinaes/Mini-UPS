@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from .forms import TrackingForm, LoginForm, SignupForm, EditUserInfoForm
-from .models import Truck, Shipments, ProductsInPackage
+from .models import Truck, Shipments, ProductsInPackage, Userinfo
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.contrib.auth import authenticate
@@ -55,6 +55,7 @@ def signup(request):
             lastname = form.cleaned_data.get('lastname')
             email = form.cleaned_data.get('email')
             user = User.objects.create_user(username=username, password=password, first_name=firstname, last_name=lastname, email=email)
+            Userinfo.objects.create(user_id=user.id, user_name=username, user_email=email)
             return HttpResponseRedirect(reverse('ups_website:login'))
     else:
         form = SignupForm()

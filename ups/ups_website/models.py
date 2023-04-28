@@ -5,17 +5,13 @@ from django.contrib.auth.models import User
 
 # # Create your models here.
 # # Create your models here.
-# class Userinfo(models.Model):
-#     user = models.OneToOneField(User, on_delete = models.CASCADE)
-#     user_name = models.CharField(max_length=200)
-#     driver_status = models.BooleanField()
-#     type = models.CharField(max_length=200, null=True)
-#     plate = models.CharField(max_length=200, null=True)
-#     passengers_num = models.IntegerField(null=True)
-#     special_vehicle_info = models.CharField(max_length=200, null=True)
-
-#     def __str__(self):
-#         return self.user_name
+class Userinfo(models.Model):
+    user_id = models.IntegerField(primary_key=True)
+    amazon_id = models.IntegerField(null=True)
+    user_name = models.CharField(max_length=200)
+    user_email = models.CharField(max_length=200)
+    def __str__(self):
+        return self.user_name
 
 class Truck(models.Model):
     truck_id = models.IntegerField(primary_key=True)  # Required: primary key, unique identifier for each Truck

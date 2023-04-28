@@ -53,16 +53,6 @@ message AUreqDelivery {
 }
 
 
-message AUquery {
-	required int64 shipID = 1;
-	required int64 seqNum = 2;
-}
-
-message UAstatus {
-	required string status = 1;
-	required int64 seqNum = 2;
-}
-
 message UAdelivered {
 	required int64 shipID = 1;
 	required int64 seqNum = 2;
@@ -89,22 +79,20 @@ message Err{
 
 message UAcommands{
 	repeated UAtruckArrived truckArr = 1;
-	repeated UAstatus status = 2;
-	repeated UAdelivered delivered = 3;
-	repeated UAchangeResp changeResp = 4;
-	repeated UAbindUPSResponse bindUPSResponse = 5;
-	repeated Err err = 6;
-	optional bool disconnect = 7;
-	repeated int64 acks = 8;
+	repeated UAdelivered delivered = 2;
+	repeated UAchangeResp changeResp = 3;
+	repeated UAbindUPSResponse bindUPSResponse = 4;
+	repeated Err err = 5;
+	optional bool disconnect = 6;
+	repeated int64 acks = 7;
 }
 
 message AUcommands{
 	repeated AUreqPickup pickup = 1;
 	repeated AUreqDelivery delivery =  2;
-	repeated AUquery query = 3;
-	repeated AUchangeDestn changeDest = 4;
-	repeated AUbindUPS bind = 5;
-	repeated Err err = 6;
-	optional bool disconnect = 7;
-	repeated int64 acks = 8;
+	repeated AUchangeDestn changeDest = 3;
+	repeated AUbindUPS bind = 4;
+	repeated Err err = 5;
+	optional bool disconnect = 6;
+	repeated int64 acks = 7;
 }

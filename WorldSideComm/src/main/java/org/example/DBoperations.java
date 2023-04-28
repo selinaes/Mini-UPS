@@ -3,6 +3,7 @@ package org.example;
 import org.example.models.Truck;
 import org.example.models.Shipment;
 import org.example.models.ProductsInPackage;
+import org.example.models.User;
 //import org.hibernate.Criteria;
 import org.hibernate.LockMode;
 import org.hibernate.Session;
@@ -22,6 +23,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
 import gpb.WorldUps;
+import gpb.UpsAmazon;
 
 
 public class DBoperations {
@@ -235,6 +237,70 @@ public class DBoperations {
         }
         finally {
             lockT.unlock();
+        }
+    }
+
+    public static void addProductsInPackage(long shipmentID, List<UpsAmazon.AProduct> products) {
+        Session session = SessionFactoryWrapper.openSession();
+        Lock lock = SessionFactoryWrapper.getLock("productsInPackage");
+        lock.lock();
+        try (session) {
+            Transaction tx = session.beginTransaction();
+            Shipment ship = session.get(Shipment.class, shipmentID, LockMode.PESSIMISTIC_WRITE);
+            for (UpsAmazon.AProduct product: products) {
+                ProductsInPackage pkg = new ProductsInPackage();
+                pkg.setShipment(ship);
+                pkg.setProduct_description(product.getDescription());
+                pkg.setProduct_id(product.getId());
+                pkg.setProduct_quantity(product.getCount());
+                session.merge(pkg);
+            }
+            tx.commit();
+        }
+        finally {
+            lock.unlock();
+        }
+    }
+
+    public static boolean searchUpsIDaddAmazonID(int upsID, int amazonID){
+        Session session = SessionFactoryWrapper.openSession();
+        Lock lock = SessionFactoryWrapper.getLock("user");
+        lock.lock();
+        try (session) {
+            Transaction trans = session.beginTransaction();
+            User user = session.get(User.class, upsID, LockMode.PESSIMISTIC_WRITE);
+            if (user == null){ // can't find in database
+                return false;
+            }
+            user.setAmazon_id(amazonID);
+            session.merge(user);
+            trans.commit();
+            return true;
+        }
+        finally {
+            lock.unlock();
+        }
+    }
+
+    public static boolean checkStatusChangeDestination(UpsAmazon.AUchangeDestn changeDestn){
+        Session session = SessionFactoryWrapper.openSession();
+        Lock lock = SessionFactoryWrapper.getLock("shipment");
+        lock.lock();
+        try (session) {
+            Transaction trans = session.beginTransaction();
+            Shipment ship = session.get(Shipment.class, changeDestn.getShipID(), LockMode.PESSIMISTIC_WRITE); // 所有此类都必须查是否存在！然后用到Err
+            if (ship == null || ship.getShipment_status().equals("out for delivery") || ship.getShipment_status().equals("delivered")){ // can't find in database, or already delivering
+                return false;
+            }
+            ship.setDest_x(changeDestn.getDestinationX());
+            ship.setDest_y(changeDestn.getDestinationY());
+
+            session.merge(ship);
+            trans.commit();
+            return true;
+        }
+        finally {
+            lock.unlock();
         }
     }
 
