@@ -25,7 +25,9 @@ SECRET_KEY = '2!3e3jfa^h*w%0)f^)xe++6-d7m)!#3=m#t7@-l&@=lla3u^ux'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['vcm-33565.vm.duke.edu', 'vcm-33562.vm.duke.edu']
+ALLOWED_HOSTS = ['vcm-33565.vm.duke.edu', 'vcm-33562.vm.duke.edu', 'web']
+
+CSRF_TRUSTED_ORIGINS = ['http://*.vcm-xxxxx.vm.duke.edu:8000','http://*.127.0.0.1:8000'] 
 
 
 # Application definition
@@ -86,13 +88,24 @@ WSGI_APPLICATION = 'ups.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "upsDB",
+#         "USER": "jl1188",
+#         "PASSWORD": "selina1111",
+#         "HOST": 'localhost',
+#         "PORT": 5432,
+#     }
+# }
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         "NAME": "upsDB",
-        "USER": "jl1188",
-        "PASSWORD": "selina1111",
-        "HOST": 'localhost',
+        "USER": "postgres",
+        "PASSWORD": "postgres",
+        "HOST": 'db',
         "PORT": 5432,
     }
 }

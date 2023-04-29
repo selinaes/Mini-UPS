@@ -5,26 +5,23 @@ import org.example.models.Truck;
 import org.example.models.Shipment;
 import org.example.models.ProductsInPackage;
 import org.example.models.User;
-//import org.hibernate.Criteria;
+
 import org.hibernate.LockMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-//import org.hibernate.criterion.Restrictions;
-import org.hibernate.dialect.lock.PessimisticEntityLockException;
 
-import java.util.ArrayList;
+
+
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 
 import jakarta.persistence.LockModeType;
-import jakarta.persistence.OptimisticLockException;
-import jakarta.persistence.PessimisticLockException;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
-import gpb.WorldUps;
-import gpb.UpsAmazon;
+import org.example.gpb.WorldUps;
+import org.example.gpb.UpsAmazon;
 
 
 public class DBoperations {
@@ -112,9 +109,7 @@ public class DBoperations {
             Predicate notIdle = cb.notEqual(root.get("truck_status"), "idle");
             cq.where(notIdle);
 
-            List<Truck> trucks = session.createQuery(cq).getResultList();
-
-            return trucks;
+            return session.createQuery(cq).getResultList();
         }
         finally {
             lock.unlock();
@@ -297,6 +292,10 @@ public class DBoperations {
                 System.out.println("did not find user in database" + upsID);
                 trans.commit();
                 return false;
+            } else if (user.getAmazon_id() != null) { // already binded with others
+                System.out.println("This user already binded with another amazon account");
+                trans.commit();
+                return false;
             }
             System.out.println("DBoperations: amazonID is " + amazonID);
             user.setAmazon_id(amazonID);
@@ -348,6 +347,28 @@ public class DBoperations {
         }
         finally {
             lockT.unlock();
+        }
+    }
+
+    public static String validateUpsID(int upsID){
+        Session session = SessionFactoryWrapper.openSession();
+        Lock lock = SessionFactoryWrapper.getLock("user");
+        lock.lock();
+        try (session) {
+            // get corresponding user
+            User user = session.get(User.class, upsID, LockMode.PESSIMISTIC_WRITE);
+            if (user == null){
+                return "no such ups user";
+            }
+            else if (user.getAmazon_id() == null) {
+                return "not yet binded upsID";
+            } else {
+                return null;
+            }
+
+        }
+        finally {
+            lock.unlock();
         }
     }
 

@@ -1,5 +1,5 @@
 syntax = "proto2";
-package gpb; // add this line
+package org.example.gpb; // add this line
 message AProduct{
   required int64 id = 1;
   required string description = 2;

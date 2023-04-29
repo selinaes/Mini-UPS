@@ -1,0 +1,52 @@
+version: '2'
+
+services:
+  db:
+    image: postgres:12-alpine3.15
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=upsDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: always
+    volumes:
+      - data-volume:/var/lib/postgresql/data
+  web-init:
+      build: ./ups
+      command: /code/wait-for-it.sh db:5432 --strict -- /code/initserver.sh
+      volumes:
+        - ./ups:/code
+      depends_on:
+        - db
+  web:
+      build: ./ups
+      user: nobody
+      command: /code/wait-for-it.sh db:5432 --strict -- /code/runserver.sh
+      volumes:
+        - ./ups:/code
+      expose:
+        - "8000"
+      depends_on:
+        - web-init
+  nginx:
+     image: nginx:latest
+     ports:
+       - "8000:8000"
+     volumes:
+       - ./nginx/config:/etc/nginx/conf.d
+     depends_on:
+       - web
+  backend:
+    build: ./WorldSideComm
+    #    command: /code/initserver.sh
+    #    volumes:
+    #      - ./:/app
+    ports:
+      - "12346:12345"
+      - "34567:34567"
+    depends_on:
+      - db
+      - web
+volumes:
+   data-volume:

@@ -26,11 +26,11 @@ public class User {
         this.ups_id = ups_id;
     }
 
-    public int getAmazon_id() {
+    public Integer getAmazon_id() {
         return amazon_id;
     }
 
-    public void setAmazon_id(int amazon_id) {
+    public void setAmazon_id(Integer amazon_id) {
         this.amazon_id = amazon_id;
     }
 

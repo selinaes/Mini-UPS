@@ -1,5 +1,5 @@
 syntax = "proto2";
-package gpb; // add this line
+package org.example.gpb; // add this line
 message UInitTruck{
   required int32 id = 1;
   required int32 x=2;

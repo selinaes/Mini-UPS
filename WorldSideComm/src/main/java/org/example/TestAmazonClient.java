@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import gpb.UpsAmazon;
+import org.example.gpb.UpsAmazon;
 import com.google.protobuf.GeneratedMessageV3;
 
 public class TestAmazonClient {

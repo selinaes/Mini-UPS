@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import gpb.UpsAmazon;
+import org.example.gpb.UpsAmazon;
 
 public class TestAmazon {
     @Test
