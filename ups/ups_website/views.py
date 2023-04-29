@@ -8,17 +8,37 @@ from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.urls import reverse
-import socket
 
-@login_required
-def index(request):    
-    return render(request, 'ups_website/index.html')
 
 
 @login_required
 def index(request):
     user = request.user
-    return render(request, 'ups_website/index.html', {'userinfo': user})
+
+    if request.method == 'POST':
+        form = TrackingForm(request.POST)
+        if form.is_valid():
+            shipmentID = form.cleaned_data['shipment_id']
+            try:
+                ship_info = Shipments.objects.get(shipment_id=shipmentID)
+            except Shipments.DoesNotExist:
+                ship_info = None
+            truck_id = ship_info.truck_id
+            truck_info = Truck.objects.get(truck_id=truck_id)
+            target_x = ship_info.dest_x
+            target_y = ship_info.dest_y
+            truck_x = truck_info.truck_x
+            truck_y = truck_info.truck_y
+            ship_info.distance = calculate_dist(target_x, target_y, truck_x, truck_y)
+            ship_info.truck_x = truck_x
+            ship_info.truck_y = truck_y
+            return render(request, 'ups_website/find_shipment.html', {'shipInfo': ship_info})
+        else:
+            return HttpResponse("Invalid form")
+    else:
+        form = TrackingForm()
+    context = {'form': form, 'userinfo': user}
+    return render(request, 'ups_website/index.html', context)
 
 
 @login_required
@@ -62,7 +82,7 @@ def signup(request):
         form = SignupForm()
     return render(request, 'ups_website/signup.html', {'form': form})
 
-@login_required
+
 def request_tracking(request):
     if request.method == 'POST':
         form = TrackingForm(request.POST)
@@ -72,6 +92,15 @@ def request_tracking(request):
                 ship_info = Shipments.objects.get(shipment_id=shipmentID)
             except Shipments.DoesNotExist:
                 ship_info = None
+            truck_id = ship_info.truck_id
+            truck_info = Truck.objects.get(truck_id=truck_id)
+            target_x = ship_info.dest_x
+            target_y = ship_info.dest_y
+            truck_x = truck_info.truck_x
+            truck_y = truck_info.truck_y
+            ship_info.distance = calculate_dist(target_x, target_y, truck_x, truck_y)
+            ship_info.truck_x = truck_x
+            ship_info.truck_y = truck_y
             return render(request, 'ups_website/find_shipment.html', {'shipInfo': ship_info})
         else:
             return HttpResponse("Invalid form")
@@ -115,17 +144,6 @@ def change_address(request, shipment_id):
     return render(request, 'ups_website/change_address.html', {'form': form})
 
 
-def query_truck(truck_id):
-    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    client.connect(('daemon', 8888))
-    # NOTE: append a \n at the end to become a line
-    msg = str(truck_id) + '\n'
-    client.send(msg.encode('utf-8'))
-    # expected response: ': 
-    data = client.recv(1024)
-    data = data.decode()
-    res = data.split(":")
-    if res[0] == "ack" and res[1] == str(truck_id):
-        return True
-    print('recv:', data)
-    return False
+
+def calculate_dist(x, y, x1, y1):
+    return ((x-x1)**2 + (y-y1)**2)**0.5

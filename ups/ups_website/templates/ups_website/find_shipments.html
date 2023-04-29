@@ -1,61 +1,53 @@
-{% block content %}
-<!-- Add a style block -->
-<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
+{% load static %}
 
-    th,
-    td {
-        padding: 10px;
-        text-align: left;
-        border-bottom: 1px solid #ccc;
-    }
+<!DOCTYPE html>
+<html>
 
-    th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-    }
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shipments</title>
+    <link rel="stylesheet" href="{% static 'css/all_shipments.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    tr:hover {
-        background-color: #f5f5f5;
-    }
-</style>
+</head>
 
+<body>
+    <header>
+        <h1>Shipments</h1>
+    </header>
+    <main>
+        <h2>Shipments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Shipment ID</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for shipment in shipments_info %}
+                <tr>
+                    <td>
+                        <a href="{% url 'ups_website:find_packages_detail' shipment.shipment_id %}">
+                            {{ shipment.shipment_id }}
+                        </a>
+                    </td>
+                    <td>{{ shipment.shipment_status }}</td>
+                    <td>
+                        {% if shipment.shipment_status != "delivered" %}
+                        <a href="{% url 'ups_website:change_address' shipment.shipment_id %}">
+                            Change Address
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h3><a href="{% url 'ups_website:index' %}">Go back home</a></h3>
+    </main>
+</body>
 
-
-
-
-<h2>Shipments</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Shipment ID</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for shipment in shipments_info %}
-        <tr>
-            <td>
-                <a href="{% url 'ups_website:find_packages_detail' shipment.shipment_id %}">
-                    {{ shipment.shipment_id }}
-                </a>
-            </td>
-            <td>{{ shipment.shipment_status }}</td>
-            <td>
-                {% if shipment.shipment_status != "delivered" %}
-                <a href="{% url 'ups_website:change_address' shipment.shipment_id %}">
-                    Change Address
-                </a>
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<h3><a href="{% url 'ups_website:index' %}">Go back home</a></h3>
-{% endblock %}
+</html>

@@ -1,9 +1,226 @@
-{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js " dir="ltr" lang="en" style="--vh:10.09px;">
+
+
+<body class="ups-wems" data-inq-observer="1">
+    <div class="iw_viewport-wrapper">
+        <div class="container-fluid iw_section" id="sectionksjaq8t2">
+            <div class="row iw_row iw_stretch" id="rowksjaq8t3">
+                <div class="iw_columns col-lg-12" id="colksjaq8t4">
+                    <div class="iw_component" id="iw_comp1658153875548">
+                        <div id="ups-navContainer" data-plugin="upsGlobalHeader" data-utg-content-block-id="glb_comp"
+                            class="ups-component" data-track-url="https://www.ups.com/track" data-home="true"
+                            data-upstoken="5fed378362c3bb7464154728c2637daade22afcdacd09faed3e6eb260e3378b94f406b792fcff7b2d78bae15d61c678ba186b14f97ddfccd1d0ddaa1d649a82d"
+                            style="min-height: 171.062px;">
+                            <div class="header-alerts show" id="ups-alertsWrap"
+                                data-alerts="/en_CA/support/contact-us/1653459378104.ajax?">
+                                <div class="ups-container" role="region" aria-label="Welcome Message">
+
+                                    <div class="alerts-wrapper">
+                                        <ul class="ups-alerts_list" id="alert-list" aria-live="polite"
+                                            style="width: 952px;">
+                                            <li class="ups-alert_msg" data-position="alert1"
+                                                aria-roledescription="slide" aria-label="1 of 2" tabindex="0"
+                                                aria-current="page" style="width: 476px;"><span
+                                                    class="alert-text">Welcome to our Mini UPS World</span></li>
+
+                                        </ul>
+                                    </div>
+                                </div><a class="ups-link ups-analytics" id="ups-skipNav" href="#" tabindex="0"
+                                    data-utg-event-id="21" data-utg-link-type="link">Skip To Main Content</a>
+
+                                <header>
+                                    <div class="ups-container navbar-expand-lg">
+                                        <div id="ups-header_logo" class="ups-logo ups-analytics" data-utg-event-id="21"
+                                            data-utg-link-type="link" title="UPS Home"><img
+                                                src="https://www.ups.com/assets/resources/webcontent/images/ups-logo.svg"
+                                                alt="UPS Home Page"></div>
+
+                                        <div class="ups-user-actions dropdown"><a
+                                                class="ups-cta ups-cta-primary ups-analytics" data-utg-event-id="21"
+                                                data-utg-link-type="link" data-utg-link-name="Signup"
+                                                aria-label="Signup" href="{% url 'ups_website:login' %}""><span
+                                                    class=" icon ups-icon-user" aria-hidden="true"></span></a>
+
+                                        </div>
+
+                                    </div>
+                                    <link rel="stylesheet" href="{% static 'css/ups_tracking.css' %}">
+                                    <link rel="stylesheet" href="{% static 'css/ups_request.css' %}">
+
+                                </header>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid iw_section" id="sectionksjaq8t6">
+            <div class="row iw_row iw_stretch" id="rowksjaq8t7">
+                <div class="iw_columns col-lg-12" id="colksjaq8t8">
+                    <div class="iw_placeholder" id="iw_placeholder1629400065305">
+                        <div class="iw_component" id="iw_comp1672819359243">
+                            <!--ls:begin[component-1672819359243]-->
+                            <style>
+                                #iw_comp1672819359243 {}
+                            </style><!--ls:end[component-1672819359243]-->
+                        </div>
+                        <div class="iw_component" id="iw_comp1658153875556">
+                            <style>
+                                #iw_comp1658153875556 {}
+                            </style>
+                            <div data-utg-content-block-id="app_tsr"
+                                class="ups-component app-teaser bg-brown hero-image" data-plugin="tabNavigation"
+                                style="margin-bottom: 16px;">
+                                <div class="ups-container">
+                                    <div class="apps-container">
+                                        <ul class="nav jobs-list" role="tablist">
+                                            <li class="nav-item job-item" role="presentation"><a class="nav-link active"
+                                                    id="tabs_0_tab_0" role="tab" data-toggle="tab"
+                                                    aria-controls="tabs_0_tabPane_0" data-hero-image="true"
+                                                    data-script="/assets/resources/webcontent/scripts/applications/track/tracking-widget-component.cb4160.js"
+                                                    aria-selected="true" tabindex="0" href="#tabs_0_tabPane_0"
+                                                    data-loaded="true"><span class="app-title">Track</span></a></li>
+                                        </ul>
+                                        <div class="tab-content app-content_1">
+                                            <div class="tab-pane active" id="tabs_0_tabPane_0" role="tabpanel"
+                                                aria-labelledby="tabs_0_tab_0">
+                                                <h2 class="panel-title"><a role="button" data-toggle="collapse"
+                                                        aria-expanded="true" aria-controls="app1d15448-content"
+                                                        href="#app1d15448-content">Track<span
+                                                            class="icon ups-icon-bottom-arrow"
+                                                            aria-hidden="true"></span></a></h2>
+                                                <div role="region" id="app1d15448-content"
+                                                    class="panel-body collapse show" data-parent=".app-content_1">
+                                                    <custom-track-widget _nghost-mtr-c12="" ng-version="12.1.4">
+                                                        <form _ngcontent-mtr-c12="" method="post" novalidate=""
+                                                            id="widget-track-package"
+                                                            class="ups-job-form ups-track-package-form ng-untouched ng-pristine ng-invalid">
+                                                            {% csrf_token %}
+                                                            <div _ngcontent-mtr-c12=""
+                                                                class="form-content form-content-inline">
+                                                                <div _ngcontent-mtr-c12="" data-plugin="inputControl"
+                                                                    class="ups-form_group ups-input">
+                                                                    <label _ngcontent-mtr-c12="" for="ups-track--qs"
+                                                                        id="stApp_widgetTrkNumLbl"
+                                                                        class="ups-form_label"></label>
+                                                                    <div _ngcontent-mtr-c12=""
+                                                                        class="ups-text_wrapper ups-input_wrapper">
+                                                                        <input _ngcontent-mtr-c12="" type="text"
+                                                                            name="{{ form.shipment_id.html_name }}"
+                                                                            data-name="trackNums"
+                                                                            id="{{ form.shipment_id.auto_id }}"
+                                                                            aria-required="true" required=""
+                                                                            class="ups-form_input ng-untouched ng-pristine ng-invalid"
+                                                                            value="{{ form.shipment_id.value|default:'' }}">
+                                                                    </div>
+                                                                    <p _ngcontent-mtr-c12="" class="ups-formError">
+                                                                        <span _ngcontent-mtr-c12="" aria-hidden="true"
+                                                                            class="ups-icon-exclamation"></span>
+                                                                    </p>
+                                                                </div>
+                                                                <button _ngcontent-mtr-c12="" type="submit"
+                                                                    id="stApp_widgetTrkNumBtn"
+                                                                    class="ups-cta ups-cta-primary">
+                                                                    Track
+                                                                    <span _ngcontent-mtr-c12="" aria-hidden="true"
+                                                                        class="icon ups-icon-right-arrow"></span>
+                                                                </button>
+                                                            </div>
+
+
+                                                        </form><!---->
+                                                    </custom-track-widget>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane " id="tabs_0_tabPane_1" role="tabpanel"
+                                                aria-labelledby="app2d15448">
+                                                <h2 class="panel-title"><a
+                                                        href="https://wwwapps.ups.com/calTimeCost?loc=en_CA">Quote<span
+                                                            class="icon ups-icon-bottom-arrow"
+                                                            aria-hidden="true"></span></a></h2>
+                                                <div role="region" id="app2d15448-content" class="panel-body collapse "
+                                                    data-parent=".app-content_1"></div>
+                                            </div>
+                                            <div class="tab-pane " id="tabs_0_tabPane_2" role="tabpanel"
+                                                aria-labelledby="app3d15448">
+                                                <h2 class="panel-title"><a
+                                                        href="https://www.ups.com/ship?loc=en_CA">Ship<span
+                                                            class="icon ups-icon-bottom-arrow"
+                                                            aria-hidden="true"></span></a></h2>
+                                                <div role="region" id="app3d15448-content" class="panel-body collapse "
+                                                    data-parent=".app-content_1"></div>
+                                            </div>
+                                            <div class="tab-pane " id="tabs_0_tabPane_3" role="tabpanel"
+                                                aria-labelledby="app4d15448">
+                                                <h2 class="panel-title"><a
+                                                        href="/ca/en/business-solutions/ups-billing.page">Billing<span
+                                                            class="icon ups-icon-bottom-arrow"
+                                                            aria-hidden="true"></span></a></h2>
+                                                <div role="region" id="app4d15448-content" class="panel-body collapse "
+                                                    data-parent=".app-content_1"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hero-img"><img
+                                            src="https://www.ups.com/assets/resources/webcontent/images/JTBD-CA-PEAK-G-1271693975-Q422-WebP-Resized.webp"
+                                            alt="Smiling woman, holding smartphone." class="img-fluid" loading="lazy">
+                                    </div>
+                                </div>
+                                <div class="arc-container"><svg xmlns="http://www.w3.org/2000/svg" width="1440"
+                                        class="arc" height="72" viewBox="0 0 1440 72" fill="none" aria-hidden="true"
+                                        focusable="false">
+                                        <path d="M-400 176C139.222 -24.794 1028.42 -10.941 1440 13.8751V176L-400 176Z"
+                                            fill="white"></path>
+                                    </svg></div>
+                            </div>
+                        </div>
+                        <div class="iw_component" id="iw_comp1658153875553">
+                            <style>
+                                #iw_comp1658153875553 {}
+                            </style>
+                            <div class="ups-component promo-teaser primary-promo background-arc"
+                                data-utg-content-block-id="ftd_teas">
+                                <div class="ups-container">
+                                    <div class="card ups-card">
+                                        <div class="card-header fade-in-up-light">
+                                            <h2>Let’s Start Shipping</h2>
+                                        </div>
+                                        <div class="card-img fade-in-up-light"><img
+                                                src="https://www.ups.com/assets/resources/webcontent/images/guided-shipping-GettyImages-1222457412-Q322.jpg"
+                                                alt="Close up of hands holding boxes on desk with laptop open to UPS.com shipping application."
+                                                class="img-fluid" loading="lazy"></div>
+                                        <div class="card-body fade-in-up-light">
+                                            <div class="card-body-content">
+                                                <p>You’ve got packages. We’ll take care of them.</p>
+                                                <p> Log in to view all your packages information. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
+
+
+
+<!-- {% load static %}
 <h2>Enter your tracking number</h2>
+
+<img src="{% static 'images/waiting4.png' %}" alt="Waiting image">
+
+
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit</button>
 </form>
-<h3><a href="{% url 'ups_website:index' %}">Go back home</a></h3>
-{% endblock %}
+<h3><a href="{% url 'ups_website:index' %}">Go back home</a></h3> -->

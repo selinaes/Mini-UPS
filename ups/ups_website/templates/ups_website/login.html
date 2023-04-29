@@ -1,116 +1,261 @@
-3.92 KiB
+{% load static %}
 <!DOCTYPE html>
+<!-- <html class="no-js " dir="ltr" lang="en" style="--vh:10.09px;"> -->
+<link rel="stylesheet" href="{% static 'css/ups_tracking.css' %}">
+<link rel="stylesheet" href="{% static 'css/ups_request.css' %}">
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<link rel="stylesheet" href="{% static 'css/login1.css' %}">
 
-<head>
-    <meta http-equiv="content-type" content="text/html">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!--SEO meta tags-->
-    <!--    Change the index to your website's name-->
-    <title>UPS Webapp</title>
-    <!-- Bootstrap Core CSS ––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
-    <!-- fontawesome ––––––––––––––––––––––––––– -->
-    <script src="https://kit.fontawesome.com/5c9f2dfb26.js"></script>
-    <!-- To add a google font and paste the link -->
-    <style>
-        body {
-            background-color: rgb(228, 242, 247);
-            font-family: 'Futura', sans-serif;
-            line-height: 1.5;
-            color: rgb(0, 0, 0);
-            align-items: center;
-        }
+<body class="ups-wems" data-inq-observer="1">
+    <div class="iw_viewport-wrapper">
+        <div class="container-fluid iw_section" id="sectionksjaq8t2">
+            <div class="row iw_row iw_stretch" id="rowksjaq8t3">
+                <div class="iw_columns col-lg-12" id="colksjaq8t4">
+                    <div class="iw_component" id="iw_comp1658153875548">
+                        <div id="ups-navContainer" data-plugin="upsGlobalHeader" data-utg-content-block-id="glb_comp"
+                            class="ups-component" data-track-url="https://www.ups.com/track" data-home="true"
+                            data-upstoken="5fed378362c3bb7464154728c2637daade22afcdacd09faed3e6eb260e3378b94f406b792fcff7b2d78bae15d61c678ba186b14f97ddfccd1d0ddaa1d649a82d"
+                            style="min-height: 171.062px;">
+                            <div class="header-alerts show" id="ups-alertsWrap"
+                                data-alerts="/en_CA/support/contact-us/1653459378104.ajax?">
+                                <div class="ups-container" role="region" aria-label="Welcome Message">
 
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
+                                    <div class="alerts-wrapper">
+                                        <ul class="ups-alerts_list" id="alert-list" aria-live="polite"
+                                            style="width: 952px;">
+                                            <li class="ups-alert_msg" data-position="alert1"
+                                                aria-roledescription="slide" aria-label="1 of 2" tabindex="0"
+                                                aria-current="page" style="width: 476px;"><span
+                                                    class="alert-text">Welcome to our Mini UPS World</span></li>
 
-        .view {
-            background: rgb(228, 242, 247) center center no-repeat;
-            background-size: cover;
-            padding-top: 4rem;
-            padding-bottom: 2rem;
-        }
+                                        </ul>
+                                    </div>
+                                </div><a class="ups-link ups-analytics" id="ups-skipNav" href="#" tabindex="0"
+                                    data-utg-event-id="21" data-utg-link-type="link">Skip To Main Content</a>
 
-        /*navigation*/
-        .navbackground {
-            background-color: rgba(255, 255, 255, 0.7);
-        }
+                                <header>
+                                    <div class="ups-container navbar-expand-lg">
+                                        <div id="ups-header_logo" class="ups-logo ups-analytics" data-utg-event-id="21"
+                                            data-utg-link-type="link" title="UPS Home"><img
+                                                src="https://www.ups.com/assets/resources/webcontent/images/ups-logo.svg"
+                                                alt="UPS Home Page"></div>
 
-        .navbar-light .navbar-brand {
-            padding-left: 1rem;
-            color: #996666;
-            font-weight: 900;
-        }
+                                        <div class="ups-user-actions dropdown"><a
+                                                class="ups-cta ups-cta-primary ups-analytics" data-utg-event-id="21"
+                                                data-utg-link-type="link" data-utg-link-name="Signup"
+                                                aria-label="Signup" href="{% url 'ups_website:login' %}""><span
+                                                    class=" icon ups-icon-user" aria-hidden="true"></span></a>
+                                        </div>
 
-        .navbar-light .navbar-brand:hover {
-            color: #166088;
-        }
+                                    </div>
 
-        .login {
-            padding-top: 1.5rem;
-            padding-bottom: 3rem;
-        }
 
-        .form-signin .form-floating h3 {
-            font-size: 1rem;
-            text-align: center;
-            padding-bottom: 0.5rem;
-        }
+                                </header>
 
-        .form-signin .form-floating:focus-within {
-            z-index: 2;
-        }
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
-</head>
-
-<body data-spy="scroll" data-target=".navbar" data-offset="100" class="text-center">
-    <nav class="navbar  navbar-light navbar-expand-sm navbackground fixed-top">
-        <a class="navbar-brand page-scroll">UPS Webapp</a>
-    </nav>
-    <div class="container-fluid view" id='view'>
-        <div class='row justify-content-start align-items-center'>
-        </div>
-    </div>
-    <div class="main">
-        <div class="form-signin">
-            <form method="post">
-                <h1 class="h3 mb-3 fw-normal">Please log in</h1>
-                <div class="form-floating">
-                    {% csrf_token %}
-                    {{error_msg}}
-                    {{ form.as_p }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="login">
-                    <button class="w-40 btn btn-lg btn-primary" type="submit">Log in</button>
-                </div>
-            </form>
-            <p style="text-align:center;">Don't have an account? <a href="{% url 'ups_website:signup' %}">Sign up</a>
-            </p>
+            </div>
         </div>
     </div>
 </body>
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-    integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js "></script>
+
+<html dir="ltr" lang="en" style=""
+    class="canvas canvastext supports csstransforms3d flexbox cssgradients opacity backgroundsize borderimage borderradius boxshadow cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside cssreflections csstransitions flexboxlegacy csstransforms hashchange generatedcontent svg inlinesvg smil svgclippaths inputtypes-search inputtypes-tel inputtypes-url inputtypes-email no-inputtypes-datetime inputtypes-date inputtypes-month inputtypes-week inputtypes-time inputtypes-datetime-local inputtypes-number inputtypes-range inputtypes-color fontface websockets no-applicationcache audio audio-ogg audio-mp3 audio-opus audio-wav audio-m4a geolocation history hsla localstorage multiplebgs postmessage postmessage-structuredclones sessionstorage textshadow rgba video video-ogg video-h264 no-video-h265 video-webm video-vp9 no-video-hls no-video-av1 webgl websqldatabase webworkers target no-time texttrackapi track checked arrow json notification placeholder details template iedepVer">
+
+
+<div class="container-fluid iw_section">
+    <div class="row iw_row iw_stretch">
+        <div class="iw_columns col-lg-12">
+            <div class="iw_component">
+                <div id="ups-fw_legacy_app_wrap">
+                    <div class="ups-fw_legacy_app_inner">
+                        <div id="main"></div>
+
+                        <main id="ups-main">
+
+                            <div class="ups-form_wrap ups-wrap ups-application_wrapper">
+
+                                <div class="ups-wrap_inner ups-app_sso">
+                                    <div class="ups-app_confined">
+
+                                        <div class="ups-page-title">
+                                            <h1 class="ups-app_title">
+                                                Log In
+
+                                            </h1>
+
+                                        </div>
+                                        <form name="LoginTest" id="Login" action="/lasso/login" method="post"
+                                            class="ups-form_wrap" onsubmit="return validateLoginForm()"
+                                            data-form-initialized="true">
+                                            <input type="hidden" id="CSRFToken" name="CSRFToken"
+                                                value="6ec8720af73da6197867a6642919381d">
+
+
+                                            <input type="hidden" name="loc" value="en_US">
+                                            <input type="hidden" name="returnto"
+                                                value="https%3A%2F%2Fwww.ups.com%2Fus%2Fen%2FHome.page">
+
+                                            <input type="hidden" name="forgotpassword" value="YZ">
+                                            <input type="hidden" name="connectWithSocial" value="YZ">
+                                            <input type="hidden" name="g-recaptcha-response" id="captcharesp" value="">
+
+
+
+                                            <!-- Error Message -->
+
+                                            <div class="" id="error_list" style="display: none">
+                                                <h3 class="ups-invalid_color-list ups-error_alert-list">
+                                                    <span class="icon ups-icon-exclamation" aria-hidden="true"></span>
+                                                    Please correct the following errors:
+                                                </h3>
+
+                                                <ul class="ups-icons-error">
+
+                                                    <li id="uidError" class=""><a
+                                                            href="javascript:document.getElementById('email').focus();"
+                                                            class="ups-invalid_color">
+                                                            Email or Username
+                                                            <span class="ups-readerTxt"> field
+                                                            </span>
+                                                        </a> is required</li>
+
+                                                    <li id="passwordError" class=""><a
+                                                            href="javascript:document.getElementById('pwd').focus();"
+                                                            class="ups-invalid_color"> Password <span
+                                                                class="ups-readerTxt">
+
+                                                            </span>
+                                                        </a> is required
+
+                                                    </li>
+
+                                                    <li id="utaError" class="">
+                                                        <a href="javascript:document.getElementById('tech_agreement_auth').focus();"
+                                                            class="ups-invalid_color">
+                                                            UPS Technology Agreement
+                                                            <span class="ups-readerTxt">
+                                                                field
+                                                            </span>
+                                                        </a>
+                                                        is required
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="row">
+
+
+                                                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+
+
+
+                                                    <div id="emailInput" class="ups-form_group ups-input">
+
+                                                        <div class="ups-text_wrapper ups-input_wrapper">
+                                                            <label for="email" class="ups-form_label">
+                                                                Email or Username
+
+                                                            </label>
+                                                            <input type="text" id="email" name="userID"
+                                                                class="ups-form_input" aria-required="true"
+                                                                onkeypress="return submitenter(event)"
+                                                                autocomplete="off" value="" size="30" maxlength="50">
+                                                        </div>
+
+
+
+                                                        <div class="ups-check ups-active" id="green_checkmark_userid"
+                                                            style="display: none">
+                                                            <span class="ups-icon-check" aria-hidden="true"></span>
+                                                            <span class="ups-readerTxt">Complete</span>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+
+                                                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
+                                                    <div id="passwordInput"
+                                                        class="ups-form_group ups-input ups-form_required ups-form_popover ups-form_user_password">
+
+                                                        <div class="ups-text_wrapper ups-input_wrapper">
+                                                            <label for="pwd" class="ups-form_label"> Password
+                                                            </label>
+                                                            <input type="password" id="pwd" name="password"
+                                                                onkeypress="return submitenter(event)"
+                                                                class="ups-form_input ups-has_showhide_icon"
+                                                                aria-required="true" size="30" maxlength="26"
+                                                                autocomplete="off">
+
+                                                            <div id="hide_show" style="display: none">
+                                                                <button type="button" id="showHide"
+                                                                    class="ups-input_action" aria-label="Show Password">
+                                                                    <span id="showHide_span" class="icon ups-icon-eye"
+                                                                        aria-hidden="true">
+                                                                    </span>
+
+                                                                </button>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="ups-check ups-active" id="green_checkmark_pwd"
+                                                            style="display: none">
+                                                            <span class="ups-icon-check" aria-hidden="true"></span>
+                                                            <span class="ups-readerTxt">Complete</span>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="ups-group lasso_login">
+                                                <div class="ups-form_ctaGroup">
+
+                                                    <button id="submitBtn" name="getTokenWithPassword" type="submit"
+                                                        class="ups-cta ups-cta_primary">
+                                                        Log In
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- end button -->
+                                        </form>
+
+                                        <!--  -->
+                                    </div>
+                                </div>
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</html>
+
+
+<form method="post">
+    <h1 class="h3 mb-3 fw-normal">Please log in</h1>
+    <div class="form-floating">
+        {% csrf_token %}
+        {{error_msg}}
+        {{ form.as_p }}
+    </div>
+    <div class="login">
+        <button class="w-40 btn btn-lg btn-primary" type="submit">Log in</button>
+    </div>
+</form>
+
+
+
+</html>

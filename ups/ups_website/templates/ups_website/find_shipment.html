@@ -10,6 +10,8 @@
     <h3>Shipment Destination: {{ shipInfo.dest_x }}, {{ shipInfo.dest_y }}</h3>
     <h3>Truck ID: {{ shipInfo.truck_id }}</h3>
     <h3>Shipment Status: {{ shipInfo.shipment_status }}</h3>
+    <h3>Truck Location: {{ shipInfo.truck_x }}, {{ shipInfo.truck_y }}</h3>
+    <h3>Distance to Owner: {{ shipInfo.distance }} km</h3>
     {% else %}
     <h3 style="color:rgb(255, 191, 30);"> No Shipment Found </h3>
     {% endif %}

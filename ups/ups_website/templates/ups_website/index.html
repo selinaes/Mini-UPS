@@ -1,266 +1,261 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Basic Page Needs––––––––––––––––––––––––––– -->
-
-<head>
-    <meta http-equiv="content-type" content="text/html">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!--SEO meta tags-->
-    <!--    Change the index to your website's name-->
-    <title>UPS Webapp</title>
-    <!-- Bootstrap Core CSS ––––––––––––––––––––––––––– -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
-    <!-- fontawesome ––––––––––––––––––––––––––– -->
-    <script src="https://kit.fontawesome.com/5c9f2dfb26.js"></script>
-    <!-- To add a google font and paste the link -->
-    <style>
-        html {
-            /*    1rem = 16px*/
-            font-size: 1rem;
-        }
-
-        body {
-            background-color: white;
-            font-family: 'Futura', sans-serif;
-            line-height: 1.5;
-        }
-
-        p {
-            margin-bottom: 1.3rem;
-        }
-
-        /*this is a group selection, selecting all the headlines h1-h4*/
-        h1,
-        h2,
-        h3,
-        h4 {
-            /*    headline font*/
-            font-family: 'Merriweather Sans', sans-serif;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        h1 {
-            /*  top:0 right:0  bottom:0.5rem left:0*/
-            margin: 0 0 0.5rem 0;
-            font-size: 3.157rem;
-        }
-
-        h2 {
-            /*  top:1.414rem right:0  bottom:0.5rem left:0*/
-            margin: 1.414rem 0 0.5rem 0;
-            font-size: 2.369rem;
-        }
-
-        h3 {
-            /*  top:1.414rem right:0  bottom:0.5rem left:0*/
-            margin: 1.414em 0 0.5rem 0;
-            font-size: 1.777rem;
-        }
-
-        h4 {
-            /*  top:1.414rem right:0  bottom:0.5rem left:0*/
-            margin: 1.414em 0 0.5rem 0;
-            font-size: 1.333rem;
-        }
+<html class="no-js " dir="ltr" lang="en" style="--vh:10.09px;">
 
 
-        /*Interactive elements*/
-        /* link*/
-        a {
-            color: #166088;
-        }
+<body class="ups-wems" data-inq-observer="1">
+    <div class="iw_viewport-wrapper">
+        <div class="container-fluid iw_section" id="sectionksjaq8t2">
+            <div class="row iw_row iw_stretch" id="rowksjaq8t3">
+                <div class="iw_columns col-lg-12" id="colksjaq8t4">
+                    <div class="iw_component" id="iw_comp1658153875548">
+                        <div id="ups-navContainer" data-plugin="upsGlobalHeader" data-utg-content-block-id="glb_comp"
+                            class="ups-component" data-track-url="https://www.ups.com/track" data-home="true"
+                            data-upstoken="5fed378362c3bb7464154728c2637daade22afcdacd09faed3e6eb260e3378b94f406b792fcff7b2d78bae15d61c678ba186b14f97ddfccd1d0ddaa1d649a82d"
+                            style="min-height: 171.062px;">
+                            <div class="header-alerts show" id="ups-alertsWrap"
+                                data-alerts="/en_CA/support/contact-us/1653459378104.ajax?">
+                                <div class="ups-container" role="region" aria-label="Welcome Message">
 
-        a:hover {
-            /* color: #C0D6DF; */
-            color: orange;
-            text-decoration: none;
-        }
+                                    <div class="alerts-wrapper">
+                                        <ul class="ups-alerts_list" id="alert-list" aria-live="polite"
+                                            style="width: 952px;">
+                                            <li class="ups-alert_msg" data-position="alert1"
+                                                aria-roledescription="slide" aria-label="1 of 2" tabindex="0"
+                                                aria-current="page" style="width: 476px;"><span
+                                                    class="alert-text">Welcome to our Mini UPS World,
+                                                    {{userinfo.username}}.
+                                                    Your User ID: {{userinfo.id}} </span></li>
 
-        /*self-defined class names*/
-        .view {
-            background: rgb(220, 188, 248) center center no-repeat;
-            background-size: cover;
-            padding-top: 11rem;
-            padding-bottom: 3.5rem;
-        }
+                                        </ul>
+                                    </div>
+                                </div><a class="ups-link ups-analytics" id="ups-skipNav" href="#" tabindex="0"
+                                    data-utg-event-id="21" data-utg-link-type="link">Skip To Main Content</a>
 
-        .view h1 {
-            padding-left: 50px;
-            color: orange;
-        }
+                                <header>
+                                    <div class="ups-container navbar-expand-lg">
+                                        <div id="ups-header_logo" class="ups-logo ups-analytics" data-utg-event-id="21"
+                                            data-utg-link-type="link" title="UPS Home"><img
+                                                src="https://www.ups.com/assets/resources/webcontent/images/ups-logo.svg"
+                                                alt="UPS Home Page"></div>
 
+                                        <div class="ups-user-actions dropdown"><a
+                                                class="ups-cta ups-cta-primary ups-analytics" data-utg-event-id="21"
+                                                data-utg-link-type="link" data-utg-link-name="Signup"
+                                                aria-label="Signup" href="{% url 'ups_website:logout' %}"><span
+                                                    class=" icon ups-icon-user" aria-hidden="true"></span></a>
+                                        </div>
 
-        .projectbackground {
-            /* background-color:#F2C299; */
-            background-color: rgb(228, 242, 247);
-            padding-top: 6.5rem;
-            padding-bottom: 5rem;
-        }
+                                    </div>
+                                    <link rel="stylesheet" href="{% static 'css/ups_tracking.css' %}">
+                                    <link rel="stylesheet" href="{% static 'css/ups_request.css' %}">
 
-        .project img {
-            filter: grayscale(50%);
-        }
-
-        .project img:hover {
-            filter: grayscale(0%);
-        }
-
-        /*navigation*/
-        /*-----navigation background------*/
-        .navbackground {
-            background-color: rgb(255, 255, 255, 0.7);
-        }
-
-        /*-----navigation button in the mobile view------*/
-        /*-----navigation brand name------*/
-        .navbar-light .navbar-brand {
-            padding-left: 1rem;
-            color: #996666;
-            font-weight: 900;
-        }
-
-        /*-----navigation brand name hover color----*/
-        .navbar-light .navbar-brand:hover {
-            color: #166088;
-        }
-
-        /*-------navigation menu links--------*/
-        .navbar-light .navbar-nav .nav-link {
-            color: #4F6D7A;
-            font-size: 1.2rem;
-            padding-right: 1rem;
-        }
-
-        .navbar-light .navbar-nav :hover {
-            color: orange;
-        }
-
-        .contactbackground {
-            padding-top: 1rem;
-            background-color: #C0D6DF;
-            color: #4F6D7A;
-        }
-
-        /*footer*/
-        footer {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-        }
-
-        .info {
-            margin-top: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .contactbackground p {
-            margin-top: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .date {
-            margin-top: 5rem;
-        }
-    </style>
-</head>
-
-<body data-spy="scroll" data-target=".navbar" data-offset="100">
-
-    <nav class="navbar  navbar-light navbar-expand-sm navbackground fixed-top">
-
-        <!--     add d-block d-sm-none class name if you just want the brand name to appear in the mobile view.-->
-        <a class="navbar-brand page-scroll">UPS Webapp</a>
-        <!--        Try justify-content-start, justify-content-end or justify-content-between, justify-content-around to see different layout styles for the navigation.-->
-        <div class="collapse navbar-collapse  justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <span class="nav-link page-scroll">Hi, {{user.username}} <a
-                            href="{% url 'ups_website:logout' %}">Logout</a></span>
-                </li>
-
-            </ul>
-        </div>
-    </nav>
-
-    <!--    main content starts from here. Use container or container-fluid-->
-    <div class="container-fluid view" id='view'>
-        <div class='row justify-content-start align-items-center'>
-            <div class='col-sm-5 text-center'>
-                <h1>UPS Webapp</h1>
-                <h1>Userid : {{userinfo.id}}</h1>
-            </div>
-        </div>
-    </div>
-
-    <div class='projectbackground' id='portfolio'>
-        <div class="container project">
-            <div class='row justify-content-center align-items-center'>
-                <div class='col-sm-3 text-center'>
-                    <h3><a href="{% url 'ups_website:request_shipment' %}" style="text-decoration: none"> Tracking
-                            Package </a>
-                    </h3>
-                </div>
-                <div class='col-sm-3 text-center'>
-                    <h3><a href="{% url 'ups_website:find_shipments' %}" style="text-decoration: none"> Find All Your
-                            Packages </a>
-                    </h3>
+                                </header>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="container-fluid iw_section" id="sectionksjaq8t6">
+            <div class="row iw_row iw_stretch" id="rowksjaq8t7">
+                <div class="iw_columns col-lg-12" id="colksjaq8t8">
+                    <div class="iw_placeholder" id="iw_placeholder1629400065305">
+                        <div class="iw_component" id="iw_comp1672819359243">
+                            <!--ls:begin[component-1672819359243]-->
+                            <style>
+                                #iw_comp1672819359243 {}
+                            </style><!--ls:end[component-1672819359243]-->
+                        </div>
+                        <div class="iw_component" id="iw_comp1658153875556">
+                            <style>
+                                #iw_comp1658153875556 {}
+                            </style>
+                            <div data-utg-content-block-id="app_tsr"
+                                class="ups-component app-teaser bg-brown hero-image" data-plugin="tabNavigation"
+                                style="margin-bottom: 16px;">
+                                <div class="ups-container">
+                                    <div class="apps-container">
+                                        <ul class="nav jobs-list" role="tablist">
+                                            <li class="nav-item job-item" role="presentation"><a class="nav-link active"
+                                                    id="tabs_0_tab_0" role="tab" data-toggle="tab"
+                                                    aria-controls="tabs_0_tabPane_0" data-hero-image="true"
+                                                    data-script="/assets/resources/webcontent/scripts/applications/track/tracking-widget-component.cb4160.js"
+                                                    aria-selected="true" tabindex="0" href="#tabs_0_tabPane_0"
+                                                    data-loaded="true"><span class="app-title">Track</span></a></li>
+
+                                            <li class="nav-item job-item" role="presentation"><a class="nav-link active"
+                                                    id="tabs_0_tab_0" role="tab" data-toggle="tab"
+                                                    aria-controls="tabs_0_tabPane_0" data-hero-image="true"
+                                                    data-script="/assets/resources/webcontent/scripts/applications/track/tracking-widget-component.cb4160.js"
+                                                    aria-selected="true" tabindex="0"
+                                                    href="{% url 'ups_website:find_shipments' %}"
+                                                    data-loaded=" true"><span class="app-title">All
+                                                        Packages</span></a></li>
+                                        </ul>
+                                        <div class="tab-content app-content_1">
+                                            <div class="tab-pane active" id="tabs_0_tabPane_0" role="tabpanel"
+                                                aria-labelledby="tabs_0_tab_0">
+                                                <h2 class="panel-title"><a role="button" data-toggle="collapse"
+                                                        aria-expanded="true" aria-controls="app1d15448-content"
+                                                        href="#app1d15448-content">Track<span
+                                                            class="icon ups-icon-bottom-arrow"
+                                                            aria-hidden="true"></span></a></h2>
+                                                <div role="region" id="app1d15448-content"
+                                                    class="panel-body collapse show" data-parent=".app-content_1">
+                                                    <custom-track-widget _nghost-mtr-c12="" ng-version="12.1.4">
+                                                        <form _ngcontent-mtr-c12="" method="post" novalidate=""
+                                                            id="widget-track-package"
+                                                            class="ups-job-form ups-track-package-form ng-untouched ng-pristine ng-invalid">
+                                                            {% csrf_token %}
+                                                            <div _ngcontent-mtr-c12=""
+                                                                class="form-content form-content-inline">
+                                                                <div _ngcontent-mtr-c12="" data-plugin="inputControl"
+                                                                    class="ups-form_group ups-input">
+                                                                    <label _ngcontent-mtr-c12="" for="ups-track--qs"
+                                                                        id="stApp_widgetTrkNumLbl"
+                                                                        class="ups-form_label"></label>
+                                                                    <div _ngcontent-mtr-c12=""
+                                                                        class="ups-text_wrapper ups-input_wrapper">
+                                                                        <input _ngcontent-mtr-c12="" type="text"
+                                                                            name="{{ form.shipment_id.html_name }}"
+                                                                            data-name="trackNums"
+                                                                            id="{{ form.shipment_id.auto_id }}"
+                                                                            aria-required="true" required=""
+                                                                            class="ups-form_input ng-untouched ng-pristine ng-invalid"
+                                                                            value="{{ form.shipment_id.value|default:'' }}">
+                                                                    </div>
+                                                                    <p _ngcontent-mtr-c12="" class="ups-formError">
+                                                                        <span _ngcontent-mtr-c12="" aria-hidden="true"
+                                                                            class="ups-icon-exclamation"></span>
+                                                                    </p>
+                                                                </div>
+                                                                <button _ngcontent-mtr-c12="" type="submit"
+                                                                    id="stApp_widgetTrkNumBtn"
+                                                                    class="ups-cta ups-cta-primary">
+                                                                    Track
+                                                                    <span _ngcontent-mtr-c12="" aria-hidden="true"
+                                                                        class="icon ups-icon-right-arrow"></span>
+                                                                </button>
+                                                            </div>
 
 
-    <div class='contactbackground' id='contact'>
-        <footer class='container text-center'>
-            <h2>I would love to hear from you!</h2>
-            <p>If you have any questions, please let us know.</p>
-
-            <div class='info'>
-                <p><a href='mailto:yikai.liu@duke.edu'>yikai.liu@duke.edu</a></p>
+                                                        </form><!---->
+                                                    </custom-track-widget>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane " id="tabs_0_tabPane_1" role="tabpanel"
+                                                aria-labelledby="app2d15448">
+                                                <h2 class="panel-title"><a
+                                                        href="https://wwwapps.ups.com/calTimeCost?loc=en_CA">Quote<span
+                                                            class="icon ups-icon-bottom-arrow"
+                                                            aria-hidden="true"></span></a></h2>
+                                                <div role="region" id="app2d15448-content" class="panel-body collapse "
+                                                    data-parent=".app-content_1"></div>
+                                            </div>
+                                            <div class="tab-pane " id="tabs_0_tabPane_2" role="tabpanel"
+                                                aria-labelledby="app3d15448">
+                                                <h2 class="panel-title"><a
+                                                        href="https://www.ups.com/ship?loc=en_CA">Ship<span
+                                                            class="icon ups-icon-bottom-arrow"
+                                                            aria-hidden="true"></span></a></h2>
+                                                <div role="region" id="app3d15448-content" class="panel-body collapse "
+                                                    data-parent=".app-content_1"></div>
+                                            </div>
+                                            <div class="tab-pane " id="tabs_0_tabPane_3" role="tabpanel"
+                                                aria-labelledby="app4d15448">
+                                                <h2 class="panel-title"><a
+                                                        href="/ca/en/business-solutions/ups-billing.page">Billing<span
+                                                            class="icon ups-icon-bottom-arrow"
+                                                            aria-hidden="true"></span></a></h2>
+                                                <div role="region" id="app4d15448-content" class="panel-body collapse "
+                                                    data-parent=".app-content_1"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="hero-img"><img
+                                            src="https://www.ups.com/assets/resources/webcontent/images/JTBD-CA-PEAK-G-1271693975-Q422-WebP-Resized.webp"
+                                            alt="Smiling woman, holding smartphone." class="img-fluid" loading="lazy">
+                                    </div>
+                                </div>
+                                <div class="arc-container"><svg xmlns="http://www.w3.org/2000/svg" width="1440"
+                                        class="arc" height="72" viewBox="0 0 1440 72" fill="none" aria-hidden="true"
+                                        focusable="false">
+                                        <path d="M-400 176C139.222 -24.794 1028.42 -10.941 1440 13.8751V176L-400 176Z"
+                                            fill="white"></path>
+                                    </svg></div>
+                            </div>
+                        </div>
+                        <div class="iw_component" id="iw_comp1658153875553">
+                            <style>
+                                #iw_comp1658153875553 {}
+                            </style>
+                            <div class="ups-component promo-teaser primary-promo background-arc"
+                                data-utg-content-block-id="ftd_teas">
+                                <div class="ups-container">
+                                    <div class="card ups-card">
+                                        <div class="card-header fade-in-up-light">
+                                            <h2>Let’s Start Shipping</h2>
+                                        </div>
+                                        <div class="card-img fade-in-up-light"><img
+                                                src="https://www.ups.com/assets/resources/webcontent/images/guided-shipping-GettyImages-1222457412-Q322.jpg"
+                                                alt="Close up of hands holding boxes on desk with laptop open to UPS.com shipping application."
+                                                class="img-fluid" loading="lazy"></div>
+                                        <div class="card-body fade-in-up-light">
+                                            <div class="card-body-content">
+                                                <p>You’ve got packages. We’ll take care of them.</p>
+                                                <p> You have already logged in. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-        </footer>
-    </div>
-
-
-
-
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js "></script>
+        </div>
 </body>
 
 </html>
 
 
 
+<!-- {% load static %}
+<h2>Enter your tracking number</h2>
+
+<img src="{% static 'images/waiting4.png' %}" alt="Waiting image">
 
 
 
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+<h3><a href="{% url 'ups_website:index' %}">Go back home</a></h3> -->
+<!-- <div class="container-fluid view" id='view'>
+    <div class='row justify-content-start align-items-center'>
+        <div class='col-sm-5 text-center'>
+            <h1>UPS Webapp</h1>
+            <h1>Userid : {{userinfo.id}}</h1>
+        </div>
+    </div>
+</div>
 
-
-
-<!-- <!DOCTYPE html>
-<html>
-
-<body>
-    <h1> Welcome to the UPS</h1>
-    <button type="button"> <a href="{% url 'ups_website:request_shipment' %}"> Track your package </a> </button><br>
-
-</body>
-
-</html> -->
+<div class='projectbackground' id='portfolio'>
+    <div class="container project">
+        <div class='row justify-content-center align-items-center'>
+            <div class='col-sm-3 text-center'>
+                <h3><a href="{% url 'ups_website:request_shipment' %}" style="text-decoration: none"> Tracking
+                        Package </a>
+                </h3>
+            </div>
+            <div class='col-sm-3 text-center'>
+                <h3><a href="{% url 'ups_website:find_shipments' %}" style="text-decoration: none"> Find All Your
+                        Packages </a>
+                </h3>
+            </div>
+        </div>
+    </div>
+</div> -->
