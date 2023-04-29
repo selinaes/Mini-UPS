@@ -292,6 +292,10 @@ public class DBoperations {
                 System.out.println("did not find user in database" + upsID);
                 trans.commit();
                 return false;
+            } else if (user.getAmazon_id() != null) { // already binded with others
+                System.out.println("This user already binded with another amazon account");
+                trans.commit();
+                return false;
             }
             System.out.println("DBoperations: amazonID is " + amazonID);
             user.setAmazon_id(amazonID);

@@ -38,9 +38,9 @@ public class WorldSimulatorClient {
     /**
     * Send Uconnect message to the world and wait for the response from the World Docker server
     * for Uconnected
-    * @return worldid
+    * @return worldid if successful, null otherwise
     */
-    public long connectToWorld(List<WorldUps.UInitTruck> trucks) throws IOException {
+    public Long connectToWorld(List<WorldUps.UInitTruck> trucks) throws IOException {
         // Connect to the world using UConnect
         socket = new Socket(host, port);
         inputStream = socket.getInputStream();
@@ -50,8 +50,20 @@ public class WorldSimulatorClient {
 
         // Wait for UConnected response
         WorldUps.UConnected uConnected = read(WorldUps.UConnected.parser());
-        System.out.println("Result of connection: " + uConnected.getResult());
-        System.out.println("Connected to world " + uConnected.getWorldid());
+
+        String result = uConnected.getResult();
+
+        if (result.startsWith("connected")) {
+            System.out.println("Result of connection: " + uConnected.getResult());
+            System.out.println("Connected to world " + uConnected.getWorldid());
+        } else if (result.startsWith("error")) {
+            System.out.println("Error connecting to world: " + uConnected.getResult());
+            return null;
+        } else {
+            System.out.println("Unrecognized response: " + uConnected.getResult());
+            return null;
+        }
+
         return uConnected.getWorldid();
     }
 

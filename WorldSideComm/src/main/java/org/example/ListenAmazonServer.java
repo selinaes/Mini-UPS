@@ -154,7 +154,7 @@ public class ListenAmazonServer {
     /**
     * Send the wordId to the amazon and check for the AUconnectedWorld response
     */
-    public boolean connectSameWorld(long worldId, Socket clientSock) throws IOException {
+    public boolean connectSameWorld(Long worldId, Socket clientSock) throws IOException {
         UpsAmazon.UAinitWorld initWorld = UpsAmazon.UAinitWorld.newBuilder()
                 .setWorldID(worldId)
                 .build();
@@ -171,19 +171,22 @@ public class ListenAmazonServer {
     * Handle Client: UConnect from the
     */
     public void handleClient(Socket client_socket) throws IOException {
-        List<WorldUps.UInitTruck> trucks = initTrucks(10);
+        List<WorldUps.UInitTruck> trucks = initTrucks(65);
 
-        // Step 1: UConnect
-        long worldId = worldClient.connectToWorld(trucks);
+        // Step 1: UConnect, make sure succeed before proceed
+        Long newWorldId = null;
+        do {
+            newWorldId = worldClient.connectToWorld(trucks);
+        } while (newWorldId == null);
 
        // UAinitWorld, make sure connect to same world
         while (true) {
-            boolean result = connectSameWorld(worldId,client_socket);
+            boolean result = connectSameWorld(newWorldId,client_socket);
             if (result) {
-                this.worldId = worldId; // not sure need or not
+                this.worldId = newWorldId; // not sure need or not
                 break;
             }
-            worldId = worldClient.connectToWorld(trucks);
+            newWorldId = worldClient.connectToWorld(trucks);
         }
 
         // Thread, always listen to World and handle updates
@@ -227,7 +230,7 @@ public class ListenAmazonServer {
 
         // Schedule a task to be executed after a certain delay
         int delayForQuery = 5; // Adjust the delay as needed
-        scheduler.scheduleAtFixedRate(this::addQueryTruck, delayForAmazon, delayInSeconds, TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(this::addQueryTruck, delayForQuery, delayInSeconds, TimeUnit.SECONDS);
 
         // on current thread, listen and handle Amazon's message
         receiveHandleAmazon(client_socket);
