@@ -14,7 +14,7 @@ services:
       - data-volume:/var/lib/postgresql/data
   web-init:
       build: ./ups
-      command: /code/initserver.sh
+      command: /code/wait-for-it.sh db:5432 --strict -- /code/initserver.sh
       volumes:
         - ./ups:/code
       depends_on:
@@ -22,7 +22,7 @@ services:
   web:
       build: ./ups
       user: nobody
-      command: /code/runserver.sh
+      command: /code/wait-for-it.sh db:5432 --strict -- /code/runserver.sh
       volumes:
         - ./ups:/code
       expose:
