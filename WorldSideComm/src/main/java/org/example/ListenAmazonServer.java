@@ -19,8 +19,8 @@ import java.util.concurrent.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import gpb.UpsAmazon;
-import gpb.WorldUps;
+import org.example.gpb.UpsAmazon;
+import org.example.gpb.WorldUps;
 
 public class ListenAmazonServer {
     private final ServerSocket serverSocket;

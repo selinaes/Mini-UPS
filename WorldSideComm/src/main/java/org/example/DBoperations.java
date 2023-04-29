@@ -20,8 +20,8 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 
-import gpb.WorldUps;
-import gpb.UpsAmazon;
+import org.example.gpb.WorldUps;
+import org.example.gpb.UpsAmazon;
 
 
 public class DBoperations {
