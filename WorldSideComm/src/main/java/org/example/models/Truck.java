@@ -52,11 +52,11 @@ public class Truck {
         this.truck_id = truck_id;
     }
 
-    public int getWh_id() {
+    public Integer getWh_id() {
         return wh_id;
     }
 
-    public void setWh_id(int wh_id) {
+    public void setWh_id(Integer wh_id) {
         this.wh_id = wh_id;
     }
 

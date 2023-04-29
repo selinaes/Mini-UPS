@@ -50,7 +50,6 @@ public class WorldSimulatorClient {
 
         // Wait for UConnected response
         WorldUps.UConnected uConnected = read(WorldUps.UConnected.parser());
-//        WorldUps.UConnected uConnected = (WorldUps.UConnected)readNew(WorldUps.UCommands.newBuilder());
         System.out.println("Result of connection: " + uConnected.getResult());
         System.out.println("Connected to world " + uConnected.getWorldid());
         return uConnected.getWorldid();
@@ -106,8 +105,6 @@ public class WorldSimulatorClient {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formattedUtcDateTime = utcDateTime.format(formatter);
         System.out.println("UTC Time: " + formattedUtcDateTime);
-//        WorldUps.UResponses uResponses = (WorldUps.UResponses)readNew(WorldUps.UResponses.newBuilder());
-        loggerListenWorld.info("Received responses: " + uResponses);
         return uResponses;
     }
 
@@ -120,42 +117,31 @@ public class WorldSimulatorClient {
             try {
                 uResponses = readResponses();
                 if (uResponses == null){
-
-                    System.out.println("null uResponses");
+                    System.out.println("null uResponses, or lost connection");
                     break;
                 }
                 // handle each situation with world
                 for (long acks: uResponses.getAcksList()){
-                    loggerListenWorld.debug("line 113 received world acks: " + acks);
                     handleWorldAcks(acks);
                 }
 
                 for (WorldUps.UErr err: uResponses.getErrorList()){
-                    loggerListenWorld.debug("line 118 received completions");
-                    loggerListenWorld.info(err.toString());
+                    System.out.println("UErr received: " + err.toString());
                     handleError(err);
                 }
 
                 for (WorldUps.UFinished completions : uResponses.getCompletionsList()) {
-                    loggerListenWorld.debug("line 91 received completions");
-                    loggerListenWorld.info(completions.toString());
                     System.out.println("UFinished received. status: " + completions.getStatus());
                     handleCompletions(completions);
                 }
 
                 for (WorldUps.UDeliveryMade delivered: uResponses.getDeliveredList()) {
-                    loggerListenWorld.debug("line 101 received UDeliveryMade");
-                    loggerListenWorld.info(delivered.toString());
                     handleDeliveries(delivered);
                 }
 
                 for (WorldUps.UTruck truckstatus: uResponses.getTruckstatusList()) {
-                    loggerListenWorld.debug("line 107 received completions");
-                    loggerListenWorld.info(truckstatus.toString());
                     handleTruckStatus(truckstatus);
                 }
-
-
 
                 if (uResponses.getFinished()){
                     break;
@@ -275,11 +261,7 @@ public class WorldSimulatorClient {
 
 
         }
-        else if (type.equals("UQuery")){
-            //似乎不需要做啥？
 
-        }
-        loggerListenWorld.debug("Message with ack " + acks + " removed from worldMessages");
         GlobalVariables.worldMessages.remove(acks);
 
     }
@@ -290,9 +272,16 @@ public class WorldSimulatorClient {
         GlobalVariables.worldAcks.add(err.getSeqnum());
         GlobalVariables.worldAckLock.unlock();
         if (GlobalVariables.worldAcked.contains(seqNum)){
-            loggerListenWorld.debug("UErr " + seqNum + " already handled");
             return;
         }
+        System.out.println();
+        if (!GlobalVariables.worldMessages.containsKey(err.getOriginseqnum())){
+            System.out.println("Origin message already not in worldMessages, not handling");
+        }
+        System.out.println("1st Handling UErr \n" + err.toString());
+        System.out.println("Original seqnum is " + err.getOriginseqnum());
+        System.out.println("Original message is " + GlobalVariables.worldMessages.remove(err.getOriginseqnum()).toString());
+
 
         GlobalVariables.worldAcked.add(err.getSeqnum());
 
