@@ -1,21 +1,64 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: dodgerblue;
+            font-size: 24px;
+            padding: 10px 20px;
+        }
+
+        h3 {
+            font-size: 18px;
+            padding: 10px 20px;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: dodgerblue;
+            text-decoration: underline;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
 
 <body>
-    <h2 style="color:dodgerblue;">Here is your tracking info!</h2>
-    {% if shipInfo %}
-    <h3> Shipment ID: {{ shipInfo.shipment_id }}</h3>
-    <h3>Shipment Warehouse Location: {{ shipInfo.wh_id }}</h3>
-    <h3>Shipment Destination: {{ shipInfo.dest_x }}, {{ shipInfo.dest_y }}</h3>
-    <h3>Truck ID: {{ shipInfo.truck_id }}</h3>
-    <h3>Shipment Status: {{ shipInfo.shipment_status }}</h3>
-    <h3>Truck Location: {{ shipInfo.truck_x }}, {{ shipInfo.truck_y }}</h3>
-    <h3>Distance to Owner: {{ shipInfo.distance }} km</h3>
-    {% else %}
-    <h3 style="color:rgb(255, 191, 30);"> No Shipment Found </h3>
-    {% endif %}
-    <h3><a href="{% url 'ups_website:index' %}">Go back home</a></h3>
+    <div class="container">
+        <h2>Here is your tracking info!</h2>
+        {% if shipInfo %}
+        <h3>Shipment ID: {{ shipInfo.shipment_id }}</h3>
+        <h3>Shipment Warehouse Location: {{ shipInfo.wh_id }}</h3>
+        <h3>Shipment Destination: {{ shipInfo.dest_x }}, {{ shipInfo.dest_y }}</h3>
+        <h3>Truck ID: {{ shipInfo.truck_id }}</h3>
+        <h3>Shipment Status: {{ shipInfo.shipment_status }}</h3>
+        <h3>Truck Location: {{ shipInfo.truck_x }}, {{ shipInfo.truck_y }}</h3>
+        <h3>Distance to Owner: {{ shipInfo.distance }} km</h3>
+        {% else %}
+        <h3 style="color:rgb(255, 191, 30);">No Shipment Found</h3>
+        {% endif %}
+        <h3><a href="{% url 'ups_website:index' %}">Go back home</a></h3>
+    </div>
 </body>
 
 </html>
