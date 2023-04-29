@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  db:
+    image: postgres:12-alpine3.15
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=upsDB
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: always
+    volumes:
+      - data-volume:/var/lib/postgresql/data
+  backend:
+    build: .
+    #    command: /code/initserver.sh
+    #    volumes:
+    #      - ./:/app
+    ports:
+      - "12346:12345"
+      - "34567:34567"
+    depends_on:
+      - db
+
+#
+volumes:
+  data-volume:

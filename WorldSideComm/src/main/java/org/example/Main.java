@@ -1,14 +1,13 @@
 package org.example;
 
-import gpb.WorldUps;
 
 import java.io.IOException;
-import java.util.List;
 
 
 public class Main {
     public static void main(String[] args) {
-        String worldHost = "localhost";
+//        String worldHost = "localhost";
+        String worldHost = "vcm-33562.vm.duke.edu";
         int worldPort = 12345;
         int amazonPort = 34567;
         System.out.println(System.getProperty("user.dir"));

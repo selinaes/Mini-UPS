@@ -4,12 +4,16 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url">jdbc:postgresql://localhost:5432/upsDB</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://db:5432/upsDB</property>
+<!--    <property name="connection.url">jdbc:postgresql://localhost:5432/upsDB</property>-->
     <property name="connection.driver_class">org.postgresql.Driver</property>
 
 
-    <property name="connection.username">jl1188</property>
-    <property name="connection.password">selina1111</property>
+<!--    <property name="connection.username">jl1188</property>-->
+<!--    <property name="connection.password">selina1111</property>-->
+
+    <property name="connection.username">postgres</property>
+    <property name="connection.password">postgres</property>
 
     <!-- DB schema will be updated if needed -->
 

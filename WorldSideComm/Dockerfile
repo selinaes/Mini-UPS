@@ -32,4 +32,4 @@ RUN mkdir /app
 COPY --from=build /home/gradle/src/build/libs/*.jar /app/
 RUN #gradlew run
 #ENTRYPOINT ["java", "-jar", "/app/your-project-name.jar"]
-ENTRYPOINT ["java","-XX:+UseContainerSupport", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/stock-exchange-application-1.0-shadow.jar-1.0-SNAPSHOT-all.jar"]
+ENTRYPOINT ["java","-XX:+UseContainerSupport", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/ups-application-1.0-shadow.jar-1.0-SNAPSHOT-all.jar"]
