@@ -12,7 +12,7 @@ public class User {
     private int ups_id;
 
     @Column(nullable = true)
-    private int amazon_id;
+    private Integer amazon_id;
 
     private String user_name;
 

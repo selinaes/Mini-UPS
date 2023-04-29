@@ -81,7 +81,7 @@ public class ListenAmazonServer {
         loggerSendWorld.debug("added world acks to worldmessage" + GlobalVariables.worldAcks);
         System.out.println("added world acks to worldmessage" + GlobalVariables.worldAcks);
         uCommandsBuilder.addAllAcks(GlobalVariables.worldAcks);
-        uCommandsBuilder.setSimspeed(50);
+//        uCommandsBuilder.setSimspeed(50);
         GlobalVariables.worldAcks.clear();
         GlobalVariables.worldAckLock.unlock();
 
@@ -242,16 +242,32 @@ public class ListenAmazonServer {
             }
         }, delayForAmazon, delayInSeconds, TimeUnit.SECONDS);
 
+        // on current thread, listen and handle Amazon's message
+        receiveHandleAmazon(client_socket);
+    }
+
+    public void addQueryTruck(){
+        List<Truck> outTrucks = DBoperations.getUsingTrucks();
+        for (Truck truck : outTrucks) {
+            long seqnum = GlobalVariables.seqNumWorld.incrementAndGet();
+            WorldUps.UQuery queryTruck = WorldUps.UQuery.newBuilder()
+                    .setTruckid(truck.getTruck_id()).setSeqnum(seqnum)
+                    .build();
+            GlobalVariables.worldMessages.put(seqnum, queryTruck);
+        }
+    }
+
+    public void receiveHandleAmazon(Socket client_socket) throws IOException{
         // continuously read from Amazon, handle one by one, collect next-to-send messages into global variable
         while (!Thread.currentThread().isInterrupted()) {
             UpsAmazon.AUcommands aUcommands = read(UpsAmazon.AUcommands.parser(), client_socket); // 需要验证，如果下一条没有会不会出问题
 //            UpsAmazon.AUcommands aUcommands = (UpsAmazon.AUcommands) readNew(UpsAmazon.AUcommands.newBuilder(), client_socket);
-            System.out.println("Received AUcommands: \n" + aUcommands.toString());
+
             if (aUcommands == null){
                 System.out.println("AUcommands is null");
                 break;
             }
-
+//            System.out.println("Received AUcommands: \n" + aUcommands.toString());
             // handle each situation with world
             for (UpsAmazon.Err err: aUcommands.getErrList()) {
                 System.out.println("err");
@@ -259,7 +275,7 @@ public class ListenAmazonServer {
             }
 
             for (long acks : aUcommands.getAcksList()) {
-                System.out.println("ack received");
+                System.out.println("Amazon ack received");
                 handleAmazonAcks(acks);
             }
 
@@ -294,14 +310,14 @@ public class ListenAmazonServer {
 
 
     public void handlePickup(UpsAmazon.AUreqPickup pickup) {
+        GlobalVariables.amazonAckLock.lock();
+        GlobalVariables.amazonAcks.add(pickup.getSeqNum());
+        GlobalVariables.amazonAckLock.unlock();
         if (GlobalVariables.amazonAcked.contains(pickup.getSeqNum())){
             return;
         }
-        System.out.println("Handling pickup: \n" + pickup.toString());
-        GlobalVariables.amazonAckLock.lock();
-        GlobalVariables.amazonAcks.add(pickup.getSeqNum());
+        System.out.println("1st handling pickup: \n" + pickup.toString());
         GlobalVariables.amazonAcked.add(pickup.getSeqNum());
-        GlobalVariables.amazonAckLock.unlock();
         Truck usedTruck = DBoperations.useAvailableTruck(pickup.getWhID());
         if (usedTruck == null) {
             long errSeqNum = GlobalVariables.seqNumAmazon.incrementAndGet();
@@ -341,35 +357,40 @@ public class ListenAmazonServer {
     }
 
     public void handleBind(UpsAmazon.AUbindUPS bind) {
+        GlobalVariables.amazonAckLock.lock();
+        GlobalVariables.amazonAcks.add(bind.getSeqNum());
+        GlobalVariables.amazonAckLock.unlock();
         if (GlobalVariables.amazonAcked.contains(bind.getSeqNum())){
             return;
         }
-        System.out.println("Handling bind" + bind.toString());
-        GlobalVariables.amazonAckLock.lock();
-        GlobalVariables.amazonAcks.add(bind.getSeqNum());
+        System.out.println("First time handling bind \n" + bind.toString());
         GlobalVariables.amazonAcked.add(bind.getSeqNum());
-        GlobalVariables.amazonAckLock.unlock();
         // search in DB to see if upsID exist, if so return success
         int upsID = bind.getUpsID();
         int amazonID = bind.getOwnerID();
+        System.out.println("Bind parameters: upsID: " + upsID + " amazonID: " + amazonID);
         boolean success = DBoperations.searchUpsIDaddAmazonID(upsID, amazonID);
+        if (!success){
+            System.out.println("NOT EXIST ID!");
+        }
         // form AUbindUPSResponse
         long seqnum = GlobalVariables.seqNumAmazon.incrementAndGet();
         UpsAmazon.UAbindUPSResponse response = UpsAmazon.UAbindUPSResponse.newBuilder()
                 .setStatus(success).setOwnerID(amazonID).setUpsID(upsID).setSeqNum(seqnum).build();
+        System.out.println("added bindResponse to message: " + response.toString());
         // put response into message list
         GlobalVariables.amazonMessages.put(seqnum, response);
     }
 
     public void handleDelivery(UpsAmazon.AUreqDelivery delivery) {
+        GlobalVariables.amazonAckLock.lock();
+        GlobalVariables.amazonAcks.add(delivery.getSeqNum());
+        GlobalVariables.amazonAckLock.unlock();
         if (GlobalVariables.amazonAcked.contains(delivery.getSeqNum())){
             return;
         }
-        System.out.println("Handling delivery" + delivery.toString());
-        GlobalVariables.amazonAckLock.lock();
-        GlobalVariables.amazonAcks.add(delivery.getSeqNum());
+        System.out.println("1st Handling delivery" + delivery.toString());
         GlobalVariables.amazonAcked.add(delivery.getSeqNum());
-        GlobalVariables.amazonAckLock.unlock();
         // get ShipID
         long shipmentID = delivery.getShipID();
         long seqnum = GlobalVariables.seqNumWorld.incrementAndGet();
@@ -382,14 +403,14 @@ public class ListenAmazonServer {
     }
 
     public void handleChangeDest(UpsAmazon.AUchangeDestn changeDestn) {
+        GlobalVariables.amazonAckLock.lock();
+        GlobalVariables.amazonAcks.add(changeDestn.getSeqNum());
+        GlobalVariables.amazonAckLock.unlock();
         if (GlobalVariables.amazonAcked.contains(changeDestn.getSeqNum())){
             return;
         }
-        System.out.println("Handling changeDest" + changeDestn.toString());
-        GlobalVariables.amazonAckLock.lock();
-        GlobalVariables.amazonAcks.add(changeDestn.getSeqNum());
+        System.out.println("1st Handling changeDest \n" + changeDestn.toString());
         GlobalVariables.amazonAcked.add(changeDestn.getSeqNum());
-        GlobalVariables.amazonAckLock.unlock();
 
         // Case 1: if status before delivering, change destination.
         // Case 2: if status delivering, create UAchangeResp fail, save to message list
@@ -406,20 +427,20 @@ public class ListenAmazonServer {
 
 
     public void handleErr(UpsAmazon.Err err) {
+        GlobalVariables.amazonAckLock.lock();
+        GlobalVariables.amazonAcks.add(err.getSeqnum());
+        GlobalVariables.amazonAckLock.unlock();
         if (GlobalVariables.amazonAcked.contains(err.getSeqnum())){
             return;
         }
-        System.out.println("Handling error" + err.toString());
-        GlobalVariables.amazonAckLock.lock();
-        GlobalVariables.amazonAcks.add(err.getSeqnum());
+        System.out.println("1st Handling error \n" + err.toString());
         GlobalVariables.amazonAcked.add(err.getSeqnum());
-        GlobalVariables.amazonAckLock.unlock();
         System.out.println("err");
     }
 
     public void handleAmazonAcks(long acks) {
         if (!GlobalVariables.amazonMessages.containsKey(acks)){
-            System.out.println("World ack already not in amazonMessage, not handling");
+            System.out.println("Amazon ack already not in amazonMessage, not handling");
             return;
         }
         System.out.println("Handling Amazon acks: " + acks);

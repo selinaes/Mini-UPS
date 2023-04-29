@@ -15,6 +15,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.models.Shipment;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
 public class WorldSimulatorClient {
     private final String host;
     private final int port;
@@ -77,7 +81,7 @@ public class WorldSimulatorClient {
         return parser.parseDelimitedFrom(inputStream);
     }
 
-    private <T> T readNew(com.google.protobuf.Parser<T> parser) throws IOException {
+    private <T> T readCoded(com.google.protobuf.Parser<T> parser) throws IOException {
         CodedInputStream codedInputStream = CodedInputStream.newInstance(inputStream);
         return parser.parseFrom(codedInputStream);
     }
@@ -98,6 +102,10 @@ public class WorldSimulatorClient {
     */
     public WorldUps.UResponses readResponses() throws IOException {
         WorldUps.UResponses uResponses = read(WorldUps.UResponses.parser());
+        LocalDateTime utcDateTime = LocalDateTime.now(ZoneId.of("UTC"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedUtcDateTime = utcDateTime.format(formatter);
+        System.out.println("UTC Time: " + formattedUtcDateTime);
 //        WorldUps.UResponses uResponses = (WorldUps.UResponses)readNew(WorldUps.UResponses.newBuilder());
         loggerListenWorld.info("Received responses: " + uResponses);
         return uResponses;
@@ -112,6 +120,7 @@ public class WorldSimulatorClient {
             try {
                 uResponses = readResponses();
                 if (uResponses == null){
+
                     System.out.println("null uResponses");
                     break;
                 }
@@ -164,15 +173,18 @@ public class WorldSimulatorClient {
 
     public void handleCompletions(WorldUps.UFinished completions){
         long seqNum = completions.getSeqnum();
+        GlobalVariables.worldAckLock.lock();
+        GlobalVariables.worldAcks.add(seqNum);
+        GlobalVariables.worldAckLock.unlock();
+
         if (GlobalVariables.worldAcked.contains(seqNum)){
             loggerListenWorld.debug("UFinished " + seqNum + " already handled");
             return;
         }
-        System.out.println("Handling UFinished" + completions.toString());
-        GlobalVariables.worldAckLock.lock();
-        GlobalVariables.worldAcks.add(seqNum);
+        System.out.println("1st Handling UFinished \n" + completions.toString());
+
         GlobalVariables.worldAcked.add(seqNum);
-        GlobalVariables.worldAckLock.unlock();
+
         if (completions.getStatus().equals("IDLE")) {
             // change truck status back to idle, whid still old but not matter, because next time when use idle will update
             int truck_id = completions.getTruckid();
@@ -201,15 +213,17 @@ public class WorldSimulatorClient {
 
     public void handleDeliveries(WorldUps.UDeliveryMade delivered){
         long seqNum = delivered.getSeqnum();
+        GlobalVariables.worldAckLock.lock();
+        GlobalVariables.worldAcks.add(seqNum);
+        GlobalVariables.worldAckLock.unlock();
         if (GlobalVariables.worldAcked.contains(seqNum)){
             loggerListenWorld.debug("UDeliveryMade " + seqNum + " already handled");
             return;
         }
-        System.out.println("Handling UDeliveryMade" + delivered.toString());
-        GlobalVariables.worldAckLock.lock();
-        GlobalVariables.worldAcks.add(seqNum);
+        System.out.println("1st Handling UDeliveryMade \n" + delivered.toString());
+
         GlobalVariables.worldAcked.add(seqNum);
-        GlobalVariables.worldAckLock.unlock();
+
         long seqnum = GlobalVariables.seqNumAmazon.incrementAndGet();
         UpsAmazon.UAdelivered tosend_delivered = UpsAmazon.UAdelivered.newBuilder().setShipID(delivered.getPackageid()).setSeqNum(seqnum).build();
         GlobalVariables.amazonMessages.put(seqnum, tosend_delivered);
@@ -218,16 +232,20 @@ public class WorldSimulatorClient {
 
     public void handleTruckStatus(WorldUps.UTruck truckstatus){
         long seqNum = truckstatus.getSeqnum();
+        GlobalVariables.worldAckLock.lock();
+        GlobalVariables.worldAcks.add(truckstatus.getSeqnum());
+        GlobalVariables.worldAckLock.unlock();
         if (GlobalVariables.worldAcked.contains(seqNum)){
             loggerListenWorld.debug("UTruck " + seqNum + " already handled");
             return;
         }
-        System.out.println("Handling UTruck" + truckstatus.toString());
-        GlobalVariables.worldAckLock.lock();
-        GlobalVariables.worldAcks.add(truckstatus.getSeqnum());
+        System.out.println("1st Handling UTruck \n" + truckstatus.toString());
+
         GlobalVariables.worldAcked.add(truckstatus.getSeqnum());
-        GlobalVariables.worldAckLock.unlock();
-        System.out.println("handle truck status");
+
+        // update truck info
+        DBoperations.updateTruckInfo(truckstatus);
+
     }
 
     public void handleWorldAcks(long acks){
@@ -268,14 +286,16 @@ public class WorldSimulatorClient {
 
     public void handleError(WorldUps.UErr err){
         long seqNum = err.getSeqnum();
+        GlobalVariables.worldAckLock.lock();
+        GlobalVariables.worldAcks.add(err.getSeqnum());
+        GlobalVariables.worldAckLock.unlock();
         if (GlobalVariables.worldAcked.contains(seqNum)){
             loggerListenWorld.debug("UErr " + seqNum + " already handled");
             return;
         }
-        GlobalVariables.worldAckLock.lock();
-        GlobalVariables.worldAcks.add(err.getSeqnum());
+
         GlobalVariables.worldAcked.add(err.getSeqnum());
-        GlobalVariables.worldAckLock.unlock();
+
     }
 
 

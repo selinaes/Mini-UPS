@@ -12,7 +12,7 @@ public class Truck {
     private int truck_id;
 
     @Column(nullable = true)
-    private int wh_id;
+    private Integer wh_id;
 
     private int truck_x;
 

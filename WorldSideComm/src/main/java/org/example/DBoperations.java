@@ -1,5 +1,6 @@
 package org.example;
 
+import jakarta.persistence.criteria.Predicate;
 import org.example.models.Truck;
 import org.example.models.Shipment;
 import org.example.models.ProductsInPackage;
@@ -93,6 +94,27 @@ public class DBoperations {
 
             tx.commit();
             return usedTruck;
+        }
+        finally {
+            lock.unlock();
+        }
+    }
+
+    public static List<Truck> getUsingTrucks(){
+        Session session = SessionFactoryWrapper.openSession();
+        Lock lock = SessionFactoryWrapper.getLock("truck");
+        lock.lock();
+        try (session) {
+
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Truck> cq = cb.createQuery(Truck.class);
+            Root<Truck> root = cq.from(Truck.class);
+            Predicate notIdle = cb.notEqual(root.get("truck_status"), "idle");
+            cq.where(notIdle);
+
+            List<Truck> trucks = session.createQuery(cq).getResultList();
+
+            return trucks;
         }
         finally {
             lock.unlock();
@@ -272,9 +294,11 @@ public class DBoperations {
             Transaction trans = session.beginTransaction();
             User user = session.get(User.class, upsID, LockMode.PESSIMISTIC_WRITE);
             if (user == null){ // can't find in database
+                System.out.println("did not find user in database" + upsID);
                 trans.commit();
                 return false;
             }
+            System.out.println("DBoperations: amazonID is " + amazonID);
             user.setAmazon_id(amazonID);
             session.merge(user);
             trans.commit();
@@ -305,6 +329,25 @@ public class DBoperations {
         }
         finally {
             lock.unlock();
+        }
+    }
+
+    public static void updateTruckInfo(WorldUps.UTruck info) {
+        Session session = SessionFactoryWrapper.openSession();
+        Lock lockT = SessionFactoryWrapper.getLock("truck");
+        lockT.lock();
+        try (session) {
+            Transaction tx = session.beginTransaction();
+            // get corresponding truck
+            Truck truck = session.get(Truck.class, info.getTruckid(), LockMode.PESSIMISTIC_WRITE);
+            truck.setTruck_x(info.getX());
+            truck.setTruck_y(info.getY());
+            session.merge(truck);
+
+            tx.commit();
+        }
+        finally {
+            lockT.unlock();
         }
     }
 
