@@ -43,7 +43,7 @@
                                         <div class="ups-user-actions dropdown"><a
                                                 class="ups-cta ups-cta-primary ups-analytics" data-utg-event-id="21"
                                                 data-utg-link-type="link" data-utg-link-name="Signup"
-                                                aria-label="Signup" href="{% url 'ups_website:login' %}""><span
+                                                aria-label="Signup" href="{% url 'ups_website:signup' %}"><span
                                                     class=" icon ups-icon-user" aria-hidden="true"></span></a>
                                         </div>
 
@@ -62,8 +62,8 @@
     </div>
 </body>
 
-<html dir="ltr" lang="en" style=""
-    class="canvas canvastext supports csstransforms3d flexbox cssgradients opacity backgroundsize borderimage borderradius boxshadow cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside cssreflections csstransitions flexboxlegacy csstransforms hashchange generatedcontent svg inlinesvg smil svgclippaths inputtypes-search inputtypes-tel inputtypes-url inputtypes-email no-inputtypes-datetime inputtypes-date inputtypes-month inputtypes-week inputtypes-time inputtypes-datetime-local inputtypes-number inputtypes-range inputtypes-color fontface websockets no-applicationcache audio audio-ogg audio-mp3 audio-opus audio-wav audio-m4a geolocation history hsla localstorage multiplebgs postmessage postmessage-structuredclones sessionstorage textshadow rgba video video-ogg video-h264 no-video-h265 video-webm video-vp9 no-video-hls no-video-av1 webgl websqldatabase webworkers target no-time texttrackapi track checked arrow json notification placeholder details template iedepVer">
+<!-- <html dir="ltr" lang="en" style=""
+    class="canvas canvastext supports csstransforms3d flexbox cssgradients opacity backgroundsize borderimage borderradius boxshadow cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside cssreflections csstransitions flexboxlegacy csstransforms hashchange generatedcontent svg inlinesvg smil svgclippaths inputtypes-search inputtypes-tel inputtypes-url inputtypes-email no-inputtypes-datetime inputtypes-date inputtypes-month inputtypes-week inputtypes-time inputtypes-datetime-local inputtypes-number inputtypes-range inputtypes-color fontface websockets no-applicationcache audio audio-ogg audio-mp3 audio-opus audio-wav audio-m4a geolocation history hsla localstorage multiplebgs postmessage postmessage-structuredclones sessionstorage textshadow rgba video video-ogg video-h264 no-video-h265 video-webm video-vp9 no-video-hls no-video-av1 webgl websqldatabase webworkers target no-time texttrackapi track checked arrow json notification placeholder details template iedepVer"> -->
 
 
 <div class="container-fluid iw_section">
@@ -88,152 +88,123 @@
                                             </h1>
 
                                         </div>
-                                        <form name="LoginTest" id="Login" action="/lasso/login" method="post"
-                                            class="ups-form_wrap" onsubmit="return validateLoginForm()"
-                                            data-form-initialized="true">
+                                        <form name="LoginTest" id="Login" method="post" class="ups-form_wrap"
+                                            onsubmit="return validateLoginForm()" data-form-initialized="true">
                                             <input type="hidden" id="CSRFToken" name="CSRFToken"
                                                 value="6ec8720af73da6197867a6642919381d">
+                                            {% csrf_token %}
 
+                                            <!-- Other hidden fields -->
 
-                                            <input type="hidden" name="loc" value="en_US">
-                                            <input type="hidden" name="returnto"
-                                                value="https%3A%2F%2Fwww.ups.com%2Fus%2Fen%2FHome.page">
-
-                                            <input type="hidden" name="forgotpassword" value="YZ">
-                                            <input type="hidden" name="connectWithSocial" value="YZ">
-                                            <input type="hidden" name="g-recaptcha-response" id="captcharesp" value="">
-
-
-
-                                            <!-- Error Message -->
-
-                                            <div class="" id="error_list" style="display: none">
-                                                <h3 class="ups-invalid_color-list ups-error_alert-list">
-                                                    <span class="icon ups-icon-exclamation" aria-hidden="true"></span>
-                                                    Please correct the following errors:
-                                                </h3>
-
-                                                <ul class="ups-icons-error">
-
-                                                    <li id="uidError" class=""><a
-                                                            href="javascript:document.getElementById('email').focus();"
-                                                            class="ups-invalid_color">
-                                                            Email or Username
-                                                            <span class="ups-readerTxt"> field
-                                                            </span>
-                                                        </a> is required</li>
-
-                                                    <li id="passwordError" class=""><a
-                                                            href="javascript:document.getElementById('pwd').focus();"
-                                                            class="ups-invalid_color"> Password <span
-                                                                class="ups-readerTxt">
-
-                                                            </span>
-                                                        </a> is required
-
-                                                    </li>
-
-                                                    <li id="utaError" class="">
-                                                        <a href="javascript:document.getElementById('tech_agreement_auth').focus();"
-                                                            class="ups-invalid_color">
-                                                            UPS Technology Agreement
-                                                            <span class="ups-readerTxt">
-                                                                field
-                                                            </span>
-                                                        </a>
-                                                        is required
-                                                    </li>
-
-                                                </ul>
-                                            </div>
                                             <div class="row">
-
-
                                                 <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
-
-
-
                                                     <div id="emailInput" class="ups-form_group ups-input">
-
                                                         <div class="ups-text_wrapper ups-input_wrapper">
-                                                            <label for="email" class="ups-form_label">
-                                                                Email or Username
-
-                                                            </label>
-                                                            <input type="text" id="email" name="userID"
+                                                            <label for="{{ form.username.auto_id }}"
+                                                                class="ups-form_label">Email or Username</label>
+                                                            <input type="text" id="{{ form.username.auto_id }}"
+                                                                name="{{ form.username.html_name }}"
                                                                 class="ups-form_input" aria-required="true"
                                                                 onkeypress="return submitenter(event)"
-                                                                autocomplete="off" value="" size="30" maxlength="50">
+                                                                autocomplete="off"
+                                                                value="{{ form.username.value|default:'' }}" size="30"
+                                                                maxlength="50">
                                                         </div>
 
-
-
-                                                        <div class="ups-check ups-active" id="green_checkmark_userid"
-                                                            style="display: none">
-                                                            <span class="ups-icon-check" aria-hidden="true"></span>
-                                                            <span class="ups-readerTxt">Complete</span>
-                                                        </div>
+                                                        <!-- Other elements -->
 
                                                     </div>
-
                                                 </div>
-
 
                                                 <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12">
                                                     <div id="passwordInput"
                                                         class="ups-form_group ups-input ups-form_required ups-form_popover ups-form_user_password">
-
                                                         <div class="ups-text_wrapper ups-input_wrapper">
-                                                            <label for="pwd" class="ups-form_label"> Password
-                                                            </label>
-                                                            <input type="password" id="pwd" name="password"
+                                                            <label for="{{ form.password.auto_id }}"
+                                                                class="ups-form_label">Password</label>
+                                                            <input type="password" id="{{ form.password.auto_id }}"
+                                                                name="{{ form.password.html_name }}"
                                                                 onkeypress="return submitenter(event)"
                                                                 class="ups-form_input ups-has_showhide_icon"
                                                                 aria-required="true" size="30" maxlength="26"
-                                                                autocomplete="off">
+                                                                autocomplete="off"
+                                                                value="{{ form.password.value|default:'' }}">
 
-                                                            <div id="hide_show" style="display: none">
-                                                                <button type="button" id="showHide"
-                                                                    class="ups-input_action" aria-label="Show Password">
-                                                                    <span id="showHide_span" class="icon ups-icon-eye"
-                                                                        aria-hidden="true">
-                                                                    </span>
+                                                            <!-- Other elements -->
 
-                                                                </button>
-
-                                                            </div>
                                                         </div>
 
-                                                        <div class="ups-check ups-active" id="green_checkmark_pwd"
-                                                            style="display: none">
-                                                            <span class="ups-icon-check" aria-hidden="true"></span>
-                                                            <span class="ups-readerTxt">Complete</span>
-                                                        </div>
+                                                        <!-- Other elements -->
 
                                                     </div>
-
                                                 </div>
-
                                             </div>
+
+                                            <!-- Other elements -->
 
                                             <div class="ups-group lasso_login">
                                                 <div class="ups-form_ctaGroup">
-
                                                     <button id="submitBtn" name="getTokenWithPassword" type="submit"
                                                         class="ups-cta ups-cta_primary">
                                                         Log In
                                                     </button>
-
                                                 </div>
                                             </div>
 
-                                            <!-- end button -->
+                                            <!-- End button -->
                                         </form>
 
-                                        <!--  -->
+                                        <hr>
+
+
+                                        <h2 class="ups-txt_size_xl ups-txt_bold">New To UPS?</h2>
+
+                                        <div class="ups-group lasso_login">
+                                            <div class="popover-row">
+                                                <!-- <span>
+
+                                                    Save time on your shipping activities with a UPS username.
+                                                </span> -->
+                                                <!-- <div class="pop-container">
+                                                    <button type="button" class="popover-button" title=""
+                                                        data-original-title="">
+                                                        <span class="icon ups-icon-questioncircle" aria-hidden="true">
+                                                        </span>
+
+                                                        <span class="sr-only">Popover on Top</span>
+
+
+                                                    </button>
+                                                    <template id="helpPopover">
+                                                        <ul>
+                                                            <li>Personalize your UPS experience.</li>
+                                                            <li>Store address information.</li>
+                                                            <li>Order free supplies.</li>
+                                                            <li>Access your tracking history and more.</li>
+
+                                                        </ul>
+
+                                                    </template> -->
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="ups-form_ctaGroup">
+                                            <button class="ups-cta ups-cta_tertiary">
+                                                <a href="{% url 'ups_website:signup' %}">
+                                                    Create a UPS Username
+                                                    <span class="icon ups-icon-chevronright" aria-hidden="true"></span>
+                                                </a>
+                                            </button>
+
+
+
+                                            <!--  -->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         </main>
                     </div>
                 </div>
@@ -241,21 +212,6 @@
         </div>
     </div>
 
-</html>
 
 
-<form method="post">
-    <h1 class="h3 mb-3 fw-normal">Please log in</h1>
-    <div class="form-floating">
-        {% csrf_token %}
-        {{error_msg}}
-        {{ form.as_p }}
-    </div>
-    <div class="login">
-        <button class="w-40 btn btn-lg btn-primary" type="submit">Log in</button>
-    </div>
-</form>
-
-
-
-</html>
+    </html>

@@ -8,7 +8,7 @@ from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.urls import reverse
-
+# from django.core.mail import send_mail
 
 
 @login_required
@@ -147,3 +147,20 @@ def change_address(request, shipment_id):
 
 def calculate_dist(x, y, x1, y1):
     return ((x-x1)**2 + (y-y1)**2)**0.5
+
+# def send_password_reset_email(email):
+#     try:
+#         user = User.objects.get(email=email)
+#     except User.DoesNotExist:
+#         # If the user does not exist, you can either ignore it or show a message.
+#         return
+
+#     token = default_token_generator.make_token(user)
+#     uid = urlsafe_base64_encode(force_bytes(user.pk))
+
+#     reset_url = settings.BASE_URL + reverse('reset_password', kwargs={'uidb64': uid, 'token': token})
+
+#     subject = 'Reset your password'
+#     message = render_to_string('password_reset_email.html', {'reset_url': reset_url})
+    
+#     send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email])
