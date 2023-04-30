@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.models.Shipment;
 
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -209,7 +210,7 @@ public class WorldSimulatorClient {
 
     }
 
-    public void handleDeliveries(WorldUps.UDeliveryMade delivered){
+    public void handleDeliveries(WorldUps.UDeliveryMade delivered) {
         long seqNum = delivered.getSeqnum();
         GlobalVariables.worldAckLock.lock();
         GlobalVariables.worldAcks.add(seqNum);
@@ -226,6 +227,15 @@ public class WorldSimulatorClient {
         UpsAmazon.UAdelivered tosend_delivered = UpsAmazon.UAdelivered.newBuilder().setShipID(delivered.getPackageid()).setSeqNum(seqnum).build();
         GlobalVariables.amazonMessages.put(seqnum, tosend_delivered);
         DBoperations.updateShipStatus(delivered.getPackageid(), "delivered");
+
+//        // send Email
+//        EmailSender emailSender = new EmailSender();
+//        try {
+//            emailSender.sendEmail("jiawei.liu@duke.edu", "Event Notification", "Hello, your package is delivered!");
+//        } catch (MessagingException e) {
+//            throw new RuntimeException(e);
+//        }
+
     }
 
     public void handleTruckStatus(WorldUps.UTruck truckstatus){
@@ -237,7 +247,7 @@ public class WorldSimulatorClient {
             loggerListenWorld.debug("UTruck " + seqNum + " already handled");
             return;
         }
-//        System.out.println("1st Handling UTruck \n" + truckstatus.toString());
+        System.out.println("1st Handling UTruck \n" + truckstatus.toString());
 
         GlobalVariables.worldAcked.add(truckstatus.getSeqnum());
 

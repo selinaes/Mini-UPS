@@ -25,9 +25,9 @@ import org.example.gpb.WorldUps;
 public class ListenAmazonServer {
     private final ServerSocket serverSocket;
     BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>(100);
-    ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 5, 5, TimeUnit.MILLISECONDS, workQueue);
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(3, 7, 5, TimeUnit.MILLISECONDS, workQueue);
     // Create a ScheduledExecutorService
-    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(3);
+    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
     WorldSimulatorClient worldClient;
     long worldId;
 
@@ -229,8 +229,8 @@ public class ListenAmazonServer {
         }, delayForAmazon, delayInSeconds, TimeUnit.SECONDS);
 
         // Schedule a task to be executed after a certain delay
-        int delayForQuery = 50; // Adjust the delay as needed
-        scheduler.scheduleAtFixedRate(this::addQueryTruck, delayForQuery, delayInSeconds, TimeUnit.SECONDS);
+//        int delayForQuery = 50; // Adjust the delay as needed
+//        scheduler.scheduleAtFixedRate(this::addQueryTruck, delayForQuery, delayInSeconds, TimeUnit.SECONDS);
 
         // on current thread, listen and handle Amazon's message
         receiveHandleAmazon(client_socket);
@@ -259,32 +259,32 @@ public class ListenAmazonServer {
 //
             // handle each situation with world
             for (UpsAmazon.Err err: aUcommands.getErrList()) {
-                System.out.println("err received");
+                System.out.println("err received" + err.getSeqnum());
                 handleErr(err);
             }
 
             for (long acks : aUcommands.getAcksList()) {
-                System.out.println("Amazon ack received");
+                System.out.println("Amazon ack received" + acks);
                 handleAmazonAcks(acks);
             }
 
             for (UpsAmazon.AUreqPickup pickup : aUcommands.getPickupList()) {
-                System.out.println("AUreqPickup");
+                System.out.println("AUreqPickup " + pickup.getSeqNum());
                 handlePickup(pickup);
             }
 
             for (UpsAmazon.AUbindUPS bind : aUcommands.getBindList()) {
-                System.out.println("AUbindUPS");
+                System.out.println("AUbindUPS" + bind.getSeqNum());
                 handleBind(bind);
             }
 
             for (UpsAmazon.AUreqDelivery delivery : aUcommands.getDeliveryList()) {
-                System.out.println("AUreqDelivery");
+                System.out.println("AUreqDelivery" + delivery.getSeqNum());
                 handleDelivery(delivery);
             }
 
             for (UpsAmazon.AUchangeDestn changeDestn : aUcommands.getChangeDestList()) {
-                System.out.println("AUchangeDestn");
+                System.out.println("AUchangeDestn" + changeDestn.getSeqNum());
                 handleChangeDest(changeDestn);
             }
 
