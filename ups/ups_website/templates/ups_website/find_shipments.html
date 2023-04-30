@@ -84,7 +84,8 @@
                     </td>
                     <td>{{ shipment.shipment_status }}</td>
                     <td>
-                        {% if shipment.shipment_status != "delivered" %}
+                        {% if shipment.shipment_status != "delivered" and shipment.shipment_status != "out for
+                        delivery"%}
                         <a href="{% url 'ups_website:change_address' shipment.shipment_id %}">
                             Change Address
                         </a>
