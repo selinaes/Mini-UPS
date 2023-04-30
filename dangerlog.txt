@@ -29,4 +29,4 @@ to be in position 8, while our acks is in position7, which caused the problem.
 6. When we connect with some other groups, one order or two would be fine, but more orders would block somewhere,
 so that we keep receiving the same message from Amazon, keep sending back acks and the response, but they can't 
 receive our message or acks. We later realized that they did not ack our message until they finished handling, 
-which could potentially cause blocking problems
+which could potentially cause blocking problems.
