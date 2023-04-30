@@ -25,7 +25,7 @@ import org.example.gpb.WorldUps;
 public class ListenAmazonServer {
     private final ServerSocket serverSocket;
     BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>(100);
-    ThreadPoolExecutor executor = new ThreadPoolExecutor(100, 100, 5, TimeUnit.MILLISECONDS, workQueue);
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 5, 5, TimeUnit.MILLISECONDS, workQueue);
     // Create a ScheduledExecutorService
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
     WorldSimulatorClient worldClient;

@@ -25,3 +25,8 @@ then the other side miss it and then they will never receive a second ack, even 
 5. Then, we still cannot receive each other's ack. The other Amazon group found that their protocol is a little
 different from ours - we deleted a message, but they did not delete it as we discussed. This caused their acks
 to be in position 8, while our acks is in position7, which caused the problem.
+
+6. When we connect with some other groups, one order or two would be fine, but more orders would block somewhere,
+so that we keep receiving the same message from Amazon, keep sending back acks and the response, but they can't 
+receive our message or acks. We later realized that they did not ack our message until they finished handling, 
+which could potentially cause blocking problems
