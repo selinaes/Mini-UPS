@@ -237,7 +237,7 @@ public class WorldSimulatorClient {
             loggerListenWorld.debug("UTruck " + seqNum + " already handled");
             return;
         }
-        System.out.println("1st Handling UTruck \n" + truckstatus.toString());
+//        System.out.println("1st Handling UTruck \n" + truckstatus.toString());
 
         GlobalVariables.worldAcked.add(truckstatus.getSeqnum());
 

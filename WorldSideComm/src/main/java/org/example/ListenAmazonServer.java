@@ -60,7 +60,7 @@ public class ListenAmazonServer {
             }
             // Add UQuery messages
             else if (message instanceof WorldUps.UQuery query) {
-                System.out.println("added query to ucommands");
+//                System.out.println("added query to ucommands");
                 uCommandsBuilder.addQueries(query);
             }
             else {
@@ -229,7 +229,7 @@ public class ListenAmazonServer {
         }, delayForAmazon, delayInSeconds, TimeUnit.SECONDS);
 
         // Schedule a task to be executed after a certain delay
-        int delayForQuery = 5; // Adjust the delay as needed
+        int delayForQuery = 50; // Adjust the delay as needed
         scheduler.scheduleAtFixedRate(this::addQueryTruck, delayForQuery, delayInSeconds, TimeUnit.SECONDS);
 
         // on current thread, listen and handle Amazon's message

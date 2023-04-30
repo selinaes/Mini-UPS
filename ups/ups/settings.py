@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['vcm-33565.vm.duke.edu', 'vcm-33562.vm.duke.edu', 'web']
 
-CSRF_TRUSTED_ORIGINS = ['http://*.vcm-xxxxx.vm.duke.edu:8000','http://*.127.0.0.1:8000'] 
+CSRF_TRUSTED_ORIGINS = ['http://*.vcm-xxxxx.vm.duke.edu:8000','http://*.127.0.0.1:8000','http://localhost:8000'] 
 
 
 # Application definition
@@ -102,9 +102,9 @@ WSGI_APPLICATION = 'ups.wsgi.application'
 DATABASES = {
     "default": {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        "NAME": "upsDB",
+        "NAME": "ups",
         "USER": "postgres",
-        "PASSWORD": "postgres",
+        "PASSWORD": "trytry",
         "HOST": 'db',
         "PORT": 5432,
     }

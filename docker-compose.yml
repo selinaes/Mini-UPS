@@ -6,9 +6,9 @@ services:
     ports:
       - "5433:5432"
     environment:
-      - POSTGRES_DB=upsDB
+      - POSTGRES_DB=ups
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=trytry
     restart: always
     volumes:
       - data-volume:/var/lib/postgresql/data
