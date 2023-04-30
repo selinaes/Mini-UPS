@@ -8,8 +8,13 @@ from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.urls import reverse
-
-
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.contrib.auth.tokens import default_token_generator
+from django.conf import settings
 
 @login_required
 def index(request):
@@ -77,6 +82,16 @@ def signup(request):
             email = form.cleaned_data.get('email')
             user = User.objects.create_user(username=username, password=password, first_name=firstname, last_name=lastname, email=email)
             Userinfo.objects.create(user_id=user.id, user_name=username, user_email=email)
+            email_list = []
+            email_list.append(email)
+            # send email to user
+            send_mail(
+                'Create MiniUPS Account Confirmed',
+                'Your have successfully created a MiniUPS account. Your username is ' + username + '.',
+                'miniUPS@outlook.com',
+                email_list,
+                fail_silently=False,
+            )
             return HttpResponseRedirect(reverse('ups_website:login'))
     else:
         form = SignupForm()
@@ -90,17 +105,18 @@ def request_tracking(request):
             shipmentID = form.cleaned_data['shipment_id']
             try:
                 ship_info = Shipments.objects.get(shipment_id=shipmentID)
+                truck_id = ship_info.truck_id
+                truck_info = Truck.objects.get(truck_id=truck_id)
+                target_x = ship_info.dest_x
+                target_y = ship_info.dest_y
+                truck_x = truck_info.truck_x
+                truck_y = truck_info.truck_y
+                ship_info.distance = calculate_dist(target_x, target_y, truck_x, truck_y)
+                ship_info.truck_x = truck_x
+                ship_info.truck_y = truck_y
             except Shipments.DoesNotExist:
                 ship_info = None
-            truck_id = ship_info.truck_id
-            truck_info = Truck.objects.get(truck_id=truck_id)
-            target_x = ship_info.dest_x
-            target_y = ship_info.dest_y
-            truck_x = truck_info.truck_x
-            truck_y = truck_info.truck_y
-            ship_info.distance = calculate_dist(target_x, target_y, truck_x, truck_y)
-            ship_info.truck_x = truck_x
-            ship_info.truck_y = truck_y
+            
             return render(request, 'ups_website/find_shipment.html', {'shipInfo': ship_info})
         else:
             return HttpResponse("Invalid form")
@@ -147,3 +163,5 @@ def change_address(request, shipment_id):
 
 def calculate_dist(x, y, x1, y1):
     return ((x-x1)**2 + (y-y1)**2)**0.5
+
+
