@@ -3,9 +3,15 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /code
 RUN chmod 777 /code
 WORKDIR /code
-ADD requirements.txt /code/
+COPY requirements.txt /code/
 RUN pip install -r requirements.txt
-ADD . /code/
-RUN chmod 777 initserver.sh
-RUN chmod 777 runserver.sh
-RUN chmod 777 startserver.sh
+COPY initserver.sh /code/initserver.sh
+COPY runserver.sh /code/runserver.sh
+COPY startserver.sh /code/startserver.sh
+# Set permissions for the shell scripts
+RUN chmod 777 /code/initserver.sh
+RUN chmod 777 /code/runserver.sh
+RUN chmod 777 /code/startserver.sh
+COPY . /code/
+
+
