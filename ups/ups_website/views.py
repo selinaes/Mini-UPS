@@ -26,17 +26,18 @@ def index(request):
             shipmentID = form.cleaned_data['shipment_id']
             try:
                 ship_info = Shipments.objects.get(shipment_id=shipmentID)
+                truck_id = ship_info.truck_id
+                truck_info = Truck.objects.get(truck_id=truck_id)
+                target_x = ship_info.dest_x
+                target_y = ship_info.dest_y
+                truck_x = truck_info.truck_x
+                truck_y = truck_info.truck_y
+                ship_info.distance = calculate_dist(target_x, target_y, truck_x, truck_y)
+                ship_info.truck_x = truck_x
+                ship_info.truck_y = truck_y
             except Shipments.DoesNotExist:
                 ship_info = None
-            truck_id = ship_info.truck_id
-            truck_info = Truck.objects.get(truck_id=truck_id)
-            target_x = ship_info.dest_x
-            target_y = ship_info.dest_y
-            truck_x = truck_info.truck_x
-            truck_y = truck_info.truck_y
-            ship_info.distance = calculate_dist(target_x, target_y, truck_x, truck_y)
-            ship_info.truck_x = truck_x
-            ship_info.truck_y = truck_y
+
             return render(request, 'ups_website/find_shipment.html', {'shipInfo': ship_info})
         else:
             return HttpResponse("Invalid form")
