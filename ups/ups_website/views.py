@@ -15,6 +15,8 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
+from smtplib import SMTPException, SMTPAuthenticationError, SMTPConnectError, SMTPServerDisconnected
+from django.core.mail import send_mail
 
 @login_required
 def index(request):
@@ -86,13 +88,17 @@ def signup(request):
             email_list = []
             email_list.append(email)
             # send email to user
-            send_mail(
-                'Create MiniUPS Account Confirmed',
-                'Your have successfully created a MiniUPS account. Your username is ' + username + '.',
-                'miniUPS@outlook.com',
-                email_list,
-                fail_silently=False,
-            )
+            try:
+                send_mail(
+                    'Create MiniUPS Account Confirmed',
+                    'Your have successfully created a MiniUPS account. Your username is ' + username + '.',
+                    'miniUPS@outlook.com',
+                    email_list,
+                    fail_silently=False,
+                )
+            except (SMTPAuthenticationError, SMTPConnectError, SMTPServerDisconnected, SMTPException) as e:
+                # Handle the SMTP error here, e.g., log the error, display a message to the user, etc.
+                print(f"An SMTP error occurred: {e}")
             return HttpResponseRedirect(reverse('ups_website:login'))
     else:
         form = SignupForm()

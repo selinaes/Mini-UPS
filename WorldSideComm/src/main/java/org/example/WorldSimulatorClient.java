@@ -142,26 +142,41 @@ public class WorldSimulatorClient {
                 }
                 // handle each situation with world
                 for (long acks: uResponses.getAcksList()){
-                    
-                    handleWorldAcks(acks);
+                    executor.execute(() -> {
+                        System.out.println("Ack received: " + acks);
+                        handleWorldAcks(acks);
+                    });
+                    // handleWorldAcks(acks);
                 }
 
                 for (WorldUps.UErr err: uResponses.getErrorList()){
                     System.out.println("UErr received: " + err.toString());
-                    handleError(err);
+                    executor.execute(() -> {
+                        handleError(err);
+                    });
+                    // handleError(err);
                 }
 
                 for (WorldUps.UFinished completions : uResponses.getCompletionsList()) {
                     System.out.println("UFinished received. status: " + completions.getStatus());
-                    handleCompletions(completions);
+                    executor.execute(() -> {
+                        handleCompletions(completions);
+                    });
+                    // handleCompletions(completions);
                 }
 
                 for (WorldUps.UDeliveryMade delivered: uResponses.getDeliveredList()) {
-                    handleDeliveries(delivered);
+                    executor.execute(() -> {
+                        handleDeliveries(delivered);
+                    });
+                    // handleDeliveries(delivered);
                 }
 
                 for (WorldUps.UTruck truckstatus: uResponses.getTruckstatusList()) {
-                    handleTruckStatus(truckstatus);
+                    executor.execute(() -> {
+                        handleTruckStatus(truckstatus);
+                    });
+                    // handleTruckStatus(truckstatus);
                 }
 
                 if (uResponses.getFinished()){
@@ -185,7 +200,7 @@ public class WorldSimulatorClient {
         GlobalVariables.worldAckLock.unlock();
 
         if (GlobalVariables.worldAcked.contains(seqNum)){
-            loggerListenWorld.debug("UFinished " + seqNum + " already handled");
+            loggerListenWorld.debug("UFinished " + seqNum + " not 1st time handling");
             return;
         }
         System.out.println("1st Handling UFinished \n" + completions.toString());
@@ -252,7 +267,7 @@ public class WorldSimulatorClient {
         GlobalVariables.worldAcks.add(truckstatus.getSeqnum());
         GlobalVariables.worldAckLock.unlock();
         if (GlobalVariables.worldAcked.contains(seqNum)){
-            loggerListenWorld.debug("UTruck " + seqNum + " already handled");
+            // loggerListenWorld.debug("UTruck " + seqNum + " already handled");
             return;
         }
         // System.out.println("1st Handling UTruck \n" + truckstatus.toString());
@@ -267,7 +282,7 @@ public class WorldSimulatorClient {
     public void handleWorldAcks(long acks){
         // world acked, we can delete it from worldMessages
         if (!GlobalVariables.worldMessages.containsKey(acks)){
-            System.out.println("World ack already not in worldMessages, not handling");
+            System.out.println(acks + "World ack not 1st time handling");
             return;
         }
         System.out.println("Handling WorldAcks: " + acks);
@@ -302,6 +317,7 @@ public class WorldSimulatorClient {
         GlobalVariables.worldAcks.add(err.getSeqnum());
         GlobalVariables.worldAckLock.unlock();
         if (GlobalVariables.worldAcked.contains(seqNum)){
+            System.out.println("UErr " + seqNum + "not 1st time handling");
             return;
         }
         System.out.println();
