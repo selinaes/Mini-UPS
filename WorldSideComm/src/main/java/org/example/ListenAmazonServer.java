@@ -47,15 +47,15 @@ public class ListenAmazonServer {
         WorldUps.UCommands.Builder uCommandsBuilder = WorldUps.UCommands.newBuilder();
         // Loop through the ConcurrentHashMap
         for (com.google.protobuf.GeneratedMessageV3 message : GlobalVariables.worldMessages.values()) {
-            System.out.println("adding to worldMessage - type" + message.getClass().getName());
+            // System.out.println("adding to worldMessage - type" + message.getClass().getName());
             // Add UGoPickup messages
             if (message instanceof WorldUps.UGoPickup pickup) {
-                System.out.println("added pickup to ucommands");
+                System.out.println("UGoPickup added to ucommands");
                 uCommandsBuilder.addPickups(pickup);
             }
             // Add UGoDeliver messages
             else if (message instanceof WorldUps.UGoDeliver delivery) {
-                System.out.println("added delivery to ucommands");
+                System.out.println("UGoDeliver added to ucommands");
                 uCommandsBuilder.addDeliveries(delivery);
             }
             // Add UQuery messages
@@ -90,23 +90,23 @@ public class ListenAmazonServer {
         for (com.google.protobuf.GeneratedMessageV3 message : GlobalVariables.amazonMessages.values()) {
             System.out.println("message type" + message.getClass().getName());
             if (message instanceof UpsAmazon.UAtruckArrived truckArr) {
-                System.out.println("line 91 added truckArr to UAcommands");
+                System.out.println("UAtruckArrived added to UAcommands");
                 UACommandsBuilder.addTruckArr(truckArr);
             }
             else if (message instanceof UpsAmazon.UAdelivered delivered) {
-                System.out.println("line 101 added delivered to UAcommands");
+                System.out.println("UAdelivered added to UAcommands");
                 UACommandsBuilder.addDelivered(delivered);
             }
             else if (message instanceof UpsAmazon.UAbindUPSResponse bindRes){
-                System.out.println("line 105 added bindRes to UAcommands");
+                System.out.println("UAbindUPSResponse added to UAcommands");
                 UACommandsBuilder.addBindUPSResponse(bindRes);
             }
             else if (message instanceof  UpsAmazon.UAchangeResp changeResp) {
-                System.out.println("line 109 added changeResp to UAcommands");
+                System.out.println("UAchangeResp added to UAcommands");
                 UACommandsBuilder.addChangeResp(changeResp);
             }
             else if (message instanceof  UpsAmazon.Err err) {
-                System.out.println("line 123 added err to UAcommands");
+                System.out.println("Err added to UAcommands");
                 UACommandsBuilder.addErr(err);
             }
             else {
@@ -204,7 +204,13 @@ public class ListenAmazonServer {
                 return;
             }
             try {
-                System.out.println("Sent to world: \n" + worldMessage.toString());
+                if (worldMessage.getQueriesCount() > 0) {
+                    System.out.println("With Queries: \n" + "pickups total " + worldMessage.getPickupsCount() + "deliveries total " 
+                    + worldMessage.getDeliveriesCount()  + "queries total " + worldMessage.getQueriesCount() + "\n");
+                } else {
+                    System.out.println("Sent to world: \n" + worldMessage.toString());
+                }
+                
                 worldClient.sendCommands(worldMessage);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -229,8 +235,8 @@ public class ListenAmazonServer {
         }, delayForAmazon, delayInSeconds, TimeUnit.SECONDS);
 
         // Schedule a task to be executed after a certain delay
-//        int delayForQuery = 50; // Adjust the delay as needed
-//        scheduler.scheduleAtFixedRate(this::addQueryTruck, delayForQuery, delayInSeconds, TimeUnit.SECONDS);
+       int delayForQuery = 5; // Adjust thex delay as needed
+       scheduler.scheduleAtFixedRate(this::addQueryTruck, delayForQuery, delayInSeconds, TimeUnit.SECONDS);
 
         // on current thread, listen and handle Amazon's message
         receiveHandleAmazon(client_socket);
