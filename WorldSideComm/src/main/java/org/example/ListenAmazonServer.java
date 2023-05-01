@@ -25,7 +25,7 @@ import org.example.gpb.WorldUps;
 public class ListenAmazonServer {
     private final ServerSocket serverSocket;
     BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>(100);
-    ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 5, 5, TimeUnit.MILLISECONDS, workQueue);
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(100, 100, 5, TimeUnit.MILLISECONDS, workQueue);
     // Create a ScheduledExecutorService
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5);
     WorldSimulatorClient worldClient;
@@ -266,12 +266,18 @@ public class ListenAmazonServer {
             // handle each situation with world
             for (UpsAmazon.Err err: aUcommands.getErrList()) {
                 System.out.println("err received" + err.getSeqnum());
-                handleErr(err);
+                executor.execute(() -> {
+                    handleErr(err);
+                });
+                // handleErr(err);
             }
 
             for (long acks : aUcommands.getAcksList()) {
                 System.out.println("Amazon ack received" + acks);
-                handleAmazonAcks(acks);
+                executor.execute(() -> {
+                    handleAmazonAcks(acks);
+                });
+                // handleAmazonAcks(acks);
             }
 
             for (UpsAmazon.AUreqPickup pickup : aUcommands.getPickupList()) {
@@ -281,17 +287,26 @@ public class ListenAmazonServer {
 
             for (UpsAmazon.AUbindUPS bind : aUcommands.getBindList()) {
                 System.out.println("AUbindUPS" + bind.getSeqNum());
-                handleBind(bind);
+                executor.execute(() -> {
+                    handleBind(bind);
+                });
+                // handleBind(bind);
             }
 
             for (UpsAmazon.AUreqDelivery delivery : aUcommands.getDeliveryList()) {
                 System.out.println("AUreqDelivery" + delivery.getSeqNum());
-                handleDelivery(delivery);
+                executor.execute(() -> {
+                    handleDelivery(delivery);
+                });
+                // handleDelivery(delivery);
             }
 
             for (UpsAmazon.AUchangeDestn changeDestn : aUcommands.getChangeDestList()) {
                 System.out.println("AUchangeDestn" + changeDestn.getSeqNum());
-                handleChangeDest(changeDestn);
+                executor.execute(() -> {
+                    handleChangeDest(changeDestn);
+                });
+                // handleChangeDest(changeDestn);
             }
 
 
@@ -310,6 +325,7 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcks.add(pickup.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
         if (GlobalVariables.amazonAcked.contains(pickup.getSeqNum())){
+            System.out.println(pickup.getSeqNum() + " AUreqPickup not 1st time handle");
             return;
         }
         System.out.println("1st handling pickup: \n" + pickup.toString());
@@ -369,6 +385,7 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcks.add(bind.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
         if (GlobalVariables.amazonAcked.contains(bind.getSeqNum())){
+            System.out.println(bind.getSeqNum() + " AUbindUPS not 1st time handle");
             return;
         }
         System.out.println("First time handling bind \n" + bind.toString());
@@ -385,7 +402,6 @@ public class ListenAmazonServer {
         long seqnum = GlobalVariables.seqNumAmazon.incrementAndGet();
         UpsAmazon.UAbindUPSResponse response = UpsAmazon.UAbindUPSResponse.newBuilder()
                 .setStatus(success).setOwnerID(amazonID).setUpsID(upsID).setSeqNum(seqnum).build();
-        System.out.println("added bindResponse to message: " + response.toString());
         // put response into message list
         GlobalVariables.amazonMessages.put(seqnum, response);
     }
@@ -395,6 +411,7 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcks.add(delivery.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
         if (GlobalVariables.amazonAcked.contains(delivery.getSeqNum())){
+            System.out.println(delivery.getSeqNum() + " AUreqDelivery not 1st time handle");
             return;
         }
         System.out.println("1st Handling delivery" + delivery.toString());
@@ -415,6 +432,7 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcks.add(changeDestn.getSeqNum());
         GlobalVariables.amazonAckLock.unlock();
         if (GlobalVariables.amazonAcked.contains(changeDestn.getSeqNum())){
+            System.out.println(changeDestn.getSeqNum() + " AUchangeDestn not 1st time handle");
             return;
         }
         System.out.println("1st Handling changeDest \n" + changeDestn.toString());
@@ -439,6 +457,7 @@ public class ListenAmazonServer {
         GlobalVariables.amazonAcks.add(err.getSeqnum());
         GlobalVariables.amazonAckLock.unlock();
         if (GlobalVariables.amazonAcked.contains(err.getSeqnum())){
+            System.out.println(err.getSeqnum() + " Amazon Err not 1st time handle");
             return;
         }
         System.out.println("1st Handling error \n" + err.toString());
@@ -461,10 +480,10 @@ public class ListenAmazonServer {
 
     public void handleAmazonAcks(long acks) {
         if (!GlobalVariables.amazonMessages.containsKey(acks)){
-            System.out.println("Amazon ack already not in amazonMessage, not handling");
+            System.out.println(acks + "Amazon ack not first time handling");
             return;
         }
-        System.out.println("Handling Amazon acks: " + acks);
+        System.out.println("1st time Handling Amazon acks: " + acks);
         // Step1. check ack Type, call corresponding method to change necessary status
         String type = GlobalVariables.amazonMessages.get(acks).getDescriptorForType().getName();
         if (type.equals("UAtruckArrived")){

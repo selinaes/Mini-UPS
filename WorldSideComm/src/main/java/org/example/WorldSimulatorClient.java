@@ -5,6 +5,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.GeneratedMessageV3;
@@ -27,6 +31,9 @@ public class WorldSimulatorClient {
 
     private InputStream inputStream;
     private OutputStream outputStream;
+
+    BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<Runnable>(100);
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(100, 100, 5, TimeUnit.MILLISECONDS, workQueue);
 
     private static final Logger loggerListenWorld = LogManager.getLogger("LISTEN_WORLD");
 
@@ -135,6 +142,7 @@ public class WorldSimulatorClient {
                 }
                 // handle each situation with world
                 for (long acks: uResponses.getAcksList()){
+                    
                     handleWorldAcks(acks);
                 }
 
