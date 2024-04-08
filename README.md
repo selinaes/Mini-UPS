@@ -4,7 +4,7 @@
 
 ## Project Specs
 
-The requirements for this project is described here: [Project Specification](./Project Spec v2.pdf).
+The requirements for this project is described here: [Project Specification](./Project_Spec_v2.pdf).
 Our team's differentiation features are described here: [Differentiation](./Final_Project_Differentiation.pdf).
 The Interoperability Group's communication protocol spec is here: [Protocol Spec](./ups_amazon_Protocol_Spec.pdf).
 
